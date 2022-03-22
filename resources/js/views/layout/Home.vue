@@ -6,10 +6,10 @@
     </div>
 
     <div class="row main-block">     
-      <div class="col-3 main-sidebar">
+      <div class="col-xl-3 main-sidebar">
         <Sidebar></Sidebar>
       </div>
-      <div class="col-9 main-body">
+      <div class="col-xl-9 main-body">
         <Main></Main>
       </div>
     </div>
@@ -37,19 +37,18 @@ export default {
 <style scoped lang="scss">
 
   .header {
-    background-color: orange;
+    background-color: rgb(255, 255, 255);
   }
 
   .main-sidebar{
-    background-color: red;
+    background-color: rgb(255, 255, 255);
   }
 
   .main-body{
-    background-color: yellow;
+    background-color: #F5EFFF;
   }
 
   .main-block {
-    height: 1100px;
   }
 
 

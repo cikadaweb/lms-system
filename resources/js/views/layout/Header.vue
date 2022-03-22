@@ -1,19 +1,14 @@
 <template>
 
-  <ul class="nav justify-content-end">
-    <li class="nav-item">
-      <a class="nav-link active" aria-current="page" href="#">Active</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#">Link</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-    </li>
-  </ul>
+    <header class="header">
+        <img src="../../../img/logo.png" class="logo" alt="fsk logo">
+        <nav class="user-nav">
+            <div class="user-nav__user">
+                <img src="../../../img/user.png" alt="User Photo" class="user-nav__user-photo">
+                <span class="user-nav__user-name">Cikada</span>
+            </div>
+        </nav>
+    </header>
 
 </template>
 
@@ -30,5 +25,35 @@ export default {
 
 <style scoped lang="scss">
 
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.logo {
+    height: 65px;
+    margin-left: 120px;
+}
+
+.user-nav {
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    & > * {
+        padding: 0 2rem;
+        cursor: pointer;
+        height: 100%;
+        display: flex;
+        align-items: center;
+    }
+    &__user-photo {
+        height: 50px;
+        margin-left: 3rem;
+        padding: 0 2rem;
+    }
+}
 
 </style>

@@ -1,6 +1,8 @@
 <template>
 
-  <h2>Здесь блок main</h2>
+  <main class="main-part">
+      
+  </main>
 
 </template>
 
@@ -17,6 +19,8 @@ export default {
 
 <style scoped lang="scss">
 
+.main-part {
 
+}
 
 </style>
