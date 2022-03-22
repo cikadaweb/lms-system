@@ -4,8 +4,10 @@
         <img src="../../../img/logo.png" class="logo" alt="fsk logo">
         <nav class="user-nav">
             <div class="user-nav__user">
-                <img src="../../../img/user.png" alt="User Photo" class="user-nav__user-photo">
-                <span class="user-nav__user-name">Cikada</span>
+                <!-- <img src="../../../img/user.png" alt="User Photo" class="user-nav__user-photo"> -->
+                <router-link :to="'/user/register'"><span class="user-nav__user-name">Registration</span></router-link>
+                <router-link :to="'/user/login'"><span class="user-nav__user-name">Login</span></router-link>
+                
             </div>
         </nav>
     </header>
@@ -54,6 +56,13 @@ export default {
         margin-left: 3rem;
         padding: 0 2rem;
     }
+    
+    &__user-name {
+        padding: 0 3px;
+        text-decoration: none;
+        color: var(--color-grey-light-4)
+    }
+    
 }
 
 </style>
