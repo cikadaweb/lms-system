@@ -9,7 +9,7 @@
             <my-input type="text" placeholder="email address" v-model="user.email"></my-input>
             <my-input type="text" placeholder="password" v-model="user.password"></my-input>
             <my-input type="text" placeholder="password confirmation" v-model="user.password_confirmation"></my-input>
-            <my-button type="submit">Registration</my-button>
+            <my-button type="submit" @click.prevent="register">Registration</my-button>
             <router-link to="/user/login"><p class="message">Already registered?</p><a href="#">Create an account</a></router-link>
           </form>
           
@@ -33,6 +33,11 @@ export default {
         password: "",
         password_confirmation: ""
       }
+    }
+  },
+  methods: {
+    register() {
+      this.$store.dispatch("auth/registerUser", this.user)
     }
   }
 }

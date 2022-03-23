@@ -16,7 +16,7 @@ export default {
 
   methods: {
     updateInput(event) {
-      this.$emit("udpate:modelValue", event.target.value)
+      this.$emit("update:modelValue", event.target.value)
     }
   }
 }

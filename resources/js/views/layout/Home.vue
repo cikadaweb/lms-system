@@ -20,15 +20,30 @@
 
 
 <script>
-import Header from "./Header";
+
+import axios from "../../../axios/axios-instance";
+import Header from "../ui/Header";
 import Main from "./Main";
 import Sidebar from "./Sidebar";
+
 export default {
     components: {
         Header,
         Sidebar,
         Main
+    },
+    mounted() {
+      this.getData()
+    },
+    methods: {
+      getData() {
+        axios.get("/api/get")
+        .then(response => {
+          console.log(response)
+        })
+      },
     }
+
 }
 </script>
 
@@ -47,9 +62,5 @@ export default {
   .main-body{
     background-color: #F5EFFF;
   }
-
-  .main-block {
-  }
-
 
 </style>
