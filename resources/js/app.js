@@ -9,6 +9,11 @@ import { createApp } from "vue";
 const app = createApp({});
 import router from "./router/router";
 import store from "./store";
+import components from "./views/ui";
+
+components.forEach((component) => {
+    app.component(component.name, component);
+});
 
 app.use(router).use(store).mount("#app");
 
