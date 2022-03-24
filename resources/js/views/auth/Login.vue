@@ -7,7 +7,7 @@
           <form class="form">
             <my-input type="text" placeholder="email address" v-model="user.email"></my-input>
             <my-input type="text" placeholder="password" v-model="user.password"></my-input>
-            <my-button type="submit" @click.prevent="login">Login</my-button>
+            <my-button type="submit" class="btn-success" @click.prevent="login">Login</my-button>
             <router-link to="/user/register"><p class="message">Not Registered?</p><a href="#">Create an account</a></router-link>
           </form>
           
