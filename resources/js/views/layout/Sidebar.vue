@@ -49,7 +49,8 @@ a {
 }
 
 .sidebar {
-    background-color: var(--color-grey-dark-1);
+    background-color: #F5EFFF;
+    border-radius: 15px;
     flex: 0 0 18%;
     display: flex;
     flex-direction: column;

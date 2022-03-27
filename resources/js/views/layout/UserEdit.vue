@@ -2,43 +2,45 @@
 
   <div class="container">
     <div class="row justify-content-md-center">
-        <div class="register-page">
+        <div class="user-page">
           
           <form class="form">
+            <h1>Edit User</h1>
             <my-input type="text" placeholder="username" v-model="user.name"></my-input>
-            <my-input type="email" placeholder="email address" v-model="user.email"></my-input>
-            <my-input type="password" placeholder="password" v-model="user.password"></my-input>
-            <my-input type="password" placeholder="password confirmation" v-model="user.password_confirmation"></my-input>
-            <my-button type="submit" class="btn-success" @click.prevent="register">Registration</my-button>
-            <router-link to="/user/login"><p class="message">Already registered?</p><a href="#">Create an account</a></router-link>
+            <my-input type="text" placeholder="email" v-model="user.email"></my-input>
+            <my-button class="btn-success" @click="updateUsers">Update</my-button>
           </form>
-          
         </div>
     </div>
   </div>
 
 </template>
-
-
-
 <script>
+import axios from "../../../axios/axios-instance";
 
 export default {
-  name: "Registration",
+  
+  name: "UserEdit",
   data() {
     return {
       user: {
-        name: "",
-        email:"",
-        password: "",
-        password_confirmation: ""
+        name:"",
+        email: ""
       }
     }
   },
   methods: {
-    register() {
-      this.$store.dispatch("auth/registerUser", this.user)
-    }
+    updateUsers() {
+        axios
+            .put("/api/users/" + this.$route.params.id, {
+                name: this.user.name,
+                email: this.user.email,
+            })
+            .then((response) => {
+              // this.$router.push({name: "Dashboard"});
+              window.location.replace("/user/dashboard");
+            });
+    },
   }
 }
 </script>
@@ -47,7 +49,7 @@ export default {
 
 <style scoped lang="scss">
 
-.register-page {
+.user-page {
     width: 360px;
     padding: 8% 0 0;
     margin: auto;

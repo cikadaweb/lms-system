@@ -49,7 +49,15 @@ export default {
 
 
 
-<style scoped lang="scss">
+<style lang="scss">
+
+  li {
+  list-style-type: none; 
+  }
+  ul {
+  margin-left: 0; 
+  padding-left: 0;
+  }
 
   .header {
     background-color: rgb(255, 255, 255);
@@ -58,9 +66,16 @@ export default {
   .main-sidebar{
     background-color: rgb(255, 255, 255);
   }
+  
+  .main-block{
+    background-color: rgb(255, 255, 255);
+    padding-right: 12px;
+  }
 
   .main-body{
     background-color: #F5EFFF;
+    border-radius: 15px;
+    padding-right: 10px;
   }
 
 </style>

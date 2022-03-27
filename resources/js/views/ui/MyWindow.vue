@@ -10,10 +10,6 @@
     <div class="popup__content">
       <slot></slot>
     </div>
-    <div class="popup__footer pt-2">
-      <my-button class="btn-success">Save</my-button>
-      <my-button class="btn-danger" @click="close">Close</my-button>
-    </div>
   </div>
 
 </template>

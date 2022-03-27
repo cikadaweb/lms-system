@@ -6,12 +6,22 @@
       <h2>Пользователи:</h2>
 
     <my-window v-if="isPopupVisible" @close="closePopup">
-        <form>
-            <my-input type="text" placeholder="username"  />
-            <my-input type="text" placeholder="email address"  />
-            <my-input type="password" placeholder="password"  />
-            <my-input type="password" placeholder="password confirmation"  />
-        </form>
+      <ul class="popup">
+        <li>
+          <form>
+            <my-input type="text" placeholder="username" v-model="user.name"  />
+            <my-input type="text" placeholder="email address" v-model="user.email" />
+            <my-input type="password" placeholder="password" v-model="user.password" />
+            <my-input type="password" placeholder="password confirmation" v-model="user.password_confirmation" />
+          </form>
+        </li>
+        <li>        
+          <div class="popup__footer pt-2">
+            <my-button class="btn-success" @click="addUser">Add</my-button>
+            <my-button class="btn-danger">Update</my-button>
+          </div>
+        </li>
+      </ul>
     </my-window>
 
       <table class="table table-success table-striped">
@@ -35,10 +45,12 @@
             <td>{{ user.email }}</td>
             <td>{{ user.password }}</td>
             <td>
-                <my-button class="btn-outline-success" @click="popup">  Edit </my-button>
+                <router-link :to="{name: 'UserEdit', params:{id: user.id}}">
+                  <my-button class="btn-outline-success">  Edit </my-button>
+                </router-link>
             </td>
             <td>
-                <my-button class="btn-outline-danger"> Delete </my-button>
+                <my-button class="btn-outline-danger" @click="deleteUser(user.id)"> Delete </my-button>
             </td>
             <td></td>
           </tr>
@@ -54,6 +66,7 @@
 
 <script>
 import MyWindow from "../ui/MyWindow";
+import axios from "../../../axios/axios-instance";
 
 export default {
   components: {
@@ -61,19 +74,39 @@ export default {
   },
   data() {
     return {
-      isPopupVisible: false
+      isPopupVisible: false,
+      user: {
+        name: '',
+        email: '',
+        password: '',
+        password_confirmation: ''
+      }
     }
   },
   created() {
     this.$store.dispatch("users/getUsers")
   },
   methods: {
+
     popup() {
         this.isPopupVisible = true
     },
+
     closePopup() {
         this.isPopupVisible = false
     },
+
+    addUser() {
+      this.$store.dispatch("users/addUser", this.user)
+    },
+  
+    deleteUser(id) {
+      axios.delete("/api/users/" + id)
+        .then((response) => {
+          this.$store.dispatch("users/getUsers")
+      })
+    },
+
   },
   computed: {
     getUsers: {
@@ -89,5 +122,11 @@ export default {
 
 <style scoped lang="scss">
 
+  .popup__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
 
 </style>
