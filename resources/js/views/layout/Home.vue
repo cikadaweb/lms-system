@@ -50,13 +50,14 @@ export default {
 
 
 <style lang="scss">
+// тут будут главные стили, которые и на Dashboard распространяются
 
   li {
-  list-style-type: none; 
+    list-style-type: none; 
   }
   ul {
-  margin-left: 0; 
-  padding-left: 0;
+    margin-left: 0; 
+    padding-left: 0;
   }
 
   .header {
@@ -66,7 +67,7 @@ export default {
   .main-sidebar{
     background-color: rgb(255, 255, 255);
   }
-  
+
   .main-block{
     background-color: rgb(255, 255, 255);
     padding-right: 12px;

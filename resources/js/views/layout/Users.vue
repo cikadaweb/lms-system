@@ -5,24 +5,28 @@
       
       <h2>Пользователи:</h2>
 
-    <my-window v-if="isPopupVisible" @close="closePopup">
-      <ul class="popup">
-        <li>
-          <form>
-            <my-input type="text" placeholder="username" v-model="user.name"  />
-            <my-input type="text" placeholder="email address" v-model="user.email" />
-            <my-input type="password" placeholder="password" v-model="user.password" />
-            <my-input type="password" placeholder="password confirmation" v-model="user.password_confirmation" />
-          </form>
-        </li>
-        <li>        
-          <div class="popup__footer pt-2">
-            <my-button class="btn-success" @click="addUser">Add</my-button>
-            <my-button class="btn-danger">Update</my-button>
-          </div>
-        </li>
-      </ul>
-    </my-window>
+      <my-window v-if="isPopupVisible" @close="closePopup">
+        <ul class="popup">
+          <li>
+            <form>
+              <my-input type="text" placeholder="username" v-model="user.name"  />
+              <my-input type="text" placeholder="email address" v-model="user.email" />
+              <my-input type="password" placeholder="password" v-model="user.password" />
+              <my-input type="password" placeholder="password confirmation" v-model="user.password_confirmation" />
+            </form>
+          </li>
+          <li>        
+            <div class="popup__footer pt-2">
+              <my-button class="btn-success" @click="addUser">Добавить</my-button>
+              <my-button class="btn-danger"  @click="popup">Отменить</my-button>
+            </div>
+          </li>
+        </ul>
+      </my-window>
+
+      <div class="table-btn pt-2 pb-3">
+        <my-button class="btn-success" @click="popup">Добавить пользователя</my-button>
+      </div>
 
       <table class="table table-success table-striped">
         <thead>
@@ -30,29 +34,25 @@
             <th scope="col">#</th>
             <th scope="col">Логин</th>
             <th scope="col">Почта</th>
-            <th scope="col">Пароль</th>
+            <th scope="col">Роль</th>
             <th>Редактировать</th>
             <th>Удалить</th>
-            <th>
-              <my-button class="btn-success" @click="popup">Add</my-button>
-            </th>
           </tr>
         </thead>
         <tbody >
-          <tr v-for="user in getUsers" :key="user.id">
-            <th>{{ user.id }}</th>
+          <tr v-for="(user, idx) in getUsers" :key="user.id">
+            <th>{{ idx }}</th>
             <td>{{ user.name }}</td>
             <td>{{ user.email }}</td>
-            <td>{{ user.password }}</td>
+            <td>Администратор</td>
             <td>
                 <router-link :to="{name: 'UserEdit', params:{id: user.id}}">
-                  <my-button class="btn-outline-success">  Edit </my-button>
+                  <my-button class="btn-outline-success">Редактировать</my-button>
                 </router-link>
             </td>
             <td>
-                <my-button class="btn-outline-danger" @click="deleteUser(user.id)"> Delete </my-button>
+                <my-button class="btn-outline-danger" @click="deleteUser(user.id)">Удалить</my-button>
             </td>
-            <td></td>
           </tr>
         </tbody>
       </table>
@@ -89,7 +89,7 @@ export default {
   methods: {
 
     popup() {
-        this.isPopupVisible = true
+        this.isPopupVisible = !this.isPopupVisible
     },
 
     closePopup() {
@@ -126,6 +126,10 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+
+  .table-btn{
+    display: flex;
   }
   
 

@@ -32,18 +32,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
 
-  .header {
-    background-color: rgb(255, 255, 255);
-  }
-
-  .main-sidebar{
-    background-color: rgb(255, 255, 255);
-  }
-
-  .main-body{
-    background-color: #F5EFFF;
-  }
 
 </style>

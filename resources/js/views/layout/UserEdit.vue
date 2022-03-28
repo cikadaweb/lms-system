@@ -5,10 +5,10 @@
         <div class="user-page">
           
           <form class="form">
-            <h1>Edit User</h1>
+            <h3>Редактирование пользователя</h3>
             <my-input type="text" placeholder="username" v-model="user.name"></my-input>
             <my-input type="text" placeholder="email" v-model="user.email"></my-input>
-            <my-button class="btn-success" @click="updateUsers">Update</my-button>
+            <my-button class="btn-success" @click="updateUsers">Обновить</my-button>
           </form>
         </div>
     </div>
