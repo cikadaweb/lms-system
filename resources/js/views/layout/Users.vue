@@ -131,6 +131,14 @@ export default {
   .table-btn{
     display: flex;
   }
+
+  li {
+    list-style-type: none; 
+  }
+  ul {
+    margin-left: 0; 
+    padding-left: 0;
+  }
   
 
 </style>

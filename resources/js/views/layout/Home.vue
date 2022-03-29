@@ -52,14 +52,6 @@ export default {
 <style lang="scss">
 // тут будут главные стили, которые и на Dashboard распространяются
 
-  li {
-    list-style-type: none; 
-  }
-  ul {
-    margin-left: 0; 
-    padding-left: 0;
-  }
-
   .header {
     background-color: rgb(255, 255, 255);
   }
