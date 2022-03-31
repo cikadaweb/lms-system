@@ -49,7 +49,8 @@ export default {
 
 
 
-<style scoped lang="scss">
+<style lang="scss">
+// тут будут главные стили, которые и на Dashboard распространяются
 
   .header {
     background-color: rgb(255, 255, 255);
@@ -59,8 +60,15 @@ export default {
     background-color: rgb(255, 255, 255);
   }
 
+  .main-block{
+    background-color: rgb(255, 255, 255);
+    padding-right: 12px;
+  }
+
   .main-body{
     background-color: #F5EFFF;
+    border-radius: 15px;
+    padding-right: 10px;
   }
 
 </style>

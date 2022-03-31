@@ -2,37 +2,45 @@
 
   <div class="container">
     <div class="row justify-content-md-center">
-        <div class="login-page">
+        <div class="user-page">
           
           <form class="form">
-            <my-input type="email" placeholder="email address" v-model="user.email"></my-input>
-            <my-input type="password" placeholder="password" v-model="user.password"></my-input>
-            <my-button type="submit" class="btn-success" @click.prevent="login">Войти</my-button>
-            <router-link to="/user/register"><p class="message">Еще не регистрироваилсь?</p><a href="#">Зарегистрироваться</a></router-link>
+            <h3>Редактирование пользователя</h3>
+            <my-input type="text" placeholder="username" v-model="user.name"></my-input>
+            <my-input type="text" placeholder="email" v-model="user.email"></my-input>
+            <my-button class="btn-success" @click="updateUsers">Обновить</my-button>
           </form>
-          
         </div>
     </div>
   </div>
 
 </template>
 <script>
+import axios from "../../../axios/axios-instance";
 
 export default {
   
-  name: "Login",
+  name: "UserEdit",
   data() {
     return {
       user: {
-        email:"",
-        password: ""
+        name:"",
+        email: ""
       }
     }
   },
   methods: {
-    login() {
-      this.$store.dispatch("auth/loginUser", this.user)
-    }
+    updateUsers() {
+        axios
+            .put("/api/users/" + this.$route.params.id, {
+                name: this.user.name,
+                email: this.user.email,
+            })
+            .then((response) => {
+              // this.$router.push({name: "Dashboard"});
+              window.location.replace("/user/dashboard");
+            });
+    },
   }
 }
 </script>
@@ -41,7 +49,7 @@ export default {
 
 <style scoped lang="scss">
 
-.login-page {
+.user-page {
     width: 360px;
     padding: 8% 0 0;
     margin: auto;

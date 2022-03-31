@@ -1,22 +1,26 @@
 <template>
     <nav class="sidebar">
         <ul class="side-nav">
-            <li class="side-nav__item">
-                <a href="#" class="side-nav__link">
-                    <svg class="side-nav__icon">
-                        <use xlink:href="../../../img/sprite.svg#icon-home2"></use>
-                    </svg>
-                    <span>Главная</span>
-                </a>
-            </li>
-            <li class="side-nav__item">
-                <a href="#" class="side-nav__link">
-                    <svg class="side-nav__icon">
-                        <use xlink:href="../../../img/sprite.svg#icon-users"></use>
-                    </svg>
-                    <span>Сотрудники</span>
-                </a>
-            </li>
+           <router-link :to="'/'">
+                <li class="side-nav__item">
+                    <a href="#" class="side-nav__link">
+                        <svg class="side-nav__icon">
+                            <use xlink:href="../../../img/sprite.svg#icon-home2"></use>
+                        </svg>
+                        <span>Главная</span>
+                    </a>
+                </li>
+            </router-link> 
+            <router-link :to="'/user/dashboard'">
+                <li class="side-nav__item">
+                    <a href="#" class="side-nav__link">
+                        <svg class="side-nav__icon">
+                            <use xlink:href="../../../img/sprite.svg#icon-users"></use>
+                        </svg>
+                        <span>Сотрудники</span>
+                    </a>
+                </li>
+            </router-link> 
             <li class="side-nav__item">
                 <a href="#" class="side-nav__link">
                     <svg class="side-nav__icon">
@@ -39,8 +43,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
+a {
+    text-decoration: none;
+}
+
 .sidebar {
-    background-color: var(--color-grey-dark-1);
+    background-color: #F5EFFF;
+    border-radius: 15px;
     flex: 0 0 18%;
     display: flex;
     flex-direction: column;
@@ -60,7 +70,7 @@ export default {
     &__link:link,
     &__link:visited
     {
-        color: var(--color-grey-light-4);
+        color: black;
         text-decoration: none;
         padding: 1.75rem 3rem;
         display: flex;

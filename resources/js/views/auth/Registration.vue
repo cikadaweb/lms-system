@@ -6,11 +6,11 @@
           
           <form class="form">
             <my-input type="text" placeholder="username" v-model="user.name"></my-input>
-            <my-input type="text" placeholder="email address" v-model="user.email"></my-input>
-            <my-input type="text" placeholder="password" v-model="user.password"></my-input>
-            <my-input type="text" placeholder="password confirmation" v-model="user.password_confirmation"></my-input>
-            <my-button type="submit" @click.prevent="register">Registration</my-button>
-            <router-link to="/user/login"><p class="message">Already registered?</p><a href="#">Create an account</a></router-link>
+            <my-input type="email" placeholder="email address" v-model="user.email"></my-input>
+            <my-input type="password" placeholder="password" v-model="user.password"></my-input>
+            <my-input type="password" placeholder="password confirmation" v-model="user.password_confirmation"></my-input>
+            <my-button type="submit" class="btn-success" @click.prevent="register">Создать аккаунт</my-button>
+            <router-link to="/user/login"><p class="message">Уже зарегистрированы?</p><a href="#">Войти</a></router-link>
           </form>
           
         </div>
