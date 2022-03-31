@@ -1,4 +1,5 @@
 import axios from "axios";
+import store from "../js/store/index";
 
 const instance = axios.create({
     withCredentials: true,
@@ -17,6 +18,8 @@ instance.interceptors.response.use({}, (error) => {
             localStorage.removeItem("x-token");
         }
         window.location.replace("/user/login");
+    } else if (error.response.status === 422 || error.response.status === 500) {
+        console.log(error.response.data.errors);
     }
 });
 

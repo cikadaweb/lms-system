@@ -13,10 +13,19 @@
               <my-input type="text" placeholder="email address" v-model="user.email" />
               <my-input type="password" placeholder="password" v-model="user.password" />
               <my-input type="password" placeholder="password confirmation" v-model="user.password_confirmation" />
+            
+              <h2 class="pt-2">Роль</h2>
+              <select class="form-select" aria-label="Default select example" v-model="user.role.name">
+                <option disabled>Выберите роль</option>
+                <option v-for="role in getRoles" :key="role.id">
+                  {{ role.name }}
+                </option>
+              </select>
+
             </form>
           </li>
           <li>        
-            <div class="popup__footer pt-2">
+            <div class="popup__footer pt-3">
               <my-button class="btn-success" @click="addUser">Добавить</my-button>
               <my-button class="btn-danger"  @click="popup">Отменить</my-button>
             </div>
@@ -44,7 +53,8 @@
             <th>{{ idx }}</th>
             <td>{{ user.name }}</td>
             <td>{{ user.email }}</td>
-            <td>Администратор</td>
+            <td v-if="user.role">{{ user.role.name }}</td>
+            <td v-else>N/A</td>
             <td>
                 <router-link :to="{name: 'UserEdit', params:{id: user.id}}">
                   <my-button class="btn-outline-success">Редактировать</my-button>
@@ -79,12 +89,16 @@ export default {
         name: '',
         email: '',
         password: '',
-        password_confirmation: ''
+        password_confirmation: '',
+        role: {
+          name: "",
+        }
       }
     }
   },
   created() {
     this.$store.dispatch("users/getUsers")
+    this.$store.dispatch("users/getRoles")
   },
   methods: {
 
@@ -113,6 +127,11 @@ export default {
       get() {
         return this.$store.state.users.userList
       }
+    },
+    getRoles: {
+      get() {
+        return this.$store.state.users.roleList
+      }
     }
   }
 }
@@ -139,6 +158,7 @@ export default {
     margin-left: 0; 
     padding-left: 0;
   }
+  
   
 
 </style>
