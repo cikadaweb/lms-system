@@ -71,4 +71,13 @@ export default {
     padding-right: 10px;
   }
 
+  li {
+    list-style-type: none; 
+  }
+  ul {
+    margin-left: 0; 
+    padding-left: 0;
+  }
+  
+
 </style>

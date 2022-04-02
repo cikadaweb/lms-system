@@ -1,9 +1,12 @@
 import axios from "../../../axios/axios-instance";
 
-const state = {};
+const state = {
+    errors: [],
+    invalidCredentials: "",
+};
 
 const actions = {
-    loginUser({}, user) {
+    loginUser(ctx, user) {
         return new Promise((resolve) => {
             axios.get("/sanctum/csrf-cookie").then((response) => {
                 axios
@@ -12,23 +15,33 @@ const actions = {
                         password: user.password,
                     })
                     .then((response) => {
+                        console.log("Adel:", response);
                         if (response.data) {
                             localStorage.setItem(
                                 "x-token",
                                 response.config.headers["X-XSRF-TOKEN"]
                             );
                             window.location.replace("/");
-                            console.log(response);
                         }
                     })
                     .catch((error) => {
-                        console.log(error.response);
+                        if (
+                            error.response.status === 422 ||
+                            error.response.status === 500
+                        ) {
+                            ctx.commit(
+                                "setInvalidCredentials",
+                                error.response.data.message
+                            );
+                            ctx.commit("setErrors", error.response.data.errors);
+                            console.log(error.response.data.errors);
+                        }
                     });
             });
         });
     },
 
-    registerUser({}, user) {
+    registerUser(ctx, user) {
         return new Promise((resolve) => {
             axios.get("/sanctum/csrf-cookie").then((response) => {
                 axios
@@ -49,7 +62,17 @@ const actions = {
                         }
                     })
                     .catch((error) => {
-                        console.log(error.response);
+                        if (
+                            error.response.status === 422 ||
+                            error.response.status === 500
+                        ) {
+                            ctx.commit(
+                                "setInvalidCredentials",
+                                error.response.data.message
+                            );
+                            ctx.commit("setErrors", error.response.data.errors);
+                            console.log(error.response.data.errors);
+                        }
                     });
             });
         });
@@ -62,9 +85,24 @@ const actions = {
     },
 };
 
-const mutations = {};
+const mutations = {
+    setErrors(state, errors) {
+        state.errors = errors;
+        console.log(state.error);
+    },
+    setInvalidCredentials(state, invalidCredentials) {
+        state.invalidCredentials = invalidCredentials;
+    },
+};
 
-const getters = {};
+const getters = {
+    errors(state) {
+        return state.errors;
+    },
+    invalidCredentials(state) {
+        return state.invalidCredentials;
+    },
+};
 
 export default {
     namespaced: true,

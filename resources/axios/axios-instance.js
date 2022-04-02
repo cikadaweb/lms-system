@@ -1,5 +1,4 @@
 import axios from "axios";
-import store from "../js/store/index";
 
 const instance = axios.create({
     withCredentials: true,
@@ -10,17 +9,31 @@ const instance = axios.create({
     },
 });
 
-instance.interceptors.response.use({}, (error) => {
-    console.log(error.response);
-    if (error.response.status === 401 || error.response.status === 419) {
-        const token = localStorage.getItem("x-token");
-        if (token) {
-            localStorage.removeItem("x-token");
+// instance.interceptors.response.use({}, (error) => {
+//     console.log(error.response);
+//     if (error.response.status === 401 || error.response.status === 419) {
+//         const token = localStorage.getItem("x-token");
+//         if (token) {
+//             localStorage.removeItem("x-token");
+//         }
+//         window.location.replace("/user/login");
+//     } else if (error.response.status === 422 || error.response.status === 500) {
+//         console.log(error.response.data.errors);
+//     }
+// });
+
+axios.interceptors.response.use(
+    (response) => {},
+    (error) => {
+        if (error.response.status === 401 || error.response.status === 419) {
+            const token = localStorage.getItem("x-token");
+            if (token) {
+                localStorage.removeItem("x-token");
+            }
+            window.location.replace("/user/login");
         }
-        window.location.replace("/user/login");
-    } else if (error.response.status === 422 || error.response.status === 500) {
-        console.log(error.response.data.errors);
+        return Promise.reject(error.response.data);
     }
-});
+);
 
 export default instance;

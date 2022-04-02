@@ -2,9 +2,11 @@
 
   <div class="container">
     <div class="row justify-content-md-center">
+        <validation-errors v-if="validationErrors" :errors="validationErrors"></validation-errors>
         <div class="register-page">
           
           <form class="form">
+            <h2>Регистрация</h2>
             <my-input type="text" placeholder="username" v-model="user.name"></my-input>
             <my-input type="email" placeholder="email address" v-model="user.email"></my-input>
             <my-input type="password" placeholder="password" v-model="user.password"></my-input>
@@ -22,6 +24,8 @@
 
 
 <script>
+import { mapGetters } from "vuex"
+import ValidationErrors from "../ui/ValidationErrors.vue";
 
 export default {
   name: "Registration",
@@ -39,7 +43,13 @@ export default {
     register() {
       this.$store.dispatch("auth/registerUser", this.user)
     }
-  }
+  },
+    computed: {
+    ...mapGetters({
+      validationErrors: "auth/errors"
+    })  
+  },
+  components: {ValidationErrors}
 }
 </script>
 
@@ -79,7 +89,6 @@ export default {
 
 .form .message {
     margin: 15px;
-    color: #b3b3b3;
     font-size: 12px;
 }
 .form .message a {

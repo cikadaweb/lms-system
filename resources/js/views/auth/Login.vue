@@ -2,9 +2,21 @@
 
   <div class="container">
     <div class="row justify-content-md-center">
+
+      <div class="alert alert-danger" role="alert"
+       v-if="invalidCredentials"
+       :style="{
+         display: invalidCredentials ? 'flex' : 'none'
+       }"  
+       >
+        Неверно введенные данные!
+      </div>
+
+      <validation-errors v-if="validationErrors" :errors="validationErrors"></validation-errors>
+
         <div class="login-page">
-          
           <form class="form">
+            <h2>Авторизация</h2>
             <my-input type="email" placeholder="email address" v-model="user.email"></my-input>
             <my-input type="password" placeholder="password" v-model="user.password"></my-input>
             <my-button type="submit" class="btn-success" @click.prevent="login">Войти</my-button>
@@ -12,11 +24,14 @@
           </form>
           
         </div>
+
     </div>
   </div>
 
 </template>
 <script>
+import { mapGetters } from "vuex"
+import ValidationErrors from "../ui/ValidationErrors.vue";
 
 export default {
   
@@ -26,14 +41,23 @@ export default {
       user: {
         email:"",
         password: ""
-      }
+      },
+      isShowAlert: false
     }
   },
   methods: {
     login() {
       this.$store.dispatch("auth/loginUser", this.user)
     }
-  }
+  },
+  computed: {
+    ...mapGetters({
+      invalidCredentials: "auth/invalidCredentials",
+      validationErrors: "auth/errors"
+    })  
+
+  },
+  components: {ValidationErrors}
 }
 </script>
 
@@ -73,7 +97,6 @@ export default {
 
 .form .message {
     margin: 15px;
-    color: #b3b3b3;
     font-size: 12px;
 }
 .form .message a {
