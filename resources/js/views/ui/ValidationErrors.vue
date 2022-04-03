@@ -3,8 +3,13 @@
   <div>
     <ul>
       <li>
-        <div class="alert alert-danger" role="alert" v-for="(value, index) in validationErrors" :key="index">
-          {{ value }}
+        <div class="alert alert-danger alert-block" role="alert" v-for="(value, index) in validationErrors" :key="index">
+          <div class="alert__text">
+            {{ value }}
+          </div>
+          <div class="alert__btn" onclick="this.parentElement.style.display='none';">
+            <i class="bi bi-x-circle"></i>
+          </div>
         </div>
       </li>
     </ul>
@@ -27,6 +32,14 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 
-</style>
+.alert-block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+</style>>
+
+

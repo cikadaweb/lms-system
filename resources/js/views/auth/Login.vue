@@ -3,13 +3,18 @@
   <div class="container">
     <div class="row justify-content-md-center">
 
-      <div class="alert alert-danger" role="alert"
+      <div class="alert alert-danger alert-block" role="alert"
        v-if="invalidCredentials"
        :style="{
          display: invalidCredentials ? 'flex' : 'none'
        }"  
        >
-        Неверно введенные данные!
+        <div class="alert__text">
+          Неверно введенные данные!
+        </div>
+        <div class="alert__btn" onclick="this.parentElement.style.display='none';">
+          <i class="bi bi-x-circle"></i>
+        </div>
       </div>
 
       <validation-errors v-if="validationErrors" :errors="validationErrors"></validation-errors>
@@ -65,6 +70,12 @@ export default {
 
 <style scoped lang="scss">
 
+.alert-block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .login-page {
     width: 360px;
     padding: 8% 0 0;
@@ -103,5 +114,6 @@ export default {
     text-decoration: none;
     color: var(--color-grey-light-4);
 }
+
 
 </style>

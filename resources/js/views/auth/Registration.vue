@@ -2,7 +2,23 @@
 
   <div class="container">
     <div class="row justify-content-md-center">
+
+        <div class="alert alert-danger alert-block" role="alert"
+        v-if="invalidCredentials"
+        :style="{
+          display: invalidCredentials ? 'flex' : 'none'
+        }"  
+        >
+          <div class="alert__text">
+            Неверно введенные данные!
+          </div>
+          <div class="alert__btn" onclick="this.parentElement.style.display='none';">
+            <i class="bi bi-x-circle"></i>
+          </div>
+        </div>
+
         <validation-errors v-if="validationErrors" :errors="validationErrors"></validation-errors>
+
         <div class="register-page">
           
           <form class="form">
@@ -36,7 +52,8 @@ export default {
         email:"",
         password: "",
         password_confirmation: ""
-      }
+      },
+      isShowAlert: false
     }
   },
   methods: {
@@ -46,6 +63,7 @@ export default {
   },
     computed: {
     ...mapGetters({
+      invalidCredentials: "auth/invalidCredentials",
       validationErrors: "auth/errors"
     })  
   },
@@ -56,6 +74,12 @@ export default {
 
 
 <style scoped lang="scss">
+
+.alert-block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
 .register-page {
     width: 360px;

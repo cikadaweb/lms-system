@@ -15,7 +15,6 @@ const actions = {
                         password: user.password,
                     })
                     .then((response) => {
-                        console.log("Adel:", response);
                         if (response.data) {
                             localStorage.setItem(
                                 "x-token",
@@ -58,7 +57,6 @@ const actions = {
                                 response.config.headers["X-XSRF-TOKEN"]
                             );
                             window.location.replace("/");
-                            console.log(response);
                         }
                     })
                     .catch((error) => {
@@ -88,7 +86,6 @@ const actions = {
 const mutations = {
     setErrors(state, errors) {
         state.errors = errors;
-        console.log(state.error);
     },
     setInvalidCredentials(state, invalidCredentials) {
         state.invalidCredentials = invalidCredentials;
