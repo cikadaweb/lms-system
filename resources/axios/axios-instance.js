@@ -9,31 +9,28 @@ const instance = axios.create({
     },
 });
 
-// instance.interceptors.response.use({}, (error) => {
-//     console.log(error.response);
-//     if (error.response.status === 401 || error.response.status === 419) {
-//         const token = localStorage.getItem("x-token");
-//         if (token) {
-//             localStorage.removeItem("x-token");
-//         }
-//         window.location.replace("/user/login");
-//     } else if (error.response.status === 422 || error.response.status === 500) {
-//         console.log(error.response.data.errors);
-//     }
-// });
-
-axios.interceptors.response.use(
-    (response) => {},
-    (error) => {
-        if (error.response.status === 401 || error.response.status === 419) {
-            const token = localStorage.getItem("x-token");
-            if (token) {
-                localStorage.removeItem("x-token");
-            }
-            window.location.replace("/user/login");
+instance.interceptors.response.use({}, (error) => {
+    if (error.response.status === 401 || error.response.status === 419) {
+        const token = localStorage.getItem("x-token");
+        if (token) {
+            localStorage.removeItem("x-token");
         }
-        return Promise.reject(error.response.data);
+        window.location.replace("/user/login");
     }
-);
+});
+
+// axios.interceptors.response.use(
+//     (response) => {},
+//     (error) => {
+//         if (error.response.status === 401 || error.response.status === 419) {
+//             const token = localStorage.getItem("x-token");
+//             if (token) {
+//                 localStorage.removeItem("x-token");
+//             }
+//             window.location.replace("/user/login");
+//         }
+//         return Promise.reject(error.response.data);
+//     }
+// );
 
 export default instance;

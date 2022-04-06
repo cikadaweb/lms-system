@@ -50,7 +50,7 @@
         </thead>
         <tbody >
           <tr v-for="(user, idx) in getUsers" :key="user.id">
-            <th>{{ idx }}</th>
+            <th>{{ idx + 1 }}</th>
             <td>{{ user.name }}</td>
             <td>{{ user.email }}</td>
             <td v-if="user.role">{{ user.role.name }}</td>

@@ -2,7 +2,7 @@
 
   <div class="popup">
     <div class="popup__header">
-      <span style="color: #ccccc"><h3>Добавление пользователя</h3></span>
+      <span style="color: #ccccc"><h3>Добавление</h3></span>
         <span class="popup__btn" @click="close">
           <i class="bi bi-x-circle"></i>
         </span>

@@ -5,19 +5,10 @@
         <div class="user-page">
           
           <form class="form">
-            <h3>Редактирование пользователя</h3>
-            <my-input type="text" placeholder="username" v-model="user.name"></my-input>
-            <my-input type="text" placeholder="email" v-model="user.email"></my-input>
+            <h3>Редактирование разрешения</h3>
+            <my-input type="text" placeholder="permission" v-model="permission.name"></my-input>
 
-            <h2 class="pt-2">Роль</h2>
-            <select class="form-select" aria-label="Default select example" v-model="user.role.name">
-              <option disabled>Выберите роль</option>
-              <option v-for="role in getRoles" :key="role.id">
-                {{ role.name }}
-              </option>
-            </select>
-
-            <my-button class="btn-success" @click="updateUsers">Обновить</my-button>
+            <my-button class="btn-success" @click="updatePermissions">Обновить</my-button>
 
           </form>
         </div>
@@ -30,42 +21,25 @@ import axios from "../../../axios/axios-instance";
 
 export default {
   
-  name: "UserEdit",
+  name: "EditPermission",
   data() {
     return {
-      user: {
+      permission: {
         name:"",
-        email: "",
-        role: {
-          name: "",
-        }
       }
     }
   },
-  created() {
-    this.$store.dispatch("users/getRoles")
-  },
   methods: {
-    updateUsers() {
+    updatePermissions() {
         axios
-            .put("/api/users/" + this.$route.params.id, {
-                name: this.user.name,
-                email: this.user.email,
-                role: this.user.role.name
+            .put("/api/permissions/" + this.$route.params.id, {
+                name: this.permission.name,
             })
             .then((response) => {
-              // this.$router.push({name: "Dashboard"});
-              window.location.replace("/user/dashboard");
+              window.location.replace("/user/permissions");
             });
     },
   },
-  computed: {
-    getRoles: {
-      get() {
-        return this.$store.state.users.roleList
-      }
-    }
-  }
   
 }
 </script>

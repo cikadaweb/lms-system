@@ -4,6 +4,10 @@ import Login from "../views/auth/Login";
 import Registration from "../views/auth/Registration";
 import Dashboard from "../views/layout/Dashboard";
 import UserEdit from "../views/layout/UserEdit";
+import Permissions from "../views/layout/Permissions";
+import EditPermissions from "../views/layout/EditPermissions";
+import Management from "../views/layout/Management";
+import EditManagement from "../views/layout/EditManagement";
 
 const routes = [
     {
@@ -30,6 +34,26 @@ const routes = [
         path: "/user/:id",
         name: "UserEdit",
         component: UserEdit,
+    },
+    {
+        path: "/user/management",
+        name: "Management",
+        component: Management,
+    },
+    {
+        path: "/user/management/:id",
+        name: "EditManagement",
+        component: EditManagement,
+    },
+    {
+        path: "/user/permissions",
+        name: "Permissions",
+        component: Permissions,
+    },
+    {
+        path: "/user/permissions/:id",
+        name: "EditPermissions",
+        component: EditPermissions,
     },
 ];
 
