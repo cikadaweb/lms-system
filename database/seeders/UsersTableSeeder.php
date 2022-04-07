@@ -16,6 +16,6 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        Permission::create(['name'=>'Read post']);
+        Role::create(['name'=>'User']);
     }
 }

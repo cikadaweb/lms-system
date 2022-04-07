@@ -1,0 +1,38 @@
+<template>
+
+  <div class="container">
+    <div class="row header">
+      <Header></Header>
+    </div>
+
+    <div class="row main-block">     
+      <div class="col-xl-3 main-sidebar">
+        <Sidebar></Sidebar>
+      </div>
+      <div class="col-xl-9 main-body">
+        <Courses></Courses>
+      </div>
+    </div>
+  </div>
+
+</template>
+
+<script>
+import Header from "../../ui/Header.vue";
+import Sidebar from "../Sidebar.vue";
+import Courses from "./Courses.vue";
+
+export default {
+    name: "CoursesDashboard",
+    components: {
+      Header,
+      Sidebar,
+      Courses
+    }
+}
+</script>
+
+<style lang="scss">
+
+
+</style>

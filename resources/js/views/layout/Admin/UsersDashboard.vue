@@ -18,9 +18,9 @@
 </template>
 
 <script>
-import Header from "../ui/Header";
-import Sidebar from "./Sidebar";
-import Users from "./Users";
+import Header from "../../ui/Header.vue";
+import Sidebar from "../Sidebar.vue";
+import Users from "./Users.vue";
 
 export default {
     name: "Dashboard",

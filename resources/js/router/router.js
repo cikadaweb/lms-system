@@ -2,12 +2,13 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/layout/Home";
 import Login from "../views/auth/Login";
 import Registration from "../views/auth/Registration";
-import Dashboard from "../views/layout/Dashboard";
-import UserEdit from "../views/layout/UserEdit";
+import UsersDashboard from "../views/layout/Admin/UsersDashboard";
+import UserEdit from "../views/layout/Admin/UserEdit";
 import Permissions from "../views/layout/Permissions";
 import EditPermissions from "../views/layout/EditPermissions";
 import Management from "../views/layout/Management";
 import EditManagement from "../views/layout/EditManagement";
+import CoursesDashboard from "../views/layout/Admin/CoursesDashboard";
 
 const routes = [
     {
@@ -17,8 +18,8 @@ const routes = [
     },
     {
         path: "/user/dashboard",
-        name: "Dashboard",
-        component: Dashboard,
+        name: "UsersDashboard",
+        component: UsersDashboard,
     },
     {
         path: "/user/login",
@@ -54,6 +55,11 @@ const routes = [
         path: "/user/permissions/:id",
         name: "EditPermissions",
         component: EditPermissions,
+    },
+    {
+        path: "/courses",
+        name: "CoursesDashboard",
+        component: CoursesDashboard,
     },
 ];
 

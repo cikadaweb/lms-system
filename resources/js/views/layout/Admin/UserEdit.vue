@@ -26,7 +26,7 @@
 
 </template>
 <script>
-import axios from "../../../axios/axios-instance";
+import axios from "../../../../axios/axios-instance";
 
 export default {
   
