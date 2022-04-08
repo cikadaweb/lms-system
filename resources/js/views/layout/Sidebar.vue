@@ -11,6 +11,17 @@
                     </a>
                 </li>
             </router-link> 
+            <router-link :to="'/news'">
+                <li class="side-nav__item">
+                    <a href="#" class="side-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-newspaper side-nav__link-icon" viewBox="0 0 16 16">
+                        <path d="M0 2.5A1.5 1.5 0 0 1 1.5 1h11A1.5 1.5 0 0 1 14 2.5v10.528c0 .3-.05.654-.238.972h.738a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 1 1 0v9a1.5 1.5 0 0 1-1.5 1.5H1.497A1.497 1.497 0 0 1 0 13.5v-11zM12 14c.37 0 .654-.211.853-.441.092-.106.147-.279.147-.531V2.5a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0-.5.5v11c0 .278.223.5.497.5H12z"/>
+                        <path d="M2 3h10v2H2V3zm0 3h4v3H2V6zm0 4h4v1H2v-1zm0 2h4v1H2v-1zm5-6h2v1H7V6zm3 0h2v1h-2V6zM7 8h2v1H7V8zm3 0h2v1h-2V8zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1z"/>
+                        </svg>
+                        <span>Объявления</span>
+                    </a>
+                </li>
+            </router-link> 
             <router-link :to="'/courses'">
                 <li class="side-nav__item">
                     <a href="#" class="side-nav__link">
@@ -75,12 +86,13 @@ a {
 }
 
 .sidebar {
-    background-color: #F5EFFF;
+    // background-color: #F5EFFF;
     border-radius: 15px;
     flex: 0 0 18%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    height: 98%;
 }
 .side-nav {
     font-size: 16px;
@@ -88,7 +100,6 @@ a {
     margin-top: 3.5rem;
     text-decoration: none;
     &__item {
-        background-color: var(--color-grey-dark-1);
         display: flex;
         justify-content: space-between;
         text-decoration: none;
@@ -105,25 +116,16 @@ a {
     &__link:hover {
         color: cornflowerblue;
     }
-        &__icon {
-            width: 30px;
-            height: 30px;
-            margin-right: 2rem;
-            fill: currentColor;
-        }
 }
 .legal {
-    font-size: 1.2rem;
-    color: var(--color-grey-light-4);
-    text-align: center;
+    font-size: 16px;
+    text-align: center; 
     padding: 2.5rem;
-    margin-top: 170px;
 }
 
 .side-nav__link-icon {
-    width: 30px;
-    height: 30px;
-    margin-right: 2rem;
-    fill: currentColor;
+    width: 25px;
+    height: 25px;
+    margin-right: 15px;
 }
 </style>

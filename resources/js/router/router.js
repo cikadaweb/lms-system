@@ -4,11 +4,13 @@ import Login from "../views/auth/Login";
 import Registration from "../views/auth/Registration";
 import UsersDashboard from "../views/layout/Admin/UsersDashboard";
 import UserEdit from "../views/layout/Admin/UserEdit";
+import CoursesDashboard from "../views/layout/Admin/CoursesDashboard";
+import NewsDashboard from "../views/layout/Admin/NewsDashboard";
+
 import Permissions from "../views/layout/Permissions";
 import EditPermissions from "../views/layout/EditPermissions";
 import Management from "../views/layout/Management";
 import EditManagement from "../views/layout/EditManagement";
-import CoursesDashboard from "../views/layout/Admin/CoursesDashboard";
 
 const routes = [
     {
@@ -37,6 +39,16 @@ const routes = [
         component: UserEdit,
     },
     {
+        path: "/courses",
+        name: "CoursesDashboard",
+        component: CoursesDashboard,
+    },
+    {
+        path: "/news",
+        name: "NewsDashboard",
+        component: NewsDashboard,
+    },
+    {
         path: "/user/management",
         name: "Management",
         component: Management,
@@ -55,11 +67,6 @@ const routes = [
         path: "/user/permissions/:id",
         name: "EditPermissions",
         component: EditPermissions,
-    },
-    {
-        path: "/courses",
-        name: "CoursesDashboard",
-        component: CoursesDashboard,
     },
 ];
 

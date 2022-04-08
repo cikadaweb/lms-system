@@ -56,7 +56,7 @@ export default {
 
 .logo {
     height: 65px;
-    margin-left: 120px;
+    margin-left: 85px;
 }
 
 .user-nav {

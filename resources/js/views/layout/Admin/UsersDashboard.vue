@@ -1,15 +1,15 @@
 <template>
 
-  <div class="container">
+  <div class="custom-container">
     <div class="row header">
       <Header></Header>
     </div>
 
     <div class="row main-block">     
-      <div class="col-xl-3 main-sidebar">
+      <div class="col-xl-2 main-sidebar">
         <Sidebar></Sidebar>
       </div>
-      <div class="col-xl-9 main-body">
+      <div class="col-xl-10 main-body">
         <Users></Users>
       </div>
     </div>

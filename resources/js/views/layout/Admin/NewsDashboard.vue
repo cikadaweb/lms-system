@@ -10,7 +10,7 @@
         <Sidebar></Sidebar>
       </div>
       <div class="col-xl-10 main-body">
-        <Courses></Courses>
+        <News></News>
       </div>
     </div>
   </div>
@@ -20,14 +20,14 @@
 <script>
 import Header from "../../ui/Header.vue";
 import Sidebar from "../Sidebar.vue";
-import Courses from "./Courses.vue";
+import News from "./News.vue";
 
 export default {
-    name: "CoursesDashboard",
+    name: "NewsDashboard",
     components: {
       Header,
       Sidebar,
-      Courses
+      News
     }
 }
 </script>
