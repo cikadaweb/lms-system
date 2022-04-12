@@ -2,11 +2,14 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/layout/Home";
 import Login from "../views/auth/Login";
 import Registration from "../views/auth/Registration";
-import UsersDashboard from "../views/layout/Admin/UsersDashboard";
+
+import UsersMain from "../views/layout/Admin/UsersMain";
 import UserEdit from "../views/layout/Admin/UserEdit";
-import CoursesDashboard from "../views/layout/Admin/CoursesDashboard";
-import NewsDashboard from "../views/layout/Admin/NewsDashboard";
-import NewsCreate from "../views/layout/Admin/NewsCreate";
+
+import CoursesMain from "../views/layout/Admin/CoursesMain";
+
+import ArticlesMain from "../views/layout/Admin/ArticlesMain";
+import ArticleCreate from "../views/layout/Admin/ArticleCreate";
 
 import Permissions from "../views/layout/Permissions";
 import EditPermissions from "../views/layout/EditPermissions";
@@ -20,9 +23,9 @@ const routes = [
         component: Home,
     },
     {
-        path: "/user/dashboard",
-        name: "UsersDashboard",
-        component: UsersDashboard,
+        path: "/users/dashboard",
+        name: "UsersMain",
+        component: UsersMain,
     },
     {
         path: "/user/login",
@@ -40,19 +43,19 @@ const routes = [
         component: UserEdit,
     },
     {
-        path: "/courses",
-        name: "CoursesDashboard",
-        component: CoursesDashboard,
+        path: "/courses/dashboard",
+        name: "CoursesMain",
+        component: CoursesMain,
     },
     {
-        path: "/news",
-        name: "NewsDashboard",
-        component: NewsDashboard,
+        path: "/articles/dashboard",
+        name: "ArticlesMain",
+        component: ArticlesMain,
     },
     {
-        path: "/news/create",
-        name: "NewsCreate",
-        component: NewsCreate,
+        path: "/article/create",
+        name: "ArticleCreate",
+        component: ArticleCreate,
     },
     {
         path: "/user/management",

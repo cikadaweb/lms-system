@@ -11,7 +11,7 @@
                     </a>
                 </li>
             </router-link> 
-            <router-link :to="'/news'">
+            <router-link :to="'/articles/dashboard'">
                 <li class="side-nav__item">
                     <a href="#" class="side-nav__link">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-newspaper side-nav__link-icon" viewBox="0 0 16 16">
@@ -22,7 +22,7 @@
                     </a>
                 </li>
             </router-link> 
-            <router-link :to="'/courses'">
+            <router-link :to="'/courses/dashboard'">
                 <li class="side-nav__item">
                     <a href="#" class="side-nav__link">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-mortarboard-fill side-nav__link-icon" viewBox="0 0 16 16">
@@ -33,7 +33,7 @@
                     </a>
                 </li>
             </router-link> 
-            <router-link :to="'/user/dashboard'">
+            <router-link :to="'/users/dashboard'">
                 <li class="side-nav__item">
                     <a href="#" class="side-nav__link">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-people-fill side-nav__link-icon" viewBox="0 0 16 16">

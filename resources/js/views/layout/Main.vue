@@ -1,9 +1,14 @@
 <template>
 
   <div class="container">
+
     <div class="row pt-5">
 
       <h2>Статистика по курсам:</h2>
+
+      <div>
+        <button class="btn btn-warning" @click="test">Тест гипотезы</button>
+      </div>
 
       <div class="col-xl-6">
         <p>Активные курсы:</p>
@@ -40,6 +45,7 @@
 
 <script>
 import PieChart from "../ui/PieChart";
+import axios from "../../../axios/axios-instance";
 
 export default {
 
@@ -70,6 +76,16 @@ export default {
             ],
             borderWidth: 1
         }]
+      }
+    }
+  },
+  methods: {
+    async test() {
+      try {
+        const { data } = await axios.get("http://127.0.0.1:8000/api/articles");
+        console.log(data)
+      } catch (e) {
+          console.log(e.message);
       }
     }
   }

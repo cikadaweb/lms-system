@@ -33,7 +33,8 @@ export default {
         Main
     },
     mounted() {
-      this.getData()
+      // toDo
+      // this.getData()
     },
     methods: {
       getData() {
@@ -49,7 +50,7 @@ export default {
 
 
 
-<style lang="scss">
+<style scoped lang="scss">
 // тут будут главные стили, которые и на Dashboard распространяются
 
 .custom-container {

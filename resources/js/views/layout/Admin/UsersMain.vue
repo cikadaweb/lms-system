@@ -10,7 +10,7 @@
         <Sidebar></Sidebar>
       </div>
       <div class="col-xl-10 main-body">
-        <News></News>
+        <UsersDashboard></UsersDashboard>
       </div>
     </div>
   </div>
@@ -20,14 +20,14 @@
 <script>
 import Header from "../../ui/Header.vue";
 import Sidebar from "../Sidebar.vue";
-import News from "./News.vue";
+import UsersDashboard from "./UsersDashboard.vue";
 
 export default {
-    name: "NewsDashboard",
+    name: "UsersMain",
     components: {
       Header,
       Sidebar,
-      News
+      UsersDashboard
     }
 }
 </script>
