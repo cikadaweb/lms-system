@@ -23,6 +23,10 @@ class Article extends Model
         return $this->belongsToMany(Tag::class);
     }
 
+    public function createdAtForHumans(){
+        return $this->created_at->diffForHumans();
+    }
+
     public function scopeAllPaginate($query, $numbers)
     {
         return $query->with('tags', 'state')->orderBy('created_at', 'desc')->paginate($numbers);

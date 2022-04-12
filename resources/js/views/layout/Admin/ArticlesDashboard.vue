@@ -25,11 +25,11 @@
           </tr>
         </thead>
         <tbody >
-          <tr v-for="(state, idx) in getNews" :key="state.id">
-            <th>{{ idx + 1 }}</th>
-            <td>{{ state.title }}</td>
+          <tr v-for="(article, idx) in getArticles" :key="article.id">
+            <th>{{ idx }}</th>
+            <td>{{ article.title }}</td>
             <td>12</td>
-            <td>12.04.22</td>
+            <td>{{ article.created_at }}</td>
             <td>
                 <router-link :to="'/'">
                   <my-button class="btn-success">Открыть</my-button>
@@ -76,7 +76,7 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch("news/getNews")
+    this.$store.dispatch("articles/getArticles")
   },
   methods: {
 
@@ -93,9 +93,9 @@ export default {
 
   },
   computed: {
-    getNews: {
+    getArticles: {
       get() {
-        return this.$store.state.news.newsList
+        return this.$store.state.articles.articlesList
       }
     },
   }

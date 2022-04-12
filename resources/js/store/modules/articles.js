@@ -1,33 +1,31 @@
 import axios from "../../../axios/axios-instance";
 
 const state = {
-    newsList: [],
+    articlesList: [],
 };
 
 const actions = {
-    getNews(ctx) {
+    getArticles(ctx) {
         axios
             .get("/api/articles")
             .then((response) => {
-                ctx.commit("setNewsList", response.data);
+                ctx.commit("setArticlesList", response.data);
                 console.log(response.data);
             })
             .catch((error) => {
                 console.log(error);
             });
     },
-    addUser({}, user) {
+    addArticle({}, article) {
         axios
-            .post("/api/users", {
-                name: user.name,
-                email: user.email,
-                role: user.role.name,
-                password: user.password,
-                password_confirmation: user.password_confirmation,
+            .post("/api/articles", {
+                title: article.title,
+                img: article.img,
+                body: article.body,
             })
             .then((response) => {
                 if (response.data) {
-                    window.location.replace("/user/dashboard");
+                    window.location.replace("/articles/dashboard");
                     console.log(response);
                 }
             })
@@ -38,14 +36,14 @@ const actions = {
 };
 
 const mutations = {
-    setNewsList(state, payload) {
-        state.newsList = payload;
+    setArticlesList(state, payload) {
+        state.articlesList = payload;
     },
 };
 
 const getters = {
-    newsList(state) {
-        return state.newsList;
+    articlesList(state) {
+        return state.articlesList;
     },
 };
 

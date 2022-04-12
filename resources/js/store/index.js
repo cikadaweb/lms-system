@@ -1,12 +1,12 @@
 import Vuex from "vuex";
 import auth from "./modules/auth";
 import users from "./modules/users";
-import news from "./modules/news";
+import articles from "./modules/articles";
 
 export default new Vuex.Store({
     modules: {
         auth,
         users,
-        news,
+        articles,
     },
 });

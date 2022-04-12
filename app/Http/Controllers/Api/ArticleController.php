@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Article;
 use Illuminate\Http\Request;
+
+use App\Models\Article;
+use App\Http\Resources\ArticleResource;
 
 class ArticleController extends Controller
 {
@@ -16,6 +18,13 @@ class ArticleController extends Controller
     public function index()
     {
         return Article::all();
+
+        // $article = Article::first();
+        // return new ArticleResource($article);
+
+        // $article = Article::with("comments", "tags", "state")-first();
+        // return new ArticleResource($article);
+        
 
         // $articles = Article::allPaginate(1);
         // return $articles;

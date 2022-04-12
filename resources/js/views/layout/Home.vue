@@ -50,7 +50,7 @@ export default {
 
 
 
-<style scoped lang="scss">
+<style lang="scss">
 // тут будут главные стили, которые и на Dashboard распространяются
 
 .custom-container {
