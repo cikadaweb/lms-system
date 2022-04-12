@@ -2,6 +2,7 @@
 
     <header class="header">
         <router-link :to="'/'"><img src="../../../img/logo.png" class="logo" alt="fsk logo"></router-link>
+        <span>Вы находитесь в системе уже: 45 минут </span>
         <nav class="user-nav">
             <div class="user-nav__user">
 

@@ -6,6 +6,7 @@ import UsersDashboard from "../views/layout/Admin/UsersDashboard";
 import UserEdit from "../views/layout/Admin/UserEdit";
 import CoursesDashboard from "../views/layout/Admin/CoursesDashboard";
 import NewsDashboard from "../views/layout/Admin/NewsDashboard";
+import NewsCreate from "../views/layout/Admin/NewsCreate";
 
 import Permissions from "../views/layout/Permissions";
 import EditPermissions from "../views/layout/EditPermissions";
@@ -47,6 +48,11 @@ const routes = [
         path: "/news",
         name: "NewsDashboard",
         component: NewsDashboard,
+    },
+    {
+        path: "/news/create",
+        name: "NewsCreate",
+        component: NewsCreate,
     },
     {
         path: "/user/management",

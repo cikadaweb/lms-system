@@ -139,7 +139,7 @@ export default {
 
 
 
-<style scoped lang="scss">
+<style lang="scss">
 
   .popup__footer {
     display: flex;
