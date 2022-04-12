@@ -34,6 +34,7 @@ export default {
 .popup {
     padding: 16px;
     position: fixed;
+    z-index: 1;
     top: 170px;
     left: 590px;
     width: 400px;

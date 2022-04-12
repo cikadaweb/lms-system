@@ -1,16 +1,16 @@
 <template>
 
-  <div class="container">
+  <div class="custom-container">
     <div class="row header">
       <Header></Header>
     </div>
 
     <div class="row main-block">     
-      <div class="col-xl-3 main-sidebar">
+      <div class="col-xl-2 main-sidebar">
         <Sidebar></Sidebar>
       </div>
-      <div class="col-xl-9 main-body">
-        <Users></Users>
+      <div class="col-xl-10 main-body">
+        <Courses></Courses>
       </div>
     </div>
   </div>
@@ -18,16 +18,16 @@
 </template>
 
 <script>
-import Header from "../ui/Header";
-import Sidebar from "./Sidebar";
-import Users from "./Users";
+import Header from "../../ui/Header.vue";
+import Sidebar from "../Sidebar.vue";
+import Courses from "./Courses.vue";
 
 export default {
-    name: "Dashboard",
+    name: "CoursesDashboard",
     components: {
       Header,
       Sidebar,
-      Users
+      Courses
     }
 }
 </script>

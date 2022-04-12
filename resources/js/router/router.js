@@ -2,8 +2,12 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/layout/Home";
 import Login from "../views/auth/Login";
 import Registration from "../views/auth/Registration";
-import Dashboard from "../views/layout/Dashboard";
-import UserEdit from "../views/layout/UserEdit";
+import UsersDashboard from "../views/layout/Admin/UsersDashboard";
+import UserEdit from "../views/layout/Admin/UserEdit";
+import CoursesDashboard from "../views/layout/Admin/CoursesDashboard";
+import NewsDashboard from "../views/layout/Admin/NewsDashboard";
+import NewsCreate from "../views/layout/Admin/NewsCreate";
+
 import Permissions from "../views/layout/Permissions";
 import EditPermissions from "../views/layout/EditPermissions";
 import Management from "../views/layout/Management";
@@ -17,8 +21,8 @@ const routes = [
     },
     {
         path: "/user/dashboard",
-        name: "Dashboard",
-        component: Dashboard,
+        name: "UsersDashboard",
+        component: UsersDashboard,
     },
     {
         path: "/user/login",
@@ -34,6 +38,21 @@ const routes = [
         path: "/user/:id",
         name: "UserEdit",
         component: UserEdit,
+    },
+    {
+        path: "/courses",
+        name: "CoursesDashboard",
+        component: CoursesDashboard,
+    },
+    {
+        path: "/news",
+        name: "NewsDashboard",
+        component: NewsDashboard,
+    },
+    {
+        path: "/news/create",
+        name: "NewsCreate",
+        component: NewsCreate,
     },
     {
         path: "/user/management",

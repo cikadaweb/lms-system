@@ -75,8 +75,8 @@
 
 
 <script>
-import MyWindow from "../ui/MyWindow";
-import axios from "../../../axios/axios-instance";
+import MyWindow from "../../ui/MyWindow.vue";
+import axios from "../../../../axios/axios-instance";
 
 export default {
   components: {
@@ -139,7 +139,7 @@ export default {
 
 
 
-<style scoped lang="scss">
+<style lang="scss">
 
   .popup__footer {
     display: flex;

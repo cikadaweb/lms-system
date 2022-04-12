@@ -1,15 +1,15 @@
 <template>
 
-  <div class="container">
+  <div class="custom-container">
     <div class="row header">
       <Header></Header>
     </div>
 
     <div class="row main-block">     
-      <div class="col-xl-3 main-sidebar">
+      <div class="col-xl-2 main-sidebar">
         <Sidebar></Sidebar>
       </div>
-      <div class="col-xl-9 main-body">
+      <div class="col-xl-10 main-body">
         <Main></Main>
       </div>
     </div>
@@ -52,17 +52,27 @@ export default {
 <style lang="scss">
 // тут будут главные стили, которые и на Dashboard распространяются
 
+.custom-container {
+  margin: 10px 30px;
+}
+
   .header {
     background-color: rgb(255, 255, 255);
+    border-radius: 15px 15px 0 0;
   }
 
   .main-sidebar{
     background-color: rgb(255, 255, 255);
+    border-radius: 0 0 15px 15px;
   }
 
   .main-block{
     background-color: rgb(255, 255, 255);
     padding-right: 12px;
+    border-radius: 0 0 15px 15px;
+
+    // осторожно тут значение!
+    min-height: 650px;
   }
 
   .main-body{

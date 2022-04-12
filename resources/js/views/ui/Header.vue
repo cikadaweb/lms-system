@@ -2,8 +2,15 @@
 
     <header class="header">
         <router-link :to="'/'"><img src="../../../img/logo.png" class="logo" alt="fsk logo"></router-link>
+        <span>Вы находитесь в системе уже: 45 минут </span>
         <nav class="user-nav">
             <div class="user-nav__user">
+
+                <form class="d-flex pe-3">
+                    <input class="form-control me-2 user-nav-input" type="search" placeholder="Найти на странице" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Поиск</button>
+                </form>
+
                 <!-- <img src="../../../img/user.png" alt="User Photo" class="user-nav__user-photo"> -->
                 <router-link v-if="token" :to="'/user/register'"><span class="user-nav__user-name">Регистрация</span></router-link>
                 <router-link v-if="token" :to="'/user/login'"><span class="user-nav__user-name">Авторизация</span></router-link>
@@ -50,7 +57,7 @@ export default {
 
 .logo {
     height: 65px;
-    margin-left: 120px;
+    margin-left: 85px;
 }
 
 .user-nav {
@@ -76,6 +83,10 @@ export default {
         color: var(--color-grey-light-4)
     }
     
+}
+
+.user-nav-input {
+    width: 400px;
 }
 
 </style>
