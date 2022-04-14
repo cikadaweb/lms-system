@@ -24,5 +24,7 @@ class ArticleResource extends JsonResource
             'tags' => TagResource::collection($this->whenLoaded('tags')),
             'statistic' => new StateResource($this->whenLoaded('state')),
         ];
+
+        // return parent::toArray($request);
     }
 }

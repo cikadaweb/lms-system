@@ -6,9 +6,9 @@
 
       <h2>Статистика по курсам:</h2>
 
-      <div>
+      <router-link :to="'/articles/1'">
         <button class="btn btn-warning" @click="test">Тест гипотезы</button>
-      </div>
+      </router-link>
 
       <div class="col-xl-6">
         <p>Активные курсы:</p>
@@ -80,14 +80,14 @@ export default {
     }
   },
   methods: {
-    async test() {
-      try {
-        const { data } = await axios.get("http://127.0.0.1:8000/api/articles");
-        console.log(data)
-      } catch (e) {
-          console.log(e.message);
-      }
-    }
+    // async test() {
+    //   try {
+    //     const { data } = await axios.get("http://127.0.0.1:8000/api/articles");
+    //     console.log(data)
+    //   } catch (e) {
+    //       console.log(e.message);
+    //   }
+    // }
   }
 
 }

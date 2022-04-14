@@ -18,6 +18,7 @@
             <th scope="col">#</th>
             <th scope="col">Название</th>
             <th scope="col">Просмотры</th>
+            <th scope="col">Теги</th>
             <th scope="col">Дата создания</th>
             <th>Перейти</th>
             <th>Редактировать</th>
@@ -26,9 +27,14 @@
         </thead>
         <tbody >
           <tr v-for="(article, idx) in getArticles" :key="article.id">
-            <th>{{ idx }}</th>
+            <th>{{ idx + 1 }}</th>
             <td>{{ article.title }}</td>
-            <td>12</td>
+            <td>{{ article.statistic }}</td>
+            <td>
+              <span v-for="tag in article.tags" :key="tag.id" class="badge bg-danger">
+                {{ tag.label }}
+              </span>
+            </td>
             <td>{{ article.created_at }}</td>
             <td>
                 <router-link :to="'/'">

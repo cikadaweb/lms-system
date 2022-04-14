@@ -1,13 +1,11 @@
 <?php
 
+use App\Http\Controllers\Api\ArticleController;
 use App\Http\Controllers\Api\PermissionController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\UserController;
 
 use App\Http\Controllers\MainController;
-
-use App\Http\Controllers\Api\ArticleController;
-
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -37,4 +35,4 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     });
 });
 
-Route::resource('articles', ArticleController::class);
+Route::apiResource('articles', ArticleController::class);

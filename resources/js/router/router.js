@@ -10,6 +10,8 @@ import CoursesMain from "../views/layout/Admin/CoursesMain";
 
 import ArticlesMain from "../views/layout/Admin/ArticlesMain";
 import ArticleCreate from "../views/layout/Admin/ArticleCreate";
+import ArticlesShow from "../views/layout/Admin/ArticlesShow";
+import ArticleShowOne from "../views/layout/Admin/ArticleShowOne";
 
 import Permissions from "../views/layout/Permissions";
 import EditPermissions from "../views/layout/EditPermissions";
@@ -56,6 +58,16 @@ const routes = [
         path: "/article/create",
         name: "ArticleCreate",
         component: ArticleCreate,
+    },
+    {
+        path: "/articles",
+        name: "ArticlesShow",
+        component: ArticlesShow,
+    },
+    {
+        path: "/articles/:id",
+        name: "ArticleShowOne",
+        component: ArticleShowOne,
     },
     {
         path: "/user/management",

@@ -1,34 +1,62 @@
 <template>
 
-  <div class="container">
+  <div class="container custom-container-crud mt-3">
+    <div class="row pt-3 pb-3">
+
+      <div class="nav">
+        <h2>Новости:</h2>
+        <router-link :to="'/'"><h5><i class="bi bi-house-door"></i> Вернуться на главную</h5></router-link>
+      </div>
+
+
+      <div class="row mt-5">
+
+        <div class="col-6 pb-3" v-for="article in getArticles" :key="article.id">
+          <div class="card card_news">
+            <img :src="`${article.img}`" class="card-img-top card_news-picture" alt="">
+            <div class="card-body">
+              <h5 class="card-title">{{ article.title }}</h5>
+              <p class="card-text card_news-text">{{ article.body }}</p>
+              <p>Дата публикации: {{ article.created_at }}</p>
+              <a href="#" class="btn btn-primary">Подробнее</a>
+              <div class="mt-3">
+                <span class="badge bg-primary me-2">{{ article.statistic }} <i class="bi bi-hand-thumbs-up"></i></span>
+                <span class="badge bg-danger me-2">{{ article.statistic }} <i class="bi bi-eye"></i></span>
+              </div>
+              <div class="mt-4">
+                Теги:
+                <a href="#" class="badge bg-danger me-2" v-for="tag in article.tags" :key="tag.id">{{ tag.label }}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div> 
+  <!-- <div class="container">
     <div class="row pt-3">
       
       <h2>Новости:</h2>
 
-      <div class="pt-2 pb-3">
-        <router-link :to="'/news/create'">
-          <my-button class="btn-success">Добавить объявление</my-button>
-        </router-link>
-      </div>
-
       <div class="row mt-5">
 
-        <div class="col-6 pb-3">
+        <div class="col-6 pb-3" v-for="article in getArticles" :key="article.id">
           <div class="card card_news">
-            <img src="../../../../img/news_1.jpeg" class="card-img-top card_news-picture" alt="">
+            <img :src="`${article.img}`" class="card-img-top card_news-picture" alt="">
             <div class="card-body">
-              <h5 class="card-title">МЕЖДУНАРОДНЫЙ ОТРАСЛЕВОЙ КОНКУРС «ЛИДЕР СТЕКОЛЬНОЙ ОТРАСЛИ - 2022»</h5>
-              <p class="card-text card_news-text">Целью международного конкурса «Лидер стекольной отрасли - 2022» является привлечение внимания потребителей к персонам и компаниям, работающим в стекольной индустрии. Достижение успеха в этой сложнейшей области предпринимательства неразрывно связано с развитием науки управления.</p>
-              <p>19.04.22</p>
+              <h5 class="card-title">{{ article.title }}</h5>
+              <p class="card-text card_news-text">{{ article.body }}</p>
+              <p>{{ article.created_at }}</p>
               <a href="#" class="btn btn-primary">Подробнее</a>
               <div class="mt-3">
-                <span class="badge bg-primary">30 <i class="bi bi-hand-thumbs-up"></i></span>
-                <span class="badge bg-danger">100 <i class="bi bi-eye"></i></span>
+                <span class="badge bg-primary me-2">{{ article.statistic }} <i class="bi bi-hand-thumbs-up"></i></span>
+                <span class="badge bg-danger me-2">{{ article.statistic }} <i class="bi bi-eye"></i></span>
               </div>
               <div class="mt-4">
                 Теги:
-                <a href="#" class="badge bg-danger">Тег1</a>
-                <a href="#" class="badge bg-danger">Тег2</a>
+                <a href="#" class="badge bg-danger me-2" v-for="tag in article.tags" :key="tag.id">{{ tag.label }}</a>
               </div>
             </div>
           </div>
@@ -54,25 +82,44 @@
             </div>
           </div>
         </div>
-
       </div>
-      
-      
     </div>
-  </div>
+  </div> -->
 
 </template>
 
 <script>
 
 export default {
-  name: "News",
+  name: "ArticlesShow",
+  created() {
+    this.$store.dispatch("articles/getArticles")
+  },
+  computed: {
+    getArticles: {
+      get() {
+        return this.$store.state.articles.articlesList
+      }
+    },
+  }
 }
 </script>
 
 
 
 <style lang="scss">
+
+.custom-container-crud {
+    background-color: rgb(255, 255, 255);
+    border-radius: 15px;
+    padding: 30px;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 .card_news-picture {
   padding: 10px;

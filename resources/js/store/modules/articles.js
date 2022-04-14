@@ -9,8 +9,10 @@ const actions = {
         axios
             .get("/api/articles")
             .then((response) => {
-                ctx.commit("setArticlesList", response.data);
-                console.log(response.data);
+                // пока смотрим что получим
+                ctx.commit("setArticlesList", response.data.data);
+                console.log("Получим наши статьи: ");
+                console.log(response);
             })
             .catch((error) => {
                 console.log(error);

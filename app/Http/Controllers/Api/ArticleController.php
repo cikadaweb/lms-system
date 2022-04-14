@@ -17,17 +17,32 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        return Article::all();
+        $articles = Article::allPaginate(10);
+        return ArticleResource::collection($articles);
+
 
         // $article = Article::first();
         // return new ArticleResource($article);
 
         // $article = Article::with("comments", "tags", "state")-first();
         // return new ArticleResource($article);
-        
 
+        //Работают
+
+        // $articles = Article::lastLimit(2);
+        // return ArticleResource::collection($articles);
+        
+        // пагниация
         // $articles = Article::allPaginate(1);
         // return $articles;
+
+        // Osprey
+        // return ArticleResource::collection(Article::all());
+
+        // return Article::all();
+        
+        // $article = Article::find(5);
+        // return $article;
     }
 
     /**

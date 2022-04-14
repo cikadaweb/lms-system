@@ -57,11 +57,11 @@
             <td v-else>N/A</td>
             <td>
                 <router-link :to="{name: 'UserEdit', params:{id: user.id}}">
-                  <my-button class="btn-outline-success">Редактировать</my-button>
+                  <my-button class="btn-outline-success"><i class="bi bi-pencil-square"></i> Редактировать</my-button>
                 </router-link>
             </td>
             <td>
-                <my-button class="btn-outline-danger" @click="deleteUser(user.id)">Удалить</my-button>
+                <my-button class="btn-outline-danger" @click="deleteUser(user.id)"><i class="bi bi-trash"></i> Удалить</my-button>
             </td>
           </tr>
         </tbody>
