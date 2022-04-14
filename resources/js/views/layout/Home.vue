@@ -53,6 +53,10 @@ export default {
 <style lang="scss">
 // тут будут главные стили, которые и на Dashboard распространяются
 
+a {
+  text-decoration: none;
+}
+
 .custom-container {
   margin: 10px 30px;
 }

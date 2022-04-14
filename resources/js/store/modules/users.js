@@ -29,7 +29,7 @@ const actions = {
             })
             .then((response) => {
                 if (response.data) {
-                    window.location.replace("/user/dashboard");
+                    // window.location.replace("/users/dashboard");
                     console.log(response);
                 }
             })

@@ -6,7 +6,20 @@
   <meta name="viewport"
     content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <link href="/colorbox/colorbox.css" rel="stylesheet">
+  <!-- /.подключеие стилей colorbox -->
+
   <link href="{{ mix('/css/app.css') }}" rel="stylesheet">
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+
+  <script type="text/javascript" src="/colorbox/jquery.colorbox-min.js" defer></script>
+  <!-- /.подключеие скрипта colorbox -->
+
+  <script type="text/javascript" src="/packages/barryvdh/elfinder/js/standalonepopup.js" defer></script>
+  <!-- /.подключеие готового скрипта elfinder -->
+
   <title>Формула Стекла</title>
 </head>
 
@@ -19,7 +32,7 @@
     referrerpolicy="origin"></script>
   <!-- /.подключеие tinyMCE -->
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
   <script>
   tinymce.init({
@@ -75,11 +88,7 @@
   }
   </script>
 
-  <script type="text/javascript" src="/colorbox/jquery.colorbox-min.js"></script>
-  <!-- /.подключеие скрипта colorbox -->
 
-  <script type="text/javascript" src="/packages/barryvdh/elfinder/js/standalonepopup.js"></script>
-  <!-- /.подключеие готового скрипта elfinder -->
 
   <script src="{{ mix('js/app.js') }}"></script>
 </body>

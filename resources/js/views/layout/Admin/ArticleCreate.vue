@@ -13,7 +13,7 @@
         </div>
 
         <div class="mb-3">
-          <label for="movieDescription" class="form-label">Описание фильма *</label>
+          <label for="movieDescription" class="form-label">Описание статьи *</label>
           <textarea id="mytextarea" name="mytextarea"></textarea>
         </div>
 

@@ -24,7 +24,7 @@
             <h2>Авторизация</h2>
             <my-input type="email" placeholder="email address" v-model="user.email"></my-input>
             <my-input type="password" placeholder="password" v-model="user.password"></my-input>
-            <my-button type="submit" class="btn-success" @click.prevent="login">Войти</my-button>
+            <my-button type="submit" class="btn btn-primary" @click.prevent="login">Войти <i class="bi bi-box-arrow-in-right"></i></my-button>
             <router-link to="/user/register"><p class="message">Еще не регистрироваилсь?</p><a href="#">Зарегистрироваться</a></router-link>
           </form>
           
@@ -77,7 +77,7 @@ export default {
 }
 
 .login-page {
-    width: 360px;
+    width: 450px;
     padding: 8% 0 0;
     margin: auto;
     display:flex;
@@ -85,11 +85,11 @@ export default {
 
 .form {
     position: relative;
-    z-index: 1;
-    background-color: var(--color-grey-dark-1);
+    // z-index: 1;
     background-size: cover;
     background-position: center;
-    max-width: 360px;
+    border-radius: 15px;
+    max-width: 450px;
     margin: 0 auto 100px;
     padding: 45px;
     text-align: center;
@@ -109,10 +109,6 @@ export default {
 .form .message {
     margin: 15px;
     font-size: 12px;
-}
-.form .message a {
-    text-decoration: none;
-    color: var(--color-grey-light-4);
 }
 
 

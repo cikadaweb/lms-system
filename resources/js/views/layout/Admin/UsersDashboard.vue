@@ -13,10 +13,10 @@
               <my-input type="text" placeholder="email address" v-model="user.email" />
               <my-input type="password" placeholder="password" v-model="user.password" />
               <my-input type="password" placeholder="password confirmation" v-model="user.password_confirmation" />
-            
-              <h2 class="pt-2">Роль</h2>
-              <select class="form-select" aria-label="Default select example" v-model="user.role.name">
-                <option disabled>Выберите роль</option>
+
+              <label for="" class="form-label mt-2">Роль пользователя:</label>
+              <select class="form-select mb-3" v-model="user.role.name">
+                <option disabled selected>Выберите роль</option>
                 <option v-for="role in getRoles" :key="role.id">
                   {{ role.name }}
                 </option>
@@ -111,8 +111,19 @@ export default {
         this.isPopupVisible = false
     },
 
+    clearPopup() {
+      this.user.name = ""
+      this.user.email = ""
+      this.user.password = ""
+      this.user.password_confirmation = ""
+      this.user.role.name = ""
+    },
+
     addUser() {
       this.$store.dispatch("users/addUser", this.user)
+      this.$store.dispatch("users/getUsers")
+      this.clearPopup()
+      this.closePopup()
     },
   
     deleteUser(id) {
@@ -141,6 +152,10 @@ export default {
 
 
 <style scoped lang="scss">
+
+.form-select {
+  background-color: rgb(255, 255, 255);
+}
 
   .popup__footer {
     display: flex;

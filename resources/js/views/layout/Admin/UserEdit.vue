@@ -9,15 +9,20 @@
             <my-input type="text" placeholder="username" v-model="user.name"></my-input>
             <my-input type="text" placeholder="email" v-model="user.email"></my-input>
 
-            <h2 class="pt-2">Роль</h2>
-            <select class="form-select" aria-label="Default select example" v-model="user.role.name">
-              <option disabled>Выберите роль</option>
+            <label for="" class="form-label">Роль пользователя:</label>
+            <select class="form-select mb-3" v-model="user.role.name">
+              <option disabled selected>Выберите роль</option>
               <option v-for="role in getRoles" :key="role.id">
                 {{ role.name }}
               </option>
             </select>
 
-            <my-button class="btn-success" @click="updateUsers">Обновить</my-button>
+            <div class="form-buttons">
+              <my-button class="btn-success" @click="updateUsers">Обновить</my-button>
+              <router-link :to="'/users/dashboard'">
+                  <my-button class="btn-danger">Отменить</my-button>
+              </router-link>
+            </div>
 
           </form>
         </div>
@@ -54,8 +59,8 @@ export default {
                 role: this.user.role.name
             })
             .then((response) => {
-              // this.$router.push({name: "Dashboard"});
-              window.location.replace("/user/dashboard");
+              this.$router.push({name: "UsersMain"});
+              // window.location.replace("/users/dashboard");
             });
     },
   },
@@ -74,8 +79,12 @@ export default {
 
 <style scoped lang="scss">
 
+.form-select {
+  background-color: rgb(255, 255, 255);
+}
+
 .user-page {
-    width: 360px;
+    width: 450px;
     padding: 8% 0 0;
     margin: auto;
     display:flex;
@@ -83,11 +92,11 @@ export default {
 
 .form {
     position: relative;
-    z-index: 1;
-    background-color: var(--color-grey-dark-1);
+    // z-index: 1;
     background-size: cover;
     background-position: center;
-    max-width: 360px;
+    max-width: 450px;
+    border-radius: 15px;
     margin: 0 auto 100px;
     padding: 45px;
     text-align: center;
@@ -109,9 +118,15 @@ export default {
     color: #b3b3b3;
     font-size: 12px;
 }
-.form .message a {
-    text-decoration: none;
-    color: var(--color-grey-light-4);
+
+.form-label {
+  display: flex;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 </style>
