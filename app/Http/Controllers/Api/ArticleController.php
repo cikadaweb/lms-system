@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Models\Article;
 use App\Http\Resources\ArticleResource;
 
+use Validator;
+
 class ArticleController extends Controller
 {
     /**
@@ -63,7 +65,32 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make(
+            $request->all(),
+            [
+                "title" => ["required"],
+                "img" => ["required"],
+                "body" => ["required"],
+            ]
+            );
+        if ($validator->fails()) {
+            return [
+                "status" => false,
+                "errors" => $validator->messages()
+            ];
+        }
+
+        $article = new Article();
+        $article->title = $request->title;
+        $article->img = "/" . $request->img;
+        $article->body = $request->body;
+        $article->save();
+        
+
+        return [
+            "status" => true,
+            "article" => $article
+        ];
     }
 
     /**
@@ -74,7 +101,18 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        //
+        // $article = Article::find($id);
+        // if (!$article) {
+        //     return response()->json([
+        //         "status" => false,
+        //         "message" => "Article not found"
+        //     ])->setStatusCode(404);
+        // }
+
+        // return $article;
+
+        $article = Article::findById($id);
+        return new ArticleResource($article);
     }
 
     /**

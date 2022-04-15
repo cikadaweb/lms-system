@@ -6,9 +6,18 @@
     </div>
 
     <div class="row main-block">     
-      <div class="col-xl-2 main-sidebar">
+
+      <div class="col-xl-2 main-sidebar" v-if="userRole == 'Admin'">
         <Sidebar></Sidebar>
       </div>
+      <div class="col-xl-2 main-sidebar" v-else-if="userRole == 'Master'">
+        <!-- ToDo
+        <UserSidebar></UserSidebar> -->
+      </div>
+      <div class="col-xl-2 main-sidebar" v-else>
+        <UserSidebar></UserSidebar>
+      </div>
+
       <div class="col-xl-10 main-body">
         <Main></Main>
       </div>
@@ -25,22 +34,30 @@ import axios from "../../../axios/axios-instance";
 import Header from "../ui/Header";
 import Main from "./Main";
 import Sidebar from "./Sidebar";
+import UserSidebar from "./User/UserSidebar.vue";
 
 export default {
     components: {
         Header,
         Sidebar,
-        Main
+        Main,
+        UserSidebar
+    },
+    data() {
+      return {
+        userRole: ""
+      }
     },
     mounted() {
-      // toDo
-      // this.getData()
+      // toDo для первой загрузки страницы делается запрос для определения токена
+      this.getData()
     },
     methods: {
       getData() {
         axios.get("/api/get")
         .then(response => {
-          console.log(response)
+          console.log(response.data.roles[0].name)
+          this.userRole = response.data.roles[0].name
         })
       },
     }

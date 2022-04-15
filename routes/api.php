@@ -26,13 +26,22 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware' => 'auth:sanctum'], function() {
+
     Route::group(['middleware' => ['role:Admin']], function () {
-        // Route::get('get', [MainController::class, '__invoke']);
-        
+        Route::get('get', [MainController::class, '__invoke']);
         Route::apiResource('users', UserController::class);
         Route::apiResource('roles', RoleController::class);
         Route::apiResource('permissions', PermissionController::class);
     });
-});
 
-Route::apiResource('articles', ArticleController::class);
+    // Route::group(['middleware' => ['role:User']], function () {
+    //     Route::get('get', [MainController::class, '__invoke']);
+    //     Route::apiResource('users', UserController::class);
+    //     Route::apiResource('roles', RoleController::class);
+    //     Route::apiResource('permissions', PermissionController::class);
+        
+    // });
+
+    Route::apiResource('articles', ArticleController::class);
+
+});

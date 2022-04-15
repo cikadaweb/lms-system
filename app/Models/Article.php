@@ -30,13 +30,18 @@ class Article extends Model
         return $past;
     }
 
+    public function scopeLastLimit($query, $numbers)
+    {
+        return $query->with('tags', 'state')->orderBy('created_at', 'desc')->limit($numbers)->get();
+    }
+
     public function scopeAllPaginate($query, $numbers)
     {
         return $query->with('tags', 'state')->orderBy('created_at', 'desc')->paginate($numbers);
     }
 
-    public function scopeLastLimit($query, $numbers)
+    public function scopeFindById($query, $id)
     {
-        return $query->with('tags', 'state')->orderBy('created_at', 'desc')->limit($numbers)->get();
+        return $query->with('comments','tags', 'state')->where('id', $id)->firstOrFail();
     }
 }

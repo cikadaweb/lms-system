@@ -37,9 +37,10 @@
             </td>
             <td>{{ article.created_at }}</td>
             <td>
-                <router-link :to="'/'">
+                <router-link :to="{name: 'ArticleShowOne', params:{id: article.id}}">
                   <my-button class="btn-success">Открыть</my-button>
                 </router-link>
+                
             </td>
             <td>
                 <router-link :to="'/'">

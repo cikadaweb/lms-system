@@ -17,8 +17,6 @@ components.forEach((component) => {
 
 app.use(router).use(store).mount("#app");
 
-// console.log("user object from vue", window.user);
-
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue

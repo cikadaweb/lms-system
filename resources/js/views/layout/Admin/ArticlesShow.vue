@@ -12,11 +12,11 @@
       <div class="row mt-5">
 
         <div class="col-6 pb-3" v-for="article in getArticles" :key="article.id">
-          <div class="card card_news">
-            <img :src="`${article.img}`" class="card-img-top card_news-picture" alt="">
+          <div class="card card_article">
+            <img :src="`${article.img}`" class="card-img-top card_article-picture" alt="">
             <div class="card-body">
               <h5 class="card-title">{{ article.title }}</h5>
-              <p class="card-text card_news-text">{{ article.body }}</p>
+              <p class="card-text card_article-text" v-html="article.body"></p>
               <p>Дата публикации: {{ article.created_at }}</p>
               <a href="#" class="btn btn-primary">Подробнее</a>
               <div class="mt-3">
@@ -43,11 +43,11 @@
       <div class="row mt-5">
 
         <div class="col-6 pb-3" v-for="article in getArticles" :key="article.id">
-          <div class="card card_news">
-            <img :src="`${article.img}`" class="card-img-top card_news-picture" alt="">
+          <div class="card card_article">
+            <img :src="`${article.img}`" class="card-img-top card_article-picture" alt="">
             <div class="card-body">
               <h5 class="card-title">{{ article.title }}</h5>
-              <p class="card-text card_news-text">{{ article.body }}</p>
+              <p class="card-text card_article-text">{{ article.body }}</p>
               <p>{{ article.created_at }}</p>
               <a href="#" class="btn btn-primary">Подробнее</a>
               <div class="mt-3">
@@ -63,11 +63,11 @@
         </div>
 
         <div class="col-6 pb-3">
-          <div class="card card_news">
-            <img src="../../../../img/news_2.png" class="card-img-top card_news-picture" alt="">
+          <div class="card card_article">
+            <img src="../../../../img/news_2.png" class="card-img-top card_article-picture" alt="">
             <div class="card-body">
               <h5 class="card-title">АССОЦИАЦИИ «СТЕКЛОСОЮЗ» РОССИИ ПРОДОЛЖАЕТ РАБОТУ С МЕЖДУНАРОДНОЙ ОРГАНИЗАЦИЕЙ ПО СТАНДАРТИЗАЦИИ ISO ТК63 «СТЕКЛЯННАЯ ТАРА»</h5>
-              <p class="card-text card_news-text">В адрес Ассоциации «СтеклоСоюз» России на имя Сергеевой Л.С. поступило письмо от Международной организации по стандартизации ISO ТК63 «Стеклянная тара», в котором говорится, что ISO по-прежнему стремится поддерживать открытую и нейтральную платформу для технических экспертов в целях разработки международных стандартов, признанных во всем мире в качестве незаменимой движущей силы для экономического и социального роста.</p>
+              <p class="card-text card_article-text">В адрес Ассоциации «СтеклоСоюз» России на имя Сергеевой Л.С. поступило письмо от Международной организации по стандартизации ISO ТК63 «Стеклянная тара», в котором говорится, что ISO по-прежнему стремится поддерживать открытую и нейтральную платформу для технических экспертов в целях разработки международных стандартов, признанных во всем мире в качестве незаменимой движущей силы для экономического и социального роста.</p>
               <p>22.04.22</p>
               <a href="#" class="btn btn-primary">Подробнее</a>
               <div class="mt-3">
@@ -107,7 +107,7 @@ export default {
 
 
 
-<style lang="scss">
+<style scoped lang="scss">
 
 .custom-container-crud {
     background-color: rgb(255, 255, 255);
@@ -121,13 +121,13 @@ export default {
   align-items: center;
 }
 
-.card_news-picture {
+.card_article-picture {
   padding: 10px;
   max-height: 300px;
   object-fit: contain;
 }
 
-.card_news-text {
+.card_article-text {
     height: 100px;
     text-indent: 5%;
     overflow: hidden;
