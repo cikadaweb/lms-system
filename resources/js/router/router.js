@@ -10,6 +10,7 @@ import CoursesMain from "../views/layout/Admin/CoursesMain";
 
 import ArticlesMain from "../views/layout/Admin/ArticlesMain";
 import ArticleCreate from "../views/layout/Admin/ArticleCreate";
+import ArticleEdit from "../views/layout/Admin/ArticleEdit";
 import ArticlesShow from "../views/layout/Admin/ArticlesShow";
 import ArticleShowOne from "../views/layout/Admin/ArticleShowOne";
 
@@ -58,6 +59,11 @@ const routes = [
         path: "/article/create",
         name: "ArticleCreate",
         component: ArticleCreate,
+    },
+    {
+        path: "/article/edit/:id",
+        name: "ArticleEdit",
+        component: ArticleEdit,
     },
     {
         path: "/articles",

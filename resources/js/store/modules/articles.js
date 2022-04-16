@@ -2,7 +2,14 @@ import axios from "../../../axios/axios-instance";
 
 const state = {
     articlesList: [],
-    currentArticle: {},
+    currentArticle: {
+        comments: [],
+        tags: [],
+        statistic: {
+            likes: 0,
+            views: 0,
+        },
+    },
 };
 
 const actions = {
@@ -19,7 +26,6 @@ const actions = {
             });
     },
     getArticleData(ctx, id) {
-        console.log("ID:", id);
         axios
             .get("/api/articles/" + id)
             .then((response) => {
@@ -40,7 +46,6 @@ const actions = {
             })
             .then((response) => {
                 if (response.data) {
-                    window.location.replace("/articles/dashboard");
                     console.log(response);
                 }
             })
@@ -62,6 +67,12 @@ const mutations = {
 const getters = {
     articlesList(state) {
         return state.articlesList;
+    },
+    articleViews(state) {
+        return state.currentArticle.statistic.views;
+    },
+    articleLikes(state) {
+        return state.currentArticle.statistic.likes;
     },
 };
 

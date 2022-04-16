@@ -133,9 +133,33 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Article $article)
     {
-        //
+        $validator = Validator::make(
+            $request->all(),
+            [
+                "title" => ["required"],
+                "img" => ["required"],
+                "body" => ["required"],
+            ]
+            );
+        if ($validator->fails()) {
+            return [
+                "status" => false,
+                "errors" => $validator->messages()
+            ];
+        }
+
+        $article->title = $request->title;
+        $article->img = "/" . $request->img;
+        $article->body = $request->body;
+        $article->save();
+        
+
+        return [
+            "status" => true,
+            "article" => $article
+        ];
     }
 
     /**
@@ -144,8 +168,8 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Article $article)
     {
-        //
+        $article->delete();
     }
 }

@@ -6,7 +6,7 @@
 
       <h2>Статистика по курсам:</h2>
 
-      <router-link :to="'/articles/1'">
+      <router-link :to="'/'">
         <button class="btn btn-warning" @click="test">Тест гипотезы</button>
       </router-link>
 
@@ -80,14 +80,15 @@ export default {
     }
   },
   methods: {
-    // async test() {
-    //   try {
-    //     const { data } = await axios.get("http://127.0.0.1:8000/api/articles");
-    //     console.log(data)
-    //   } catch (e) {
-    //       console.log(e.message);
-    //   }
-    // }
+    async test() {
+      console.log("Пока ничего")
+      // try {
+      //   const { data } = await axios.get("http://127.0.0.1:8000/api/articles");
+      //   console.log(data)
+      // } catch (e) {
+      //     console.log(e.message);
+      // }
+    }
   }
 
 }

@@ -3,30 +3,52 @@
   <div class="container custom-container-crud mt-3">
     <div class="row pt-3 pb-3">
 
-      <div class="col-12 p-3">
+      <div class="col-xl-12">
 
         <div class="nav">
-          <h2>{{ article.title }}</h2>
-          <router-link :to="'/'"><h5><i class="bi bi-house-door"></i> Вернуться на главную</h5></router-link>
+          <div>
+            <h2>{{ article.title }}</h2>
+          </div>
+          <div>
+            <router-link :to="'/'"><h5><i class="bi bi-house-door"></i> Вернуться на главную</h5></router-link>
+          </div>
         </div>
 
-        <img :src="article.img" class="card_article-picture" alt="">
-        <p>
-            <span class="tag">
-                <span>label</span>
-                <span > | </span>
-                <span>extra</span>
-                <span>label</span>
-                <span > | </span>
-                <span>extra</span>
-            </span>
-        </p>
-        <p class="card_article-text" v-html="article.body"></p>
-        <p>Опубликованно:  <i>{{ article.created_at }}</i></p>
-        <div class="mt-3">
-            <span class="badge bg-success me-2">45 <i class="bi bi-hand-thumbs-up"></i></span>
-            <span class="badge bg-primary me-2">105 <i class="bi bi-eye"></i></span>
-        </div>
+          <figure class="card-article">
+
+            <img :src="article.img" class="article_picture" alt="">
+
+            <figcaption class="figure-caption">
+                <p>
+                  <span class="article_tags">
+                    <strong>Теги: </strong>
+                      <span>label</span>
+                      <span > | </span>
+                      <span>extra</span>
+                      <span>label</span>
+                      <span > | </span>
+                      <span>extra</span>
+                  </span>
+              </p>
+            </figcaption>
+
+            <figcaption class="figure-caption text-end">
+              <!-- <span class="badge rounded-pill bg-success article_badge me-2">{{ likes }} <i class="bi bi-hand-thumbs-up"></i></span>
+              <span class="badge rounded-pill bg-primary article_badge me-2">{{ views }} <i class="bi bi-eye"></i></span> -->
+            
+              <span class="badge rounded-pill bg-success article_badge me-2" v-if="article.statistic !== null">{{ article.statistic["likes"] }} <i class="bi bi-hand-thumbs-up"></i></span>
+              <span class="badge rounded-pill bg-success article_badge me-2" v-else>0 <i class="bi bi-hand-thumbs-up"></i></span>
+              
+              <span class="badge rounded-pill bg-primary article_badge me-2" v-if="article.statistic !== null">{{ article.statistic["views"] }} <i class="bi bi-eye"></i></span>
+              <span class="badge rounded-pill bg-primary article_badge me-2" v-else>0 <i class="bi bi-eye"></i></span>
+            </figcaption>
+
+            <p class="article_text pt-5" v-html="article.body"></p>
+            <p>Опубликованно:  <i>{{ article.created_at }}</i></p>
+
+          </figure>
+
+
         
       </div>
 
@@ -43,9 +65,22 @@ export default {
 
   name: "ArticleShowOne",
   computed: {
-    article() {
-      return this.$store.state.articles.currentArticle
-    }
+    article: {
+      get() {
+        return this.$store.state.articles.currentArticle
+      }
+    },
+    // ToDo логика правильная, но нужно завершить
+    views: {
+      get() {
+        return this.$store.getters['articles/articleViews']
+      }
+    },
+    likes: {
+      get() {
+        return this.$store.getters['articles/articleLikes']
+      }
+    },
   },
   mounted() {
      this.$store.dispatch("articles/getArticleData", this.$route.params.id)
@@ -70,12 +105,19 @@ export default {
   align-items: center;
 }
 
-.card_article-picture {
+.article_picture {
   display: flex;
-  padding: 10px;
   margin: 0 auto;
   max-height: 500px;
   object-fit: contain;
+}
+
+.article_tags {
+  font-size: 16px;
+}
+
+.article_badge {
+  font-size: 16px;
 }
 
 </style>
