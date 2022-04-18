@@ -71,6 +71,7 @@ class ArticleController extends Controller
             [
                 "title" => ["required"],
                 "img" => ["required"],
+                "preview" => ["required"],
                 "body" => ["required"],
             ]
             );
@@ -84,6 +85,7 @@ class ArticleController extends Controller
         $article = new Article();
         $article->title = $request->title;
         $article->img = "/" . $request->img;
+        $article->preview = $request->preview;
         $article->body = $request->body;
         $article->save();
 
@@ -148,6 +150,7 @@ class ArticleController extends Controller
             [
                 "title" => ["required"],
                 "img" => ["required"],
+                "preview" => ["required"],
                 "body" => ["required"],
             ]
             );
@@ -160,6 +163,7 @@ class ArticleController extends Controller
 
         $article->title = $request->title;
         $article->img = "/" . $request->img;
+        $article->preview = $request->preview;
         $article->body = $request->body;
         $article->save();
         

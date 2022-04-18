@@ -18,19 +18,16 @@
               <img :src="`${article.img}`" class="card-img-top card_article-picture" alt="">
               <div class="card-body">
                 <h5 class="card-title">{{ article.title }}</h5>
-                <!-- <p class="card-text card_article-text" v-html="article.body"></p> -->
-                <p class="card-text card_article-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium ut, esse tempora exercitationem praesentium qui consequatur molestias corporis, iste porro dolore, est eius delectus beatae suscipit ea? Dolore, nostrum tempore.</p>
+                <p class="card-text card_article-text">{{ article.preview }}</p>
                 <p>Дата публикации: {{ article.created_at }}</p>
                 <router-link :to="{name: 'ArticleShowOne', params:{id: article.id}}">
                   <my-button class="btn-primary">Подробнее</my-button>
                 </router-link>
                 <div class="mt-3">
 
-                  <span class="badge bg-primary me-2" v-if="article.statistic !== null">{{ article.statistic["likes"] }} <i class="bi bi-hand-thumbs-up"></i></span>
-                  <span class="badge bg-primary me-2" v-else>0 <i class="bi bi-hand-thumbs-up"></i></span>
+                  <span class="badge bg-primary me-2">{{ article.statistic["likes"] }} <i class="bi bi-hand-thumbs-up"></i></span>
+                  <span class="badge bg-danger me-2">{{ article.statistic["views"] }} <i class="bi bi-eye"></i></span>
 
-                  <span class="badge bg-danger me-2" v-if="article.statistic !== null">{{ article.statistic["views"] }} <i class="bi bi-eye"></i></span>
-                  <span class="badge bg-danger me-2" v-else>0 <i class="bi bi-eye"></i></span>
                 </div>
                 <div class="mt-4">
                   Теги:

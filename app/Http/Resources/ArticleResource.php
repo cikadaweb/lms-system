@@ -18,6 +18,7 @@ class ArticleResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'img' => $this->img,
+            'preview' => $this->preview,
             'body' => $this->body,
             'created_at' => $this->createdAtForHumans(),
             'comments' => CommentResource::collection($this->whenLoaded('comments')),

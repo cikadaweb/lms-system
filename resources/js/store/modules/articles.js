@@ -42,6 +42,7 @@ const actions = {
             .post("/api/articles", {
                 title: article.title,
                 img: article.img,
+                preview: article.preview,
                 body: article.body,
             })
             .then((response) => {

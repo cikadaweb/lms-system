@@ -17,7 +17,7 @@
 
           <div class="mb-3">
             <label for="articlePreview" class="form-label"><strong>Превью статьи *</strong></label>
-            <input class="form-control" id="articlePreview" placeholder="до 30 символов">
+            <input v-model.trim="form.preview" class="form-control" id="articlePreview" placeholder="до 30 символов">
           </div>
 
           <div class="mb-3">
@@ -56,6 +56,7 @@ export default {
       form: {
         title: "",
         img: "",
+        preview: "",
         body: "",
       }
     }

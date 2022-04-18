@@ -57,8 +57,8 @@
             </tr>
           </thead>
           <tbody >
-            <tr v-for="(article, idx) in getArticles" :key="article.id">
-              <th>{{ idx + 1 }}</th>
+            <tr v-for="article in getArticles" :key="article.id">
+              <th>{{ article.id }}</th>
               <td>{{ article.title }}</td>
               <td>{{ article.statistic["views"] }}</td>
               <td>

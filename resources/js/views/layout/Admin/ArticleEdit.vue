@@ -98,9 +98,10 @@ export default {
       axios.put("/api/articles/" + this.$route.params.id, {
               title: this.article.title,
               img: this.article.img,
+              preview: this.article.preview,
               body: this.article.body,
           }).then((response) => {
-            this.$router.push({name: "ArticlesDasboard"});
+            this.$router.push("/articles/dashboard");
           });
     },
 
