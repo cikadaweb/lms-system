@@ -33,14 +33,14 @@
             </figcaption>
 
             <figcaption class="figure-caption text-end">
-              <!-- <span class="badge rounded-pill bg-success article_badge me-2">{{ likes }} <i class="bi bi-hand-thumbs-up"></i></span>
-              <span class="badge rounded-pill bg-primary article_badge me-2">{{ views }} <i class="bi bi-eye"></i></span> -->
+              <span class="badge rounded-pill bg-success article_badge me-2">{{ likes }} <i class="bi bi-hand-thumbs-up"></i></span>
+              <span class="badge rounded-pill bg-primary article_badge me-2">{{ views }} <i class="bi bi-eye"></i></span>
             
-              <span class="badge rounded-pill bg-success article_badge me-2" v-if="article.statistic !== null">{{ article.statistic["likes"] }} <i class="bi bi-hand-thumbs-up"></i></span>
+              <!-- <span class="badge rounded-pill bg-success article_badge me-2" v-if="article.statistic !== null">{{ article.statistic["likes"] }} <i class="bi bi-hand-thumbs-up"></i></span>
               <span class="badge rounded-pill bg-success article_badge me-2" v-else>0 <i class="bi bi-hand-thumbs-up"></i></span>
               
               <span class="badge rounded-pill bg-primary article_badge me-2" v-if="article.statistic !== null">{{ article.statistic["views"] }} <i class="bi bi-eye"></i></span>
-              <span class="badge rounded-pill bg-primary article_badge me-2" v-else>0 <i class="bi bi-eye"></i></span>
+              <span class="badge rounded-pill bg-primary article_badge me-2" v-else>0 <i class="bi bi-eye"></i></span> -->
             </figcaption>
 
             <p class="article_text pt-5" v-html="article.body"></p>

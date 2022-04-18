@@ -25,9 +25,16 @@ class Article extends Model
     }
 
     public function createdAtForHumans(){
-        $carbondate = Carbon::parse( $this->created_at); 
-        $past = $carbondate->toDateString('d-m-Y');
-        return $past;
+
+        return $this->created_at->diffForHumans();
+
+        // $carbondate = Carbon::parse( $this->created_at); 
+        // $past = $carbondate->toDateString('d-m-Y');
+        // return $past;
+
+        //наш формат
+        // $carbondate = Carbon::createFromFormat("Y-m-d H:i:s", $this->created_at)->format("d.m.Y"); 
+        // return $carbondate;
     }
 
     public function scopeLastLimit($query, $numbers)

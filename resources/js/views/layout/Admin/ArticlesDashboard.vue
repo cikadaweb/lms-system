@@ -60,9 +60,7 @@
             <tr v-for="(article, idx) in getArticles" :key="article.id">
               <th>{{ idx + 1 }}</th>
               <td>{{ article.title }}</td>
-              <!-- здесь обработка просмотров !временное -->
-              <td v-if="article.statistic !== null">{{ article.statistic["views"] }}</td>
-              <td v-else>Нет просмотров</td>
+              <td>{{ article.statistic["views"] }}</td>
               <td>
                 <span v-for="tag in article.tags" :key="tag.id" class="badge bg-primary">
                   {{ tag.label }}

@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Resources;
-
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CommentResource extends JsonResource
@@ -17,7 +16,8 @@ class CommentResource extends JsonResource
         return [
             'id' => $this->id,
             'body' => $this->body,
-            'created_at' => $this->createdAtForHumans(),
+            // тут было 'created_at' => $this->createdAtForHumans(),
+            'created_at' => $this->created_at,
         ];
     }
 }

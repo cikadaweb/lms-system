@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Article;
+use App\Models\State;
 use App\Http\Resources\ArticleResource;
 
 use Validator;
@@ -85,6 +86,13 @@ class ArticleController extends Controller
         $article->img = "/" . $request->img;
         $article->body = $request->body;
         $article->save();
+
+        // создание статистики по умолчанию
+        $state = new State();
+        $state->likes = 0;
+        $state->views = 0;
+        $state->article_id = $article->id;
+        $state->save();
         
 
         return [
