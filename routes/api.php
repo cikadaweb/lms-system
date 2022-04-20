@@ -26,22 +26,20 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware' => 'auth:sanctum'], function() {
-
-    Route::group(['middleware' => ['role:Admin']], function () {
-        Route::get('get', [MainController::class, '__invoke']);
-        Route::apiResource('users', UserController::class);
-        Route::apiResource('roles', RoleController::class);
-        Route::apiResource('permissions', PermissionController::class);
-    });
-
-    // Route::group(['middleware' => ['role:User']], function () {
-    //     Route::get('get', [MainController::class, '__invoke']);
-    //     Route::apiResource('users', UserController::class);
-    //     Route::apiResource('roles', RoleController::class);
-    //     Route::apiResource('permissions', PermissionController::class);
-        
-    // });
-
+    
+    Route::get('getRole', [MainController::class, '__invoke']);
+    Route::apiResource('users', UserController::class);
+    Route::apiResource('roles', RoleController::class);
+    Route::apiResource('permissions', PermissionController::class);
     Route::apiResource('articles', ArticleController::class);
 
+    Route::put('article-views-increment', [App\Http\Controllers\Api\ArticleController::class, 'viewsIncrement']);
+    Route::put('article-likes-increment', [App\Http\Controllers\Api\ArticleController::class, 'likesIncrement']);
+
 });
+
+// Route::group(['middleware' => ['role:Admin']], function () {
+//     Route::apiResource('users', UserController::class);
+//     Route::apiResource('roles', RoleController::class);
+//     Route::apiResource('permissions', PermissionController::class);
+// });
