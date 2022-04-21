@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\ArticleController;
 use App\Http\Controllers\Api\PermissionController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\CommentController;
 
 use App\Http\Controllers\MainController;
 
@@ -33,8 +34,9 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::apiResource('permissions', PermissionController::class);
     Route::apiResource('articles', ArticleController::class);
 
-    Route::put('article-views-increment', [App\Http\Controllers\Api\ArticleController::class, 'viewsIncrement']);
-    Route::put('article-likes-increment', [App\Http\Controllers\Api\ArticleController::class, 'likesIncrement']);
+    Route::put('article-views-increment', [ArticleController::class, 'viewsIncrement']);
+    Route::put('article-likes-increment', [ArticleController::class, 'likesIncrement']);
+    Route::post('article-add-comment', [CommentController::class, 'store'] );
 
 });
 

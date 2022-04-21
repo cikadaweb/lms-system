@@ -16,8 +16,7 @@ class CommentResource extends JsonResource
         return [
             'id' => $this->id,
             'body' => $this->body,
-            // тут было 'created_at' => $this->createdAtForHumans(),
-            'created_at' => $this->created_at,
+            'created_at' => $this->createdAtForHumans(),
         ];
     }
 }

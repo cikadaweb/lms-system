@@ -184,4 +184,19 @@ class ArticleController extends Controller
     {
         $article->delete();
     }
+    
+    public function viewsIncrement(Request $request) {
+        $article = Article::findById($request->id);
+        $article->state->increment('views');
+        return new ArticleResource($article);
+
+    }
+
+    public function likesIncrement(Request $request) {
+        $article = Article::findById($request->id);
+
+        $inc = $request->get('increment');
+        $inc ? $article->state->decrement('likes') : $article->state->increment('likes');
+        return new ArticleResource($article);
+    }
 }

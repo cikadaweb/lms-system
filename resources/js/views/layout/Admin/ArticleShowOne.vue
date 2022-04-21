@@ -31,17 +31,16 @@
             </figcaption>
 
             <figcaption class="figure-caption text-end">
-              <span class="badge rounded-pill bg-success article_badge me-2">{{ likes }} <i class="bi bi-hand-thumbs-up"></i></span>
-              <span class="badge rounded-pill bg-primary article_badge me-2">{{ views }} <i class="bi bi-eye"></i></span>
+              <LikesState></LikesState>
+              <ViewsState></ViewsState>
             </figcaption>
 
             <p class="article_text pt-5" v-html="article.body"></p>
             <p>Опубликованно:  <i>{{ article.created_at }}</i></p>
-
           </figure>
 
+          <Comments></Comments>
 
-        
       </div>
 
     </div>
@@ -52,8 +51,12 @@
 </template>
 
 <script>
+import ViewsState from "../../ui/ViewsState.vue"
+import LikesState from "../../ui/LikesState.vue"
+import Comments from "../../ui/Comments.vue"
 
 export default {
+  components: { LikesState, ViewsState, Comments },
 
   name: "ArticleShowOne",
   computed: {
@@ -67,20 +70,11 @@ export default {
         return this.$store.state.articles.currentArticle.tags.length
       } 
     },
-    // ToDo логика правильная, но нужно завершить
-    views: {
-      get() {
-        return this.$store.getters['articles/articleViews']
-      }
-    },
-    likes: {
-      get() {
-        return this.$store.getters['articles/articleLikes']
-      }
-    },
+
   },
   mounted() {
      this.$store.dispatch("articles/getArticleData", this.$route.params.id)
+     this.$store.dispatch('articles/viewsIncrement',  this.$route.params.id)
   },
 
 }
@@ -116,5 +110,7 @@ export default {
 .article_badge {
   font-size: 16px;
 }
+
+
 
 </style>
