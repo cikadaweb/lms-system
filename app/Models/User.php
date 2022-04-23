@@ -43,4 +43,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function scopeAllPaginate($query, $numbers)
+    {
+        return $query->orderBy('created_at', 'desc')->paginate($numbers);
+    }
 }

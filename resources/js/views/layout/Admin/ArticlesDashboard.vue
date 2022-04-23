@@ -156,7 +156,7 @@ export default {
 
 
 
-<style scoped lang="scss">
+<style lang="scss">
 
 .table-nav {
   background-color: white;
@@ -187,7 +187,7 @@ export default {
   }
 
   .tabel-label {
-    background-color: #F5EFFF;
+    background-color: #F5EFFF !important;
   }
 
   .articles-pagination {

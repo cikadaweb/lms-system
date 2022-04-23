@@ -64,7 +64,7 @@ export default {
     }
   },
   mounted() {
-    //  this.$store.dispatch("articles/getArticleData", this.$route.params.id)
+     this.$store.dispatch("articles/getArticleData", this.$route.params.id)
   },
 
   computed: {
