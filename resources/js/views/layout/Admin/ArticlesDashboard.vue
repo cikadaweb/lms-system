@@ -57,7 +57,7 @@
             </tr>
           </thead>
           <tbody >
-            <tr v-for="article in getArticles" :key="article.id">
+            <tr v-for="article in articles" :key="article.id">
               <th>{{ article.id }}</th>
               <td>{{ article.title }}</td>
               <td>{{ article.statistic["views"] }}</td>
@@ -86,24 +86,11 @@
         </table>
       </div>
 
-      <div class="col-xl-12">
-        <nav aria-label="Page navigation example" class="articles-pagination">
-          <ul class="pagination">
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-              <a class="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
+      <div class="col-xl-12 d-flex justify-content-center">
+        <Pagination 
+          :pagination_url="pagination_url"
+          v-on:set-paginate-items="setPaginateArticles"
+        ></Pagination>
       </div>
 
     </div>
@@ -115,26 +102,28 @@
 
 <script>
 import axios from "../../../../axios/axios-instance";
+import Pagination from "../../ui/Pagination.vue"
 
 export default {
   
   name: "ArticlesDashboard",
   components: {
-
+    Pagination
   },
   data() {
     return {
-
+      articles: {},
+      pagination_url: "http://127.0.0.1:8000/api/articles"
     }
   },
   created() {
-    this.$store.dispatch("articles/getArticles")
+    // this.$store.dispatch("articles/getArticles")
   },
   methods: {
 
-    // addUser() {
-    //   this.$store.dispatch("users/addUser", this.user)
-    // },
+    setPaginateArticles(articles) {
+      this.articles = articles
+    },
   
     deleteArticle(id) {
       axios.delete("/api/articles/" + id)

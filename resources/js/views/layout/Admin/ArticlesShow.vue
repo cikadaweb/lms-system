@@ -13,7 +13,7 @@
       <div class="col-xl-12">
         <div class="row mt-5">
 
-          <div class="col-6 pb-3" v-for="article in getArticles" :key="article.id">
+          <div class="col-6 pb-3" v-for="article in articles" :key="article.id">
             <div class="card card_article">
               <img :src="`${article.img}`" class="card-img-top card_article-picture" alt="">
               <div class="card-body">
@@ -40,23 +40,45 @@
         </div>
       </div>
 
+      <div class="col-xl-12 d-flex justify-content-center">
+        <Pagination 
+          :pagination_url="pagination_url"
+          v-on:set-paginate-items="setPaginateArticles"
+        ></Pagination>
+      </div>
+
     </div>
   </div> 
 
 </template>
 
 <script>
+import Pagination from "../../ui/Pagination.vue"
 
 export default {
   name: "ArticlesShow",
   created() {
     this.$store.dispatch("articles/getArticles")
   },
+  components: {
+    Pagination
+  },
+  data() {
+    return {
+      articles: {},
+      pagination_url: "http://127.0.0.1:8000/api/articles"
+    }
+  },
   computed: {
-    getArticles: {
-      get() {
-        return this.$store.state.articles.articlesList
-      }
+    // getArticles: {
+    //   get() {
+    //     return this.$store.state.articles.articlesList
+    //   }
+    // },
+  },
+  methods: {
+    setPaginateArticles(articles) {
+      this.articles = articles
     },
   }
 }

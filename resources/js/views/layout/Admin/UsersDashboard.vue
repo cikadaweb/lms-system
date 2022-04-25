@@ -75,7 +75,7 @@
         <table class="table table-success table-striped">
           <thead>
             <tr>
-              <th class="tabel-label">#</th>
+              <th class="tabel-label">ID</th>
               <th class="tabel-label">Логин</th>
               <th class="tabel-label">Почта</th>
               <th class="tabel-label">Роль</th>
@@ -84,8 +84,8 @@
             </tr>
           </thead>
           <tbody >
-            <tr v-for="(user, idx) in getUsers" :key="user.id">
-              <th>{{ idx + 1 }}</th>
+            <tr v-for="user in users" :key="user.id">
+              <th>{{ user.id }}</th>
               <td>{{ user.name }}</td>
               <td>{{ user.email }}</td>
               <td v-if="user.role">{{ user.role.name }}</td>
@@ -103,6 +103,13 @@
         </table>
       </div>
 
+      <div class="col-xl-12 d-flex justify-content-center">
+          <Pagination 
+            :pagination_url="pagination_url"
+            v-on:set-paginate-items="setPaginateUsers"
+        ></Pagination>
+      </div>
+
     </div>
   </div>
 
@@ -111,13 +118,16 @@
 
 
 <script>
+import Pagination from "../../ui/Pagination.vue"
 import MyWindow from "../../ui/MyWindow.vue";
 import axios from "../../../../axios/axios-instance";
+
 
 export default {
   name: "UsersDashboard",
   components: {
-    MyWindow
+    MyWindow,
+    Pagination
   },
   data() {
     return {
@@ -130,11 +140,13 @@ export default {
         role: {
           name: "",
         }
-      }
+      },
+      users: {},
+      pagination_url: "http://127.0.0.1:8000/api/users"
     }
   },
   created() {
-    this.$store.dispatch("users/getUsers")
+    // this.$store.dispatch("users/getUsers")
     this.$store.dispatch("users/getRoles")
   },
   methods: {
@@ -169,13 +181,17 @@ export default {
       })
     },
 
+    setPaginateUsers(users) {
+      this.users = users
+    },
+
   },
   computed: {
-    getUsers: {
-      get() {
-        return this.$store.state.users.userList
-      }
-    },
+    // getUsers: {
+    //   get() {
+    //     return this.$store.state.users.userList
+    //   }
+    // },
     getRoles: {
       get() {
         return this.$store.state.users.roleList

@@ -11,8 +11,8 @@
         <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
           <div class="d-flex justify-content-between align-items-center text-center">
             <div class="card-body">
-              <h5 class="card-title">Статьи</h5>
               <h2 class="card-text">15</h2>
+              <h5 class="card-title">Статьи</h5>
             </div>
             <div class="card-body">
               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-newspaper card-icons" viewBox="0 0 16 16">
@@ -29,8 +29,8 @@
         <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
           <div class="d-flex justify-content-between align-items-center text-center">
             <div class="card-body">
-              <h5 class="card-title">Курсы</h5>
               <h2 class="card-text">2</h2>
+              <h5 class="card-title">Курсы</h5>
             </div>
             <div class="card-body">
               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-book card-icons" viewBox="0 0 16 16">
@@ -46,8 +46,8 @@
         <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
           <div class="d-flex justify-content-between align-items-center text-center">
             <div class="card-body">
-              <h5 class="card-title">Тесты</h5>
               <h2 class="card-text">15</h2>
+              <h5 class="card-title">Тесты</h5>
             </div>
             <div class="card-body">
              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-pencil card-icons" viewBox="0 0 16 16">
@@ -63,8 +63,8 @@
         <div class="card text-white bg-warning mb-3" style="max-width: 18rem;"> 
           <div class="d-flex justify-content-between align-items-center text-center">
             <div class="card-body">
-              <h5 class="card-title">Пользователи</h5>
               <h2 class="card-text">15</h2>
+              <h5 class="card-title">Пользователи</h5>
             </div>
             <div class="card-body">
               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-people card-icons" viewBox="0 0 16 16">
@@ -169,6 +169,11 @@ export default {
 
 
 <style scoped lang="scss">
+
+.card:hover {
+  transform: scale(1.1);
+  transition-duration: .5s;
+}
 
 .chart{
   background-color: rgb(255, 255, 255);

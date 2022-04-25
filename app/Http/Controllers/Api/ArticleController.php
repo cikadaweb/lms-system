@@ -20,7 +20,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::allPaginate(10);
+        $articles = Article::allPaginate(4);
         return ArticleResource::collection($articles);
 
 
