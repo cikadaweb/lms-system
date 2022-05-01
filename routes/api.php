@@ -32,8 +32,8 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::apiResource('users', UserController::class);
     Route::apiResource('roles', RoleController::class);
     Route::apiResource('permissions', PermissionController::class);
+    
     Route::apiResource('articles', ArticleController::class);
-
     Route::put('article-views-increment', [ArticleController::class, 'viewsIncrement']);
     Route::put('article-likes-increment', [ArticleController::class, 'likesIncrement']);
     Route::post('article-add-comment', [CommentController::class, 'store'] );
