@@ -1,4 +1,5 @@
 import axios from "../../../axios/axios-instance";
+import router from "../../router/router";
 
 const state = {
     articlesList: [],
@@ -20,11 +21,12 @@ const actions = {
         axios
             .get("/api/articles")
             .then((response) => {
-                // пока смотрим что получим
+                // отладка
                 ctx.commit("setArticlesList", response.data.data);
                 console.log("Получим наши статьи: ", response);
             })
             .catch((error) => {
+                // отладка
                 console.log(error);
             });
     },
@@ -32,11 +34,12 @@ const actions = {
         axios
             .get("/api/articles/" + id)
             .then((response) => {
-                // пока смотрим что получим
+                // отладка
                 ctx.commit("setArticleData", response.data.data);
                 console.log(response.data.data);
             })
             .catch((error) => {
+                // отладка
                 console.log(error);
             });
     },
@@ -50,10 +53,33 @@ const actions = {
             })
             .then((response) => {
                 if (response.data) {
+                    // отладка
                     console.log(response);
+                    router.push("/articles/dashboard");
                 }
             })
             .catch((error) => {
+                // отладка
+                console.log(error.response);
+            });
+    },
+    changeArticle({}, article, id) {
+        axios
+            .put("/api/articles/" + id, {
+                title: article.title,
+                preview: article.preview,
+                body: article.body,
+                img: article.img,
+            })
+            .then((response) => {
+                if (response.data) {
+                    // отладка
+                    console.log(response);
+                    // router.push("/articles/" + id);
+                }
+            })
+            .catch((error) => {
+                // отладка
                 console.log(error.response);
             });
     },
@@ -65,6 +91,7 @@ const actions = {
                     ctx.commit("setArticleData", response.data.data);
                 })
                 .catch((error) => {
+                    // отладка
                     console.log(error);
                 });
         }, 5000);
@@ -80,8 +107,10 @@ const actions = {
                 ctx.commit("setLike", !state.likeIt);
             })
             .catch((error) => {
+                // отладка
                 console.log(error);
             });
+        // отладка
         console.log("После клика по кнопке", state.likeIt);
     },
     addComment(ctx, payload) {
@@ -92,6 +121,7 @@ const actions = {
             })
             // ToDo работает неверно
             .then((response) => {
+                // отладка
                 console.log("Сюда не входим!");
                 ctx.commit("setCommentSuccess", !state.commentSuccess);
                 ctx.dispatch("getArticleData", payload.article_id);

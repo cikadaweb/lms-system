@@ -20,7 +20,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::allPaginate(4);
+        $articles = Article::allPaginate(5);
         return ArticleResource::collection($articles);
 
 
@@ -75,11 +75,12 @@ class ArticleController extends Controller
                 "body" => ["required"],
             ]
             );
+            
         if ($validator->fails()) {
-            return [
+            return response()->json([
                 "status" => false,
                 "errors" => $validator->messages()
-            ];
+            ], 400);
         }
 
         $article = new Article();
@@ -96,11 +97,10 @@ class ArticleController extends Controller
         $state->article_id = $article->id;
         $state->save();
         
-
-        return [
+        return response()->json([
             "status" => true,
             "article" => $article
-        ];
+        ], 201);
     }
 
     /**
