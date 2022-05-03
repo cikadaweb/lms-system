@@ -14,6 +14,7 @@ const state = {
     likeIt: false,
     commentSuccess: false,
     errors: [],
+    tagList: [],
 };
 
 const actions = {
@@ -30,6 +31,7 @@ const actions = {
                 console.log(error);
             });
     },
+
     getArticleData(ctx, id) {
         axios
             .get("/api/articles/" + id)
@@ -43,6 +45,19 @@ const actions = {
                 console.log(error);
             });
     },
+
+    getTags(ctx) {
+        axios
+            .get("/api/article-tags")
+            .then((response) => {
+                ctx.commit("setTagList", response.data);
+                console.log(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
+
     addArticle({}, article) {
         axios
             .post("/api/articles", {
@@ -63,9 +78,10 @@ const actions = {
                 console.log(error.response);
             });
     },
+
     changeArticle({}, article, id) {
         axios
-            .put("/api/articles/" + id, {
+            .put("/api/articles/" + article.id, {
                 title: article.title,
                 preview: article.preview,
                 body: article.body,
@@ -75,7 +91,7 @@ const actions = {
                 if (response.data) {
                     // отладка
                     console.log(response);
-                    // router.push("/articles/" + id);
+                    router.push("/articles/" + article.id);
                 }
             })
             .catch((error) => {
@@ -83,6 +99,7 @@ const actions = {
                 console.log(error.response);
             });
     },
+
     viewsIncrement(ctx, payload) {
         setTimeout(() => {
             axios
@@ -96,6 +113,7 @@ const actions = {
                 });
         }, 5000);
     },
+
     addLike(ctx, payload) {
         axios
             .put("/api/article-likes-increment", {
@@ -113,6 +131,7 @@ const actions = {
         // отладка
         console.log("После клика по кнопке", state.likeIt);
     },
+
     addComment(ctx, payload) {
         axios
             .post("/api/article-add-comment", {
@@ -147,6 +166,9 @@ const mutations = {
     setCommentSuccess(state, payload) {
         state.commentSuccess = payload;
     },
+    setTagList(state, payload) {
+        state.tagList = payload;
+    },
 };
 
 const getters = {
@@ -158,6 +180,9 @@ const getters = {
     },
     articleLikes(state) {
         return state.currentArticle.statistic.likes;
+    },
+    tagList(state) {
+        return state.tagList;
     },
 };
 

@@ -122,7 +122,7 @@ export default {
         let textContent = tinymce.get('mytextarea').getContent();
         this.article.body =  textContent ;
 
-        this.$store.dispatch("articles/addArticle", this.article, this.$route.params.id)
+        this.$store.dispatch("articles/changeArticle", this.article, this.$route.params.id)
       }
     },
 

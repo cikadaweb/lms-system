@@ -47,6 +47,11 @@ class Article extends Model
         return $query->with('tags', 'state')->orderBy('created_at', 'desc')->paginate($numbers);
     }
 
+    public function scopeFindBySearch($query, $numbers, $title)
+    {
+        return $query->with('tags', 'state')->where("title", "like", "%".$title."%")->orderBy('created_at', 'desc')->paginate($numbers);
+    }
+
     public function scopeFindById($query, $id)
     {
         return $query->with('comments','tags', 'state')->where('id', $id)->firstOrFail();

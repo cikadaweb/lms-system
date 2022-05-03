@@ -1,9 +1,11 @@
 <?php
 
-use App\Http\Controllers\Api\ArticleController;
-use App\Http\Controllers\Api\PermissionController;
-use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\RoleController;
+use App\Http\Controllers\Api\PermissionController;
+
+use App\Http\Controllers\Api\ArticleController;
+use App\Http\Controllers\Api\TagController;
 use App\Http\Controllers\Api\CommentController;
 
 use App\Http\Controllers\MainController;
@@ -34,9 +36,13 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::apiResource('permissions', PermissionController::class);
     
     Route::apiResource('articles', ArticleController::class);
+    Route::get('articles-all', [ArticleController::class, 'getAllArticles']);
+    Route::get('articles-search', [ArticleController::class, 'getArticlesBySearch']);
     Route::put('article-views-increment', [ArticleController::class, 'viewsIncrement']);
     Route::put('article-likes-increment', [ArticleController::class, 'likesIncrement']);
     Route::post('article-add-comment', [CommentController::class, 'store'] );
+    
+    Route::apiResource('article-tags', TagController::class);
 
 });
 

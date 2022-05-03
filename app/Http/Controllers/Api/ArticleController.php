@@ -18,7 +18,7 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $articles = Article::allPaginate(5);
         return ArticleResource::collection($articles);
@@ -199,4 +199,17 @@ class ArticleController extends Controller
         $inc ? $article->state->decrement('likes') : $article->state->increment('likes');
         return new ArticleResource($article);
     }
+
+    public function getAllArticles() {
+        return Article::all();
+    }
+
+    public function getArticlesBySearch(Request $request) {
+        $search_input =  $request->get('searchInput');
+        if (!empty($search_input)) {
+            $articles = Article::findBySearch(5, $search_input);
+            return ArticleResource::collection($articles);
+        }
+    }
+
 }

@@ -19778,7 +19778,7 @@ __webpack_require__.r(__webpack_exports__);
         this.article.img = imgPath.value;
         var textContent = tinymce.get('mytextarea').getContent();
         this.article.body = textContent;
-        this.$store.dispatch("articles/addArticle", this.article, this.$route.params.id);
+        this.$store.dispatch("articles/changeArticle", this.article, this.$route.params.id);
       }
     }
   }
@@ -19853,10 +19853,13 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       articles: {},
-      pagination_url: "http://127.0.0.1:8000/api/articles"
+      pagination_url: "http://127.0.0.1:8000/api/articles",
+      search_input: ""
     };
   },
-  created: function created() {// this.$store.dispatch("articles/getArticles")
+  created: function created() {
+    // this.$store.dispatch("articles/getArticles")
+    this.$store.dispatch("articles/getTags");
   },
   methods: {
     setPaginateArticles: function setPaginateArticles(articles) {
@@ -19867,13 +19870,32 @@ __webpack_require__.r(__webpack_exports__);
 
       _axios_axios_instance__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("/api/articles/" + id).then(function (response) {
         _this.$store.dispatch("articles/getArticles");
+
+        _this.articles = _this.getArticles;
       });
+    },
+    getArticlesBySearch: function getArticlesBySearch() {
+      var _this2 = this;
+
+      if (this.search_input !== '') {
+        _axios_axios_instance__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/articles-search/" + "?searchInput=".concat(this.search_input)).then(function (response) {
+          console.log(response.data.data);
+          _this2.articles = response.data.data;
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      }
     }
   },
   computed: {
-    getArticles: {
+    // getArticles: {
+    //   get() {
+    //     return this.$store.state.articles.articlesList
+    //   }
+    // },
+    getTags: {
       get: function get() {
-        return this.$store.state.articles.articlesList;
+        return this.$store.state.articles.tagList;
       }
     }
   }
@@ -21752,16 +21774,54 @@ var _hoisted_7 = {
 
 var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Все статьи");
 
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"col-xl-12\"><nav class=\"table-nav d-flex justify-content-between\"><div><form class=\"d-flex pe-3\"><input class=\"form-control me-2 table-nav__input\" type=\"search\" placeholder=\"Найти\" aria-label=\"Search\"></form></div><div class=\"table-nav-selects\"><select class=\"form-select table-nav__select me-2\" aria-label=\"Default select example\"><option selected>Все даты</option><option value=\"1\">One</option><option value=\"2\">Two</option><option value=\"3\">Three</option></select><select class=\"form-select table-nav__select\" aria-label=\"Default select example\"><option selected>Статус</option><option value=\"1\">One</option><option value=\"2\">Two</option><option value=\"3\">Three</option></select></div></nav></div>", 1);
-
-var _hoisted_10 = {
+var _hoisted_9 = {
   "class": "col-xl-12"
 };
+var _hoisted_10 = {
+  "class": "table-nav d-flex justify-content-between"
+};
 var _hoisted_11 = {
+  "class": "d-flex pe-3"
+};
+var _hoisted_12 = {
+  "class": "table-nav-selects"
+};
+
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+  "class": "form-select table-nav__select me-2",
+  "aria-label": "Default select example"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  selected: "",
+  disabled: ""
+}, "Статус статьи"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "1"
+}, "active"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "2"
+}, "disable")], -1
+/* HOISTED */
+);
+
+var _hoisted_14 = {
+  "class": "form-select table-nav__select",
+  "aria-label": "Default select example"
+};
+
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  selected: "",
+  disabled: ""
+}, "Теги", -1
+/* HOISTED */
+);
+
+var _hoisted_16 = ["value"];
+var _hoisted_17 = {
+  "class": "col-xl-12"
+};
+var _hoisted_18 = {
   "class": "table table-light table-striped"
 };
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
   "class": "tabel-label"
 }, "ID"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
   "class": "tabel-label"
@@ -21781,13 +21841,13 @@ var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Открыть");
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Открыть");
 
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Редактировать");
+var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Редактировать");
 
-var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Удалить");
+var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Удалить");
 
-var _hoisted_16 = {
+var _hoisted_23 = {
   "class": "col-xl-12 d-flex justify-content-center"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -21833,7 +21893,29 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  })])]), _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.articles, function (article) {
+  })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+      return $data.search_input = $event;
+    }),
+    onInput: _cache[1] || (_cache[1] = function () {
+      return $options.getArticlesBySearch && $options.getArticlesBySearch.apply($options, arguments);
+    }),
+    "class": "form-control me-2 table-nav__input",
+    type: "search",
+    placeholder: "Найти",
+    "aria-label": "Search"
+  }, null, 544
+  /* HYDRATE_EVENTS, NEED_PATCH */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.search_input]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [_hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", _hoisted_14, [_hoisted_15, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.getTags, function (tag) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
+      key: tag.id,
+      value: tag.id
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(tag.label), 9
+    /* TEXT, PROPS */
+    , _hoisted_16);
+  }), 128
+  /* KEYED_FRAGMENT */
+  ))])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_18, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.articles, function (article) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", {
       key: article.id
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(article.id), 1
@@ -21866,7 +21948,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           "class": "btn-success"
         }, {
           "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-            return [_hoisted_13];
+            return [_hoisted_20];
           }),
           _: 1
           /* STABLE */
@@ -21891,7 +21973,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           "class": "btn-warning"
         }, {
           "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-            return [_hoisted_14];
+            return [_hoisted_21];
           }),
           _: 1
           /* STABLE */
@@ -21910,7 +21992,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }
     }, {
       "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-        return [_hoisted_15];
+        return [_hoisted_22];
       }),
       _: 2
       /* DYNAMIC */
@@ -21920,12 +22002,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , ["onClick"])])]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_Pagination, {
+  ))])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [$data.search_input == '' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Pagination, {
+    key: 0,
     pagination_url: $data.pagination_url,
     onSetPaginateItems: $options.setPaginateArticles
   }, null, 8
   /* PROPS */
-  , ["pagination_url", "onSetPaginateItems"])])])]);
+  , ["pagination_url", "onSetPaginateItems"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])]);
 }
 
 /***/ }),
@@ -24442,7 +24525,8 @@ var state = {
   },
   likeIt: false,
   commentSuccess: false,
-  errors: []
+  errors: [],
+  tagList: []
 };
 var actions = {
   getArticles: function getArticles(ctx) {
@@ -24462,6 +24546,14 @@ var actions = {
       console.log(response.data.data);
     })["catch"](function (error) {
       // отладка
+      console.log(error);
+    });
+  },
+  getTags: function getTags(ctx) {
+    _axios_axios_instance__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/article-tags").then(function (response) {
+      ctx.commit("setTagList", response.data);
+      console.log(response.data);
+    })["catch"](function (error) {
       console.log(error);
     });
   },
@@ -24487,7 +24579,7 @@ var actions = {
   changeArticle: function changeArticle(_ref2, article, id) {
     _objectDestructuringEmpty(_ref2);
 
-    _axios_axios_instance__WEBPACK_IMPORTED_MODULE_0__["default"].put("/api/articles/" + id, {
+    _axios_axios_instance__WEBPACK_IMPORTED_MODULE_0__["default"].put("/api/articles/" + article.id, {
       title: article.title,
       preview: article.preview,
       body: article.body,
@@ -24495,7 +24587,8 @@ var actions = {
     }).then(function (response) {
       if (response.data) {
         // отладка
-        console.log(response); // router.push("/articles/" + id);
+        console.log(response);
+        _router_router__WEBPACK_IMPORTED_MODULE_1__["default"].push("/articles/" + article.id);
       }
     })["catch"](function (error) {
       // отладка
@@ -24557,6 +24650,9 @@ var mutations = {
   },
   setCommentSuccess: function setCommentSuccess(state, payload) {
     state.commentSuccess = payload;
+  },
+  setTagList: function setTagList(state, payload) {
+    state.tagList = payload;
   }
 };
 var getters = {
@@ -24568,6 +24664,9 @@ var getters = {
   },
   articleLikes: function articleLikes(state) {
     return state.currentArticle.statistic.likes;
+  },
+  tagList: function tagList(state) {
+    return state.tagList;
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
