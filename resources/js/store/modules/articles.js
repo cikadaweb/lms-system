@@ -50,8 +50,9 @@ const actions = {
         axios
             .get("/api/article-tags")
             .then((response) => {
+                // отладка
                 ctx.commit("setTagList", response.data);
-                console.log(response.data);
+                // console.log(response.data);
             })
             .catch((error) => {
                 console.log(error);

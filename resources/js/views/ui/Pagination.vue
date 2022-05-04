@@ -42,7 +42,7 @@ export default {
         axios
             .get(page_url)
             .then((response) => {
-                this.$emit("set-paginate-items", response.data.data)
+                this.$emit("set-paginate-items", response)
                 this.makePagination(response.data)
             })
             .catch((error) => {

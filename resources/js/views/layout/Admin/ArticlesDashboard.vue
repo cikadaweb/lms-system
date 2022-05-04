@@ -25,11 +25,13 @@
       
       <div class="col-xl-12">
         <nav class="table-nav d-flex justify-content-between">
+          
                 <div>
                   <form class="d-flex pe-3">
                       <input v-model="search_input" @input="getArticlesBySearch" class="form-control me-2 table-nav__input" type="search" placeholder="Найти" aria-label="Search">
                   </form>
                 </div>
+
                 <div class="table-nav-selects">
                   <select class="form-select table-nav__select me-2" aria-label="Default select example">
                     <option selected disabled>Статус статьи</option>
@@ -118,7 +120,8 @@ export default {
     return {
       articles: {},
       pagination_url: "http://127.0.0.1:8000/api/articles",
-      search_input: ""
+      search_input: "",
+      exact_tag: ""
     }
   },
   created() {
@@ -128,7 +131,14 @@ export default {
   methods: {
 
     setPaginateArticles(articles) {
-      this.articles = articles
+      if (this.search_input != "") {
+        let filterData = articles.data.data.filter((article) => {
+          article.title.toLowerCase().includes(this.search_input.toLowerCase())
+        })
+        this.articles = filterData
+      } else {
+        this.articles = articles.data.data
+      }
     },
   
     deleteArticle(id) {
@@ -149,7 +159,6 @@ export default {
             console.log(error);
         });
       }
-
     }
 
   },

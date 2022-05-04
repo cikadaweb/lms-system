@@ -11,6 +11,31 @@
       </div>
 
       <div class="col-xl-12">
+        <nav class="table-nav d-flex justify-content-between">
+          
+                <div>
+                  <form class="d-flex pe-3">
+                      <input v-model="search_input" @input="getArticlesBySearch" class="form-control me-2 table-nav__input" type="search" placeholder="Найти" aria-label="Search">
+                  </form>
+                </div>
+
+                <div class="table-nav-selects">
+                  <select class="form-select table-nav__select me-2" aria-label="Default select example">
+                    <option selected disabled>Статус статьи</option>
+                    <option value="1">active</option>
+                    <option value="2">disable</option>
+                  </select>
+
+                  <select class="form-select table-nav__select" aria-label="Default select example">
+                    <option selected disabled>Теги</option>
+                    <option v-for="tag in getTags" :key="tag.id" :value="tag.id">{{ tag.label }}</option>
+                  </select>
+
+                </div>
+        </nav>
+      </div>
+
+      <div class="col-xl-12">
         <div class="row mt-5">
 
           <div class="col-6 pb-3" v-for="article in articles" :key="article.id">
@@ -53,12 +78,14 @@
 </template>
 
 <script>
+import axios from "../../../../axios/axios-instance";
 import Pagination from "../../ui/Pagination.vue"
 
 export default {
   name: "ArticlesShow",
   created() {
-    this.$store.dispatch("articles/getArticles")
+    // this.$store.dispatch("articles/getArticles")
+    this.$store.dispatch("articles/getTags")
   },
   components: {
     Pagination
@@ -66,7 +93,9 @@ export default {
   data() {
     return {
       articles: {},
-      pagination_url: "http://127.0.0.1:8000/api/articles"
+      pagination_url: "http://127.0.0.1:8000/api/articles",
+      search_input: "",
+      exact_tag: ""
     }
   },
   computed: {
@@ -75,11 +104,34 @@ export default {
     //     return this.$store.state.articles.articlesList
     //   }
     // },
+    getTags: {
+      get() {
+        return this.$store.state.articles.tagList
+      }
+    }
   },
   methods: {
     setPaginateArticles(articles) {
-      this.articles = articles
+      if (this.search_input != "") {
+        let filterData = articles.data.data.filter((article) => {
+          article.title.toLowerCase().includes(this.search_input.toLowerCase())
+        })
+        this.articles = filterData
+      } else {
+        this.articles = articles.data.data
+      }
     },
+    getArticlesBySearch() {
+      if (this.search_input !== '') {
+        axios.get("/api/articles-search/" + `?searchInput=${this.search_input}`)
+          .then((response) => {
+            console.log(response.data.data)
+            this.articles = response.data.data})
+          .catch((error) => {
+            console.log(error);
+        });
+      }
+    }
   }
 }
 </script>
