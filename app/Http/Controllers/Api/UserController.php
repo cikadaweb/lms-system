@@ -112,4 +112,12 @@ class UserController extends Controller
 
 
     }
+
+    public function getUsersBySearch(Request $request) {
+        $search_input =  $request->get('searchInput');
+        if (!empty($search_input)) {
+            $users = User::findBySearch(5, $search_input);
+            return UserResource::collection($users);
+        }
+    }
 }

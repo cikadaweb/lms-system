@@ -48,4 +48,9 @@ class User extends Authenticatable
     {
         return $query->orderBy('created_at', 'desc')->paginate($numbers);
     }
+
+    public function scopeFindBySearch($query, $numbers, $name)
+    {
+        return $query->where("name", "like", "%".$name."%")->orderBy('created_at', 'desc')->paginate($numbers);
+    }
 }

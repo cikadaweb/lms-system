@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     
     Route::get('getRole', [MainController::class, '__invoke']);
     Route::apiResource('users', UserController::class);
+    Route::get('users-search', [UserController::class, 'getUsersBySearch']);
     Route::apiResource('roles', RoleController::class);
     Route::apiResource('permissions', PermissionController::class);
     

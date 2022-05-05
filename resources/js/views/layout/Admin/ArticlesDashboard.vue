@@ -41,7 +41,12 @@
 
                   <select class="form-select table-nav__select" aria-label="Default select example">
                     <option selected disabled>Теги</option>
-                    <option v-for="tag in getTags" :key="tag.id" :value="tag.id">{{ tag.label }}</option>
+                    <option 
+                    v-for="tag in getTags"
+                    :key="tag.id" 
+                    :value="tag.id"
+                    @click="setArticleTag"
+                    >{{ tag.label }}</option>
                   </select>
 
                 </div>
@@ -49,7 +54,18 @@
       </div>
 
       <div class="col-xl-12">
-        <table class="table table-light table-striped">
+
+        <div class="pt-3" v-if="articles.length > 0">
+          <h2>Результаты по запросу: {{ search_input }}</h2>
+          <p class="lead">Всего найдено {{ articles.length }} постов.</p>
+        </div>
+        <div class="pt-3" v-else >
+          <h2>По запросу {{ search_input }} ничего не найдено.</h2>
+          <a href="" @click.prevent="search_input = ''">Отобразить все посты</a>
+        </div>
+
+
+        <table class="table table-light table-striped" v-if="articles.length > 0">
           <thead>
             <tr>
               <th class="tabel-label">ID</th>
@@ -121,7 +137,7 @@ export default {
       articles: {},
       pagination_url: "http://127.0.0.1:8000/api/articles",
       search_input: "",
-      exact_tag: ""
+      selected_tag: ""
     }
   },
   created() {
@@ -136,6 +152,7 @@ export default {
           article.title.toLowerCase().includes(this.search_input.toLowerCase())
         })
         this.articles = filterData
+        console.log("Сюда заходим")
       } else {
         this.articles = articles.data.data
       }
@@ -159,7 +176,26 @@ export default {
             console.log(error);
         });
       }
+    },
+
+    // async getCategoryGoods (type) {
+    //   try {
+    //     const response = await fetch('https://ozon-v-default-rtdb.firebaseio.com/goods.json')
+    //     const data = await response.json()
+    //     const filterData = data.filter((good) => {
+    //       return good.category === type
+    //     })
+    //     this.$emit('category-goods', filterData)
+    //   } catch (e) {
+    //     console.log(e.message)
+    //   }
+    // },
+
+    setArticleTag () {
+      console.log("asdasd")
+      // this.selected_tag = tag
     }
+
 
   },
   computed: {
@@ -202,7 +238,7 @@ export default {
 }
 
 .table-nav__select {
-  width: 150px;
+  width: 200px;
 }
 
   .table-btn{
