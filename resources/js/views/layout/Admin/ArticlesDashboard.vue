@@ -39,13 +39,17 @@
                     <option value="2">disable</option>
                   </select>
 
-                  <select class="form-select table-nav__select" aria-label="Default select example">
+                  <select 
+                    class="form-select table-nav__select" 
+                    aria-label="Default select example"
+                    v-model="selected_tag" 
+                    @change="setArticleTag"
+                  >
                     <option selected disabled>Теги</option>
                     <option 
                     v-for="tag in getTags"
                     :key="tag.id" 
-                    :value="tag.id"
-                    @click="setArticleTag"
+                    :value="tag.label"
                     >{{ tag.label }}</option>
                   </select>
 
@@ -147,9 +151,9 @@ export default {
   methods: {
 
     setPaginateArticles(articles) {
-      if (this.search_input != "") {
+      if (this.selected_tag != "") {
         let filterData = articles.data.data.filter((article) => {
-          article.title.toLowerCase().includes(this.search_input.toLowerCase())
+          return article.tag === this.selected_tag
         })
         this.articles = filterData
         console.log("Сюда заходим")
@@ -192,8 +196,7 @@ export default {
     // },
 
     setArticleTag () {
-      console.log("asdasd")
-      // this.selected_tag = tag
+      console.log(this.selected_tag)
     }
 
 
