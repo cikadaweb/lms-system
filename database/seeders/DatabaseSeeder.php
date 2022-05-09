@@ -14,7 +14,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        // было изначально
         // \App\Models\User::factory(10)->create();
-        $this->call(UsersTableSeeder::class);
+        // $this->call(UsersTableSeeder::class);
+
+        $courses = \App\Models\Course::factory(3)->create(); 
+        $lessons = \App\Models\Lesson::factory(15)->create();
+
+        // $lessons_id = $lessons->pluck('id');
+
+        // $courses->each(function ($course) use ($lessons_id) {
+
+        //     \App\Models\Lesson::factory(3)->create([
+        //         'course_id' => $course->id
+        //     ]);
+        // });
     }
 }

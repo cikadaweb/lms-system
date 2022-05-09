@@ -10,14 +10,14 @@
         </div>
 
         <div class="pe-5">
-          <router-link :to="'/article/create'">
-            <my-button class="btn-success">Добавить статью</my-button>
+          <router-link :to="'/articles'">
+            <my-button class="btn-primary">Все статьи</my-button>
           </router-link>
         </div>
 
         <div class="pe-5">
-          <router-link :to="'/articles'">
-            <my-button class="btn-primary">Все статьи</my-button>
+          <router-link :to="'/article/create'">
+            <my-button class="btn-success">Добавить статью</my-button>
           </router-link>
         </div>
 

@@ -44,6 +44,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function courses() {
+        return $this->belongsToMany(Course::class);
+    }
+
     public function scopeAllPaginate($query, $numbers)
     {
         return $query->orderBy('created_at', 'desc')->paginate($numbers);

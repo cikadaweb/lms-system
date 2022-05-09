@@ -6,12 +6,12 @@
       <div class="col-xl-12 d-flex pb-3">
 
         <div class="pe-5">
-          <h2>Активные курсы:</h2>
+          <h2>Модули курса {{ this.$route.params.id }}:</h2>
         </div>
 
         <div class="pe-5">
           <router-link :to="'/course/create'">
-            <my-button class="btn-success">Создать курс</my-button>
+            <my-button class="btn-success">Добавить модуль</my-button>
           </router-link>
         </div>
 
@@ -19,13 +19,13 @@
 
       <div class="row mt-2">
 
-        <div class="col-6 pb-3" v-for="course in getCourses" :key="course.id">
+        <div class="col-4 pb-3" v-for="lesson in lessonsList" :key="lesson.id">
 
           <div class="card card_course">
-            <img :src="`${course.img}`" class="card-img-top card_course-picture" alt="">
+            <img src="" class="card-img-top card_course-picture" alt="">
             <div class="card-body">
-              <h5 class="card-title">{{ course.title }}</h5>
-              <p class="card-text card_course-text">{{ course.preview }}</p>
+              <h5 class="card-title">{{ lesson.title }}</h5>
+              <p class="card-text card_course-text">{{ lesson.body }}</p>
               <p>130ч</p>
 
               <div class="card__buttons d-flex justify-content-between">
@@ -53,19 +53,19 @@
 <script>
 
 export default {
-  name: "CoursesDashboard",
+  name: "LessonsDashboard",
   data() {
     return {
 
     }
   },
   mounted() {
-    this.$store.dispatch("courses/getCourses")
+    this.$store.dispatch("lessons/getLessons")
   },
   computed: {
-    getCourses: {
+    getLessons: {
       get() {
-        return this.$store.state.courses.coursesList
+        return this.$store.state.lessons.lessonsList
       }
     }
   }

@@ -7,6 +7,8 @@ use App\Http\Controllers\Api\PermissionController;
 use App\Http\Controllers\Api\ArticleController;
 use App\Http\Controllers\Api\TagController;
 use App\Http\Controllers\Api\CommentController;
+use App\Http\Controllers\Api\CourseController;
+use App\Http\Controllers\Api\LessonController;
 
 use App\Http\Controllers\MainController;
 
@@ -44,6 +46,11 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::post('article-add-comment', [CommentController::class, 'store'] );
     
     Route::apiResource('article-tags', TagController::class);
+
+    Route::apiResource('courses', CourseController::class);
+    Route::apiResource('courses', CourseController::class);
+
+    Route::apiResource('course-lessons', LessonController::class);
 
 });
 

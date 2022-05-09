@@ -122,7 +122,17 @@ class ArticleController extends Controller
         // return $article;
 
         $article = Article::findById($id);
+        if (!$article) {
+            return response()->json([
+                "status" => false,
+                "message" => "Article not found"
+            ])->setStatusCode(404);
+        }
+
         return new ArticleResource($article);
+
+        // $article = Article::findById($id);
+        // return new ArticleResource($article);
     }
 
     /**

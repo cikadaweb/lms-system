@@ -7,6 +7,8 @@ import UsersMain from "../views/layout/Admin/UsersMain";
 import UserEdit from "../views/layout/Admin/UserEdit";
 
 import CoursesMain from "../views/layout/Admin/CoursesMain";
+import CourseCreate from "../views/layout/Admin/CourseCreate";
+import LessonsMain from "../views/layout/Admin/LessonsMain";
 
 import ArticlesMain from "../views/layout/Admin/ArticlesMain";
 import ArticleCreate from "../views/layout/Admin/ArticleCreate";
@@ -49,6 +51,16 @@ const routes = [
         path: "/courses/dashboard",
         name: "CoursesMain",
         component: CoursesMain,
+    },
+    {
+        path: "/course/create",
+        name: "CourseCreate",
+        component: CourseCreate,
+    },
+    {
+        path: "/course-id:id/lessons",
+        name: "LessonsMain",
+        component: LessonsMain,
     },
     {
         path: "/articles/dashboard",
