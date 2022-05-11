@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/layout/Home";
 import Login from "../views/auth/Login";
 import Registration from "../views/auth/Registration";
+import NotFound from "../views/layout/NotFound";
 
 import UsersMain from "../views/layout/Admin/UsersMain";
 import UserEdit from "../views/layout/Admin/UserEdit";
@@ -9,6 +10,7 @@ import UserEdit from "../views/layout/Admin/UserEdit";
 import CoursesMain from "../views/layout/Admin/CoursesMain";
 import CourseCreate from "../views/layout/Admin/CourseCreate";
 import LessonsMain from "../views/layout/Admin/LessonsMain";
+import LessonShowOne from "../views/layout/Admin/LessonShowOne";
 
 import ArticlesMain from "../views/layout/Admin/ArticlesMain";
 import ArticleCreate from "../views/layout/Admin/ArticleCreate";
@@ -63,6 +65,11 @@ const routes = [
         component: LessonsMain,
     },
     {
+        path: "/course-id:id/lesson-id:lesson",
+        name: "LessonShowOne",
+        component: LessonShowOne,
+    },
+    {
         path: "/articles/dashboard",
         name: "ArticlesMain",
         component: ArticlesMain,
@@ -106,6 +113,11 @@ const routes = [
         path: "/user/permissions/:id",
         name: "EditPermissions",
         component: EditPermissions,
+    },
+    {
+        path: "/:notFound(.*)",
+        name: "NotFound",
+        component: NotFound,
     },
 ];
 

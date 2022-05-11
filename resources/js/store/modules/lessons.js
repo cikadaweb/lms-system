@@ -3,28 +3,19 @@ import router from "../../router/router";
 
 const state = {
     lessonsList: [],
-    // currentArticle: {
-    //     comments: [],
-    //     tags: [],
-    //     statistic: {
-    //         likes: 0,
-    //         views: 0,
-    //     },
-    // },
-    likeIt: false,
+    currentLesson: [],
     commentSuccess: false,
     errors: [],
-    tagList: [],
 };
 
 const actions = {
-    getLessons(ctx) {
+    getLessons(ctx, course_id) {
         axios
-            .get("/api/course-lessons")
+            .get("/api/course-lessons/" + `?courseId=${course_id}`)
             .then((response) => {
                 // отладка
-                ctx.commit("setLessonsList", response.data);
-                console.log("Получим наши уроки: ", response.data);
+                ctx.commit("setLessonsList", response.data.data);
+                console.log("Получим наши уроки: ", response.data.data);
             })
             .catch((error) => {
                 // отладка
@@ -32,24 +23,28 @@ const actions = {
             });
     },
 
-    // getArticleData(ctx, id) {
-    //     axios
-    //         .get("/api/articles/" + id)
-    //         .then((response) => {
-    //             // отладка
-    //             ctx.commit("setArticleData", response.data.data);
-    //             console.log(response.data.data);
-    //         })
-    //         .catch((error) => {
-    //             // отладка
-    //             console.log(error);
-    //         });
-    // },
+    getLessonData(ctx, lesson_id) {
+        axios
+            .get("/api/course-lesson/" + `?lessonId=${lesson_id}`)
+            .then((response) => {
+                // отладка
+                console.log(lesson_id);
+                ctx.commit("setLessonData", response.data.data[0]);
+                console.log("Получим данные урока: ", response.data.data[0]);
+            })
+            .catch((error) => {
+                // отладка
+                console.log(error);
+            });
+    },
 };
 
 const mutations = {
     setLessonsList(state, payload) {
         state.lessonsList = payload;
+    },
+    setLessonData(state, payload) {
+        state.currentLesson = payload;
     },
 };
 

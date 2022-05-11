@@ -48,9 +48,9 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::apiResource('article-tags', TagController::class);
 
     Route::apiResource('courses', CourseController::class);
-    Route::apiResource('courses', CourseController::class);
 
-    Route::apiResource('course-lessons', LessonController::class);
+    Route::get('course-lessons', [LessonController::class, 'getCourseLessons']);
+    Route::get('course-lesson', [LessonController::class, 'getCourseLesson']);
 
 });
 

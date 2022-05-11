@@ -22,4 +22,8 @@ class Lesson extends Model
     // {
     //     return $query->with('courses')->where('id', $id);
     // }
+    public function scopeFindById($query, $id)
+    {
+        return $query->all()->where('id', $id);
+    }
 }

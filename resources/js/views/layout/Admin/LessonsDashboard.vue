@@ -19,18 +19,28 @@
 
       <div class="row mt-2">
 
-        <div class="col-4 pb-3" v-for="lesson in lessonsList" :key="lesson.id">
+        <div class="col-4 pb-3" v-for="(lesson, idx) in getLessons" :key="lesson.id">
 
           <div class="card card_course">
             <img src="" class="card-img-top card_course-picture" alt="">
             <div class="card-body">
+
+              <div class="card-label d-flex justify-content-between align-items-center pb-2">
+                <img src="https://via.placeholder.com/150/F5EFFF/000000/?text=FSK" alt="">
+                <span class="card-label__text">{{ idx + 1 }}</span>
+              </div>
+
               <h5 class="card-title">{{ lesson.title }}</h5>
-              <p class="card-text card_course-text">{{ lesson.body }}</p>
-              <p>130ч</p>
+              <!-- <p class="card-text card_course-text">{{ lesson.body }}</p> -->
+              <hr>
 
               <div class="card__buttons d-flex justify-content-between">
-                <router-link :to="{name: 'LessonsMain', params:{id: course.id}}">
-                  <my-button class="btn btn-outline-primary">Открыть</my-button>
+                <router-link :to="{name: 'LessonShowOne', params:{lesson: lesson.id}}">
+                  <my-button class="btn btn-outline-success">Открыть</my-button>
+                </router-link>
+
+                <router-link :to="{name: 'LessonShowOne', params:{lesson: lesson.id}}">
+                  <my-button class="btn btn-outline-warning">Редактировать</my-button>
                 </router-link>
 
                 <router-link :to="'/'">
@@ -60,7 +70,7 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch("lessons/getLessons")
+    this.$store.dispatch("lessons/getLessons", this.$route.params.id)
   },
   computed: {
     getLessons: {
@@ -76,17 +86,13 @@ export default {
 
 <style scoped lang="scss">
 
-.card_course-picture {
-  padding: 10px;
-  max-height: 300px;
-  object-fit: contain;
+.card_course {
+  border-radius: 10px;
 }
 
-.card_course-text {
-    height: 100px;
-    text-indent: 5%;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.card-label__text {
+    font-size: 30px;
+    padding-right: 70px;
 }
 
 </style>
