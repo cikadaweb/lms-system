@@ -11,7 +11,7 @@
         <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
           <div class="d-flex justify-content-between align-items-center text-center">
             <div class="card-body">
-              <h2 class="card-text">15</h2>
+              <h2 class="card-text">{{ panelState.articles_count }}</h2>
               <h5 class="card-title">Статьи</h5>
             </div>
             <div class="card-body">
@@ -21,7 +21,7 @@
               </svg>
             </div>
           </div>
-          <div class="card-header text-center">Все статьи <i class="bi bi-arrow-right-circle"></i></div>
+          <router-link to="/articles" class="state-link"><div class="card-header text-center">Все статьи <i class="bi bi-arrow-right-circle"></i></div></router-link>
         </div>
       </div>
 
@@ -29,7 +29,7 @@
         <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
           <div class="d-flex justify-content-between align-items-center text-center">
             <div class="card-body">
-              <h2 class="card-text">2</h2>
+              <h2 class="card-text">{{ panelState.courses_count }}</h2>
               <h5 class="card-title">Курсы</h5>
             </div>
             <div class="card-body">
@@ -38,7 +38,7 @@
               </svg>
             </div>
           </div>
-          <div class="card-header text-center">Все курсы <i class="bi bi-arrow-right-circle card-icons"></i></div>
+          <router-link to="/courses/dashboard" class="state-link"><div class="card-header text-center">Все курсы <i class="bi bi-arrow-right-circle card-icons"></i></div></router-link>
         </div>
       </div>
 
@@ -55,7 +55,7 @@
             </svg>
             </div>
           </div>
-          <div class="card-header text-center">Все тесты <i class="bi bi-arrow-right-circle card-icons"></i></div>
+            <router-link to="/users/dashboard" class="state-link"><div class="card-header text-center">Все тесты <i class="bi bi-arrow-right-circle card-icons"></i></div></router-link>
         </div>
       </div>
 
@@ -63,7 +63,7 @@
         <div class="card text-white bg-warning mb-3" style="max-width: 18rem;"> 
           <div class="d-flex justify-content-between align-items-center text-center">
             <div class="card-body">
-              <h2 class="card-text">15</h2>
+              <h2 class="card-text">{{ panelState.users_count }}</h2>
               <h5 class="card-title">Пользователи</h5>
             </div>
             <div class="card-body">
@@ -72,7 +72,8 @@
               </svg>
             </div>
           </div>
-          <div class="card-header text-center">Все пользователи <i class="bi bi-arrow-right-circle"></i></div>
+          <router-link to="/users/dashboard" class="state-link"><div class="card-header text-center">Все пользователи <i class="bi bi-arrow-right-circle"></i></div></router-link>
+          
         </div>
       </div>
 
@@ -120,7 +121,7 @@ import PieChart from "../ui/PieChart";
 import axios from "../../../axios/axios-instance";
 
 export default {
-
+  props: ["panelState"],
   name: "Main",
   components: {PieChart},
   data() {
@@ -184,6 +185,10 @@ export default {
 .card-icons {
   width: 50px;
   height: 50px;
+}
+
+.state-link {
+  color: white;
 }
 
 </style>

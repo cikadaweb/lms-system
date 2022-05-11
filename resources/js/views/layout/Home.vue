@@ -19,7 +19,9 @@
       </div>
 
       <div class="col-xl-10 main-body">
-        <Main></Main>
+        <Main 
+          :panelState = panelState
+        ></Main>
       </div>
     </div>
   </div>
@@ -45,18 +47,27 @@ export default {
     },
     data() {
       return {
-        userRole: ""
+        userRole: "",
+        panelState: []
       }
     },
     mounted() {
       // toDo для первой загрузки страницы делается запрос для определения токена
       this.getData()
+      this.getPanelInfo()
     },
     methods: {
       getData() {
         axios.get("/api/getRole")
         .then(response => {
           this.userRole = response.data
+        })
+      },
+      getPanelInfo() {
+        axios.get("/api/getState")
+        .then(response => {
+          this.panelState = response.data
+          console.log(this.panelState)
         })
       },
     }
