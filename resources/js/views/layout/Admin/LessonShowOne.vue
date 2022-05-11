@@ -18,22 +18,14 @@
           <div class="mb-3">
             <label for="lessonTitle" class="form-label"><strong>Тема урока: </strong></label>
             <p>{{ lesson.title }}</p>
-            <!-- <small v-if="errors.title" class="form-small">{{ errors.title }}</small> -->
           </div>
-
-          <!-- <div class="mb-3">
-            <label for="articlePreview" class="form-label"><strong>Превью статьи *</strong></label>
-            <input  class="form-control" id="articlePreview" placeholder="до 30 символов" >
-            <small v-if="errors.preview" class="form-small">{{ errors.preview }}</small>
-          </div> -->
 
           <div class="mb-3">
             <label for="lessonBody" class="form-label"><strong>Лекция</strong></label>
-             <textarea class="form-control lesson-textarea" id="floatingTextarea2">{{ lesson.body }}</textarea>
-            <!-- <small v-if="errors.body" class="form-small">{{ errors.body }}</small> -->
+             <p class="lesson-body pt-5" v-html="lesson.body"></p>
           </div>
 
-          <!-- <div class="form-group">
+          <div class="form-group">
               <label for="feature_image"><strong>Изображение статьи *</strong></label>
               <img src="" alt="" class="img-uploaded" style="display: block; width: 300px">
               <input type="text" class="form-control" id="feature_image" name="feature_image" value="" readonly :class="{invalid: errors.img}">
@@ -44,7 +36,7 @@
                 <a href="" class="popup_selector" style="color: white;" data-inputid="feature_image"><strong>Выберите файл</strong></a>
               </button>
               <span class="form-span">Поддерживаемые форматы: jpg/jpeg/png</span>
-          </div> -->
+          </div>
 
           <div class="form-buttons">
             <router-link to="/" class="btn btn-outline-danger me-3"> Предыдущий урок </router-link>
@@ -116,11 +108,6 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.lesson-textarea {
-  padding: 50px 50px;
-  height: 500px
 }
 
 

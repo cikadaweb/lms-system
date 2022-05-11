@@ -20526,15 +20526,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       _axios_axios_instance__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/getRole").then(function (response) {
-        var currentRole = response.data[0].role_id;
-
-        if (currentRole === 9) {
-          _this.userRole = "Admin";
-        } else if (currentRole === 10) {
-          _this.userRole = "Master";
-        } else {
-          _this.userRole = "User";
-        }
+        _this.userRole = response.data;
       });
     }
   }
@@ -22880,17 +22872,61 @@ var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
-var _hoisted_10 = {
-  "class": "form-control lesson-textarea",
-  id: "floatingTextarea2"
-};
+var _hoisted_10 = ["innerHTML"];
 var _hoisted_11 = {
+  "class": "form-group"
+};
+
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "feature_image"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, "Изображение статьи *")], -1
+/* HOISTED */
+);
+
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  src: "",
+  alt: "",
+  "class": "img-uploaded",
+  style: {
+    "display": "block",
+    "width": "300px"
+  }
+}, null, -1
+/* HOISTED */
+);
+
+var _hoisted_14 = {
+  key: 0,
+  "class": "form-small"
+};
+
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  type: "button",
+  "class": "btn btn-primary mt-3 mb-3"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+  href: "",
+  "class": "popup_selector",
+  style: {
+    "color": "white"
+  },
+  "data-inputid": "feature_image"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, "Выберите файл")])], -1
+/* HOISTED */
+);
+
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "form-span"
+}, "Поддерживаемые форматы: jpg/jpeg/png", -1
+/* HOISTED */
+);
+
+var _hoisted_17 = {
   "class": "form-buttons"
 };
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Предыдущий урок ");
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Предыдущий урок ");
 
-var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Следующий урок ");
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Следующий урок ");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
@@ -22908,14 +22944,30 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.lesson.title), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <small v-if=\"errors.title\" class=\"form-small\">{{ errors.title }}</small> ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"mb-3\">\r\n            <label for=\"articlePreview\" class=\"form-label\"><strong>Превью статьи *</strong></label>\r\n            <input  class=\"form-control\" id=\"articlePreview\" placeholder=\"до 30 символов\" >\r\n            <small v-if=\"errors.preview\" class=\"form-small\">{{ errors.preview }}</small>\r\n          </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("textarea", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.lesson.body), 1
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
+    "class": "lesson-body pt-5",
+    innerHTML: $options.lesson.body
+  }, null, 8
+  /* PROPS */
+  , _hoisted_10)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [_hoisted_12, _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "text",
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["form-control", {
+      invalid: $data.errors.img
+    }]),
+    id: "feature_image",
+    name: "feature_image",
+    value: "",
+    readonly: ""
+  }, null, 2
+  /* CLASS */
+  ), $data.errors.img ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("small", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.errors.img), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <small v-if=\"errors.body\" class=\"form-small\">{{ errors.body }}</small> ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"form-group\">\r\n              <label for=\"feature_image\"><strong>Изображение статьи *</strong></label>\r\n              <img src=\"\" alt=\"\" class=\"img-uploaded\" style=\"display: block; width: 300px\">\r\n              <input type=\"text\" class=\"form-control\" id=\"feature_image\" name=\"feature_image\" value=\"\" readonly :class=\"{invalid: errors.img}\">\r\n\r\n              <small v-if=\"errors.img\" class=\"form-small\">{{ errors.img }}</small>\r\n\r\n              <button type=\"button\" class=\"btn btn-primary mt-3 mb-3\">\r\n                <a href=\"\" class=\"popup_selector\" style=\"color: white;\" data-inputid=\"feature_image\"><strong>Выберите файл</strong></a>\r\n              </button>\r\n              <span class=\"form-span\">Поддерживаемые форматы: jpg/jpeg/png</span>\r\n          </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_15, _hoisted_16]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: "/",
     "class": "btn btn-outline-danger me-3"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_12];
+      return [_hoisted_18];
     }),
     _: 1
     /* STABLE */
@@ -22925,7 +22977,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "btn btn-outline-success me-3"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_13];
+      return [_hoisted_19];
     }),
     _: 1
     /* STABLE */
@@ -42405,7 +42457,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".custom-container-crud {\n  background-color: white;\n  border-radius: 15px;\n  padding: 30px;\n}\n.nav {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.lesson-textarea {\n  padding: 50px 50px;\n  height: 500px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".custom-container-crud {\n  background-color: white;\n  border-radius: 15px;\n  padding: 30px;\n}\n.nav {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

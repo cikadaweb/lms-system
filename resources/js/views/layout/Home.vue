@@ -56,14 +56,7 @@ export default {
       getData() {
         axios.get("/api/getRole")
         .then(response => {
-          let currentRole = response.data[0].role_id
-          if (currentRole === 9) {
-            this.userRole = "Admin"
-          } else if (currentRole === 10) {
-            this.userRole = "Master"
-          } else {
-            this.userRole = "User"
-          }
+          this.userRole = response.data
         })
       },
     }
