@@ -37,6 +37,24 @@ const actions = {
                 console.log(error);
             });
     },
+    addLesson({}, data) {
+        axios
+            .post("/api/lessons", {
+                title: data.form.title,
+                body: data.form.title,
+                course_id: data.course_id,
+            })
+            .then((response) => {
+                if (response.data) {
+                    // отладка
+                    router.push(`/course-id${data.course_id}/lessons`);
+                }
+            })
+            .catch((error) => {
+                // отладка
+                console.log(error.response);
+            });
+    },
 };
 
 const mutations = {

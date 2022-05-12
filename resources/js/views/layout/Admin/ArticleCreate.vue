@@ -78,6 +78,13 @@ export default {
     formIsValid() {
       let isValid = true
 
+      let imgPath = document.getElementById("feature_image")
+      this.form.img = imgPath.value;
+      let textContent = tinymce.get('mytextarea').getContent();
+      this.form.body =  textContent ;
+
+      console.log(this.form)
+
       if (this.form.title.length === 0) {
         this.errors.title = "Название статьи не может быть пустым"
         isValid = false
@@ -110,11 +117,6 @@ export default {
 
     submitHandler() {
       if (this.formIsValid()) {
-        let imgPath = document.getElementById("feature_image")
-        this.form.img = imgPath.value;
-
-        let textContent = tinymce.get('mytextarea').getContent();
-        this.form.body =  textContent ;
 
         this.$store.dispatch("articles/addArticle", this.form)
       }

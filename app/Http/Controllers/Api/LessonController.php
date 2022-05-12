@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Lesson;
 use App\Http\Resources\LessonResource;
 
+use Validator;
+
 class LessonController extends Controller
 {
     /**
@@ -39,7 +41,33 @@ class LessonController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make(
+            $request->all(),
+            [
+                "title" => ["required"],
+                "body" => ["required"],
+                "course_id" => ["required"]
+            ]
+            );
+            
+        if ($validator->fails()) {
+            return response()->json([
+                "status" => false,
+                "errors" => $validator->messages()
+            ], 400);
+        }
+
+        $lesson = new Lesson();
+        $lesson->title = $request->title;
+        $lesson->body = $request->body;
+        $lesson->course_id = $request->course_id;
+
+        $lesson->save();
+        
+        return response()->json([
+            "status" => true,
+            "lesson" => $lesson
+        ], 201);
     }
 
     /**
@@ -98,10 +126,6 @@ class LessonController extends Controller
     }
 
     public function getCourseLessons(Request $request) {
-        // $lessons = DB::table("lessons")->where("id", "=", $id)->get();
-        // // return new ArticleResource($article);
-        // return $lessons;
-        
         $course_id =  $request->get('courseId');
         $lessons = DB::table("lessons")->where("course_id", "=", $course_id)->get();
         return new LessonResource($lessons);

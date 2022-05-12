@@ -10,7 +10,7 @@
         </div>
 
         <div class="pe-5">
-          <router-link :to="'/course/create'">
+          <router-link :to="{name: 'LessonCreate', params:{id: this.$route.params.id}}">
             <my-button class="btn-success">Добавить модуль</my-button>
           </router-link>
         </div>

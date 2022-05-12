@@ -31,20 +31,26 @@ const actions = {
                 console.log(error);
             });
     },
-
-    // getArticleData(ctx, id) {
-    //     axios
-    //         .get("/api/articles/" + id)
-    //         .then((response) => {
-    //             // отладка
-    //             ctx.commit("setArticleData", response.data.data);
-    //             console.log(response.data.data);
-    //         })
-    //         .catch((error) => {
-    //             // отладка
-    //             console.log(error);
-    //         });
-    // },
+    addCourse({}, course) {
+        axios
+            .post("/api/courses", {
+                title: course.title,
+                img: course.img,
+                preview: course.preview,
+                description: course.description,
+            })
+            .then((response) => {
+                if (response.data) {
+                    // отладка
+                    console.log(response);
+                    router.push("/courses/dashboard");
+                }
+            })
+            .catch((error) => {
+                // отладка
+                console.log(error.response);
+            });
+    },
 };
 
 const mutations = {

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Course;
+use App\Http\Resources\CourseResource;
+use Validator;
 
 class CourseController extends Controller
 {
@@ -37,7 +39,35 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make(
+            $request->all(),
+            [
+                "title" => ["required"],
+                "img" => ["required"],
+                "preview" => ["required"],
+                "description" => ["required"],
+            ]
+            );
+            
+        if ($validator->fails()) {
+            return response()->json([
+                "status" => false,
+                "errors" => $validator->messages()
+            ], 400);
+        }
+
+        $course = new Course();
+        $course->title = $request->title;
+        $course->img = $request->img;
+        $course->preview = $request->preview;
+        $course->description = $request->description;
+
+        $course->save();
+        
+        return response()->json([
+            "status" => true,
+            "course" => $course
+        ], 201);
     }
 
     /**

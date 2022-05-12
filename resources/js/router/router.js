@@ -11,6 +11,7 @@ import CoursesMain from "../views/layout/Admin/CoursesMain";
 import CourseCreate from "../views/layout/Admin/CourseCreate";
 import LessonsMain from "../views/layout/Admin/LessonsMain";
 import LessonShowOne from "../views/layout/Admin/LessonShowOne";
+import LessonCreate from "../views/layout/Admin/LessonCreate";
 
 import ArticlesMain from "../views/layout/Admin/ArticlesMain";
 import ArticleCreate from "../views/layout/Admin/ArticleCreate";
@@ -68,6 +69,11 @@ const routes = [
         path: "/course-id:id/lesson-id:lesson",
         name: "LessonShowOne",
         component: LessonShowOne,
+    },
+    {
+        path: "/course-id:id/lessons/create",
+        name: "LessonCreate",
+        component: LessonCreate,
     },
     {
         path: "/articles/dashboard",

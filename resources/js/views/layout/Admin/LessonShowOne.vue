@@ -26,17 +26,9 @@
           </div>
 
           <div class="form-group">
-              <label for="feature_image"><strong>Изображение статьи *</strong></label>
-              <img src="" alt="" class="img-uploaded" style="display: block; width: 300px">
-              <input type="text" class="form-control" id="feature_image" name="feature_image" value="" readonly :class="{invalid: errors.img}">
-
-              <small v-if="errors.img" class="form-small">{{ errors.img }}</small>
-
-              <button type="button" class="btn btn-primary mt-3 mb-3">
-                <a href="" class="popup_selector" style="color: white;" data-inputid="feature_image"><strong>Выберите файл</strong></a>
-              </button>
-              <span class="form-span">Поддерживаемые форматы: jpg/jpeg/png</span>
+              <a class="btn btn-success" href="/files\course_1\test_1.pdf" role="button" download="">Скачать урок</a>
           </div>
+
 
           <div class="form-buttons">
             <router-link to="/" class="btn btn-outline-danger me-3"> Предыдущий урок </router-link>
@@ -110,6 +102,9 @@ export default {
   align-items: center;
 }
 
+.lesson-btn {
+  color: white;
+}
 
 
 </style>
