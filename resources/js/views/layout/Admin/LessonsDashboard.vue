@@ -39,10 +39,6 @@
                   <my-button class="btn btn-outline-success">Открыть</my-button>
                 </router-link>
 
-                <router-link :to="{name: 'LessonShowOne', params:{lesson: lesson.id}}">
-                  <my-button class="btn btn-outline-warning">Редактировать</my-button>
-                </router-link>
-
                 <router-link :to="'/'">
                   <my-button class="btn btn-outline-danger">Архивироавать</my-button>
                 </router-link>
