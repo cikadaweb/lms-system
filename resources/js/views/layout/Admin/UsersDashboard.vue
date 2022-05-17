@@ -14,6 +14,10 @@
           <my-button class="btn-success" @click="popup">Добавить пользователя</my-button>
         </div>
 
+        <div class="table-btn pt-2 pb-3">
+          <my-button class="btn-success" @click="getUsersRole">Сделать</my-button>
+        </div>
+
       </div>
 
       <div class="col-xl-12">
@@ -139,6 +143,7 @@ export default {
       users: {},
       pagination_url: "http://127.0.0.1:8000/api/users",
       search_input: "",
+      status_user: ""
     }
   },
   created() {
@@ -178,31 +183,49 @@ export default {
     },
 
     setPaginateUsers(users) {
-      this.users = users
+      this.users = users.data.data
     },
 
-    setPaginateUsers(users) {
-      if (this.search_input != "") {
-        let filterData = users.data.data.filter((user) => {
-          user.name.toLowerCase().includes(this.search_input.toLowerCase())
-        })
-        this.users = filterData
-      } else {
-        this.users = users.data.data
-      }
-    },
+    // setPaginateUsers(users) {
+    //   if (this.search_input != "") {
+    //     let filterData = users.data.data.filter((user) => {
+    //       user.name.toLowerCase().includes(this.search_input.toLowerCase())
+    //     })
+    //     this.users = filterData
+    //   } else {
+    //     this.users = users.data.data
+    //   }
+    // },
 
     getUsersBySearch() {
       if (this.search_input !== '') {
         axios.get("/api/users-search/" + `?searchInput=${this.search_input}`)
           .then((response) => {
             console.log(response.data.data)
-            this.users = response.data.data})
+            this.users = response.data.data
+            })
           .catch((error) => {
             console.log(error);
         });
       }
     },
+
+    // getUsersByStatus() {
+    //   if (status_user !== "") {
+    //     axios.get("/api/users-all/")
+    //       .then((response) => {
+    //         console.log(response.data.data)
+    //         let filterData = response.data.data.filter((user) => {
+    //           return user.role.name === status_user
+    //         })
+    //         this.users = filterData
+    //       })
+    //       .catch((error) => {
+    //         console.log(error);
+    //     });
+    //   }
+    // },
+
 
   },
   computed: {

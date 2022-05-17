@@ -12,7 +12,6 @@ const actions = {
             .get("/api/users")
             .then((response) => {
                 ctx.commit("setUserList", response.data.data);
-                console.log(response);
             })
             .catch((error) => {
                 console.log(error);

@@ -22,12 +22,10 @@ const actions = {
         axios
             .get("/api/articles")
             .then((response) => {
-                // отладка
                 ctx.commit("setArticlesList", response.data.data);
-                console.log("Получим наши статьи: ", response);
+                // console.log("Получим наши статьи: ", response);
             })
             .catch((error) => {
-                // отладка
                 console.log(error);
             });
     },

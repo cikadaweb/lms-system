@@ -120,4 +120,10 @@ class UserController extends Controller
             return UserResource::collection($users);
         }
     }
+
+    public function getAllUsers()
+    {
+        $users = User::all();
+        return UserResource::collection($users);
+    }
 }

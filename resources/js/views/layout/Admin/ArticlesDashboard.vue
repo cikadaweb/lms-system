@@ -150,18 +150,6 @@ export default {
   },
   methods: {
 
-    setPaginateArticles(articles) {
-      if (this.selected_tag != "") {
-        let filterData = articles.data.data.filter((article) => {
-          return article.tag === this.selected_tag
-        })
-        this.articles = filterData
-        console.log("Сюда заходим")
-      } else {
-        this.articles = articles.data.data
-      }
-    },
-  
     deleteArticle(id) {
       axios.delete("/api/articles/" + id)
         .then((response) => {
@@ -170,6 +158,10 @@ export default {
       })
     },
 
+    setPaginateArticles(articles) {
+      this.articles = articles.data.data
+    },
+  
     getArticlesBySearch() {
       if (this.search_input !== '') {
         axios.get("/api/articles-search/" + `?searchInput=${this.search_input}`)
@@ -181,19 +173,6 @@ export default {
         });
       }
     },
-
-    // async getCategoryGoods (type) {
-    //   try {
-    //     const response = await fetch('https://ozon-v-default-rtdb.firebaseio.com/goods.json')
-    //     const data = await response.json()
-    //     const filterData = data.filter((good) => {
-    //       return good.category === type
-    //     })
-    //     this.$emit('category-goods', filterData)
-    //   } catch (e) {
-    //     console.log(e.message)
-    //   }
-    // },
 
     setArticleTag () {
       console.log(this.selected_tag)

@@ -11,8 +11,7 @@
         <Sidebar></Sidebar>
       </div>
       <div class="col-xl-2 main-sidebar" v-else-if="userRole == 'Master'">
-        <!-- ToDo
-        <UserSidebar></UserSidebar> -->
+        <Sidebar></Sidebar>
       </div>
       <div class="col-xl-2 main-sidebar" v-else>
         <UserSidebar></UserSidebar>
@@ -52,7 +51,6 @@ export default {
       }
     },
     mounted() {
-      // toDo для первой загрузки страницы делается запрос для определения токена
       this.getData()
       this.getPanelInfo()
     },
