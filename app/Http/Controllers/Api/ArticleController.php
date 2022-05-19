@@ -210,8 +210,9 @@ class ArticleController extends Controller
         return new ArticleResource($article);
     }
 
-    public function getAllArticles() {
-        return Article::all();
+    public function getAllArticles(Request $request) {
+        $articles = Article::all();
+        return ArticleResource::collection($articles);
     }
 
     public function getArticlesBySearch(Request $request) {
