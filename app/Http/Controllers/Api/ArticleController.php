@@ -211,7 +211,7 @@ class ArticleController extends Controller
     }
 
     public function getAllArticles(Request $request) {
-        $articles = Article::all();
+        $articles = Article::allArticles();
         return ArticleResource::collection($articles);
     }
 

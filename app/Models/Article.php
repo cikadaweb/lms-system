@@ -46,6 +46,11 @@ class Article extends Model
     {
         return $query->with('tags', 'state')->orderBy('created_at', 'desc')->paginate($numbers);
     }
+        
+    public function scopeAllArticles($query)
+    {
+        return $query->with('tags', 'state')->orderBy('created_at', 'desc')->get();
+    }
 
     public function scopeFindBySearch($query, $numbers, $title)
     {

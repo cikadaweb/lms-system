@@ -79,10 +79,6 @@ export default {
 
 <style scoped lang="scss">
 
-.form-select {
-  background-color: rgb(255, 255, 255);
-}
-
 .user-page {
     width: 450px;
     padding: 8% 0 0;

@@ -2,40 +2,9 @@
 
   <div class="container">
     <div class="row pt-3">
-      
 
       <div class="dashboard-panel__title col-xl-12 pt-2">
         <h1>Пользователи</h1>
-      </div>
-
-      <div class="dashboard-modal col-xl-12 pt-3">
-        <my-window v-if="isPopupVisible" @close="closePopup">
-          <ul class="popup">
-            <li>
-              <form>
-                <my-input type="text" placeholder="username" v-model="user.name"  />
-                <my-input type="text" placeholder="email address" v-model="user.email" />
-                <my-input type="password" placeholder="password" v-model="user.password" />
-                <my-input type="password" placeholder="password confirmation" v-model="user.password_confirmation" />
-
-                <label for="" class="form-label mt-2">Роль пользователя:</label>
-                <select class="form-select mb-3" v-model="user.role.name">
-                  <option disabled selected>Выберите роль</option>
-                  <option v-for="role in getRoles" :key="role.id">
-                    {{ role.name }}
-                  </option>
-                </select>
-
-              </form>
-            </li>
-            <li>        
-              <div class="popup__footer pt-3">
-                <my-button class="btn-success" @click="addUser">Добавить</my-button>
-                <my-button class="btn-danger"  @click="popup">Отменить</my-button>
-              </div>
-            </li>
-          </ul>
-        </my-window>
       </div>
 
       <div class="dashboard-panel-filter col-xl-12 d-flex justify-content-between pt-3">
@@ -48,11 +17,10 @@
 
           <div class="panel-filter-right d-flex">
 
-            <select class="form-select me-5" aria-label="Disabled select example" disabled>
-              <option selected>Статус </option>
-              <option value="1">Один</option>
-              <option value="2">Два</option>
-              <option value="3">Три</option>
+            <select class="form-select me-5">
+              <option selected>Статус пользователя</option>
+              <option value="1">Активный</option>
+              <option value="2">Неактивный</option>
             </select>
 
             <select 
@@ -61,7 +29,7 @@
               v-model="filter_role" 
               @change="filterUsersByStatus"
             >
-              <option value="" selected>Роль </option>
+              <option value="" selected>Роль пользователя</option>
               <option 
               v-for="role in getRoles"
               :key="role.id" 
@@ -75,7 +43,13 @@
       <div class="dashboard-panel-buttons col-xl-12 d-flex justify-content-between pt-3">
 
         <div class="dashboard-panel__btn table-btn ps-2">
-          <my-button class="btn-success" @click="popup">Добавить пользователя</my-button>
+          <my-button class="btn-success" @click="popup">
+            <span class="me-3">Добавить пользователя</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
+              <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+              <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+            </svg>
+          </my-button>
         </div>
 
         <div class="dashboard-panel__btn table-btn ps-2">
@@ -128,6 +102,40 @@
         ></Pagination>
       </div>
 
+      <div class="dashboard-modal col-xl-12 pt-3">
+        <my-window 
+          v-if="isPopupVisible" 
+          @close="closePopup"
+          title="Добавление пользователя" 
+        >
+          <div class="d-flex flex-column">
+            <my-input type="text" placeholder="ФИО пользователя" v-model="user.name"  />
+            <my-input type="text" placeholder="Email почта" v-model="user.email" />
+            <my-input type="password" placeholder="Пароль" v-model="user.password" />
+            <my-input type="password" placeholder="Подтверждение пароля" v-model="user.password_confirmation" />
+
+            <select 
+              class="form-select d-block mt-3" 
+              aria-label="Роль"
+              v-model="user.role.name" 
+            >
+              <option value="" selected>Роль пользователя</option>
+              <option 
+              v-for="role in getRoles"
+              :key="role.id" 
+              :value="role.name"
+              >{{ role.name }}</option>
+            </select>
+
+            <div class="popup-buttons d-flex justify-content-between mt-3">
+                <my-button class="btn-success" @click="addUser">Добавить</my-button>
+                <my-button class="btn-danger"  @click="popup">Отменить</my-button>
+            </div>
+
+          </div>
+        </my-window>
+      </div>
+
     </div>
   </div>
 
@@ -177,21 +185,17 @@ export default {
     },
 
     closePopup() {
+        this.user.name = ""
+        this.user.email = ""
+        this.user.password = ""
+        this.user.password_confirmation = ""
+        this.user.role.name = ""
         this.isPopupVisible = false
-    },
-
-    clearPopup() {
-      this.user.name = ""
-      this.user.email = ""
-      this.user.password = ""
-      this.user.password_confirmation = ""
-      this.user.role.name = ""
     },
 
     addUser() {
       this.$store.dispatch("users/addUser", this.user)
-      this.$store.dispatch("users/getUsers")
-      this.clearPopup()
+      // this.$store.dispatch("users/getUsers")
       this.closePopup()
     },
   
@@ -255,7 +259,8 @@ export default {
 
 
 
-<style scoped lang="scss">
+<style lang="scss">
+// здесь стили для dashboard-panel
 
 .dashboard-panel-filter {
   background-color: white;
@@ -265,12 +270,13 @@ export default {
 
 .form-select {
   background-color: rgb(255, 255, 255);
+  width: auto;
 }
 
-  .popup__footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+// здесь стили для dashboard-panel
+
+.tabel-label {
+  background-color: #F5EFFF !important;
+}
 
 </style>

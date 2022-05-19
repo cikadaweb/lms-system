@@ -83,10 +83,6 @@
         </div>
       </div>
 
-      <!-- <router-link :to="'/'">
-        <button class="btn btn-warning" @click="test">Тест гипотезы</button>
-      </router-link> -->
-
       <!-- <div class="col-xl-6">
         <p>Активные курсы:</p>
         <ul>
@@ -153,15 +149,7 @@ export default {
     }
   },
   methods: {
-    async test() {
-      console.log("Пока ничего")
-      // try {
-      //   const { data } = await axios.get("http://127.0.0.1:8000/api/articles");
-      //   console.log(data)
-      // } catch (e) {
-      //     console.log(e.message);
-      // }
-    }
+
   }
 
 }

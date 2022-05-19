@@ -68,7 +68,7 @@
             </router-link> -->
         </ul>
         <div class="legal">
-            &copy; 2022. Формула Стекла. All right reserved.
+            &copy; 2022. Формула Стекла.
         </div>
     </nav>
 </template>

@@ -1,11 +1,13 @@
 <template>
 
   <div class="popup">
-    <div class="popup__header">
-      <span style="color: #ccccc"><h3>Добавление</h3></span>
-        <span class="popup__btn" @click="close">
-          <i class="bi bi-x-circle"></i>
-        </span>
+    <div class="popup__header d-flex justify-content-between align-items-center">
+      <h3>{{ title }}</h3>
+      <span class="popup__btn" @click="close">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+          <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+        </svg>
+      </span>
     </div>
     <div class="popup__content">
       <slot></slot>
@@ -20,6 +22,7 @@
 
 export default {
   name: "my-window",
+  props: ["title"],
   methods: {
     close() {
       this.$emit("close")
@@ -32,29 +35,22 @@ export default {
 
 <style scoped lang="scss">
 .popup {
-    padding: 16px;
+    padding: 50px;
     position: fixed;
     z-index: 1;
     top: 170px;
-    left: 590px;
-    width: 400px;
+    left: 720px;
+    width: 500px;
     background-color: #82acff;
+    border-radius: 15px;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5), 0 5px 0 rgba(0, 0, 0, 0.2);
+}
 
-    &__header, &__footer {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    
-    &__content {
-        display: flex;
-        justify-content: center;
-        align-content: center;
-    }
+.popup__btn {
+  padding: 10px;
+}
 
-    &__btn {
-      padding: 10px 10px;
-    }
+.popup__btn:hover {
+  color: red;
 }
 </style>

@@ -7,7 +7,7 @@
           <form class="form">
             <h2>Упс, похоже страница не найдена!</h2>
             <router-link to="/user/login">
-              Перейти к авторизации
+              <button class="btn btn-danger">Вернуться назад <i class="bi bi-house-door"></i></button>
             </router-link>
           </form>
           
@@ -26,7 +26,7 @@ export default {
 
 <style scoped lang="scss">
 .login-page {
-    width: 450px;
+    width: 500px;
     padding: 8% 0 0;
     margin: auto;
     display:flex;

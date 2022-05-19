@@ -3,42 +3,43 @@
   <div class="container custom-container-crud mt-3">
     <div class="row pt-3 pb-3">
 
-      <div class="col-xl-12">
-        <div class="nav">
-          <h2>Новости:</h2>
-          <router-link :to="'/'"><h5><i class="bi bi-house-door"></i> Вернуться на главную</h5></router-link>
-        </div>
+      <div class="blog-title col-xl-12 d-flex justify-content-between align-items-center ps-3">
+        <h1>Новости</h1>
+        <router-link :to="'/'"><h5><i class="bi bi-house-door"></i> Вернуться на главную</h5></router-link>
       </div>
 
-      <div class="col-xl-12">
-        <nav class="table-nav d-flex justify-content-between">
-          
-                <div>
-                  <form class="d-flex pe-3">
-                      <input v-model="search_input" @input="getArticlesBySearch" class="form-control me-2 table-nav__input" type="search" placeholder="Найти" aria-label="Search">
-                  </form>
-                </div>
+      <div class="blog-filter col-xl-12 d-flex justify-content-between pt-3">
 
-                <div class="table-nav-selects">
-                  <select class="form-select table-nav__select me-2" aria-label="Default select example">
-                    <option selected disabled>Статус статьи</option>
-                    <option value="1">active</option>
-                    <option value="2">disable</option>
-                  </select>
+          <div class="blog-filter-left">
+            <form class="d-flex">
+              <input class="form-control panel-input" v-model="search_input" @input="getArticlesBySearch" type="search" placeholder="Найти статью" aria-label="Search">
+              <button class="btn btn-primary" @click.prevent type="submit"><i class="bi bi-search"></i></button>
+            </form>
+          </div>
 
-                  <select class="form-select table-nav__select" aria-label="Default select example">
-                    <option selected disabled>Теги</option>
-                    <option v-for="tag in getTags" :key="tag.id" :value="tag.id">{{ tag.label }}</option>
-                  </select>
+          <div class="blog-filter-right d-flex">
 
-                </div>
-        </nav>
+            <select 
+              class="form-select table-nav__select" 
+              aria-label="Default select example"
+              v-model="filter_tag" 
+              @change="filterArticlesByStatus"
+            >
+              <option value="" selected disabled>Теги </option>
+              <option 
+              v-for="tag in getTags"
+              :key="tag.id" 
+              :value="tag.label"
+              >{{ tag.label }}</option>
+            </select>
+
+          </div>
       </div>
 
-      <div class="col-xl-12">
+      <div class="blog-cards col-xl-12">
         <div class="row mt-5">
 
-          <div class="col-6 pb-3" v-for="article in articles" :key="article.id">
+          <div class="col-xl-6 pb-3" v-for="article in articles" :key="article.id">
             <div class="card card_article">
               <img :src="`${article.img}`" class="card-img-top card_article-picture" alt="">
               <div class="card-body">
@@ -61,17 +62,16 @@
               </div>
             </div>
           </div>
-          
         </div>
-      </div>
 
-      <div class="col-xl-12 d-flex justify-content-center">
-        <Pagination 
-          :pagination_url="pagination_url"
-          v-on:set-paginate-items="setPaginateArticles"
-        ></Pagination>
-      </div>
+        <div class="blog-pagination col-xl-12 d-flex justify-content-center">
+          <Pagination v-if="search_input == ''"
+            :pagination_url="pagination_url"
+            v-on:set-paginate-items="setPaginateArticles"
+          ></Pagination>
+        </div>
 
+      </div>
     </div>
   </div> 
 
@@ -95,7 +95,7 @@ export default {
       articles: {},
       pagination_url: "http://127.0.0.1:8000/api/articles",
       search_input: "",
-      exact_tag: ""
+      filter_tag: ""
     }
   },
   computed: {
@@ -112,16 +112,11 @@ export default {
   },
   methods: {
     setPaginateArticles(articles) {
-      if (this.search_input != "") {
-        let filterData = articles.data.data.filter((article) => {
-          article.title.toLowerCase().includes(this.search_input.toLowerCase())
-        })
-        this.articles = filterData
-      } else {
-        this.articles = articles.data.data
-      }
+      this.articles = articles.data.data
     },
+  
     getArticlesBySearch() {
+      this.isShowResultSatus = true
       if (this.search_input !== '') {
         axios.get("/api/articles-search/" + `?searchInput=${this.search_input}`)
           .then((response) => {
@@ -131,7 +126,7 @@ export default {
             console.log(error);
         });
       }
-    }
+    },
   }
 }
 </script>
@@ -146,11 +141,7 @@ export default {
     padding: 30px;
 }
 
-.nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+
 
 .card_article-picture {
   padding: 10px;
