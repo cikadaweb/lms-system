@@ -114,4 +114,12 @@ class CourseController extends Controller
     {
         //
     }
+
+    public function getCoursesBySearch(Request $request) {
+        $search_input =  $request->get('searchInput');
+        if (!empty($search_input)) {
+            $courses = Course::findBySearch($search_input);
+            return CourseResource::collection($courses);
+        }
+    }
 }

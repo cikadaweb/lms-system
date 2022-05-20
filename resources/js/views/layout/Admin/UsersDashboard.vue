@@ -63,6 +63,17 @@
 
       </div>
 
+      <!-- <div class="dashboard-panel-results" v-if="isShowResultSatus">
+        <div class="pt-3" v-if="articles.length > 0">
+          <h2>Результаты по запросу: {{ search_input }}</h2>
+          <p class="lead">Всего найдено {{ articles.length }} постов.</p>
+        </div>
+        <div class="pt-3" v-else >
+          <h2>По запросу {{ search_input }} ничего не найдено.</h2>
+          <a href="" @click.prevent="search_input = ''">Отобразить все посты</a>
+        </div>
+      </div> -->
+
       <div class="dashboard-panel__table col-xl-12 pt-2">
         <table class="table table-success table-striped">
           <thead>
@@ -144,10 +155,9 @@
 
 
 <script>
+import axios from "../../../../axios/axios-instance";
 import Pagination from "../../ui/Pagination.vue"
 import MyWindow from "../../ui/MyWindow.vue";
-import axios from "../../../../axios/axios-instance";
-
 
 export default {
   name: "UsersDashboard",

@@ -18,4 +18,9 @@ class Course extends Model
     public function users() {
         return $this->belongsToMany(User::class);
     }
+
+    public function scopeFindBySearch($query, $title)
+    {
+        return $query->where("title", "like", "%".$title."%")->orderBy('created_at', 'desc')->get();
+    }
 }

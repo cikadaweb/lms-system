@@ -3,13 +3,18 @@
   <div class="container">
     <div class="row pt-3">
       
-      <div class="col-xl-12 d-flex pb-3">
+      <div class="dashboard-panel__title col-xl-12 pt-2">
+        <h1>О курсе {{ this.$route.params.id }}:</h1>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Porro modi perferendis ipsa qui iste officiis quia maiores nam veritatis, voluptas eveniet dolorem eaque animi inventore minus illum nisi! Possimus, quaerat? Quo tempore praesentium autem repellendus fugiat at unde fugit amet dolorum, porro cum mollitia nihil. Amet eius quae possimus! Exercitationem.</p>
+      </div>
 
-        <div class="pe-5">
-          <h2>Модули курса {{ this.$route.params.id }}:</h2>
-        </div>
+      <div class="dashboard-panel__title col-xl-12 pt-2">
+        <h1>Модули курса {{ this.$route.params.id }}:</h1>
+      </div>
 
-        <div class="pe-5">
+      <div class="dashboard-panel-buttons col-xl-12 d-flex justify-content-between pt-3">
+
+        <div class="dashboard-panel__btn table-btn ps-2">
           <router-link :to="{name: 'LessonCreate', params:{id: this.$route.params.id}}">
             <my-button class="btn-success">Добавить модуль</my-button>
           </router-link>
@@ -17,8 +22,8 @@
 
       </div>
 
-      <div class="row mt-2">
 
+      <div class="dashboard-panel__lessons row pt-3">
         <div class="col-4 pb-3" v-for="(lesson, idx) in getLessons" :key="lesson.id">
 
           <div class="card card_course">

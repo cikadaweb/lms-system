@@ -10,7 +10,7 @@
       <div class="dashboard-panel-filter col-xl-12 d-flex justify-content-between pt-3">
           <div class="panel-filter-left">
             <form class="d-flex">
-              <input class="form-control panel-input" v-model="search_input" @input="getUsersBySearch" type="search" placeholder="Наименование курса" aria-label="Search">
+              <input class="form-control panel-input" v-model="search_input" @input="getCoursesBySearch" type="search" placeholder="Наименование курса" aria-label="Search">
               <button class="btn btn-primary" @click.prevent type="submit"><i class="bi bi-search"></i></button>
             </form>
           </div>
@@ -54,7 +54,7 @@
 
       </div>
 
-      <div class="row mt-5">
+      <div class="dashboard-panel-courses row mt-5">
         <div class="col-6 pb-3" v-for="course in getCourses" :key="course.id">
 
           <div class="card card_course">
@@ -87,17 +87,39 @@
 </template>
 
 <script>
+import axios from "../../../../axios/axios-instance";
 
 export default {
   name: "CoursesDashboard",
+
   data() {
     return {
-
+      search_input: "",
     }
   },
+
   mounted() {
     this.$store.dispatch("courses/getCourses")
   },
+
+  methods: {
+    getCoursesBySearch() {
+      if (this.search_input !== '') {
+        axios.get("/api/courses-search/" + `?searchInput=${this.search_input}`)
+          .then((response) => {
+            console.log(response.data.data)
+
+            this.$store.commit("courses/setCoursesList", response.data.data , { root: true })
+            })
+          .catch((error) => {
+            console.log(error);
+        });
+      } else {
+        this.$store.dispatch("courses/getCourses")
+      }
+    },
+  },
+
   computed: {
     getCourses: {
       get() {
