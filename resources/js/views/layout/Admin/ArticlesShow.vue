@@ -39,7 +39,7 @@
       <div class="blog-cards col-xl-12">
         <div class="row mt-5">
 
-          <div class="col-xl-6 pb-3" v-for="article in articles" :key="article.id">
+          <div class="col-xl-6 pb-3" v-for="article in getArticles" :key="article.id">
             <div class="card card_article">
               <img :src="`${article.img}`" class="card-img-top card_article-picture" alt="">
               <div class="card-body">
@@ -83,51 +83,47 @@ import Pagination from "../../ui/Pagination.vue"
 
 export default {
   name: "ArticlesShow",
-  created() {
-    // this.$store.dispatch("articles/getArticles")
-    this.$store.dispatch("articles/getTags")
-  },
   components: {
     Pagination
   },
   data() {
     return {
-      articles: {},
+      // articles: {},
       pagination_url: "http://127.0.0.1:8000/api/articles",
       search_input: "",
       filter_tag: ""
     }
   },
+  created() {
+    this.$store.dispatch("articles/getArticles")
+    this.$store.dispatch("articles/getTags")
+  },
+  methods: {
+    setPaginateArticles(articles) {
+      this.$store.commit("articles/setArticlesList", articles.data.data , { root: true })
+    },
+  
+    getArticlesBySearch() {
+      if (this.search_input !== '') {
+        this.isShowResultSatus = true
+        this.$store.dispatch("articles/getArticlesBySearch", this.search_input)
+      } else {
+        this.isShowResultSatus = false
+      }
+    },
+  },
   computed: {
-    // getArticles: {
-    //   get() {
-    //     return this.$store.state.articles.articlesList
-    //   }
-    // },
+    getArticles: {
+      get() {
+        return this.$store.state.articles.articlesList
+      }
+    },
     getTags: {
       get() {
         return this.$store.state.articles.tagList
       }
     }
   },
-  methods: {
-    setPaginateArticles(articles) {
-      this.articles = articles.data.data
-    },
-  
-    getArticlesBySearch() {
-      this.isShowResultSatus = true
-      if (this.search_input !== '') {
-        axios.get("/api/articles-search/" + `?searchInput=${this.search_input}`)
-          .then((response) => {
-            console.log(response.data.data)
-            this.articles = response.data.data})
-          .catch((error) => {
-            console.log(error);
-        });
-      }
-    },
-  }
 }
 </script>
 

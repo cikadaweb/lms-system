@@ -19947,49 +19947,45 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ArticlesShow",
-  created: function created() {
-    // this.$store.dispatch("articles/getArticles")
-    this.$store.dispatch("articles/getTags");
-  },
   components: {
     Pagination: _ui_Pagination_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
-      articles: {},
+      // articles: {},
       pagination_url: "http://127.0.0.1:8000/api/articles",
       search_input: "",
       filter_tag: ""
     };
   },
-  computed: {
-    // getArticles: {
-    //   get() {
-    //     return this.$store.state.articles.articlesList
-    //   }
-    // },
-    getTags: {
-      get: function get() {
-        return this.$store.state.articles.tagList;
-      }
-    }
+  created: function created() {
+    this.$store.dispatch("articles/getArticles");
+    this.$store.dispatch("articles/getTags");
   },
   methods: {
     setPaginateArticles: function setPaginateArticles(articles) {
-      this.articles = articles.data.data;
+      this.$store.commit("articles/setArticlesList", articles.data.data, {
+        root: true
+      });
     },
     getArticlesBySearch: function getArticlesBySearch() {
-      var _this = this;
-
-      this.isShowResultSatus = true;
-
       if (this.search_input !== '') {
-        _axios_axios_instance__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/articles-search/" + "?searchInput=".concat(this.search_input)).then(function (response) {
-          console.log(response.data.data);
-          _this.articles = response.data.data;
-        })["catch"](function (error) {
-          console.log(error);
-        });
+        this.isShowResultSatus = true;
+        this.$store.dispatch("articles/getArticlesBySearch", this.search_input);
+      } else {
+        this.isShowResultSatus = false;
+      }
+    }
+  },
+  computed: {
+    getArticles: {
+      get: function get() {
+        return this.$store.state.articles.articlesList;
+      }
+    },
+    getTags: {
+      get: function get() {
+        return this.$store.state.articles.tagList;
       }
     }
   }
@@ -22635,7 +22631,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* KEYED_FRAGMENT */
   ))], 544
   /* HYDRATE_EVENTS, NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.filter_tag]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.articles, function (article) {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.filter_tag]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.getArticles, function (article) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       "class": "col-xl-6 pb-3",
       key: article.id
@@ -23908,7 +23904,7 @@ var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
   "class": "tabel-label"
 }, "ID"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
   "class": "tabel-label"
-}, "Логин"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+}, "ФИО"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
   "class": "tabel-label"
 }, "Почта"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
   "class": "tabel-label"

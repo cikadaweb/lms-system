@@ -79,7 +79,7 @@
           <thead>
             <tr>
               <th class="tabel-label">ID</th>
-              <th class="tabel-label">Логин</th>
+              <th class="tabel-label">ФИО</th>
               <th class="tabel-label">Почта</th>
               <th class="tabel-label">Роль</th>
               <th class="tabel-label">Редактировать</th>
