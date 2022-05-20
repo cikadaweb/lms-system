@@ -1,14 +1,16 @@
 import axios from "axios";
+import router from "../../router/router";
 
 const state = {
     errors: [],
-    invalidCredentials: "",
+    // invalidCredentials: "",
 };
 
 const actions = {
     loginUser(ctx, user) {
         return new Promise((resolve) => {
             axios.get("/sanctum/csrf-cookie").then((response) => {
+                ctx.commit("clearErrors");
                 axios
                     .post("/login", {
                         email: user.email,
@@ -20,7 +22,7 @@ const actions = {
                                 "x-token",
                                 response.config.headers["X-XSRF-TOKEN"]
                             );
-                            window.location.replace("/");
+                            router.push("/");
                         }
                     })
                     .catch((error) => {
@@ -32,16 +34,16 @@ const actions = {
                             if (token) {
                                 localStorage.removeItem("x-token");
                             }
-                            window.location.replace("/user/login");
+                            router.push("/user/login");
                         }
                         if (
                             error.response.status === 422 ||
                             error.response.status === 500
                         ) {
-                            ctx.commit(
-                                "setInvalidCredentials",
-                                error.response.data.message
-                            );
+                            // ctx.commit(
+                            //     "setInvalidCredentials",
+                            //     error.response.data.message
+                            // );
                             ctx.commit("setErrors", error.response.data.errors);
                             console.log(error.response.data.errors);
                         }
@@ -66,7 +68,7 @@ const actions = {
                                 "x-token",
                                 response.config.headers["X-XSRF-TOKEN"]
                             );
-                            window.location.replace("/");
+                            router.push("/");
                         }
                     })
                     .catch((error) => {
@@ -74,10 +76,10 @@ const actions = {
                             error.response.status === 422 ||
                             error.response.status === 500
                         ) {
-                            ctx.commit(
-                                "setInvalidCredentials",
-                                error.response.data.message
-                            );
+                            // ctx.commit(
+                            //     "setInvalidCredentials",
+                            //     error.response.data.message
+                            // );
                             ctx.commit("setErrors", error.response.data.errors);
                             console.log(error.response.data.errors);
                         }
@@ -88,7 +90,7 @@ const actions = {
     logout() {
         axios.post("/logout").then((response) => {
             localStorage.removeItem("x-token");
-            window.location.replace("user/login");
+            router.push("/user/login");
         });
     },
 };
@@ -97,9 +99,12 @@ const mutations = {
     setErrors(state, errors) {
         state.errors = errors;
     },
-    setInvalidCredentials(state, invalidCredentials) {
-        state.invalidCredentials = invalidCredentials;
+    clearErrors(state) {
+        state.errors = [];
     },
+    // setInvalidCredentials(state, invalidCredentials) {
+    //     state.invalidCredentials = invalidCredentials;
+    // },
 };
 
 const getters = {

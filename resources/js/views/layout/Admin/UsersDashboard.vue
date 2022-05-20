@@ -63,16 +63,16 @@
 
       </div>
 
-      <!-- <div class="dashboard-panel-results" v-if="isShowResultSatus">
-        <div class="pt-3" v-if="articles.length > 0">
+      <div class="dashboard-panel-results" v-if="isShowResultSatus">
+        <div class="pt-3" v-if="getUsers.length > 0">
           <h2>Результаты по запросу: {{ search_input }}</h2>
-          <p class="lead">Всего найдено {{ articles.length }} постов.</p>
+          <p class="lead">Всего найдено {{ getUsers.length }} постов.</p>
         </div>
         <div class="pt-3" v-else >
           <h2>По запросу {{ search_input }} ничего не найдено.</h2>
           <a href="" @click.prevent="search_input = ''">Отобразить все посты</a>
         </div>
-      </div> -->
+      </div>
 
       <div class="dashboard-panel__table col-xl-12 pt-2">
         <table class="table table-success table-striped">
@@ -87,7 +87,7 @@
             </tr>
           </thead>
           <tbody >
-            <tr v-for="user in users" :key="user.id">
+            <tr v-for="user in getUsers" :key="user.id">
               <th>{{ user.id }}</th>
               <td>{{ user.name }}</td>
               <td>{{ user.email }}</td>
@@ -119,6 +119,8 @@
           @close="closePopup"
           title="Добавление пользователя" 
         >
+          <validation-errors v-if="userAddErrors" :errors="userAddErrors" class="pt-2"></validation-errors>
+
           <div class="d-flex flex-column">
             <my-input type="text" placeholder="ФИО пользователя" v-model="user.name"  />
             <my-input type="text" placeholder="Email почта" v-model="user.email" />
@@ -155,15 +157,16 @@
 
 
 <script>
-import axios from "../../../../axios/axios-instance";
 import Pagination from "../../ui/Pagination.vue"
 import MyWindow from "../../ui/MyWindow.vue";
+import ValidationErrors from "../../ui/ValidationErrors.vue";
 
 export default {
   name: "UsersDashboard",
   components: {
     MyWindow,
-    Pagination
+    Pagination,
+    ValidationErrors
   },
   data() {
     return {
@@ -177,15 +180,15 @@ export default {
           name: "",
         }
       },
-      users: {},
       pagination_url: "http://127.0.0.1:8000/api/users",
       search_input: "",
       filter_role: "",
-      status_user: ""
+      status_user: "",
+      isShowResultSatus: false
     }
   },
   created() {
-    // this.$store.dispatch("users/getUsers")
+    this.$store.dispatch("users/getUsers")
     this.$store.dispatch("users/getRoles")
   },
   methods: {
@@ -205,62 +208,47 @@ export default {
 
     addUser() {
       this.$store.dispatch("users/addUser", this.user)
-      // this.$store.dispatch("users/getUsers")
-      this.closePopup()
+      this.$store.dispatch("users/getUsers")
+      // this.closePopup()
+
     },
   
     deleteUser(id) {
-      axios.delete("/api/users/" + id)
-        .then((response) => {
-          this.$store.dispatch("users/getUsers")
-      })
+      this.$store.dispatch("users/deleteUser", id)
+      this.$store.dispatch("users/getUsers")
     },
 
     setPaginateUsers(users) {
-      this.users = users.data.data
+      this.$store.commit("users/setUsersList", users.data.data , { root: true })
     },
 
     getUsersBySearch() {
       if (this.search_input !== '') {
-        axios.get("/api/users-search/" + `?searchInput=${this.search_input}`)
-          .then((response) => {
-            console.log(response.data.data)
-            this.users = response.data.data
-            })
-          .catch((error) => {
-            console.log(error);
-        });
+        this.isShowResultSatus = true
+        this.$store.dispatch("users/getUsersBySearch", this.search_input)
+      } else {
+        this.isShowResultSatus = false
       }
     },
   
     filterUsersByStatus() {
-      axios.get("/api/users-all/")
-        .then((response) => {
-          console.log(response.data.data)
-
-          if (this.filter_role != "Admin" && this.filter_role != "Master" && this.filter_role != "User" ) {
-            this.users = response.data.data
-          } else {
-            let filterData = response.data.data.filter((user) => {
-              return user.role.name === this.filter_role
-            })
-            this.users = filterData
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-      });
+      this.$store.dispatch("users/filterUsersByStatus", this.filter_role)
     },
   },
   computed: {
-    // getUsers: {
-    //   get() {
-    //     return this.$store.state.users.userList
-    //   }
-    // },
+    getUsers: {
+      get() {
+        return this.$store.state.users.userList
+      }
+    },
     getRoles: {
       get() {
         return this.$store.state.users.roleList
+      }
+    },
+    userAddErrors: {
+      get() {
+        return this.$store.state.users.errors
       }
     },
   }
@@ -270,7 +258,7 @@ export default {
 
 
 <style lang="scss">
-// здесь стили для dashboard-panel
+// здесь глобальные стили для dashboard-panel
 
 .dashboard-panel-filter {
   background-color: white;

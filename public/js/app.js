@@ -19718,7 +19718,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     };
   },
-  mounted: function mounted() {
+  created: function created() {
     this.$store.dispatch("articles/getArticleData", this.$route.params.id);
   },
   computed: {
@@ -19842,7 +19842,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      articles: {},
       pagination_url: "http://127.0.0.1:8000/api/articles",
       search_input: "",
       filter_tag: "",
@@ -19850,55 +19849,49 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    // this.$store.dispatch("articles/getArticles")
+    this.$store.dispatch("articles/getArticles");
     this.$store.dispatch("articles/getTags");
   },
   methods: {
     deleteArticle: function deleteArticle(id) {
-      var _this = this;
-
-      _axios_axios_instance__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("/api/articles/" + id).then(function (response) {
-        _this.$store.dispatch("articles/getArticles");
-
-        _this.articles = _this.getArticles;
-      });
+      this.$store.dispatch("articles/deleteArticle", id);
+      this.$store.dispatch("articles/getArticles");
     },
     setPaginateArticles: function setPaginateArticles(articles) {
-      this.articles = articles.data.data;
+      this.$store.commit("articles/setArticlesList", articles.data.data, {
+        root: true
+      });
     },
     getArticlesBySearch: function getArticlesBySearch() {
-      var _this2 = this;
-
-      this.isShowResultSatus = true;
-
       if (this.search_input !== '') {
-        _axios_axios_instance__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/articles-search/" + "?searchInput=".concat(this.search_input)).then(function (response) {
-          console.log(response.data.data);
-          _this2.articles = response.data.data;
-        })["catch"](function (error) {
-          console.log(error);
-        });
+        this.isShowResultSatus = true;
+        this.$store.dispatch("articles/getArticlesBySearch", this.search_input);
+      } else {
+        this.isShowResultSatus = false;
       }
     },
-    filterArticlesByStatus: function filterArticlesByStatus() {
-      var _this3 = this;
-
-      _axios_axios_instance__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/articles-all/").then(function (response) {
-        var filterData = response.data.data.filter(function (article) {
-          return article.tags.label === _this3.filter_tag;
-        });
-        _this3.articles = filterData;
-      })["catch"](function (error) {
-        console.log(error);
-      });
+    // filterArticlesByStatus() {
+    //   axios.get("/api/articles-all/")
+    //     .then((response) => {
+    //       let filterData = response.data.data.filter((article) => {
+    //         return article.tags.label === this.filter_tag
+    //       })
+    //       this.articles = filterData
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //   });
+    // },
+    filterUsersByStatus: function filterUsersByStatus() {
+      this.$store.dispatch("articles/filterUsersByStatus", this.filter_tag);
     }
   },
   computed: {
-    // getArticles: {
-    //   get() {
-    //     return this.$store.state.articles.articlesList
-    //   }
-    // },
+    getArticles: {
+      get: function get() {
+        return this.$store.state.articles.articlesList;
+      }
+    },
     getTags: {
       get: function get() {
         return this.$store.state.articles.tagList;
@@ -20350,25 +20343,25 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
+    this.$store.dispatch("users/getUserData", this.$route.params.id);
     this.$store.dispatch("users/getRoles");
   },
   methods: {
-    updateUsers: function updateUsers() {
-      var _this = this;
-
-      _axios_axios_instance__WEBPACK_IMPORTED_MODULE_0__["default"].put("/api/users/" + this.$route.params.id, {
+    updateUserData: function updateUserData() {
+      this.$store.dispatch("users/updateUserData", {
+        id: this.$route.params.id,
         name: this.user.name,
         email: this.user.email,
         role: this.user.role.name
-      }).then(function (response) {
-        _this.$router.push({
-          name: "UsersMain"
-        }); // window.location.replace("/users/dashboard");
-
       });
     }
   },
   computed: {
+    getUserData: {
+      get: function get() {
+        return this.$store.state.users.currentUser;
+      }
+    },
     getRoles: {
       get: function get() {
         return this.$store.state.users.roleList;
@@ -20390,17 +20383,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _axios_axios_instance__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../axios/axios-instance */ "./resources/axios/axios-instance.js");
-/* harmony import */ var _ui_Pagination_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ui/Pagination.vue */ "./resources/js/views/ui/Pagination.vue");
-/* harmony import */ var _ui_MyWindow_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ui/MyWindow.vue */ "./resources/js/views/ui/MyWindow.vue");
+/* harmony import */ var _ui_Pagination_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../ui/Pagination.vue */ "./resources/js/views/ui/Pagination.vue");
+/* harmony import */ var _ui_MyWindow_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ui/MyWindow.vue */ "./resources/js/views/ui/MyWindow.vue");
+/* harmony import */ var _ui_ValidationErrors_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ui/ValidationErrors.vue */ "./resources/js/views/ui/ValidationErrors.vue");
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "UsersDashboard",
   components: {
-    MyWindow: _ui_MyWindow_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    Pagination: _ui_Pagination_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    MyWindow: _ui_MyWindow_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Pagination: _ui_Pagination_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    ValidationErrors: _ui_ValidationErrors_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
     return {
@@ -20414,15 +20408,15 @@ __webpack_require__.r(__webpack_exports__);
           name: ""
         }
       },
-      users: {},
       pagination_url: "http://127.0.0.1:8000/api/users",
       search_input: "",
       filter_role: "",
-      status_user: ""
+      status_user: "",
+      isShowResultSatus: false
     };
   },
   created: function created() {
-    // this.$store.dispatch("users/getUsers")
+    this.$store.dispatch("users/getUsers");
     this.$store.dispatch("users/getRoles");
   },
   methods: {
@@ -20438,60 +20432,44 @@ __webpack_require__.r(__webpack_exports__);
       this.isPopupVisible = false;
     },
     addUser: function addUser() {
-      this.$store.dispatch("users/addUser", this.user); // this.$store.dispatch("users/getUsers")
-
-      this.closePopup();
+      this.$store.dispatch("users/addUser", this.user);
+      this.$store.dispatch("users/getUsers"); // this.closePopup()
     },
     deleteUser: function deleteUser(id) {
-      var _this = this;
-
-      _axios_axios_instance__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("/api/users/" + id).then(function (response) {
-        _this.$store.dispatch("users/getUsers");
-      });
+      this.$store.dispatch("users/deleteUser", id);
+      this.$store.dispatch("users/getUsers");
     },
     setPaginateUsers: function setPaginateUsers(users) {
-      this.users = users.data.data;
+      this.$store.commit("users/setUsersList", users.data.data, {
+        root: true
+      });
     },
     getUsersBySearch: function getUsersBySearch() {
-      var _this2 = this;
-
       if (this.search_input !== '') {
-        _axios_axios_instance__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/users-search/" + "?searchInput=".concat(this.search_input)).then(function (response) {
-          console.log(response.data.data);
-          _this2.users = response.data.data;
-        })["catch"](function (error) {
-          console.log(error);
-        });
+        this.isShowResultSatus = true;
+        this.$store.dispatch("users/getUsersBySearch", this.search_input);
+      } else {
+        this.isShowResultSatus = false;
       }
     },
     filterUsersByStatus: function filterUsersByStatus() {
-      var _this3 = this;
-
-      _axios_axios_instance__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/users-all/").then(function (response) {
-        console.log(response.data.data);
-
-        if (_this3.filter_role != "Admin" && _this3.filter_role != "Master" && _this3.filter_role != "User") {
-          _this3.users = response.data.data;
-        } else {
-          var filterData = response.data.data.filter(function (user) {
-            return user.role.name === _this3.filter_role;
-          });
-          _this3.users = filterData;
-        }
-      })["catch"](function (error) {
-        console.log(error);
-      });
+      this.$store.dispatch("users/filterUsersByStatus", this.filter_role);
     }
   },
   computed: {
-    // getUsers: {
-    //   get() {
-    //     return this.$store.state.users.userList
-    //   }
-    // },
+    getUsers: {
+      get: function get() {
+        return this.$store.state.users.userList;
+      }
+    },
     getRoles: {
       get: function get() {
         return this.$store.state.users.roleList;
+      }
+    },
+    userAddErrors: {
+      get: function get() {
+        return this.$store.state.users.errors;
       }
     }
   }
@@ -21187,43 +21165,22 @@ var _hoisted_1 = {
 var _hoisted_2 = {
   "class": "row justify-content-md-center"
 };
-
-var _hoisted_3 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "alert__text"
-  }, " Неверно введенные данные! ", -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_4 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-    "class": "alert__btn",
-    onclick: "this.parentElement.style.display='none';"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-    "class": "bi bi-x-circle"
-  })], -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_5 = [_hoisted_3, _hoisted_4];
-var _hoisted_6 = {
+var _hoisted_3 = {
   "class": "login-page"
 };
-var _hoisted_7 = {
+var _hoisted_4 = {
   "class": "form"
 };
 
-var _hoisted_8 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_5 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Авторизация", -1
   /* HOISTED */
   );
 });
 
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Войти ");
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Войти ");
 
-var _hoisted_10 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_7 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
     "class": "bi bi-box-arrow-in-right"
   }, null, -1
@@ -21231,7 +21188,7 @@ var _hoisted_10 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_11 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_8 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
     "class": "message"
   }, "Еще не регистрироваилсь?", -1
@@ -21239,7 +21196,7 @@ var _hoisted_11 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_12 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_9 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     href: "#"
   }, "Зарегистрироваться", -1
@@ -21256,21 +21213,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_ctx.invalidCredentials ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"alert alert-danger alert-block\" role=\"alert\"\r\n       v-if=\"invalidCredentials\"\r\n       :style=\"{\r\n         display: invalidCredentials ? 'flex' : 'none'\r\n       }\"  \r\n       >\r\n        <div class=\"alert__text\">\r\n          Неверно введенные данные!\r\n        </div>\r\n        <div class=\"alert__btn\" onclick=\"this.parentElement.style.display='none';\">\r\n          <i class=\"bi bi-x-circle\"></i>\r\n        </div>\r\n      </div> "), _ctx.validationErrors ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_validation_errors, {
     key: 0,
-    "class": "alert alert-danger alert-block",
-    role: "alert",
-    style: (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeStyle)({
-      display: _ctx.invalidCredentials ? 'flex' : 'none'
-    })
-  }, _hoisted_5, 4
-  /* STYLE */
-  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.validationErrors ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_validation_errors, {
-    key: 1,
     errors: _ctx.validationErrors
   }, null, 8
   /* PROPS */
-  , ["errors"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_my_input, {
+  , ["errors"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_my_input, {
     type: "email",
     placeholder: "email address",
     modelValue: $data.user.email,
@@ -21294,7 +21242,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($options.login, ["prevent"])
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_9, _hoisted_10];
+      return [_hoisted_6, _hoisted_7];
     }),
     _: 1
     /* STABLE */
@@ -21305,7 +21253,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     to: "/user/register"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_11, _hoisted_12];
+      return [_hoisted_8, _hoisted_9];
     }),
     _: 1
     /* STABLE */
@@ -22229,7 +22177,6 @@ var _hoisted_26 = {
   "class": "dashboard-panel-table col-xl-12"
 };
 var _hoisted_27 = {
-  key: 0,
   "class": "table table-light table-striped"
 };
 
@@ -22294,7 +22241,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $data.filter_tag = $event;
     }),
     onChange: _cache[4] || (_cache[4] = function () {
-      return $options.filterArticlesByStatus && $options.filterArticlesByStatus.apply($options, arguments);
+      return _ctx.filterArticlesByStatus && _ctx.filterArticlesByStatus.apply(_ctx, arguments);
     })
   }, [_hoisted_11, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.getTags, function (tag) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
@@ -22352,9 +22299,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  })])]), $data.isShowResultSatus ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_22, [$data.articles.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Результаты по запросу: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.search_input), 1
+  })])]), $data.isShowResultSatus ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_22, [$options.getArticles.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Результаты по запросу: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.search_input), 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_24, "Всего найдено " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.articles.length) + " постов.", 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_24, "Всего найдено " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getArticles.length) + " постов.", 1
   /* TEXT */
   )])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "По запросу " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.search_input) + " ничего не найдено.", 1
   /* TEXT */
@@ -22363,7 +22310,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[5] || (_cache[5] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
       return $data.search_input = '';
     }, ["prevent"]))
-  }, "Отобразить все посты")]))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [$data.articles.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("table", _hoisted_27, [_hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.articles, function (article) {
+  }, "Отобразить все посты")]))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_27, [_hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.getArticles, function (article) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", {
       key: article.id
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(article.id), 1
@@ -22450,7 +22397,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , ["onClick"])])]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [$data.search_input == '' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Pagination, {
+  ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, [$data.search_input == '' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Pagination, {
     key: 0,
     pagination_url: $data.pagination_url,
     onSetPaginateItems: $options.setPaginateArticles
@@ -23704,41 +23651,30 @@ var _hoisted_2 = {
   "class": "row justify-content-md-center"
 };
 var _hoisted_3 = {
-  "class": "user-page"
+  "class": "dashboard-modal__user-edit"
 };
 var _hoisted_4 = {
-  "class": "form"
+  "class": "d-flex"
 };
-
-var _hoisted_5 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", null, "Редактирование пользователя", -1
-  /* HOISTED */
-  );
-});
+var _hoisted_5 = {
+  "class": "d-flex"
+};
 
 var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "for": "",
-    "class": "form-label"
-  }, "Роль пользователя:", -1
-  /* HOISTED */
-  );
-});
-
-var _hoisted_7 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
-    disabled: "",
+    value: "",
     selected: ""
-  }, "Выберите роль", -1
+  }, "Выберите роль пользователя", -1
   /* HOISTED */
   );
 });
 
+var _hoisted_7 = ["value"];
 var _hoisted_8 = {
-  "class": "form-buttons"
+  "class": "popup-buttons d-flex justify-content-between mt-3"
 };
 
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Обновить");
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Обновить ");
 
 var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Отменить");
 
@@ -23749,42 +23685,55 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_my_input, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+    onSubmit: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+      return $options.updateUserData && $options.updateUserData.apply($options, arguments);
+    }, ["prevent"])),
+    "class": "user-edit-form d-flex flex-column"
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", null, "Редактирование пользователя " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.$route.params.id), 1
+  /* TEXT */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_my_input, {
     type: "text",
-    placeholder: "username",
+    placeholder: "ФИО пользователя",
     modelValue: $data.user.name,
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $data.user.name = $event;
     })
   }, null, 8
   /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_my_input, {
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_4, "Текущее значение: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getUserData.name), 1
+  /* TEXT */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_my_input, {
     type: "text",
-    placeholder: "email",
+    placeholder: "Email почта",
     modelValue: $data.user.email,
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $data.user.email = $event;
     })
   }, null, 8
   /* PROPS */
-  , ["modelValue"]), _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
-    "class": "form-select mb-3",
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_5, "Текущее значение: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getUserData.email), 1
+  /* TEXT */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+    "class": "form-select d-block mt-3",
+    "aria-label": "Роль",
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
       return $data.user.role.name = $event;
     })
-  }, [_hoisted_7, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.getRoles, function (role) {
+  }, [_hoisted_6, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.getRoles, function (role) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
-      key: role.id
-    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(role.name), 1
-    /* TEXT */
-    );
+      key: role.id,
+      value: role.name
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(role.name), 9
+    /* TEXT, PROPS */
+    , _hoisted_7);
   }), 128
   /* KEYED_FRAGMENT */
   ))], 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.user.role.name]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_my_button, {
-    "class": "btn-success",
-    onClick: $options.updateUsers
+    type: "submit",
+    "class": "btn-success"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_9];
@@ -23792,9 +23741,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  }, 8
-  /* PROPS */
-  , ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: '/users/dashboard'
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -23812,7 +23759,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  })])])])])]);
+  })])], 32
+  /* HYDRATE_EVENTS */
+  )])])]);
 }
 
 /***/ }),
@@ -23934,13 +23883,28 @@ var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 var _hoisted_20 = {
-  "class": "dashboard-panel__table col-xl-12 pt-2"
+  key: 0,
+  "class": "dashboard-panel-results"
 };
 var _hoisted_21 = {
+  key: 0,
+  "class": "pt-3"
+};
+var _hoisted_22 = {
+  "class": "lead"
+};
+var _hoisted_23 = {
+  key: 1,
+  "class": "pt-3"
+};
+var _hoisted_24 = {
+  "class": "dashboard-panel__table col-xl-12 pt-2"
+};
+var _hoisted_25 = {
   "class": "table table-success table-striped"
 };
 
-var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
   "class": "tabel-label"
 }, "ID"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
   "class": "tabel-label"
@@ -23956,54 +23920,54 @@ var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_23 = {
+var _hoisted_27 = {
   key: 0
 };
-var _hoisted_24 = {
+var _hoisted_28 = {
   key: 1
 };
 
-var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "bi bi-pencil-square"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Редактировать");
+var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Редактировать");
 
-var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "bi bi-trash"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Удалить");
+var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Удалить");
 
-var _hoisted_29 = {
+var _hoisted_33 = {
   "class": "col-xl-12 d-flex justify-content-center"
 };
-var _hoisted_30 = {
+var _hoisted_34 = {
   "class": "dashboard-modal col-xl-12 pt-3"
 };
-var _hoisted_31 = {
+var _hoisted_35 = {
   "class": "d-flex flex-column"
 };
 
-var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+var _hoisted_36 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
   value: "",
   selected: ""
 }, "Роль пользователя", -1
 /* HOISTED */
 );
 
-var _hoisted_33 = ["value"];
-var _hoisted_34 = {
+var _hoisted_37 = ["value"];
+var _hoisted_38 = {
   "class": "popup-buttons d-flex justify-content-between mt-3"
 };
 
-var _hoisted_35 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Добавить");
+var _hoisted_39 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Добавить");
 
-var _hoisted_36 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Отменить");
+var _hoisted_40 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Отменить");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_my_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("my-button");
@@ -24011,6 +23975,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
 
   var _component_Pagination = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Pagination");
+
+  var _component_validation_errors = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("validation-errors");
 
   var _component_my_input = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("my-input");
 
@@ -24074,7 +24040,18 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"dashboard-panel-results\" v-if=\"isShowResultSatus\">\r\n        <div class=\"pt-3\" v-if=\"articles.length > 0\">\r\n          <h2>Результаты по запросу: {{ search_input }}</h2>\r\n          <p class=\"lead\">Всего найдено {{ articles.length }} постов.</p>\r\n        </div>\r\n        <div class=\"pt-3\" v-else >\r\n          <h2>По запросу {{ search_input }} ничего не найдено.</h2>\r\n          <a href=\"\" @click.prevent=\"search_input = ''\">Отобразить все посты</a>\r\n        </div>\r\n      </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_21, [_hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.users, function (user) {
+  })])]), $data.isShowResultSatus ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_20, [$options.getUsers.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Результаты по запросу: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.search_input), 1
+  /* TEXT */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_22, "Всего найдено " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getUsers.length) + " постов.", 1
+  /* TEXT */
+  )])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "По запросу " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.search_input) + " ничего не найдено.", 1
+  /* TEXT */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+    href: "",
+    onClick: _cache[5] || (_cache[5] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
+      return $data.search_input = '';
+    }, ["prevent"]))
+  }, "Отобразить все посты")]))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_25, [_hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.getUsers, function (user) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", {
       key: user.id
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user.id), 1
@@ -24083,9 +24060,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user.email), 1
     /* TEXT */
-    ), user.role ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("td", _hoisted_23, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user.role.name), 1
+    ), user.role ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("td", _hoisted_27, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(user.role.name), 1
     /* TEXT */
-    )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("td", _hoisted_24, "N/A")), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    )) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("td", _hoisted_28, "N/A")), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
       to: {
         name: 'UserEdit',
         params: {
@@ -24098,7 +24075,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           "class": "btn-outline-success"
         }, {
           "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-            return [_hoisted_25, _hoisted_26];
+            return [_hoisted_29, _hoisted_30];
           }),
           _: 1
           /* STABLE */
@@ -24117,7 +24094,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }
     }, {
       "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-        return [_hoisted_27, _hoisted_28];
+        return [_hoisted_31, _hoisted_32];
       }),
       _: 2
       /* DYNAMIC */
@@ -24127,23 +24104,29 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , ["onClick"])])]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [$data.search_input == '' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Pagination, {
+  ))])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [$data.search_input == '' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_Pagination, {
     key: 0,
     pagination_url: $data.pagination_url,
     onSetPaginateItems: $options.setPaginateUsers
   }, null, 8
   /* PROPS */
-  , ["pagination_url", "onSetPaginateItems"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [$data.isPopupVisible ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_my_window, {
+  , ["pagination_url", "onSetPaginateItems"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_34, [$data.isPopupVisible ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_my_window, {
     key: 0,
     onClose: $options.closePopup,
     title: "Добавление пользователя"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_my_input, {
+      return [$options.userAddErrors ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_validation_errors, {
+        key: 0,
+        errors: $options.userAddErrors,
+        "class": "pt-2"
+      }, null, 8
+      /* PROPS */
+      , ["errors"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_my_input, {
         type: "text",
         placeholder: "ФИО пользователя",
         modelValue: $data.user.name,
-        "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
+        "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
           return $data.user.name = $event;
         })
       }, null, 8
@@ -24152,7 +24135,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         type: "text",
         placeholder: "Email почта",
         modelValue: $data.user.email,
-        "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
+        "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
           return $data.user.email = $event;
         })
       }, null, 8
@@ -24161,7 +24144,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         type: "password",
         placeholder: "Пароль",
         modelValue: $data.user.password,
-        "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
+        "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
           return $data.user.password = $event;
         })
       }, null, 8
@@ -24170,7 +24153,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         type: "password",
         placeholder: "Подтверждение пароля",
         modelValue: $data.user.password_confirmation,
-        "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
+        "onUpdate:modelValue": _cache[9] || (_cache[9] = function ($event) {
           return $data.user.password_confirmation = $event;
         })
       }, null, 8
@@ -24178,26 +24161,26 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
         "class": "form-select d-block mt-3",
         "aria-label": "Роль",
-        "onUpdate:modelValue": _cache[9] || (_cache[9] = function ($event) {
+        "onUpdate:modelValue": _cache[10] || (_cache[10] = function ($event) {
           return $data.user.role.name = $event;
         })
-      }, [_hoisted_32, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.getRoles, function (role) {
+      }, [_hoisted_36, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.getRoles, function (role) {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
           key: role.id,
           value: role.name
         }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(role.name), 9
         /* TEXT, PROPS */
-        , _hoisted_33);
+        , _hoisted_37);
       }), 128
       /* KEYED_FRAGMENT */
       ))], 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.user.role.name]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_my_button, {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.user.role.name]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_38, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_my_button, {
         "class": "btn-success",
         onClick: $options.addUser
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_35];
+          return [_hoisted_39];
         }),
         _: 1
         /* STABLE */
@@ -24209,7 +24192,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: $options.popup
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_36];
+          return [_hoisted_40];
         }),
         _: 1
         /* STABLE */
@@ -26342,7 +26325,9 @@ var state = {
 var actions = {
   getArticles: function getArticles(ctx) {
     _axios_axios_instance__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/articles").then(function (response) {
-      ctx.commit("setArticlesList", response.data.data); // console.log("Получим наши статьи: ", response);
+      // отладка
+      ctx.commit("setArticlesList", response.data.data);
+      console.log("Статьи: ", response.data.data);
     })["catch"](function (error) {
       console.log(error);
     });
@@ -26353,20 +26338,56 @@ var actions = {
       ctx.commit("setArticleData", response.data.data);
       console.log(response.data.data);
     })["catch"](function (error) {
-      // отладка
       console.log(error);
     });
   },
-  getTags: function getTags(ctx) {
-    _axios_axios_instance__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/article-tags").then(function (response) {
-      // отладка
-      ctx.commit("setTagList", response.data); // console.log(response.data);
+  deleteArticle: function deleteArticle(_ref, id) {
+    _objectDestructuringEmpty(_ref);
+
+    _axios_axios_instance__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("/api/articles/" + id)["catch"](function (error) {
+      console.log(error.response);
+    });
+  },
+  getArticlesBySearch: function getArticlesBySearch(ctx, search_input) {
+    _axios_axios_instance__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/articles-search/" + "?searchInput=".concat(search_input)).then(function (response) {
+      console.log(response.data.data);
+      ctx.commit("setArticlesList", response.data.data);
     })["catch"](function (error) {
       console.log(error);
     });
   },
-  addArticle: function addArticle(_ref, article) {
-    _objectDestructuringEmpty(_ref);
+  // filterArticlesByTag(ctx, filter_role) {
+  //     axios
+  //         .get("/api/articles-all/")
+  //         .then((response) => {
+  //             if (
+  //                 filter_role != "Admin" &&
+  //                 filter_role != "Master" &&
+  //                 filter_role != "User"
+  //             ) {
+  //                 ctx.commit("setUsersList", response.data.data);
+  //             } else {
+  //                 let filterData = response.data.data.filter((user) => {
+  //                     return user.role.name === filter_role;
+  //                 });
+  //                 ctx.commit("setUsersList", filterData);
+  //             }
+  //         })
+  //         .catch((error) => {
+  //             console.log(error);
+  //         });
+  // },
+  getTags: function getTags(ctx) {
+    _axios_axios_instance__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/article-tags").then(function (response) {
+      // отладка
+      ctx.commit("setTagList", response.data);
+      console.log("Теги: ", response.data);
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  },
+  addArticle: function addArticle(_ref2, article) {
+    _objectDestructuringEmpty(_ref2);
 
     _axios_axios_instance__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/articles", {
       title: article.title,
@@ -26384,8 +26405,8 @@ var actions = {
       console.log(error.response);
     });
   },
-  changeArticle: function changeArticle(_ref2, article, id) {
-    _objectDestructuringEmpty(_ref2);
+  changeArticle: function changeArticle(_ref3, article, id) {
+    _objectDestructuringEmpty(_ref3);
 
     _axios_axios_instance__WEBPACK_IMPORTED_MODULE_0__["default"].put("/api/articles/" + article.id, {
       title: article.title,
@@ -26500,22 +26521,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _router_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../router/router */ "./resources/js/router/router.js");
+
 
 var state = {
-  errors: [],
-  invalidCredentials: ""
+  errors: [] // invalidCredentials: "",
+
 };
 var actions = {
   loginUser: function loginUser(ctx, user) {
     return new Promise(function (resolve) {
       axios__WEBPACK_IMPORTED_MODULE_0___default().get("/sanctum/csrf-cookie").then(function (response) {
+        ctx.commit("clearErrors");
         axios__WEBPACK_IMPORTED_MODULE_0___default().post("/login", {
           email: user.email,
           password: user.password
         }).then(function (response) {
           if (response.data) {
             localStorage.setItem("x-token", response.config.headers["X-XSRF-TOKEN"]);
-            window.location.replace("/");
+            _router_router__WEBPACK_IMPORTED_MODULE_1__["default"].push("/");
           }
         })["catch"](function (error) {
           if (error.response.status === 401 || error.response.status === 419) {
@@ -26525,11 +26549,14 @@ var actions = {
               localStorage.removeItem("x-token");
             }
 
-            window.location.replace("/user/login");
+            _router_router__WEBPACK_IMPORTED_MODULE_1__["default"].push("/user/login");
           }
 
           if (error.response.status === 422 || error.response.status === 500) {
-            ctx.commit("setInvalidCredentials", error.response.data.message);
+            // ctx.commit(
+            //     "setInvalidCredentials",
+            //     error.response.data.message
+            // );
             ctx.commit("setErrors", error.response.data.errors);
             console.log(error.response.data.errors);
           }
@@ -26548,11 +26575,14 @@ var actions = {
         }).then(function (response) {
           if (response.data) {
             localStorage.setItem("x-token", response.config.headers["X-XSRF-TOKEN"]);
-            window.location.replace("/");
+            _router_router__WEBPACK_IMPORTED_MODULE_1__["default"].push("/");
           }
         })["catch"](function (error) {
           if (error.response.status === 422 || error.response.status === 500) {
-            ctx.commit("setInvalidCredentials", error.response.data.message);
+            // ctx.commit(
+            //     "setInvalidCredentials",
+            //     error.response.data.message
+            // );
             ctx.commit("setErrors", error.response.data.errors);
             console.log(error.response.data.errors);
           }
@@ -26563,7 +26593,7 @@ var actions = {
   logout: function logout() {
     axios__WEBPACK_IMPORTED_MODULE_0___default().post("/logout").then(function (response) {
       localStorage.removeItem("x-token");
-      window.location.replace("user/login");
+      _router_router__WEBPACK_IMPORTED_MODULE_1__["default"].push("/user/login");
     });
   }
 };
@@ -26571,9 +26601,12 @@ var mutations = {
   setErrors: function setErrors(state, errors) {
     state.errors = errors;
   },
-  setInvalidCredentials: function setInvalidCredentials(state, invalidCredentials) {
-    state.invalidCredentials = invalidCredentials;
-  }
+  clearErrors: function clearErrors(state) {
+    state.errors = [];
+  } // setInvalidCredentials(state, invalidCredentials) {
+  //     state.invalidCredentials = invalidCredentials;
+  // },
+
 };
 var getters = {
   errors: function errors(state) {
@@ -26802,27 +26835,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _axios_axios_instance__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../axios/axios-instance */ "./resources/axios/axios-instance.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _axios_axios_instance__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../axios/axios-instance */ "./resources/axios/axios-instance.js");
+/* harmony import */ var _router_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../router/router */ "./resources/js/router/router.js");
 function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure undefined"); }
 
 
+
+
 var state = {
+  currentUser: {},
   userList: [],
   roleList: [],
-  permissionsList: []
+  permissionsList: [],
+  errors: []
 };
 var actions = {
   getUsers: function getUsers(ctx) {
-    _axios_axios_instance__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/users").then(function (response) {
-      ctx.commit("setUserList", response.data.data);
+    _axios_axios_instance__WEBPACK_IMPORTED_MODULE_1__["default"].get("/api/users").then(function (response) {
+      ctx.commit("setUsersList", response.data.data);
     })["catch"](function (error) {
       console.log(error);
     });
   },
-  addUser: function addUser(_ref, user) {
-    _objectDestructuringEmpty(_ref);
-
-    _axios_axios_instance__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/users", {
+  addUser: function addUser(ctx, user) {
+    ctx.commit("clearErrors");
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post("/api/users", {
       name: user.name,
       email: user.email,
       role: user.role.name,
@@ -26830,72 +26869,139 @@ var actions = {
       password_confirmation: user.password_confirmation
     }).then(function (response) {
       if (response.data) {
-        // window.location.replace("/users/dashboard");
         console.log(response);
       }
     })["catch"](function (error) {
+      if (error.response.status === 422 || error.response.status === 500) {
+        ctx.commit("setErrors", error.response.data.errors);
+        console.log(error.response.data.errors);
+      }
+    });
+  },
+  getUserData: function getUserData(ctx, id) {
+    _axios_axios_instance__WEBPACK_IMPORTED_MODULE_1__["default"].get("/api/users/" + id).then(function (response) {
+      ctx.commit("setUserData", response.data.data);
+      console.log(response);
+    })["catch"](function (error) {
+      // отладка
+      console.log(error);
+    });
+  },
+  updateUserData: function updateUserData(ctx, userData) {
+    _axios_axios_instance__WEBPACK_IMPORTED_MODULE_1__["default"].put("/api/users/" + userData.id, {
+      id: userData.id,
+      name: userData.name,
+      email: userData.email,
+      role: userData.role
+    }).then(function (response) {
+      _router_router__WEBPACK_IMPORTED_MODULE_2__["default"].push("/users/dashboard");
+    });
+  },
+  deleteUser: function deleteUser(_ref, id) {
+    _objectDestructuringEmpty(_ref);
+
+    _axios_axios_instance__WEBPACK_IMPORTED_MODULE_1__["default"]["delete"]("/api/users/" + id)["catch"](function (error) {
       console.log(error.response);
     });
   },
+  getUsersBySearch: function getUsersBySearch(ctx, search_input) {
+    _axios_axios_instance__WEBPACK_IMPORTED_MODULE_1__["default"].get("/api/users-search/" + "?searchInput=".concat(search_input)).then(function (response) {
+      console.log(response.data.data);
+      ctx.commit("setUsersList", response.data.data);
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  },
+  filterUsersByStatus: function filterUsersByStatus(ctx, filter_role) {
+    _axios_axios_instance__WEBPACK_IMPORTED_MODULE_1__["default"].get("/api/users-all/").then(function (response) {
+      if (filter_role != "Admin" && filter_role != "Master" && filter_role != "User") {
+        ctx.commit("setUsersList", response.data.data);
+      } else {
+        var filterData = response.data.data.filter(function (user) {
+          return user.role.name === filter_role;
+        });
+        ctx.commit("setUsersList", filterData);
+      }
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  },
   getRoles: function getRoles(ctx) {
-    _axios_axios_instance__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/roles").then(function (response) {
+    _axios_axios_instance__WEBPACK_IMPORTED_MODULE_1__["default"].get("/api/roles").then(function (response) {
       ctx.commit("setRoleList", response.data.data);
       console.log(response);
     })["catch"](function (error) {
       console.log(error);
     });
-  },
-  addRole: function addRole(_ref2, role) {
-    _objectDestructuringEmpty(_ref2);
+  } // addRole({}, role) {
+  //     axios
+  //         .post("/api/roles", {
+  //             name: role.name,
+  //         })
+  //         .then((response) => {
+  //             if (response.data) {
+  //                 window.location.replace("/user/management");
+  //                 console.log(response);
+  //             }
+  //         })
+  //         .catch((error) => {
+  //             console.log(error.response);
+  //         });
+  // },
+  // getPermissions(ctx) {
+  //     axios
+  //         .get("/api/permissions")
+  //         .then((response) => {
+  //             ctx.commit("setPermissionsList", response.data.data);
+  //             console.log(response);
+  //         })
+  //         .catch((error) => {
+  //             console.log(error);
+  //         });
+  // },
+  // addPermission({}, permission) {
+  //     axios
+  //         .post("/api/permissions", {
+  //             name: permission.name,
+  //         })
+  //         .then((response) => {
+  //             if (response.data) {
+  //                 window.location.replace("/user/permissions");
+  //                 console.log(response);
+  //             }
+  //         })
+  //         .catch((error) => {
+  //             console.log(error.response);
+  //         });
+  // },
 
-    _axios_axios_instance__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/roles", {
-      name: role.name
-    }).then(function (response) {
-      if (response.data) {
-        window.location.replace("/user/management");
-        console.log(response);
-      }
-    })["catch"](function (error) {
-      console.log(error.response);
-    });
-  },
-  getPermissions: function getPermissions(ctx) {
-    _axios_axios_instance__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/permissions").then(function (response) {
-      ctx.commit("setPermissionsList", response.data.data);
-      console.log(response);
-    })["catch"](function (error) {
-      console.log(error);
-    });
-  },
-  addPermission: function addPermission(_ref3, permission) {
-    _objectDestructuringEmpty(_ref3);
-
-    _axios_axios_instance__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/permissions", {
-      name: permission.name
-    }).then(function (response) {
-      if (response.data) {
-        window.location.replace("/user/permissions");
-        console.log(response);
-      }
-    })["catch"](function (error) {
-      console.log(error.response);
-    });
-  }
 };
 var mutations = {
-  setUserList: function setUserList(state, payload) {
+  setUsersList: function setUsersList(state, payload) {
     state.userList = payload;
+  },
+  setUserData: function setUserData(state, payload) {
+    state.currentUser = payload;
   },
   setRoleList: function setRoleList(state, payload) {
     state.roleList = payload;
   },
   setPermissionsList: function setPermissionsList(state, payload) {
     state.permissionsList = payload;
+  },
+  setErrors: function setErrors(state, errors) {
+    state.errors = errors;
+  },
+  clearErrors: function clearErrors(state) {
+    state.errors = [];
   }
 };
 var getters = {
   userList: function userList(state) {
     return state.userList;
+  },
+  currentUser: function currentUser(state) {
+    return state.currentUser;
   },
   roleList: function roleList(state) {
     return state.userList;
@@ -43399,7 +43505,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".user-page[data-v-32773c8b] {\n  width: 450px;\n  padding: 8% 0 0;\n  margin: auto;\n  display: flex;\n}\n.form[data-v-32773c8b] {\n  position: relative;\n  background-size: cover;\n  background-position: center;\n  max-width: 450px;\n  border-radius: 15px;\n  margin: 0 auto 100px;\n  padding: 45px;\n  text-align: center;\n  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5), 0 5px 0 rgba(0, 0, 0, 0.2);\n}\n.form input[data-v-32773c8b] {\n  font-family: \"Roboto\", sans-serif;\n  outline: 0;\n  background: #f2f2f2;\n  width: 100%;\n  border: 0;\n  margin: 0 0 15px;\n  box-sizing: border-box;\n  font-size: 14px;\n}\n.form .message[data-v-32773c8b] {\n  margin: 15px;\n  color: #b3b3b3;\n  font-size: 12px;\n}\n.form-label[data-v-32773c8b] {\n  display: flex;\n}\n.form-buttons[data-v-32773c8b] {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".user-edit-form[data-v-32773c8b] {\n  position: relative;\n  background-size: cover;\n  background-position: center;\n  max-width: 600px;\n  border-radius: 15px;\n  margin: 100px auto 100px;\n  padding: 45px;\n  text-align: center;\n  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5), 0 5px 0 rgba(0, 0, 0, 0.2);\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -43687,7 +43793,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".popup[data-v-23655370] {\n  padding: 50px;\n  position: fixed;\n  z-index: 1;\n  top: 170px;\n  left: 720px;\n  width: 500px;\n  background-color: #82acff;\n  border-radius: 15px;\n  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5), 0 5px 0 rgba(0, 0, 0, 0.2);\n}\n.popup__btn[data-v-23655370] {\n  padding: 10px;\n}\n.popup__btn[data-v-23655370]:hover {\n  color: red;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".popup[data-v-23655370] {\n  padding: 50px;\n  position: fixed;\n  z-index: 1;\n  top: 20px;\n  left: 449px;\n  width: 671px;\n  background-color: #82acff;\n  border-radius: 15px;\n  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5), 0 5px 0 rgba(0, 0, 0, 0.2);\n}\n.popup__btn[data-v-23655370] {\n  padding: 10px;\n}\n.popup__btn[data-v-23655370]:hover {\n  color: red;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

@@ -34,13 +34,14 @@ export default {
 
 
 <style scoped lang="scss">
+
 .popup {
     padding: 50px;
     position: fixed;
     z-index: 1;
-    top: 170px;
-    left: 720px;
-    width: 500px;
+    top: 20px;
+    left: 449px;
+    width: 671px;
     background-color: #82acff;
     border-radius: 15px;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5), 0 5px 0 rgba(0, 0, 0, 0.2);

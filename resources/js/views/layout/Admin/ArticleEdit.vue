@@ -68,7 +68,7 @@ export default {
       }
     }
   },
-  mounted() {
+  created() {
      this.$store.dispatch("articles/getArticleData", this.$route.params.id)
   },
 

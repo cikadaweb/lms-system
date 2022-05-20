@@ -57,4 +57,9 @@ class User extends Authenticatable
     {
         return $query->where("name", "like", "%".$name."%")->orderBy('created_at', 'desc')->paginate($numbers);
     }
+
+    public function scopeFindById($query, $id)
+    {
+        return $query->where('id', $id)->firstOrFail();
+    }
 }

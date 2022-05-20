@@ -10,6 +10,9 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\DB;
+use Validator;
+
 class UserController extends Controller
 {
 
@@ -64,7 +67,15 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::findById($id);
+        if (!$user) {
+            return response()->json([
+                "status" => false,
+                "message" => "User not found"
+            ])->setStatusCode(404);
+        }
+
+        return new UserResource($user);
     }
 
     /**
@@ -98,6 +109,34 @@ class UserController extends Controller
         }
 
         return response(['message'=>'User Updated', 'user'=>$user]);
+
+        // refactoring
+        // $validator = Validator::make(
+        //     $request->all(),
+        //     [
+        //         "id" => ["required"],
+        //         "name" => ["required"],
+        //         "email" => ["required"],
+        //         "role" => ["required"],
+        //     ]
+        //     );
+        // if ($validator->fails()) {
+        //     return [
+        //         "status" => false,
+        //         "errors" => $validator->messages()
+        //     ];
+        // }
+        // $model_has_role = DB::table("model_has_roles")->where("model_id", "=", $request->id);
+        // return $model_has_role;
+
+        // $user->name = $request->name;
+        // $user->email = $request->email;
+        // $user->save();
+    
+        // return [
+        //     "status" => true,
+        //     "user" => $user
+        // ];
     }
 
     /**

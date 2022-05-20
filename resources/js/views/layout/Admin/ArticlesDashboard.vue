@@ -77,9 +77,9 @@
       </div>
 
       <div class="dashboard-panel-results" v-if="isShowResultSatus">
-        <div class="pt-3" v-if="articles.length > 0">
+        <div class="pt-3" v-if="getArticles.length > 0">
           <h2>Результаты по запросу: {{ search_input }}</h2>
-          <p class="lead">Всего найдено {{ articles.length }} постов.</p>
+          <p class="lead">Всего найдено {{ getArticles.length }} постов.</p>
         </div>
         <div class="pt-3" v-else >
           <h2>По запросу {{ search_input }} ничего не найдено.</h2>
@@ -88,7 +88,7 @@
       </div>
 
       <div class="dashboard-panel-table col-xl-12">
-        <table class="table table-light table-striped" v-if="articles.length > 0">
+        <table class="table table-light table-striped">
           <thead>
             <tr>
               <th class="tabel-label">ID</th>
@@ -102,7 +102,7 @@
             </tr>
           </thead>
           <tbody >
-            <tr v-for="article in articles" :key="article.id">
+            <tr v-for="article in getArticles" :key="article.id">
               <th>{{ article.id }}</th>
               <td>{{ article.title }}</td>
               <td>{{ article.statistic["views"] }}</td>
@@ -158,7 +158,6 @@ export default {
   },
   data() {
     return {
-      articles: {},
       pagination_url: "http://127.0.0.1:8000/api/articles",
       search_input: "",
       filter_tag: "",
@@ -166,58 +165,54 @@ export default {
     }
   },
   created() {
-    // this.$store.dispatch("articles/getArticles")
+    this.$store.dispatch("articles/getArticles")
     this.$store.dispatch("articles/getTags")
   },
   methods: {
 
     deleteArticle(id) {
-      axios.delete("/api/articles/" + id)
-        .then((response) => {
-          this.$store.dispatch("articles/getArticles")
-          this.articles = this.getArticles
-      })
+      this.$store.dispatch("articles/deleteArticle", id)
+      this.$store.dispatch("articles/getArticles")
     },
 
     setPaginateArticles(articles) {
-      this.articles = articles.data.data
+      this.$store.commit("articles/setArticlesList", articles.data.data , { root: true })
     },
   
     getArticlesBySearch() {
-      this.isShowResultSatus = true
       if (this.search_input !== '') {
-        axios.get("/api/articles-search/" + `?searchInput=${this.search_input}`)
-          .then((response) => {
-            console.log(response.data.data)
-            this.articles = response.data.data})
-          .catch((error) => {
-            console.log(error);
-        });
+        this.isShowResultSatus = true
+        this.$store.dispatch("articles/getArticlesBySearch", this.search_input)
+      } else {
+        this.isShowResultSatus = false
       }
     },
 
-    filterArticlesByStatus() {
-      axios.get("/api/articles-all/")
-        .then((response) => {
-          let filterData = response.data.data.filter((article) => {
-            return article.tags.label === this.filter_tag
-          })
-          this.articles = filterData
-        })
-        .catch((error) => {
-          console.log(error);
-      });
+    // filterArticlesByStatus() {
+    //   axios.get("/api/articles-all/")
+    //     .then((response) => {
+    //       let filterData = response.data.data.filter((article) => {
+    //         return article.tags.label === this.filter_tag
+    //       })
+    //       this.articles = filterData
+    //     })
+    //     .catch((error) => {
+    //       console.log(error);
+    //   });
+    // },
+
+    filterUsersByStatus() {
+      this.$store.dispatch("articles/filterUsersByStatus", this.filter_tag)
     },
 
 
   },
   computed: {
-    // getArticles: {
-    //   get() {
-    //     return this.$store.state.articles.articlesList
-    //   }
-    // },
-    
+    getArticles: {
+      get() {
+        return this.$store.state.articles.articlesList
+      }
+    },
     getTags: {
       get() {
         return this.$store.state.articles.tagList

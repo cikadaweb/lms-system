@@ -3,7 +3,7 @@
   <div class="container">
     <div class="row justify-content-md-center">
 
-      <div class="alert alert-danger alert-block" role="alert"
+      <!-- <div class="alert alert-danger alert-block" role="alert"
        v-if="invalidCredentials"
        :style="{
          display: invalidCredentials ? 'flex' : 'none'
@@ -15,7 +15,7 @@
         <div class="alert__btn" onclick="this.parentElement.style.display='none';">
           <i class="bi bi-x-circle"></i>
         </div>
-      </div>
+      </div> -->
 
       <validation-errors v-if="validationErrors" :errors="validationErrors"></validation-errors>
 

@@ -22,8 +22,9 @@ const actions = {
         axios
             .get("/api/articles")
             .then((response) => {
+                // отладка
                 ctx.commit("setArticlesList", response.data.data);
-                // console.log("Получим наши статьи: ", response);
+                console.log("Статьи: ", response.data.data);
             })
             .catch((error) => {
                 console.log(error);
@@ -39,10 +40,49 @@ const actions = {
                 console.log(response.data.data);
             })
             .catch((error) => {
-                // отладка
                 console.log(error);
             });
     },
+
+    deleteArticle({}, id) {
+        axios.delete("/api/articles/" + id).catch((error) => {
+            console.log(error.response);
+        });
+    },
+
+    getArticlesBySearch(ctx, search_input) {
+        axios
+            .get("/api/articles-search/" + `?searchInput=${search_input}`)
+            .then((response) => {
+                console.log(response.data.data);
+                ctx.commit("setArticlesList", response.data.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
+
+    // filterArticlesByTag(ctx, filter_role) {
+    //     axios
+    //         .get("/api/articles-all/")
+    //         .then((response) => {
+    //             if (
+    //                 filter_role != "Admin" &&
+    //                 filter_role != "Master" &&
+    //                 filter_role != "User"
+    //             ) {
+    //                 ctx.commit("setUsersList", response.data.data);
+    //             } else {
+    //                 let filterData = response.data.data.filter((user) => {
+    //                     return user.role.name === filter_role;
+    //                 });
+    //                 ctx.commit("setUsersList", filterData);
+    //             }
+    //         })
+    //         .catch((error) => {
+    //             console.log(error);
+    //         });
+    // },
 
     getTags(ctx) {
         axios
@@ -50,7 +90,7 @@ const actions = {
             .then((response) => {
                 // отладка
                 ctx.commit("setTagList", response.data);
-                // console.log(response.data);
+                console.log("Теги: ", response.data);
             })
             .catch((error) => {
                 console.log(error);

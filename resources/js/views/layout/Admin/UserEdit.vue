@@ -2,23 +2,36 @@
 
   <div class="container">
     <div class="row justify-content-md-center">
-        <div class="user-page">
-          
-          <form class="form">
-            <h3>Редактирование пользователя</h3>
-            <my-input type="text" placeholder="username" v-model="user.name"></my-input>
-            <my-input type="text" placeholder="email" v-model="user.email"></my-input>
 
-            <label for="" class="form-label">Роль пользователя:</label>
-            <select class="form-select mb-3" v-model="user.role.name">
-              <option disabled selected>Выберите роль</option>
-              <option v-for="role in getRoles" :key="role.id">
-                {{ role.name }}
-              </option>
+        <div class="dashboard-modal__user-edit">
+          
+          <form @submit.prevent="updateUserData" class="user-edit-form d-flex flex-column">
+            
+            <h3>Редактирование пользователя {{ this.$route.params.id }}</h3>
+
+            <my-input type="text" placeholder="ФИО пользователя" v-model="user.name"></my-input>
+            <span class="d-flex">Текущее значение: {{ getUserData.name }}</span>
+
+            <my-input type="text" placeholder="Email почта" v-model="user.email"></my-input>
+            <span class="d-flex">Текущее значение: {{ getUserData.email }}</span>
+            
+            <select 
+              class="form-select d-block mt-3" 
+              aria-label="Роль"
+              v-model="user.role.name" 
+            >
+              <option value="" selected>Выберите роль пользователя</option>
+              <option 
+              v-for="role in getRoles"
+              :key="role.id" 
+              :value="role.name"
+              >{{ role.name }}</option>
             </select>
 
-            <div class="form-buttons">
-              <my-button class="btn-success" @click="updateUsers">Обновить</my-button>
+            <div class="popup-buttons d-flex justify-content-between mt-3">
+              <my-button type="submit" class="btn-success">
+                Обновить
+              </my-button>
               <router-link :to="'/users/dashboard'">
                   <my-button class="btn-danger">Отменить</my-button>
               </router-link>
@@ -26,6 +39,7 @@
 
           </form>
         </div>
+
     </div>
   </div>
 
@@ -48,23 +62,26 @@ export default {
     }
   },
   created() {
+    this.$store.dispatch("users/getUserData", this.$route.params.id)
     this.$store.dispatch("users/getRoles")
   },
   methods: {
-    updateUsers() {
-        axios
-            .put("/api/users/" + this.$route.params.id, {
-                name: this.user.name,
-                email: this.user.email,
-                role: this.user.role.name
-            })
-            .then((response) => {
-              this.$router.push({name: "UsersMain"});
-              // window.location.replace("/users/dashboard");
-            });
+
+    updateUserData() {
+      this.$store.dispatch("users/updateUserData", {
+        id: this.$route.params.id,
+        name: this.user.name,
+        email: this.user.email,
+        role: this.user.role.name,
+      })
     },
   },
   computed: {
+    getUserData: {
+      get() {
+        return this.$store.state.users.currentUser
+      }
+    },
     getRoles: {
       get() {
         return this.$store.state.users.roleList
@@ -79,50 +96,17 @@ export default {
 
 <style scoped lang="scss">
 
-.user-page {
-    width: 450px;
-    padding: 8% 0 0;
-    margin: auto;
-    display:flex;
-}
-
-.form {
+.user-edit-form{
     position: relative;
     // z-index: 1;
     background-size: cover;
     background-position: center;
-    max-width: 450px;
+    max-width: 600px;
     border-radius: 15px;
-    margin: 0 auto 100px;
+    margin: 100px auto 100px;
     padding: 45px;
     text-align: center;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5), 0 5px 0 rgba(0, 0, 0, 0.2);
-}
-.form input {
-    font-family: "Roboto", sans-serif;
-    outline: 0;
-    background: #f2f2f2;
-    width: 100%;
-    border: 0;
-    margin: 0 0 15px;
-    box-sizing: border-box;
-    font-size: 14px;
-}
-
-.form .message {
-    margin: 15px;
-    color: #b3b3b3;
-    font-size: 12px;
-}
-
-.form-label {
-  display: flex;
-}
-
-.form-buttons {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 }
 
 </style>
