@@ -63,7 +63,7 @@
             <div class="card-body">
               <h5 class="card-title">{{ course.title }}</h5>
               <p class="card-text card_course-text">{{ course.preview }}</p>
-              <p>130ч</p>
+              <p>Продолжительность: 8 часов</p>
 
               <div class="card__buttons d-flex justify-content-between">
                 <router-link :to="{name: 'LessonsMain', params:{id: course.id}}">

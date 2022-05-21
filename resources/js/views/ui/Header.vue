@@ -2,7 +2,7 @@
 
     <header class="header">
         <router-link :to="'/'"><img src="../../../img/logo.png" class="logo" alt="fsk logo"></router-link>
-        <span>Добро пожаловать на платформу, {{ user.name }} !</span>
+        <span>Добро пожаловать на платформу!</span>
         <nav class="user-nav">
             <div class="user-nav__user">
 

@@ -1,6 +1,7 @@
 <template>
     <nav class="sidebar">
         <ul class="side-nav">
+
            <router-link :to="'/'">
                 <li class="side-nav__item">
                     <a href="#" class="side-nav__link">
@@ -10,18 +11,8 @@
                         <span>Главная</span>
                     </a>
                 </li>
-            </router-link> 
-            <router-link :to="'/articles/dashboard'">
-                <li class="side-nav__item">
-                    <a href="#" class="side-nav__link">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-newspaper side-nav__link-icon" viewBox="0 0 16 16">
-                        <path d="M0 2.5A1.5 1.5 0 0 1 1.5 1h11A1.5 1.5 0 0 1 14 2.5v10.528c0 .3-.05.654-.238.972h.738a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 1 1 0v9a1.5 1.5 0 0 1-1.5 1.5H1.497A1.497 1.497 0 0 1 0 13.5v-11zM12 14c.37 0 .654-.211.853-.441.092-.106.147-.279.147-.531V2.5a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0-.5.5v11c0 .278.223.5.497.5H12z"/>
-                        <path d="M2 3h10v2H2V3zm0 3h4v3H2V6zm0 4h4v1H2v-1zm0 2h4v1H2v-1zm5-6h2v1H7V6zm3 0h2v1h-2V6zM7 8h2v1H7V8zm3 0h2v1h-2V8zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1z"/>
-                        </svg>
-                        <span>Объявления</span>
-                    </a>
-                </li>
-            </router-link> 
+            </router-link>  
+
             <router-link :to="'/courses/dashboard'">
                 <li class="side-nav__item">
                     <a href="#" class="side-nav__link">
@@ -33,6 +24,7 @@
                     </a>
                 </li>
             </router-link> 
+
             <router-link :to="'/users/dashboard'">
                 <li class="side-nav__item">
                     <a href="#" class="side-nav__link">
@@ -45,6 +37,30 @@
                     </a>
                 </li>
             </router-link> 
+
+            <router-link :to="'/quiz'">
+                <li class="side-nav__item">
+                    <a href="#" class="side-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-text-fill side-nav__link-icon" viewBox="0 0 16 16">
+                        <path d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM4.5 5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7zm0 2.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7zm0 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1h-4z"/>
+                        </svg>
+                        <span>Тесты</span>
+                    </a>
+                </li>
+            </router-link>
+
+            <router-link :to="'/articles/dashboard'">
+                <li class="side-nav__item">
+                    <a href="#" class="side-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-newspaper side-nav__link-icon" viewBox="0 0 16 16">
+                        <path d="M0 2.5A1.5 1.5 0 0 1 1.5 1h11A1.5 1.5 0 0 1 14 2.5v10.528c0 .3-.05.654-.238.972h.738a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 1 1 0v9a1.5 1.5 0 0 1-1.5 1.5H1.497A1.497 1.497 0 0 1 0 13.5v-11zM12 14c.37 0 .654-.211.853-.441.092-.106.147-.279.147-.531V2.5a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0-.5.5v11c0 .278.223.5.497.5H12z"/>
+                        <path d="M2 3h10v2H2V3zm0 3h4v3H2V6zm0 4h4v1H2v-1zm0 2h4v1H2v-1zm5-6h2v1H7V6zm3 0h2v1h-2V6zM7 8h2v1H7V8zm3 0h2v1h-2V8zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1z"/>
+                        </svg>
+                        <span>Объявления</span>
+                    </a>
+                </li>
+            </router-link>
+
             <!-- <router-link :to="'/user/management'">
                 <li class="side-nav__item">
                     <a href="#" class="side-nav__link">

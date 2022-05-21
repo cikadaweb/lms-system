@@ -20,6 +20,7 @@ import ArticlesShow from "../views/layout/Admin/ArticlesShow";
 import ArticleShowOne from "../views/layout/Admin/ArticleShowOne";
 
 import UserProfile from "../views/layout/User/UserProfile";
+import QuizMain from "../views/layout/User/QuizMain";
 
 import Permissions from "../views/layout/Permissions";
 import EditPermissions from "../views/layout/EditPermissions";
@@ -126,6 +127,11 @@ const routes = [
         path: "/user/profile",
         name: "UserProfile",
         component: UserProfile,
+    },
+    {
+        path: "/quiz",
+        name: "QuizMain",
+        component: QuizMain,
     },
     {
         path: "/:notFound(.*)",
