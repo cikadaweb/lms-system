@@ -7,10 +7,10 @@
 
     <div class="row main-block">     
 
-      <div class="col-xl-2 main-sidebar" v-if="userRole == 'Admin'">
+      <div class="col-xl-2 main-sidebar" v-if="user.role == 'Admin'">
         <Sidebar></Sidebar>
       </div>
-      <div class="col-xl-2 main-sidebar" v-else-if="userRole == 'Master'">
+      <div class="col-xl-2 main-sidebar" v-else-if="user.role == 'Master'">
         <Sidebar></Sidebar>
       </div>
       <div class="col-xl-2 main-sidebar" v-else>
@@ -30,7 +30,6 @@
 
 
 <script>
-
 import axios from "../../../axios/axios-instance";
 import Header from "../ui/Header";
 import Main from "./Main";
@@ -46,11 +45,16 @@ export default {
     },
     data() {
       return {
-        userRole: "",
-        panelState: []
+        user: {
+          id: "",
+          name: "",
+          role: ""
+        },
+        panelState: [],
+
       }
     },
-    mounted() {
+    created() {
       this.getData()
       this.getPanelInfo()
     },
@@ -58,7 +62,10 @@ export default {
       getData() {
         axios.get("/api/getRole")
         .then(response => {
-          this.userRole = response.data
+          this.user.id = response.data.userId
+          this.user.name = response.data.userName[0].name
+          this.user.role = response.data.userRole
+          localStorage.setItem("userInfo", JSON.stringify(this.user));
         })
       },
       getPanelInfo() {

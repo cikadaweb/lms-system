@@ -1,6 +1,7 @@
 <template>
     <nav class="sidebar">
         <ul class="side-nav">
+
            <router-link :to="'/'">
                 <li class="side-nav__item">
                     <a href="#" class="side-nav__link">
@@ -10,7 +11,32 @@
                         <span>Главная</span>
                     </a>
                 </li>
-            </router-link> 
+            </router-link>
+
+            <router-link :to="{name: 'UserProfile', params:{id: 1}}">
+                <li class="side-nav__item">
+                    <a href="#" class="side-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle side-nav__link-icon" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                        </svg>
+                        <span>Мой профиль</span>
+                    </a>
+                </li>
+            </router-link>
+
+            <router-link :to="'/courses/dashboard'">
+                <li class="side-nav__item">
+                    <a href="#" class="side-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-mortarboard-fill side-nav__link-icon" viewBox="0 0 16 16">
+                        <path d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917l-7.5-3.5Z"/>
+                        <path d="M4.176 9.032a.5.5 0 0 0-.656.327l-.5 1.7a.5.5 0 0 0 .294.605l4.5 1.8a.5.5 0 0 0 .372 0l4.5-1.8a.5.5 0 0 0 .294-.605l-.5-1.7a.5.5 0 0 0-.656-.327L8 10.466 4.176 9.032Z"/>
+                        </svg>
+                        <span>Мои курсы</span>
+                    </a>
+                </li>
+            </router-link>
+
             <router-link :to="'/articles'">
                 <li class="side-nav__item">
                     <a href="#" class="side-nav__link">
@@ -21,7 +47,7 @@
                         <span>Объявления</span>
                     </a>
                 </li>
-            </router-link> 
+            </router-link>  
 
  
 
@@ -40,51 +66,4 @@ export default {
 
 <style scoped lang="scss">
 
-a {
-    text-decoration: none;
-}
-
-.sidebar {
-    // background-color: #F5EFFF;
-    border-radius: 15px;
-    flex: 0 0 18%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 98%;
-}
-.side-nav {
-    font-size: 16px;
-    list-style: none;
-    margin-top: 3.5rem;
-    text-decoration: none;
-    &__item {
-        display: flex;
-        justify-content: space-between;
-        text-decoration: none;
-    }
-    &__link:link,
-    &__link:visited
-    {
-        color: black;
-        text-decoration: none;
-        padding: 1.75rem 3rem;
-        display: flex;
-        justify-content: space-between;
-    }
-    &__link:hover {
-        color: cornflowerblue;
-    }
-}
-.legal {
-    font-size: 16px;
-    text-align: center; 
-    padding: 2.5rem;
-}
-
-.side-nav__link-icon {
-    width: 25px;
-    height: 25px;
-    margin-right: 15px;
-}
 </style>

@@ -80,8 +80,8 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
-
+<style lang="scss">
+// здесь глобальные стили для sidebars
 a {
     text-decoration: none;
 }

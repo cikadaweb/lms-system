@@ -19,6 +19,8 @@ import ArticleEdit from "../views/layout/Admin/ArticleEdit";
 import ArticlesShow from "../views/layout/Admin/ArticlesShow";
 import ArticleShowOne from "../views/layout/Admin/ArticleShowOne";
 
+import UserProfile from "../views/layout/User/UserProfile";
+
 import Permissions from "../views/layout/Permissions";
 import EditPermissions from "../views/layout/EditPermissions";
 import Management from "../views/layout/Management";
@@ -119,6 +121,11 @@ const routes = [
         path: "/user/permissions/:id",
         name: "EditPermissions",
         component: EditPermissions,
+    },
+    {
+        path: "/user/profile",
+        name: "UserProfile",
+        component: UserProfile,
     },
     {
         path: "/:notFound(.*)",

@@ -3,21 +3,21 @@
   <div class="container custom-container-crud mt-3">
     <div class="row pt-3 pb-3">
 
-      <div class="blog-title col-xl-12 d-flex justify-content-between align-items-center ps-3">
+      <div class="blog-panel-title col-xl-12 d-flex justify-content-between align-items-center ps-3">
         <h1>Новости</h1>
         <router-link :to="'/'"><h5><i class="bi bi-house-door"></i> Вернуться на главную</h5></router-link>
       </div>
 
-      <div class="blog-filter col-xl-12 d-flex justify-content-between pt-3">
+      <div class="blog-panel-filter col-xl-12 d-flex justify-content-between pt-3">
 
-          <div class="blog-filter-left">
+          <div class="panel-filter-left">
             <form class="d-flex">
               <input class="form-control panel-input" v-model="search_input" @input="getArticlesBySearch" type="search" placeholder="Найти статью" aria-label="Search">
               <button class="btn btn-primary" @click.prevent type="submit"><i class="bi bi-search"></i></button>
             </form>
           </div>
 
-          <div class="blog-filter-right d-flex">
+          <div class="panel-filter-right d-flex">
 
             <select 
               class="form-select table-nav__select" 
@@ -34,6 +34,17 @@
             </select>
 
           </div>
+      </div>
+
+      <div class="blog-panel-results" v-if="isShowResultSatus">
+        <div class="pt-3" v-if="getArticles.length > 0">
+          <h2>Результаты по запросу: {{ search_input }}</h2>
+          <p class="lead">Всего найдено {{ getArticles.length }} постов.</p>
+        </div>
+        <div class="pt-3" v-else >
+          <h2>По запросу {{ search_input }} ничего не найдено.</h2>
+          <a href="" @click.prevent="search_input = ''">Отобразить все посты</a>
+        </div>
       </div>
 
       <div class="blog-cards col-xl-12">
@@ -88,10 +99,10 @@ export default {
   },
   data() {
     return {
-      // articles: {},
       pagination_url: "http://127.0.0.1:8000/api/articles",
       search_input: "",
-      filter_tag: ""
+      filter_tag: "",
+      isShowResultSatus: false
     }
   },
   created() {

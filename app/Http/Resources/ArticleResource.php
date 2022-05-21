@@ -20,6 +20,7 @@ class ArticleResource extends JsonResource
             'img' => $this->img,
             'preview' => $this->preview,
             'body' => $this->body,
+            'is_active' => $this->is_active,
             'created_at' => $this->createdAtForHumans(),
             'comments' => CommentResource::collection($this->whenLoaded('comments')),
             'tags' => TagResource::collection($this->whenLoaded('tags')),

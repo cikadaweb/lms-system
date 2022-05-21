@@ -62,6 +62,26 @@ const actions = {
             });
     },
 
+    filterArticlesByStatus(ctx, filter_status) {
+        axios
+            .get("/api/articles-all/")
+            .then((response) => {
+                console.log(filter_status);
+                if (filter_status != "1" && filter_status != "0") {
+                    console.log("ada");
+                    ctx.commit("setArticlesList", response.data.data);
+                } else {
+                    let filterData = response.data.data.filter((article) => {
+                        return article.is_active == filter_status;
+                    });
+                    ctx.commit("setArticlesList", filterData);
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
+
     // filterArticlesByTag(ctx, filter_role) {
     //     axios
     //         .get("/api/articles-all/")

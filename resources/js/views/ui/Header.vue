@@ -2,7 +2,7 @@
 
     <header class="header">
         <router-link :to="'/'"><img src="../../../img/logo.png" class="logo" alt="fsk logo"></router-link>
-        <span>Вы находитесь в системе уже: 45 минут </span>
+        <span>Добро пожаловать на платформу, {{ user.name }} !</span>
         <nav class="user-nav">
             <div class="user-nav__user">
 
@@ -12,8 +12,6 @@
                 </form>
 
                 <!-- <img src="../../../img/user.png" alt="User Photo" class="user-nav__user-photo"> -->
-                <!-- <router-link v-if="token" :to="'/user/register'"><span class="user-nav__user-name">Регистрация</span></router-link>
-                <router-link v-if="token" :to="'/user/login'"><span class="user-nav__user-name">Авторизация</span></router-link> -->
                 <my-button v-if="!token" class="btn-danger" type="submit" @click.prevent="logout">Выход</my-button>
                 
             </div>
@@ -26,19 +24,22 @@
 
 <script>
 
-export default {
+export default { 
     data() {
       return {
-        token: null
+        token: null,
+        user: {}
       }
     },
+    mounted() {
+    // this.user = JSON.parse(localStorage.getItem('userInfo'))
+
+  },
     methods: {
         logout() {
             this.$store.dispatch('auth/logout', this.user)
+            // localStorage.removeItem('tasks')
         },
-        getToken() {
-            this.token = localStorage.getItem("x-token")
-      }
     }
 }
 </script>

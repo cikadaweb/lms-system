@@ -16,12 +16,25 @@ class MainController extends Controller
     public function getUserRole() {
         $user = Auth::user();
         $userRole = DB::table("model_has_roles")->select("role_id")->where("model_id", $user->id)->get();
+        $userName = DB::table("users")->select("name")->where("id", $user->id)->get();
         if($userRole[0]->role_id === 9) {
-            return "Admin";
+            return [
+                "userId" => $user->id,
+                "userName" => $userName,
+                "userRole" => "Admin",
+            ];
         } else if ($userRole[0]->role_id === 10) { 
-            return "Master";
+            return [
+                "userId" => $user->id,
+                "userName" => $userName,
+                "userRole" => "Master",
+            ];
         } else {
-            return "User";
+            return [
+                "userId" => $user->id,
+                "userName" => $userName,
+                "userRole" => "User",
+            ];
         }
     }
     public function getPanelInfo() {
