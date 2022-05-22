@@ -9,6 +9,9 @@ use App\Models\Article;
 use App\Models\State;
 use App\Http\Resources\ArticleResource;
 
+use App\Exports\ArticlesExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 use Validator;
 
 class ArticleController extends Controller
@@ -221,6 +224,11 @@ class ArticleController extends Controller
             $articles = Article::findBySearch(5, $search_input);
             return ArticleResource::collection($articles);
         }
+    }
+
+    public function exportAllArticles()
+    {
+        return Excel::download(new ArticlesExport, 'articles.xlsx');
     }
 
 }

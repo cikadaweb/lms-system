@@ -113,6 +113,25 @@ const actions = {
                 console.log(error);
             });
     },
+    exportAllUsers() {
+        axios
+            .get("/api/users-export", {
+                responseType: "arraybuffer",
+            })
+            .then((response) => {
+                let fileURL = window.URL.createObjectURL(
+                    new Blob([response.data])
+                );
+                let fileLink = document.createElement("a");
+                fileLink.href = fileURL;
+                fileLink.setAttribute("download", "users.xlsx");
+                document.body.appendChild(fileLink);
+                fileLink.click();
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
 
     getRoles(ctx) {
         axios

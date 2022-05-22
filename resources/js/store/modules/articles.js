@@ -81,6 +81,25 @@ const actions = {
                 console.log(error);
             });
     },
+    exportAllArticles() {
+        axios
+            .get("/api/articles-export", {
+                responseType: "arraybuffer",
+            })
+            .then((response) => {
+                let fileURL = window.URL.createObjectURL(
+                    new Blob([response.data])
+                );
+                let fileLink = document.createElement("a");
+                fileLink.href = fileURL;
+                fileLink.setAttribute("download", "articles.xlsx");
+                document.body.appendChild(fileLink);
+                fileLink.click();
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
 
     // filterArticlesByTag(ctx, filter_role) {
     //     axios

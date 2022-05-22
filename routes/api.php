@@ -38,6 +38,8 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::apiResource('users', UserController::class);
     Route::get('users-all', [UserController::class, 'getAllUsers']);
     Route::get('users-search', [UserController::class, 'getUsersBySearch']);
+    Route::get('users-export', [UserController::class, 'exportAllUsers']);
+    
     Route::apiResource('roles', RoleController::class);
     Route::apiResource('permissions', PermissionController::class);
     
@@ -47,6 +49,7 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::put('article-views-increment', [ArticleController::class, 'viewsIncrement']);
     Route::put('article-likes-increment', [ArticleController::class, 'likesIncrement']);
     Route::post('article-add-comment', [CommentController::class, 'store'] );
+    Route::get('articles-export', [ArticleController::class, 'exportAllArticles']);
     
     Route::apiResource('article-tags', TagController::class);
 

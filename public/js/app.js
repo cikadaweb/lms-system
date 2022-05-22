@@ -19887,6 +19887,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     filterArticlesByTag: function filterArticlesByTag() {
       this.$store.dispatch("articles/filterArticlesByTag", this.filter_tag);
+    },
+    exportAllArticles: function exportAllArticles() {
+      this.$store.dispatch("articles/exportAllArticles");
     }
   },
   computed: {
@@ -20453,6 +20456,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     filterUsersByStatus: function filterUsersByStatus() {
       this.$store.dispatch("users/filterUsersByStatus", this.filter_role);
+    },
+    exportAllUsers: function exportAllUsers() {
+      this.$store.dispatch("users/exportAllUsers");
     }
   },
   computed: {
@@ -22485,7 +22491,7 @@ var _hoisted_22 = {
 var _hoisted_23 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
     "class": "me-3"
-  }, "Экспорт ", -1
+  }, "Экспорт статей ", -1
   /* HOISTED */
   );
 });
@@ -22658,7 +22664,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* STABLE */
 
   })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_my_button, {
-    "class": "btn-primary"
+    "class": "btn-primary",
+    onClick: $options.exportAllArticles
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_23, _hoisted_24];
@@ -22666,7 +22673,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  })])]), $data.isShowResultSatus ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_25, [$options.getArticles.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Результаты по запросу: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.search_input), 1
+  }, 8
+  /* PROPS */
+  , ["onClick"])])]), $data.isShowResultSatus ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_25, [$options.getArticles.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Результаты по запросу: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.search_input), 1
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_27, "Всего найдено " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getArticles.length) + " постов.", 1
   /* TEXT */
@@ -24259,7 +24268,7 @@ var _hoisted_17 = {
   "class": "dashboard-panel__btn table-btn ps-2"
 };
 
-var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Экспорт ");
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Экспорт пользователей ");
 
 var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
@@ -24425,7 +24434,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, 8
   /* PROPS */
   , ["onClick"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_my_button, {
-    "class": "btn-primary"
+    "class": "btn-primary",
+    onClick: $options.exportAllUsers
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_18, _hoisted_19];
@@ -24433,7 +24443,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  })])]), $data.isShowResultSatus ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_20, [$options.getUsers.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Результаты по запросу: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.search_input), 1
+  }, 8
+  /* PROPS */
+  , ["onClick"])])]), $data.isShowResultSatus ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_20, [$options.getUsers.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Результаты по запросу: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.search_input), 1
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_22, "Всего найдено " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getUsers.length) + " постов.", 1
   /* TEXT */
@@ -27088,6 +27100,20 @@ var actions = {
       console.log(error);
     });
   },
+  exportAllArticles: function exportAllArticles() {
+    _axios_axios_instance__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/articles-export", {
+      responseType: "arraybuffer"
+    }).then(function (response) {
+      var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+      var fileLink = document.createElement("a");
+      fileLink.href = fileURL;
+      fileLink.setAttribute("download", "articles.xlsx");
+      document.body.appendChild(fileLink);
+      fileLink.click();
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  },
   // filterArticlesByTag(ctx, filter_role) {
   //     axios
   //         .get("/api/articles-all/")
@@ -27654,6 +27680,20 @@ var actions = {
         });
         ctx.commit("setUsersList", filterData);
       }
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  },
+  exportAllUsers: function exportAllUsers() {
+    _axios_axios_instance__WEBPACK_IMPORTED_MODULE_1__["default"].get("/api/users-export", {
+      responseType: "arraybuffer"
+    }).then(function (response) {
+      var fileURL = window.URL.createObjectURL(new Blob([response.data]));
+      var fileLink = document.createElement("a");
+      fileLink.href = fileURL;
+      fileLink.setAttribute("download", "users.xlsx");
+      document.body.appendChild(fileLink);
+      fileLink.click();
     })["catch"](function (error) {
       console.log(error);
     });

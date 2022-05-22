@@ -10,6 +10,9 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 use Illuminate\Support\Facades\DB;
 use Validator;
 
@@ -165,4 +168,11 @@ class UserController extends Controller
         $users = User::all();
         return UserResource::collection($users);
     }
+
+    public function exportAllUsers()
+    {
+        return Excel::download(new UsersExport, 'users.xlsx');
+    }
+
+    
 }
