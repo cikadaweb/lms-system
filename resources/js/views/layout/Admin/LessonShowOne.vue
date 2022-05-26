@@ -10,7 +10,7 @@
             <h2>Идентификатор урока {{ this.$route.params.lesson }}</h2>
           </div>
           <div>
-            <router-link :to="'/'"><h5><i class="bi bi-house-door"></i> Вернуться на главную</h5></router-link>
+            <router-link :to="`/course-id${this.$route.params.course}/lessons`"><h5><i class="bi bi-arrow-90deg-left"></i> Вернуться к курсу</h5></router-link>
           </div>
         </div>
 

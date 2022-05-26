@@ -2,19 +2,12 @@ import axios from "../../../axios/axios-instance";
 import router from "../../router/router";
 
 const state = {
+    currentCourse: {},
     coursesList: [],
-    // currentArticle: {
-    //     comments: [],
-    //     tags: [],
-    //     statistic: {
-    //         likes: 0,
-    //         views: 0,
-    //     },
-    // },
-    likeIt: false,
-    commentSuccess: false,
-    errors: [],
-    tagList: [],
+    // likeIt: false,
+    // commentSuccess: false,
+    // errors: [],
+    // tagList: [],
 };
 
 const actions = {
@@ -28,6 +21,18 @@ const actions = {
             })
             .catch((error) => {
                 // отладка
+                console.log(error);
+            });
+    },
+    getCourseData(ctx, id) {
+        axios
+            .get("/api/courses/" + id)
+            .then((response) => {
+                // отладка
+                ctx.commit("setCourseData", response.data.data);
+                console.log(response.data.data);
+            })
+            .catch((error) => {
                 console.log(error);
             });
     },
@@ -56,6 +61,9 @@ const actions = {
 const mutations = {
     setCoursesList(state, payload) {
         state.coursesList = payload;
+    },
+    setCourseData(state, payload) {
+        state.currentCourse = payload;
     },
 };
 

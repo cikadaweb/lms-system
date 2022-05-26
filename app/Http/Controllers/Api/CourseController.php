@@ -78,7 +78,15 @@ class CourseController extends Controller
      */
     public function show($id)
     {
-        //
+        $course = Course::findById($id);
+        if (!$course) {
+            return response()->json([
+                "status" => false,
+                "message" => "Course not found"
+            ])->setStatusCode(404);
+        }
+
+        return new CourseResource($course);
     }
 
     /**

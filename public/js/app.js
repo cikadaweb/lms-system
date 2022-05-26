@@ -20278,11 +20278,17 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.$store.dispatch("lessons/getLessons", this.$route.params.id);
+    this.$store.dispatch("courses/getCourseData", this.$route.params.id);
   },
   computed: {
     getLessons: {
       get: function get() {
         return this.$store.state.lessons.lessonsList;
+      }
+    },
+    getCurrentCourse: {
+      get: function get() {
+        return this.$store.state.courses.currentCourse;
       }
     }
   }
@@ -23696,8 +23702,8 @@ var _hoisted_4 = {
 };
 
 var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
-  "class": "bi bi-house-door"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Вернуться на главную")], -1
+  "class": "bi bi-arrow-90deg-left"
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Вернуться к курсу")], -1
 /* HOISTED */
 );
 
@@ -23750,7 +23756,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Идентификатор урока " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.$route.params.lesson), 1
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: '/'
+    to: "/course-id".concat(this.$route.params.course, "/lessons")
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_5];
@@ -23758,7 +23764,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.lesson.title), 1
+  }, 8
+  /* PROPS */
+  , ["to"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.lesson.title), 1
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
     "class": "lesson-body pt-5",
@@ -23817,13 +23825,7 @@ var _hoisted_2 = {
 var _hoisted_3 = {
   "class": "dashboard-panel__title col-xl-12 pt-2"
 };
-
-var _hoisted_4 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Porro modi perferendis ipsa qui iste officiis quia maiores nam veritatis, voluptas eveniet dolorem eaque animi inventore minus illum nisi! Possimus, quaerat? Quo tempore praesentium autem repellendus fugiat at unde fugit amet dolorum, porro cum mollitia nihil. Amet eius quae possimus! Exercitationem.", -1
-  /* HOISTED */
-  );
-});
-
+var _hoisted_4 = ["innerHTML"];
 var _hoisted_5 = {
   "class": "dashboard-panel__title col-xl-12 pt-2"
 };
@@ -23891,13 +23893,20 @@ var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNo
 var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Архивироавать");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _this = this;
+
   var _component_my_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("my-button");
 
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", null, "О курсе " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.$route.params.id) + ":", 1
   /* TEXT */
-  ), _hoisted_4]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", null, "Модули курса " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.$route.params.id) + ":", 1
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", {
+    innerHTML: $options.getCurrentCourse.description,
+    "class": "course__description mt-3"
+  }, null, 8
+  /* PROPS */
+  , _hoisted_4)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", null, "Модули курса " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.$route.params.id) + ":", 1
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: {
@@ -23936,7 +23945,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       to: {
         name: 'LessonShowOne',
         params: {
-          lesson: lesson.id
+          lesson: lesson.id,
+          course: _this.$route.params.id
         }
       }
     }, {
@@ -27427,19 +27437,12 @@ function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("
 
 
 var state = {
-  coursesList: [],
-  // currentArticle: {
-  //     comments: [],
-  //     tags: [],
-  //     statistic: {
-  //         likes: 0,
-  //         views: 0,
-  //     },
-  // },
-  likeIt: false,
-  commentSuccess: false,
-  errors: [],
-  tagList: []
+  currentCourse: {},
+  coursesList: [] // likeIt: false,
+  // commentSuccess: false,
+  // errors: [],
+  // tagList: [],
+
 };
 var actions = {
   getCourses: function getCourses(ctx) {
@@ -27449,6 +27452,15 @@ var actions = {
       console.log("Получим наши курсы: ", response.data);
     })["catch"](function (error) {
       // отладка
+      console.log(error);
+    });
+  },
+  getCourseData: function getCourseData(ctx, id) {
+    _axios_axios_instance__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/courses/" + id).then(function (response) {
+      // отладка
+      ctx.commit("setCourseData", response.data.data);
+      console.log(response.data.data);
+    })["catch"](function (error) {
       console.log(error);
     });
   },
@@ -27475,6 +27487,9 @@ var actions = {
 var mutations = {
   setCoursesList: function setCoursesList(state, payload) {
     state.coursesList = payload;
+  },
+  setCourseData: function setCourseData(state, payload) {
+    state.currentCourse = payload;
   }
 };
 var getters = {
@@ -27542,7 +27557,7 @@ var actions = {
 
     _axios_axios_instance__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/lessons", {
       title: data.form.title,
-      body: data.form.title,
+      body: data.form.body,
       course_id: data.course_id
     }).then(function (response) {
       if (response.data) {
@@ -44278,7 +44293,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".card_course[data-v-250c1eaf] {\n  border-radius: 10px;\n}\n.card-label__text[data-v-250c1eaf] {\n  font-size: 30px;\n  padding-right: 70px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".card_course[data-v-250c1eaf] {\n  border-radius: 10px;\n}\n.card-label__text[data-v-250c1eaf] {\n  font-size: 30px;\n  padding-right: 70px;\n}\n.course__description[data-v-250c1eaf] {\n  background-color: white;\n  padding: 20px;\n  border-radius: 15px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

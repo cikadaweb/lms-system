@@ -41,7 +41,7 @@ const actions = {
         axios
             .post("/api/lessons", {
                 title: data.form.title,
-                body: data.form.title,
+                body: data.form.body,
                 course_id: data.course_id,
             })
             .then((response) => {

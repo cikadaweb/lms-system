@@ -5,7 +5,7 @@
       
       <div class="dashboard-panel__title col-xl-12 pt-2">
         <h1>О курсе {{ this.$route.params.id }}:</h1>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Porro modi perferendis ipsa qui iste officiis quia maiores nam veritatis, voluptas eveniet dolorem eaque animi inventore minus illum nisi! Possimus, quaerat? Quo tempore praesentium autem repellendus fugiat at unde fugit amet dolorum, porro cum mollitia nihil. Amet eius quae possimus! Exercitationem.</p>
+        <h4 v-html="getCurrentCourse.description" class="course__description mt-3"></h4>
       </div>
 
       <div class="dashboard-panel__title col-xl-12 pt-2">
@@ -40,7 +40,7 @@
               <hr>
 
               <div class="card__buttons d-flex justify-content-between">
-                <router-link :to="{name: 'LessonShowOne', params:{lesson: lesson.id}}">
+                <router-link :to="{name: 'LessonShowOne', params:{lesson: lesson.id, course: this.$route.params.id}}">
                   <my-button class="btn btn-outline-success">Открыть</my-button>
                 </router-link>
 
@@ -72,13 +72,19 @@ export default {
   },
   mounted() {
     this.$store.dispatch("lessons/getLessons", this.$route.params.id)
+    this.$store.dispatch("courses/getCourseData", this.$route.params.id)
   },
   computed: {
     getLessons: {
       get() {
         return this.$store.state.lessons.lessonsList
       }
-    }
+    },
+    getCurrentCourse: {
+      get() {
+        return this.$store.state.courses.currentCourse
+      }
+    },
   }
 }
 </script>
@@ -94,6 +100,12 @@ export default {
 .card-label__text {
     font-size: 30px;
     padding-right: 70px;
+}
+
+.course__description {
+  background-color: white;
+  padding: 20px;
+  border-radius: 15px;
 }
 
 </style>

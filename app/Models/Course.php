@@ -23,4 +23,8 @@ class Course extends Model
     {
         return $query->where("title", "like", "%".$title."%")->orderBy('created_at', 'desc')->get();
     }
+    public function scopeFindById($query, $id)
+    {
+        return $query->where('id', $id)->firstOrFail();
+    }
 }
