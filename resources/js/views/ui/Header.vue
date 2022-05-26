@@ -38,7 +38,7 @@ export default {
     methods: {
         logout() {
             this.$store.dispatch('auth/logout', this.user)
-            // localStorage.removeItem('tasks')
+            localStorage.removeItem('userInfo')
         },
     }
 }

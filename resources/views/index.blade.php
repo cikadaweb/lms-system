@@ -23,7 +23,10 @@
   <script type="text/javascript" src="/packages/barryvdh/elfinder/js/standalonepopup.js" defer></script>
   <!-- /.подключеие готового скрипта elfinder -->
 
-  <title>Формула Стекла</title>
+  <title>FSK - system</title>
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/logo.png" />
+
 </head>
 
 <body>

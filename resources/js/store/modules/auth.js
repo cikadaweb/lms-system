@@ -2,6 +2,7 @@ import axios from "axios";
 import router from "../../router/router";
 
 const state = {
+    authUser: {},
     errors: [],
     // invalidCredentials: "",
 };
@@ -22,6 +23,7 @@ const actions = {
                                 "x-token",
                                 response.config.headers["X-XSRF-TOKEN"]
                             );
+                            this.dispatch("auth/getLoginUserData");
                             router.push("/");
                         }
                     })
@@ -49,6 +51,16 @@ const actions = {
                         }
                     });
             });
+        });
+    },
+
+    getLoginUserData(ctx) {
+        axios.get("/api/getRole").then((response) => {
+            let user = {};
+            user.id = response.data.userId;
+            user.name = response.data.userName[0].name;
+            user.role = response.data.userRole;
+            ctx.commit("setAuthUser", user);
         });
     },
 
@@ -102,6 +114,11 @@ const mutations = {
     clearErrors(state) {
         state.errors = [];
     },
+
+    setAuthUser(state, user) {
+        state.authUser = user;
+    },
+
     // setInvalidCredentials(state, invalidCredentials) {
     //     state.invalidCredentials = invalidCredentials;
     // },
@@ -111,9 +128,12 @@ const getters = {
     errors(state) {
         return state.errors;
     },
-    invalidCredentials(state) {
-        return state.invalidCredentials;
+    authUser(state) {
+        return state.authUser;
     },
+    // invalidCredentials(state) {
+    //     return state.invalidCredentials;
+    // },
 };
 
 export default {
