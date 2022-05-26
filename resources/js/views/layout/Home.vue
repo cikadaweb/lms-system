@@ -75,6 +75,7 @@ export default {
 
 
 <style lang="scss">
+
 // тут будут главные стили, которые и на Dashboard распространяются
 
 a {

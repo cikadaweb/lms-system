@@ -2,15 +2,17 @@
     <nav class="sidebar">
         <ul class="side-nav">
 
-           <router-link :to="'/'">
-                <li class="side-nav__item">
-                    <a href="#" class="side-nav__link">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door-fill side-nav__link-icon" viewBox="0 0 16 16">
-                            <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
-                        </svg>
-                        <span>Главная</span>
-                    </a>
-                </li>
+           <router-link
+                v-if="authUser.role == 'Admin' || authUser.role == 'Master' || authUser.role == 'User'" 
+                :to="'/'">
+                    <li class="side-nav__item">
+                        <a href="#" class="side-nav__link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door-fill side-nav__link-icon" viewBox="0 0 16 16">
+                                <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
+                            </svg>
+                            <span>Главная</span>
+                        </a>
+                    </li>
             </router-link>  
 
             <router-link
@@ -111,27 +113,33 @@
                     </li>
             </router-link>
 
-            <!-- <router-link :to="'/user/management'">
-                <li class="side-nav__item">
-                    <a href="#" class="side-nav__link">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-check-fill side-nav__link-icon" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M15.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L12.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
-                        <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                        </svg>
-                        <span>Менеджер ролей</span>
-                    </a>
-                </li>
+            <router-link 
+                v-if="authUser.role == 'Admin'"
+                :to="'/user/management'">
+                    <li class="side-nav__item">
+                        <a href="#" class="side-nav__link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-check-fill side-nav__link-icon" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M15.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L12.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                            <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                            </svg>
+                            <span>Менеджер ролей</span>
+                        </a>
+                    </li>
             </router-link> 
-            <router-link :to="'/user/permissions'">
-                <li class="side-nav__item">
-                    <a href="#" class="side-nav__link">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shield-fill-check side-nav__link-icon" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M8 0c-.69 0-1.843.265-2.928.56-1.11.3-2.229.655-2.887.87a1.54 1.54 0 0 0-1.044 1.262c-.596 4.477.787 7.795 2.465 9.99a11.777 11.777 0 0 0 2.517 2.453c.386.273.744.482 1.048.625.28.132.581.24.829.24s.548-.108.829-.24a7.159 7.159 0 0 0 1.048-.625 11.775 11.775 0 0 0 2.517-2.453c1.678-2.195 3.061-5.513 2.465-9.99a1.541 1.541 0 0 0-1.044-1.263 62.467 62.467 0 0 0-2.887-.87C9.843.266 8.69 0 8 0zm2.146 5.146a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647z"/>
-                        </svg>
-                        <span>Разрешения</span>
-                    </a>
-                </li>
+            
+            <!-- <router-link 
+                v-if="authUser.role == 'Admin'"
+                :to="'/user/permissions'">
+                    <li class="side-nav__item">
+                        <a href="#" class="side-nav__link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-shield-fill-check side-nav__link-icon" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M8 0c-.69 0-1.843.265-2.928.56-1.11.3-2.229.655-2.887.87a1.54 1.54 0 0 0-1.044 1.262c-.596 4.477.787 7.795 2.465 9.99a11.777 11.777 0 0 0 2.517 2.453c.386.273.744.482 1.048.625.28.132.581.24.829.24s.548-.108.829-.24a7.159 7.159 0 0 0 1.048-.625 11.775 11.775 0 0 0 2.517-2.453c1.678-2.195 3.061-5.513 2.465-9.99a1.541 1.541 0 0 0-1.044-1.263 62.467 62.467 0 0 0-2.887-.87C9.843.266 8.69 0 8 0zm2.146 5.146a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647z"/>
+                            </svg>
+                            <span>Разрешения</span>
+                        </a>
+                    </li>
             </router-link> -->
+
         </ul>
         <div class="legal">
             &copy; 2022. Формула Стекла.
@@ -148,12 +156,9 @@ export default {
         }
     },
     mounted() {
-        // this.userRole = this.authUser.role
-        // console.log(this.authUser)
+        this.$store.dispatch("auth/getLoginUserData")
     },
-    methods: {
 
-    },
     computed: {
         authUser() {
             return this.$store.state.auth.authUser
@@ -164,6 +169,7 @@ export default {
 </script>
 
 <style lang="scss">
+
 // здесь глобальные стили для sidebars
 a {
     text-decoration: none;
@@ -212,4 +218,9 @@ a {
     height: 25px;
     margin-right: 15px;
 }
+
+.active span{
+    color: rgb(60, 127, 253);
+}
+
 </style>

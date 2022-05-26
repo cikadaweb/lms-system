@@ -60,6 +60,7 @@ const actions = {
             user.id = response.data.userId;
             user.name = response.data.userName[0].name;
             user.role = response.data.userRole;
+            // localStorage.setItem("userInfo", JSON.stringify(user));
             ctx.commit("setAuthUser", user);
         });
     },

@@ -57,7 +57,8 @@ export default {
           get() {
             return this.$store.state.articles.errors;
           }
-        }
+        },
+        
     },
     methods: {
         submit_form(){
