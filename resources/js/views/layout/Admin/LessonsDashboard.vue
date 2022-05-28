@@ -4,99 +4,67 @@
     <div class="row pt-3">
       
       <div class="col-xl-12">
-        <!-- <div class="dashboard-panel__title col-xl-12 pt-2">
-          <h1>О курсе {{ this.$route.params.id }}:</h1>
-          <h4 v-html="getCurrentCourse.description" class="course__description mt-3"></h4>
-        </div> -->
 
         <div class="dashboard-panel__title row pt-2">
           <div class=" col-xl-12">
-            <h1>Модули курса {{ this.$route.params.id }}:</h1>
+
+            <ul class="nav nav-tabs dashboard-panel__menu">
+              <li class="nav-item">
+                <a class="nav-link" href="#" @click.prevent="chooseTab('about')">О курсе</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" @click.prevent="chooseTab('modules')">Модули</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" @click.prevent="chooseTab('test')">Тест</a>
+              </li>
+            </ul>
+
           </div>
         </div>
 
-        <div class="dashboard-panel-buttons row pt-3">
-          <div class=" col-xl-12 d-flex justify-content-between ">
-            <div class="dashboard-panel__btn table-btn ps-2">
-              <router-link :to="{name: 'LessonCreate', params:{id: this.$route.params.id}}">
-                <my-button class="btn-success">Добавить модуль</my-button>
-              </router-link>
-            </div>
-          </div>
-        </div>
+        <LessonsAbout
+          v-if="currentTab == 'about'"
+        ></LessonsAbout>
 
-      <AppLoader v-if="loading"></AppLoader>
+        <LessonsModules
+          v-else-if="currentTab == 'modules'"
+        ></LessonsModules>
 
-        <div v-else class="dashboard-panel__lessons row pt-3">
-          <div class="col-6 mb-3" v-for="(lesson, idx) in getLessons" :key="lesson.id">
+        <QuizMain
+          v-else
+        ></QuizMain>
 
-            <div class="card card_course">
-              <img src="" class="card-img-top card_course-picture" alt="">
-              <div class="card-body">
-
-                <div class="card-label d-flex justify-content-between align-items-center pb-2">
-                  <img src="https://via.placeholder.com/150/F5EFFF/000000/?text=FSK" alt="">
-                  <span class="card-label__text">{{ idx + 1 }}</span>
-                </div>
-
-                <h5 class="card-title">{{ lesson.title }}</h5>
-                <!-- <p class="card-text card_course-text">{{ lesson.body }}</p> -->
-                <hr>
-
-                <div class="card__buttons d-flex justify-content-between">
-                  <router-link :to="{name: 'LessonShowOne', params:{lesson: lesson.id, course: this.$route.params.id}}">
-                    <my-button class="btn btn-outline-success">Открыть</my-button>
-                  </router-link>
-
-                  <router-link :to="'/'">
-                    <my-button class="btn btn-outline-danger">Архивироавать</my-button>
-                  </router-link>
-                </div>
-
-              </div>
-            </div>
-
-          </div>
-
-        </div>
       </div>
-      
     </div>
   </div>
 
 </template>
 
 <script>
-import AppLoader from "../../ui/AppLoader.vue";
+import LessonsAbout from "../../layout/Admin/LessonsAbout.vue";
+import LessonsModules from "../../layout/Admin/LessonsModules.vue";
+import QuizMain from "../../layout/User/QuizMain.vue";
 
 export default {
   name: "LessonsDashboard",
-  components: {AppLoader},
+  components: {LessonsAbout, LessonsModules, QuizMain},
   data() {
     return {
-
+      currentTab: "about"
     }
   },
   mounted() {
-    this.$store.dispatch("lessons/getLessons", this.$route.params.id)
-    this.$store.dispatch("courses/getCourseData", this.$route.params.id)
+
+  },
+  methods: {
+    chooseTab(tab) {
+      this.currentTab = tab
+      console.log(tab)
+    }
   },
   computed: {
-    getLessons: {
-      get() {
-        return this.$store.state.lessons.lessonsList
-      }
-    },
-    getCurrentCourse: {
-      get() {
-        return this.$store.state.courses.currentCourse
-      }
-    },
-    loading: {
-      get() {
-        return this.$store.state.lessons.loading
-      }
-    }
+
   }
 }
 </script>
@@ -104,6 +72,25 @@ export default {
 
 
 <style scoped lang="scss">
+
+.dashboard-panel__menu {
+  background-color: white;
+  padding: 15px;
+  border-radius: 15px;
+}
+
+.nav-link {
+  padding: 15px 90px 15px 90px;
+  background-color: #CAD4DD;
+  color: black;
+  border-radius: 20px;
+  font-size: 20px;
+
+  &:hover {
+    color: white;
+    background-color: #007bff;
+  }
+}
 
 .card_course {
   border-radius: 10px;
