@@ -4,20 +4,19 @@ import router from "../../router/router";
 const state = {
     currentCourse: {},
     coursesList: [],
-    // likeIt: false,
-    // commentSuccess: false,
-    // errors: [],
-    // tagList: [],
+    loading: false,
 };
 
 const actions = {
     getCourses(ctx) {
+        ctx.commit("toggleLoading");
         axios
             .get("/api/courses")
             .then((response) => {
                 // отладка
                 ctx.commit("setCoursesList", response.data);
                 console.log("Получим наши курсы: ", response.data);
+                ctx.commit("toggleLoading");
             })
             .catch((error) => {
                 // отладка
@@ -56,6 +55,17 @@ const actions = {
                 console.log(error.response);
             });
     },
+    getCoursesBySearch(ctx, search_input) {
+        axios
+            .get("/api/courses-search/" + `?searchInput=${search_input}`)
+            .then((response) => {
+                console.log(response.data.data);
+                ctx.commit("setCoursesList", response.data.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
 };
 
 const mutations = {
@@ -64,6 +74,9 @@ const mutations = {
     },
     setCourseData(state, payload) {
         state.currentCourse = payload;
+    },
+    toggleLoading(state) {
+        state.loading = !state.loading;
     },
 };
 

@@ -15,16 +15,19 @@ const state = {
     commentSuccess: false,
     errors: [],
     tagList: [],
+    loading: false,
 };
 
 const actions = {
     getArticles(ctx) {
+        ctx.commit("toggleLoading");
         axios
             .get("/api/articles")
             .then((response) => {
                 // отладка
                 ctx.commit("setArticlesList", response.data.data);
                 console.log("Статьи: ", response.data.data);
+                ctx.commit("toggleLoading");
             })
             .catch((error) => {
                 console.log(error);
@@ -246,6 +249,9 @@ const mutations = {
     },
     setTagList(state, payload) {
         state.tagList = payload;
+    },
+    toggleLoading(state) {
+        state.loading = !state.loading;
     },
 };
 

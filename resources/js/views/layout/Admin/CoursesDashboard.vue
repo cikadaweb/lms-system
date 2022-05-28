@@ -54,7 +54,20 @@
 
       </div>
 
-      <div class="dashboard-panel-courses row mt-5">
+      <div class="dashboard-panel-results" v-if="isShowResultSatus">
+        <div class="pt-3" v-if="getCourses.length > 0">
+          <h2>Результаты по запросу: {{ search_input }}</h2>
+          <p class="lead">Всего найдено {{ getCourses.length }} курсов.</p>
+        </div>
+        <div class="pt-3" v-else >
+          <h2>По запросу {{ search_input }} ничего не найдено.</h2>
+          <a href="" @click.prevent="clearSearchInput()">Отобразить все курсы</a>
+        </div>
+      </div>
+
+      <AppLoader v-if="loading"></AppLoader>
+
+      <div v-else class="dashboard-panel-courses row mt-5">
         <div class="col-6 pb-3" v-for="course in getCourses" :key="course.id">
 
           <div class="card card_course">
@@ -74,10 +87,10 @@
                   <my-button class="btn btn-outline-danger">Архивироавать</my-button>
                 </router-link>
               </div>
-
             </div>
             
           </div>
+
         </div>
       </div>
       
@@ -87,14 +100,15 @@
 </template>
 
 <script>
-import axios from "../../../../axios/axios-instance";
+import AppLoader from "../../ui/AppLoader.vue";
 
 export default {
   name: "CoursesDashboard",
-
+  components: {AppLoader},
   data() {
     return {
       search_input: "",
+      isShowResultSatus: false,
     }
   },
 
@@ -103,27 +117,33 @@ export default {
   },
 
   methods: {
+
+    clearSearchInput() {
+      this.search_input = ""
+      this.isShowResultSatus = false
+      this.$store.dispatch("courses/getCourses")
+    },
+
     getCoursesBySearch() {
       if (this.search_input !== '') {
-        axios.get("/api/courses-search/" + `?searchInput=${this.search_input}`)
-          .then((response) => {
-            console.log(response.data.data)
-
-            this.$store.commit("courses/setCoursesList", response.data.data , { root: true })
-            })
-          .catch((error) => {
-            console.log(error);
-        });
+        this.isShowResultSatus = true
+        this.$store.dispatch("courses/getCoursesBySearch", this.search_input)
       } else {
-        this.$store.dispatch("courses/getCourses")
+        this.isShowResultSatus = false
       }
     },
+  
   },
 
   computed: {
     getCourses: {
       get() {
         return this.$store.state.courses.coursesList
+      }
+    },
+    loading: {
+      get() {
+        return this.$store.state.courses.loading
       }
     }
   }

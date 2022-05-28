@@ -12,7 +12,11 @@
       </div>
 
       <div class="col-xl-10 main-body">
-        <Main 
+
+        <AppLoader v-if="loading"></AppLoader>
+
+        <Main
+          v-else 
           :panelState = panelState
         ></Main>
       </div>
@@ -26,6 +30,7 @@
 <script>
 import axios from "../../../axios/axios-instance";
 import Header from "../ui/Header";
+import AppLoader from "../ui/AppLoader";
 import Main from "./Main";
 import Sidebar from "./Sidebar";
 
@@ -34,36 +39,24 @@ export default {
         Header,
         Sidebar,
         Main,
+        AppLoader
     },
     data() {
       return {
-        // user: {
-        //   id: "",
-        //   name: "",
-        //   role: ""
-        // },
+        loading: true,
         panelState: [],
-
       }
     },
     created() {
-      // this.getData()
       this.getPanelInfo()
     },
     methods: {
-      // getData() {
-      //   axios.get("/api/getRole")
-      //   .then(response => {
-      //     this.user.id = response.data.userId
-      //     this.user.name = response.data.userName[0].name
-      //     this.user.role = response.data.userRole
-      //     localStorage.setItem("userInfo", JSON.stringify(this.user));
-      //   })
-      // },
       getPanelInfo() {
+        this.loading = true
         axios.get("/api/getState")
         .then(response => {
           this.panelState = response.data
+          this.loading = false
           // console.log(this.panelState)
         })
       },

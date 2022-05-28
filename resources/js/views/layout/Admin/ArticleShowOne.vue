@@ -2,47 +2,46 @@
 
   <div class="container custom-container-crud mt-3">
     <div class="row pt-3 pb-3">
-
       <div class="col-xl-12">
 
-        <div class="nav">
-          <div>
-            <h2>{{ article.title }}</h2>
-          </div>
-          <div>
+        <div class="blog-panel-title row ps-3">
+          <div class="col-xl-12 d-flex justify-content-between align-items-center">
+            <h1>{{ article.title }}</h1>
             <router-link :to="'/'"><h5><i class="bi bi-house-door"></i> Вернуться на главную</h5></router-link>
           </div>
         </div>
 
-          <figure class="card-article">
+        <div class="blog-panel-content row">
+            <figure class="col-xl-12 card-article">
+              <img :src="article.img" class="article_picture" alt="">
+              <figcaption class="figure-caption">
+                  <p>
+                    <span class="article_tags">
+                      <strong>Теги: </strong>
+                        <span class="tag" v-for="(tag,index) in article.tags" :key="tag.id">
+                            <span v-if="tagsLen == (index+1)">{{tag.label}}</span>
+                            <span v-else>{{tag.label}} | </span>
+                        </span>
+                    </span>
+                </p>
+              </figcaption>
 
-            <img :src="article.img" class="article_picture" alt="">
+              <figcaption class="figure-caption text-end">
+                <LikesState></LikesState>
+                <ViewsState></ViewsState>
+              </figcaption>
 
-            <figcaption class="figure-caption">
-                <p>
-                  <span class="article_tags">
-                    <strong>Теги: </strong>
-                      <span class="tag" v-for="(tag,index) in article.tags" :key="tag.id">
-                          <span v-if="tagsLen == (index+1)">{{tag.label}}</span>
-                          <span v-else>{{tag.label}} | </span>
-                      </span>
-                  </span>
-              </p>
-            </figcaption>
+              <p class="article_text pt-5" v-html="article.body"></p>
+              <p>Опубликованно:  <i>{{ article.created_at }}</i></p>
+            </figure>
+        </div>
 
-            <figcaption class="figure-caption text-end">
-              <LikesState></LikesState>
-              <ViewsState></ViewsState>
-            </figcaption>
-
-            <p class="article_text pt-5" v-html="article.body"></p>
-            <p>Опубликованно:  <i>{{ article.created_at }}</i></p>
-          </figure>
-
+        <div class="blog-panel-comments row">
           <Comments></Comments>
+        </div>
+
 
       </div>
-
     </div>
   </div>
 
@@ -70,6 +69,7 @@ export default {
         return this.$store.state.articles.currentArticle.tags.length
       } 
     },
+
 
   },
   mounted() {

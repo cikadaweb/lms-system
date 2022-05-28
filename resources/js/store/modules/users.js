@@ -8,14 +8,17 @@ const state = {
     roleList: [],
     permissionsList: [],
     errors: [],
+    loading: false,
 };
 
 const actions = {
     getUsers(ctx) {
+        ctx.commit("toggleLoading");
         axios
             .get("/api/users")
             .then((response) => {
                 ctx.commit("setUsersList", response.data.data);
+                ctx.commit("toggleLoading");
             })
             .catch((error) => {
                 console.log(error);
@@ -206,6 +209,9 @@ const mutations = {
     },
     clearErrors(state) {
         state.errors = [];
+    },
+    toggleLoading(state) {
+        state.loading = !state.loading;
     },
 };
 
