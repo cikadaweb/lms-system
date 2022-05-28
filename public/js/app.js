@@ -19699,6 +19699,61 @@ __webpack_require__.r(__webpack_exports__);
         this.$store.dispatch("articles/addArticle", this.form);
       }
     }
+  },
+  mounted: function mounted() {
+    tinymce.remove();
+    tinymce.init({
+      selector: '#mytextarea',
+      height: 500,
+      plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+      language: 'ru',
+      toolbar_mode: 'floating',
+      relative_urls: false,
+      file_picker_callback: elFinderBrowser
+    });
+
+    function elFinderBrowser(callback, value, meta) {
+      tinymce.activeEditor.windowManager.openUrl({
+        title: 'File Manager',
+        url: "/elfinder/tinymce5",
+
+        /**
+         * On message will be triggered by the child window
+         * 
+         * @param dialogApi
+         * @param details
+         * @see https://www.tiny.cloud/docs/ui-components/urldialog/#configurationoptions
+         */
+        onMessage: function onMessage(dialogApi, details) {
+          if (details.mceAction === 'fileSelected') {
+            var file = details.data.file; // Make file info
+
+            var info = file.name; // Provide file and text for the link dialog
+
+            if (meta.filetype === 'file') {
+              callback(file.url, {
+                text: info,
+                title: info
+              });
+            } // Provide image and alt text for the image dialog
+
+
+            if (meta.filetype === 'image') {
+              callback(file.url, {
+                alt: info
+              });
+            } // Provide alternative source and posted for the media dialog
+
+
+            if (meta.filetype === 'media') {
+              callback(file.url);
+            }
+
+            dialogApi.close();
+          }
+        }
+      });
+    }
   }
 });
 
@@ -20090,6 +20145,61 @@ __webpack_require__.r(__webpack_exports__);
         this.$store.dispatch("courses/addCourse", this.form);
       }
     }
+  },
+  mounted: function mounted() {
+    tinymce.remove();
+    tinymce.init({
+      selector: '#mytextarea',
+      height: 500,
+      plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+      language: 'ru',
+      toolbar_mode: 'floating',
+      relative_urls: false,
+      file_picker_callback: elFinderBrowser
+    });
+
+    function elFinderBrowser(callback, value, meta) {
+      tinymce.activeEditor.windowManager.openUrl({
+        title: 'File Manager',
+        url: "/elfinder/tinymce5",
+
+        /**
+         * On message will be triggered by the child window
+         * 
+         * @param dialogApi
+         * @param details
+         * @see https://www.tiny.cloud/docs/ui-components/urldialog/#configurationoptions
+         */
+        onMessage: function onMessage(dialogApi, details) {
+          if (details.mceAction === 'fileSelected') {
+            var file = details.data.file; // Make file info
+
+            var info = file.name; // Provide file and text for the link dialog
+
+            if (meta.filetype === 'file') {
+              callback(file.url, {
+                text: info,
+                title: info
+              });
+            } // Provide image and alt text for the image dialog
+
+
+            if (meta.filetype === 'image') {
+              callback(file.url, {
+                alt: info
+              });
+            } // Provide alternative source and posted for the media dialog
+
+
+            if (meta.filetype === 'media') {
+              callback(file.url);
+            }
+
+            dialogApi.close();
+          }
+        }
+      });
+    }
   }
 });
 
@@ -20238,6 +20348,61 @@ __webpack_require__.r(__webpack_exports__);
           course_id: this.$route.params.id
         });
       }
+    }
+  },
+  mounted: function mounted() {
+    tinymce.remove();
+    tinymce.init({
+      selector: '#mytextarea',
+      height: 500,
+      plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+      language: 'ru',
+      toolbar_mode: 'floating',
+      relative_urls: false,
+      file_picker_callback: elFinderBrowser
+    });
+
+    function elFinderBrowser(callback, value, meta) {
+      tinymce.activeEditor.windowManager.openUrl({
+        title: 'File Manager',
+        url: "/elfinder/tinymce5",
+
+        /**
+         * On message will be triggered by the child window
+         * 
+         * @param dialogApi
+         * @param details
+         * @see https://www.tiny.cloud/docs/ui-components/urldialog/#configurationoptions
+         */
+        onMessage: function onMessage(dialogApi, details) {
+          if (details.mceAction === 'fileSelected') {
+            var file = details.data.file; // Make file info
+
+            var info = file.name; // Provide file and text for the link dialog
+
+            if (meta.filetype === 'file') {
+              callback(file.url, {
+                text: info,
+                title: info
+              });
+            } // Provide image and alt text for the image dialog
+
+
+            if (meta.filetype === 'image') {
+              callback(file.url, {
+                alt: info
+              });
+            } // Provide alternative source and posted for the media dialog
+
+
+            if (meta.filetype === 'media') {
+              callback(file.url);
+            }
+
+            dialogApi.close();
+          }
+        }
+      });
     }
   }
 });
@@ -26552,23 +26717,32 @@ var _hoisted_2 = /*#__PURE__*/_withScopeId(function () {
 });
 
 var _hoisted_3 = {
-  "class": "user-nav"
+  "class": "d-flex"
 };
 var _hoisted_4 = {
-  "class": "user-nav__user"
+  "class": "navbar navbar-expand-lg user-menu"
+};
+var _hoisted_5 = {
+  "class": "container-fluid"
+};
+var _hoisted_6 = {
+  "class": "collapse navbar-collapse",
+  id: "navbarSupportedContent"
+};
+var _hoisted_7 = {
+  "class": "navbar-nav me-auto mb-2 mb-lg-0"
+};
+var _hoisted_8 = {
+  "class": "nav-item dropdown"
 };
 
-var _hoisted_5 = /*#__PURE__*/_withScopeId(function () {
-  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", {
-    "class": "navbar-nav pe-3"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Avatar "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
-    "class": "nav-item dropdown"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-    "class": "nav-link dropdown-toggle d-flex align-items-center",
+var _hoisted_9 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+    "class": "nav-link dropdown-toggle",
     href: "#",
-    id: "navbarDropdownMenuLink",
+    id: "navbarDropdown",
     role: "button",
-    "data-mdb-toggle": "dropdown",
+    "data-bs-toggle": "dropdown",
     "aria-expanded": "false"
   }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
     src: _img_user3_png__WEBPACK_IMPORTED_MODULE_2__["default"],
@@ -26576,31 +26750,46 @@ var _hoisted_5 = /*#__PURE__*/_withScopeId(function () {
     height: "33",
     alt: "Avatar",
     loading: "lazy"
-  })]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", {
-    "class": "dropdown-menu",
-    "aria-labelledby": "navbarDropdownMenuLink"
-  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-    "class": "dropdown-item",
-    href: "#"
-  }, "Мой профиль")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-    "class": "dropdown-item",
-    href: "#"
-  }, "Настройки")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-    "class": "dropdown-item",
-    href: "#"
-  }, "Выход")])])])], -1
+  })], -1
   /* HOISTED */
   );
 });
 
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Выход");
+var _hoisted_10 = {
+  "class": "dropdown-menu",
+  "aria-labelledby": "navbarDropdown"
+};
+
+var _hoisted_11 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+    "class": "dropdown-item",
+    href: "#"
+  }, "Мой профиль")], -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_12 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+    "class": "dropdown-item",
+    href: "#"
+  }, "Настройки")], -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_13 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", {
+    "class": "dropdown-divider"
+  })], -1
+  /* HOISTED */
+  );
+});
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
 
-  var _component_my_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("my-button");
-
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("header", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("header", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: '/'
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -26609,23 +26798,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, "Добро пожаловать на платформу, " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.authUser.role) + " !", 1
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_3, "Добро пожаловать на платформу, " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.authUser.role) + " !", 1
   /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <form class=\"d-flex pe-3\">\r\n                    <input class=\"form-control me-2 user-nav-input\" type=\"search\" placeholder=\"Найти на странице\" aria-label=\"Search\">\r\n                    <button class=\"btn btn-outline-success\" type=\"submit\">Поиск</button>\r\n                </form> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <img src=\"../../../img/user.png\" alt=\"User Photo\" class=\"user-nav__user-photo\"> "), _hoisted_5, !$data.token ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_my_button, {
-    key: 0,
-    "class": "btn-danger",
-    type: "submit",
-    onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)($options.logout, ["prevent"])
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_6];
-    }),
-    _: 1
-    /* STABLE */
-
-  }, 8
-  /* PROPS */
-  , ["onClick"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])]);
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_10, [_hoisted_11, _hoisted_12, _hoisted_13, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+    "class": "dropdown-item",
+    href: "",
+    onClick: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+      return $options.logout && $options.logout.apply($options, arguments);
+    }, ["prevent"]))
+  }, "Выход")])])])])])])])]);
 }
 
 /***/ }),
@@ -44877,7 +45058,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".header[data-v-56bcb099] {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding-top: 10px;\n  padding-bottom: 10px;\n}\n.logo[data-v-56bcb099] {\n  height: 65px;\n  margin-left: 85px;\n}\n.user-nav[data-v-56bcb099] {\n  align-self: stretch;\n  display: flex;\n  align-items: center;\n}\n.user-nav > *[data-v-56bcb099] {\n  padding: 0 2rem;\n  cursor: pointer;\n  height: 100%;\n  display: flex;\n  align-items: center;\n}\n.user-nav__user-photo[data-v-56bcb099] {\n  height: 50px;\n  margin-left: 3rem;\n  padding: 0 2rem;\n}\n.user-nav__user-name[data-v-56bcb099] {\n  padding: 0 3px;\n  text-decoration: none;\n  color: var(--color-grey-light-4);\n}\n.user-nav-input[data-v-56bcb099] {\n  width: 400px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".header[data-v-56bcb099] {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  padding-top: 10px;\n  padding-bottom: 10px;\n}\n.logo[data-v-56bcb099] {\n  height: 80px;\n  margin-left: 85px;\n}\n.user-menu[data-v-56bcb099] {\n  margin-right: 85px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
