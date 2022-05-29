@@ -9,6 +9,8 @@ import UserEdit from "../views/layout/Admin/UserEdit";
 
 import CoursesMain from "../views/layout/Admin/CoursesMain";
 import CourseCreate from "../views/layout/Admin/CourseCreate";
+import CourseEdit from "../views/layout/Admin/CourseEdit";
+
 import LessonsMain from "../views/layout/Admin/LessonsMain";
 import LessonShowOne from "../views/layout/Admin/LessonShowOne";
 import LessonCreate from "../views/layout/Admin/LessonCreate";
@@ -63,6 +65,11 @@ const routes = [
         path: "/course/create",
         name: "CourseCreate",
         component: CourseCreate,
+    },
+    {
+        path: "/course/edit/:id",
+        name: "CourseEdit",
+        component: CourseEdit,
     },
     {
         path: "/course-id:id/lessons",

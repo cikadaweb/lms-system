@@ -55,6 +55,26 @@ const actions = {
                 console.log(error.response);
             });
     },
+    changeCourse({}, course, id) {
+        axios
+            .put("/api/courses/" + course.id, {
+                title: course.title,
+                preview: course.preview,
+                description: course.description,
+                img: course.img,
+            })
+            .then((response) => {
+                if (response.data) {
+                    // отладка
+                    console.log(response);
+                    router.push("/course-id" + course.id + "/lessons");
+                }
+            })
+            .catch((error) => {
+                // отладка
+                console.log(error.response);
+            });
+    },
     getCoursesBySearch(ctx, search_input) {
         axios
             .get("/api/courses-search/" + `?searchInput=${search_input}`)

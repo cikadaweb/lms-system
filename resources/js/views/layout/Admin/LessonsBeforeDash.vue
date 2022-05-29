@@ -77,7 +77,7 @@ export default {
 
     }
   },
-  mounted() {
+  created() {
     this.$store.dispatch("lessons/getLessons", this.$route.params.id)
     this.$store.dispatch("courses/getCourseData", this.$route.params.id)
   },

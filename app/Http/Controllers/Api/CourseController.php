@@ -107,9 +107,35 @@ class CourseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Course $course)
     {
-        //
+        $validator = Validator::make(
+            $request->all(),
+            [
+                "title" => ["required"],
+                "img" => ["required"],
+                "preview" => ["required"],
+                "description" => ["required"],
+            ]
+            );
+        if ($validator->fails()) {
+            return [
+                "status" => false,
+                "errors" => $validator->messages()
+            ];
+        }
+
+        $course->title = $request->title;
+        $course->img = $request->img;
+        $course->preview = $request->preview;
+        $course->description = $request->description;
+        $course->save();
+        
+
+        return [
+            "status" => true,
+            "course" => $course
+        ];
     }
 
     /**
