@@ -17,9 +17,13 @@ class DatabaseSeeder extends Seeder
         // было изначально
         // \App\Models\User::factory(10)->create();
         // $this->call(UsersTableSeeder::class);
+        //
 
-        $courses = \App\Models\Course::factory(3)->create(); 
-        $lessons = \App\Models\Lesson::factory(15)->create();
+
+        // $courses = \App\Models\Course::factory(3)->create(); 
+        // $lessons = \App\Models\Lesson::factory(15)->create();
+        $tests = \App\Models\Test::factory(6)->create();
+        $questions = \App\Models\Question::factory(18)->create();
 
         // $lessons_id = $lessons->pluck('id');
 

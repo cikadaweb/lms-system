@@ -31,6 +31,7 @@ class CourseFactory extends Factory
             'title' => $title,
             'img' => 'https://via.placeholder.com/500/FFFFFF/17A2B8/?text=КУРС',
             'preview' => $preview,
+            'is_active' => 1,
             'description' => $description,
             'created_at' => $this->faker->dateTimeBetween('-1 years'),
         ];

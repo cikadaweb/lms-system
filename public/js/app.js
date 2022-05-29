@@ -20713,7 +20713,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      currentTab: "about"
+      currentTab: "test"
     };
   },
   mounted: function mounted() {},
@@ -21458,14 +21458,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var response, index, data, questions;
+        var response, index, data, myCategory, myQuestions, goodData, questions;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _this2.loading = true;
+                _this2.loading = true; // let response = await fetch("https://fsk-system-default-rtdb.firebaseio.com/results.json");
+
                 _context.next = 3;
-                return fetch("https://fsk-system-default-rtdb.firebaseio.com/results.json");
+                return fetch("/api/test/" + "".concat(_this2.$route.params.id));
 
               case 3:
                 response = _context.sent;
@@ -21476,8 +21477,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 7:
                 data = _context.sent;
-                console.log(data);
-                questions = data.map(function (question) {
+                myCategory = data.data.category;
+                myQuestions = data.data.questions;
+                goodData = [];
+                myQuestions.forEach(function (element) {
+                  var info = {};
+                  info.category = myCategory;
+                  info.correct_answer = element.correct_answer;
+                  info.incorrect_answers = element.incorrect_answers.split(',');
+                  info.question = element.question;
+                  info.type = element.type;
+                  goodData.push(info);
+                });
+                console.log("Lol", goodData);
+                questions = goodData.map(function (question) {
                   question.answers = [question.correct_answer].concat(_toConsumableArray(question.incorrect_answers)); // перетасовка массива с ответами
 
                   for (var i = question.answers.length - 1; i > 0; i--) {
@@ -21496,7 +21509,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this2.questions = questions;
                 _this2.loading = false;
 
-              case 12:
+              case 16:
               case "end":
                 return _context.stop();
             }
@@ -27135,7 +27148,9 @@ var _hoisted_5 = {
   "class": "correctAnswers text-center pt-3"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", null, "Тест курса: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.$route.params.id), 1
+  /* TEXT */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
     innerHTML: $data.loading ? 'Loading...' : $options.currentQuestion.question,
     "class": "text-center pt-5"
   }, null, 8

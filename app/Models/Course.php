@@ -9,14 +9,18 @@ class Course extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["title", "img", "preview", "description"];
+    protected $fillable = ["title", "img", "preview", "is_active", "description"];
+
+    public function users() {
+        return $this->belongsToMany(User::class);
+    }
 
     public function lessons() {
         return $this->hasMany(Lesson::class);
     }
 
-    public function users() {
-        return $this->belongsToMany(User::class);
+    public function test() {
+        return $this->hasOne(Test::class);
     }
 
     public function scopeFindBySearch($query, $title)

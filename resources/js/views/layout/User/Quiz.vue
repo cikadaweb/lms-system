@@ -1,6 +1,8 @@
 <template>
   <div class="container">
 
+    <h1>Тест курса: {{ this.$route.params.id }}</h1>
+
     <h1 v-html="loading ? 'Loading...' : currentQuestion.question" class="text-center pt-5"></h1>
     <!-- Отображается только первый вопрос -->
     <form v-if="currentQuestion" class="pt-5">
@@ -110,15 +112,30 @@ export default {
     async fetchQuestions() {
       this.loading = true;
 
-      let response = await fetch("https://fsk-system-default-rtdb.firebaseio.com/results.json");
+      // let response = await fetch("https://fsk-system-default-rtdb.firebaseio.com/results.json");
 
+      let response = await fetch("/api/test/" + `${this.$route.params.id}`);
+      
       // индетификация вопроса
       let index = 0; 
       let data = await response.json();
 
-      console.log(data)
+      let myCategory = data.data.category
+      let myQuestions = data.data.questions
+      let goodData = []
+      myQuestions.forEach(element => {
+        let info = {}
+        info.category = myCategory
+        info.correct_answer = element.correct_answer
+        info.incorrect_answers = element.incorrect_answers.split(',')
+        info.question = element.question
+        info.type = element.type
+        goodData.push(info)
+      });
 
-      let questions = data.map((question) => {
+      console.log("Lol", goodData)
+
+      let questions = goodData.map((question) => {
         question.answers = [
           question.correct_answer,
           ...question.incorrect_answers,

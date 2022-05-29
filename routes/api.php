@@ -9,6 +9,8 @@ use App\Http\Controllers\Api\TagController;
 use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\LessonController;
+use App\Http\Controllers\Api\TestController;
+use App\Http\Controllers\Api\QuestionController;
 
 use App\Http\Controllers\MainController;
 
@@ -59,6 +61,10 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::apiResource('lessons', LessonController::class);
     Route::get('course-lessons', [LessonController::class, 'getCourseLessons']);
     Route::get('course-lesson', [LessonController::class, 'getCourseLesson']);
+
+    Route::apiResource('test', TestController::class);
+
+    Route::apiResource('question', QuestionController::class);
 
 });
 

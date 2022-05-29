@@ -10,7 +10,7 @@ class Lesson extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["title", "body", "course_id"];
+    protected $fillable = ["title", "lesson_file", "body", "course_id"];
 
     public $timestamps = false;
 
