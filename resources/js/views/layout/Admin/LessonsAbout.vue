@@ -23,7 +23,7 @@
                 </my-button>
               </router-link>
 
-              <router-link :to="'/'">
+              <router-link :to="{name: 'CourseQuizCreate', params:{id: this.$route.params.id}}">
                 <my-button class="btn-primary">
                   <span class="me-3">Добавить тест к курсу</span>
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-text-fill side-nav__link-icon" viewBox="0 0 16 16">

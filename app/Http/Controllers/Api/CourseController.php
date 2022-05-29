@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Course;
+use App\Models\Test;
 use App\Http\Resources\CourseResource;
 use Validator;
 
@@ -61,8 +62,13 @@ class CourseController extends Controller
         $course->img = $request->img;
         $course->preview = $request->preview;
         $course->description = $request->description;
-
         $course->save();
+
+        // создание статистики по умолчанию
+        $test = new Test();
+        $test->category = $course->title;
+        $test->course_id = $course->id;
+        $test->save();
         
         return response()->json([
             "status" => true,

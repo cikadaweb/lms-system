@@ -115,7 +115,7 @@ export default {
       // let response = await fetch("https://fsk-system-default-rtdb.firebaseio.com/results.json");
 
       let response = await fetch("/api/test/" + `${this.$route.params.id}`);
-      
+
       // индетификация вопроса
       let index = 0; 
       let data = await response.json();
@@ -133,7 +133,7 @@ export default {
         goodData.push(info)
       });
 
-      console.log("Lol", goodData)
+      // console.log("Lol", goodData)
 
       let questions = goodData.map((question) => {
         question.answers = [

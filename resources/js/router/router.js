@@ -10,6 +10,7 @@ import UserEdit from "../views/layout/Admin/UserEdit";
 import CoursesMain from "../views/layout/Admin/CoursesMain";
 import CourseCreate from "../views/layout/Admin/CourseCreate";
 import CourseEdit from "../views/layout/Admin/CourseEdit";
+import CourseQuizCreate from "../views/layout/Admin/CourseQuizCreate";
 
 import LessonsMain from "../views/layout/Admin/LessonsMain";
 import LessonShowOne from "../views/layout/Admin/LessonShowOne";
@@ -70,6 +71,11 @@ const routes = [
         path: "/course/edit/:id",
         name: "CourseEdit",
         component: CourseEdit,
+    },
+    {
+        path: "/course:id/quiz/create",
+        name: "CourseQuizCreate",
+        component: CourseQuizCreate,
     },
     {
         path: "/course-id:id/lessons",
