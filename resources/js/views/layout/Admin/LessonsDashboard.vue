@@ -10,13 +10,24 @@
 
             <ul class="nav nav-tabs dashboard-panel__menu">
               <li class="nav-item">
-                <a class="nav-link" href="#" @click.prevent="chooseTab('about')">О курсе</a>
+                <a class="nav-link" 
+                  :class="currentTab == 'about' ? 'link-active' : ''" 
+                  @click.prevent="chooseTab($event, 'about')"
+                  >О курсе</a>
               </li>
+
               <li class="nav-item">
-                <a class="nav-link" href="#" @click.prevent="chooseTab('modules')">Модули</a>
+                <a class="nav-link" 
+                  :class="currentTab == 'modules' ? 'link-active' : ''" 
+                  @click.prevent="chooseTab($event,'modules')"
+                >Модули</a>
               </li>
+
               <li class="nav-item">
-                <a class="nav-link" href="#" @click.prevent="chooseTab('test')">Тест</a>
+                <a class="nav-link" 
+                  @click.prevent="chooseTab($event,'test')"
+                  :class="currentTab == 'test' ? 'link-active' : ''"
+                >Тест</a>
               </li>
             </ul>
 
@@ -58,9 +69,10 @@ export default {
 
   },
   methods: {
-    chooseTab(tab) {
+    chooseTab(event, tab) {
       this.currentTab = tab
       console.log(tab)
+      console.log(event)
     }
   },
   computed: {
@@ -81,15 +93,18 @@ export default {
 
 .nav-link {
   padding: 15px 90px 15px 90px;
-  background-color: #CAD4DD;
+  background-color: white;
   color: black;
-  border-radius: 20px;
   font-size: 20px;
+  
 
   &:hover {
-    color: white;
-    background-color: #007bff;
+    border-bottom: 3px solid #3eaf7c;
   }
+}
+
+.link-active {
+  border-bottom: 3px solid #3eaf7c;
 }
 
 .card_course {

@@ -1,5 +1,5 @@
 <template>
-  <div class="container custom-container-crud mt-3">
+  <div class="container custom-container-crud">
     
     <div class="dashboard-panel__title col-xl-12 pt-2">
       <h1>О курсе {{ this.$route.params.id }}:</h1>

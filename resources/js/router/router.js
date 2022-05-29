@@ -42,6 +42,7 @@ const routes = [
         path: "/user/login",
         name: "Login",
         component: Login,
+        alias: "/",
     },
     {
         path: "/user/register",

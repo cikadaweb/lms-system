@@ -20531,9 +20531,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {},
   methods: {
-    chooseTab: function chooseTab(tab) {
+    chooseTab: function chooseTab(event, tab) {
       this.currentTab = tab;
       console.log(tab);
+      console.log(event);
     }
   },
   computed: {}
@@ -22077,7 +22078,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "container custom-container-crud mt-3"
+  "class": "container custom-container-crud"
 };
 var _hoisted_2 = {
   "class": "row pt-3 pb-3"
@@ -22304,7 +22305,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "container custom-container-crud mt-3"
+  "class": "container custom-container-crud"
 };
 var _hoisted_2 = {
   "class": "row pt-3 pb-3"
@@ -22538,7 +22539,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "container custom-container-crud mt-3"
+  "class": "container custom-container-crud"
 };
 var _hoisted_2 = {
   "class": "row pt-3 pb-3"
@@ -23175,7 +23176,7 @@ var _withScopeId = function _withScopeId(n) {
 };
 
 var _hoisted_1 = {
-  "class": "container custom-container-crud mt-3"
+  "class": "container custom-container-crud"
 };
 var _hoisted_2 = {
   "class": "row pt-3 pb-3"
@@ -23475,7 +23476,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "container custom-container-crud mt-3"
+  "class": "container custom-container-crud"
 };
 var _hoisted_2 = {
   "class": "row pt-3 pb-3"
@@ -23936,7 +23937,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "container custom-container-crud mt-3"
+  "class": "container custom-container-crud"
 };
 var _hoisted_2 = {
   "class": "row pt-3 pb-3"
@@ -24074,7 +24075,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "container custom-container-crud mt-3"
+  "class": "container custom-container-crud"
 };
 var _hoisted_2 = {
   "class": "row pt-3 pb-3"
@@ -24211,7 +24212,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "container custom-container-crud mt-3"
+  "class": "container custom-container-crud"
 };
 var _hoisted_2 = {
   "class": "dashboard-panel__title col-xl-12 pt-2"
@@ -24283,24 +24284,27 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_QuizMain = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("QuizMain");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-    "class": "nav-link",
-    href: "#",
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["nav-link", $data.currentTab == 'about' ? 'link-active' : '']),
     onClick: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
-      return $options.chooseTab('about');
+      return $options.chooseTab($event, 'about');
     }, ["prevent"]))
-  }, "О курсе")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-    "class": "nav-link",
-    href: "#",
+  }, "О курсе", 2
+  /* CLASS */
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["nav-link", $data.currentTab == 'modules' ? 'link-active' : '']),
     onClick: _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
-      return $options.chooseTab('modules');
+      return $options.chooseTab($event, 'modules');
     }, ["prevent"]))
-  }, "Модули")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-    "class": "nav-link",
-    href: "#",
+  }, "Модули", 2
+  /* CLASS */
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["nav-link", $data.currentTab == 'test' ? 'link-active' : '']),
     onClick: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
-      return $options.chooseTab('test');
+      return $options.chooseTab($event, 'test');
     }, ["prevent"]))
-  }, "Тест")])])])]), $data.currentTab == 'about' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_LessonsAbout, {
+  }, "Тест", 2
+  /* CLASS */
+  )])])])]), $data.currentTab == 'about' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_LessonsAbout, {
     key: 0
   })) : $data.currentTab == 'modules' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_LessonsModules, {
     key: 1
@@ -24365,7 +24369,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
-  "class": "container custom-container-crud mt-3"
+  "class": "container custom-container-crud"
 };
 var _hoisted_2 = {
   "class": "blog-panel-title col-xl-12 d-flex justify-content-between align-items-center ps-3"
@@ -27484,7 +27488,8 @@ var routes = [{
 }, {
   path: "/user/login",
   name: "Login",
-  component: _views_auth_Login__WEBPACK_IMPORTED_MODULE_1__["default"]
+  component: _views_auth_Login__WEBPACK_IMPORTED_MODULE_1__["default"],
+  alias: "/"
 }, {
   path: "/user/register",
   name: "Registration",
@@ -44730,7 +44735,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".custom-container-crud {\n  background-color: white;\n  border-radius: 15px;\n  padding: 50px;\n}\n.form-buttons {\n  display: flex;\n  justify-content: flex-end;\n}\n.form-span {\n  display: flex;\n}\n.form-small {\n  display: flex;\n  color: red;\n}\n.form-control.invalid {\n  border-color: red;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".form-buttons {\n  display: flex;\n  justify-content: flex-end;\n}\n.form-span {\n  display: flex;\n}\n.form-small {\n  display: flex;\n  color: red;\n}\n.form-control.invalid {\n  border-color: red;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -44754,7 +44759,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".custom-container-crud {\n  background-color: white;\n  border-radius: 15px;\n  padding: 30px;\n}\n.nav {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.article_picture {\n  display: flex;\n  margin: 0 auto;\n  max-height: 500px;\n  -o-object-fit: contain;\n     object-fit: contain;\n}\n.article_tags {\n  font-size: 16px;\n}\n.article_badge {\n  font-size: 16px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".nav {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.article_picture {\n  display: flex;\n  margin: 0 auto;\n  max-height: 500px;\n  -o-object-fit: contain;\n     object-fit: contain;\n}\n.article_tags {\n  font-size: 16px;\n}\n.article_badge {\n  font-size: 16px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -44802,7 +44807,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".custom-container-crud[data-v-dac9c520] {\n  background-color: white;\n  border-radius: 15px;\n  padding: 30px;\n}\n.card_article-picture[data-v-dac9c520] {\n  padding: 10px;\n  max-height: 300px;\n  -o-object-fit: contain;\n     object-fit: contain;\n}\n.card_article-text[data-v-dac9c520] {\n  height: 100px;\n  text-indent: 5%;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".card_article-picture[data-v-dac9c520] {\n  padding: 10px;\n  max-height: 300px;\n  -o-object-fit: contain;\n     object-fit: contain;\n}\n.card_article-text[data-v-dac9c520] {\n  height: 100px;\n  text-indent: 5%;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -44826,7 +44831,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".custom-container-crud {\n  background-color: white;\n  border-radius: 15px;\n  padding: 50px;\n}\n.form-buttons {\n  display: flex;\n  justify-content: flex-end;\n}\n.form-span {\n  display: flex;\n}\n.form-small {\n  display: flex;\n  color: red;\n}\n.form-control.invalid {\n  border-color: red;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".form-buttons {\n  display: flex;\n  justify-content: flex-end;\n}\n.form-span {\n  display: flex;\n}\n.form-small {\n  display: flex;\n  color: red;\n}\n.form-control.invalid {\n  border-color: red;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -44874,7 +44879,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".custom-container-crud {\n  background-color: white;\n  border-radius: 15px;\n  padding: 50px;\n}\n.form-buttons {\n  display: flex;\n  justify-content: flex-end;\n}\n.form-span {\n  display: flex;\n}\n.form-small {\n  display: flex;\n  color: red;\n}\n.form-control.invalid {\n  border-color: red;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".form-buttons {\n  display: flex;\n  justify-content: flex-end;\n}\n.form-span {\n  display: flex;\n}\n.form-small {\n  display: flex;\n  color: red;\n}\n.form-control.invalid {\n  border-color: red;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -44898,7 +44903,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".custom-container-crud {\n  background-color: white;\n  border-radius: 15px;\n  padding: 30px;\n}\n.nav {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.lesson-btn {\n  color: white;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".nav {\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n}\n.lesson-btn {\n  color: white;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -44922,7 +44927,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".dashboard-panel__menu[data-v-250c1eaf] {\n  background-color: white;\n  padding: 15px;\n  border-radius: 15px;\n}\n.nav-link[data-v-250c1eaf] {\n  padding: 15px 90px 15px 90px;\n  background-color: #CAD4DD;\n  color: black;\n  border-radius: 20px;\n  font-size: 20px;\n}\n.nav-link[data-v-250c1eaf]:hover {\n  color: white;\n  background-color: #007bff;\n}\n.card_course[data-v-250c1eaf] {\n  border-radius: 10px;\n}\n.card-label__text[data-v-250c1eaf] {\n  font-size: 30px;\n  padding-right: 70px;\n}\n.course__description[data-v-250c1eaf] {\n  background-color: white;\n  padding: 20px;\n  border-radius: 15px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".dashboard-panel__menu[data-v-250c1eaf] {\n  background-color: white;\n  padding: 15px;\n  border-radius: 15px;\n}\n.nav-link[data-v-250c1eaf] {\n  padding: 15px 90px 15px 90px;\n  background-color: white;\n  color: black;\n  font-size: 20px;\n}\n.nav-link[data-v-250c1eaf]:hover {\n  border-bottom: 3px solid #3eaf7c;\n}\n.link-active[data-v-250c1eaf] {\n  border-bottom: 3px solid #3eaf7c;\n}\n.card_course[data-v-250c1eaf] {\n  border-radius: 10px;\n}\n.card-label__text[data-v-250c1eaf] {\n  font-size: 30px;\n  padding-right: 70px;\n}\n.course__description[data-v-250c1eaf] {\n  background-color: white;\n  padding: 20px;\n  border-radius: 15px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -45042,7 +45047,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "a {\n  text-decoration: none;\n}\n.custom-container {\n  margin: 10px 30px;\n}\n.header {\n  background-color: white;\n  border-radius: 15px 15px 0 0;\n}\n.main-sidebar {\n  background-color: white;\n  border-radius: 0 0 15px 15px;\n}\n.main-block {\n  background-color: white;\n  padding-right: 12px;\n  border-radius: 0 0 15px 15px;\n  min-height: 650px;\n}\n.main-body {\n  background-color: #F5EFFF;\n  border-radius: 15px;\n  padding-right: 10px;\n}\nli {\n  list-style-type: none;\n}\nul {\n  margin-left: 0;\n  padding-left: 0;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "a {\n  text-decoration: none;\n}\n.custom-container {\n  margin: 10px 30px;\n}\n.custom-container-crud {\n  background-color: white;\n  border-radius: 15px;\n  padding: 50px;\n  margin: 30px 0 30px 0;\n}\n.header {\n  background-color: white;\n  border-radius: 15px 15px 0 0;\n}\n.main-sidebar {\n  background-color: white;\n  border-radius: 0 0 15px 15px;\n}\n.main-block {\n  background-color: white;\n  padding-right: 12px;\n  border-radius: 0 0 15px 15px;\n  min-height: 650px;\n}\n.main-body {\n  background-color: #F5EFFF;\n  border-radius: 15px;\n  padding-right: 10px;\n  margin-bottom: 15px;\n}\nli {\n  list-style-type: none;\n}\nul {\n  margin-left: 0;\n  padding-left: 0;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

@@ -79,6 +79,13 @@ a {
   margin: 10px 30px;
 }
 
+.custom-container-crud {
+    background-color: rgb(255, 255, 255);
+    border-radius: 15px;
+    padding: 50px;
+    margin: 30px 0 30px 0;
+}
+
   .header {
     background-color: rgb(255, 255, 255);
     border-radius: 15px 15px 0 0;
@@ -102,6 +109,7 @@ a {
     background-color: #F5EFFF;
     border-radius: 15px;
     padding-right: 10px;
+    margin-bottom: 15px;
   }
 
   li {

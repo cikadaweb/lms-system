@@ -1,6 +1,6 @@
 <template>
 
-  <div class="container custom-container-crud mt-3">
+  <div class="container custom-container-crud">
     <div class="row pt-3 pb-3">
       <div class="col-xl-12">
     
@@ -168,14 +168,6 @@ export default {
 
 
 <style scoped lang="scss">
-
-.custom-container-crud {
-    background-color: rgb(255, 255, 255);
-    border-radius: 15px;
-    padding: 30px;
-}
-
-
 
 .card_article-picture {
   padding: 10px;

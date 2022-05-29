@@ -1,5 +1,5 @@
 <template>
-  <div class="container custom-container-crud mt-3">
+  <div class="container custom-container-crud">
     
     <div class="blog-panel-title col-xl-12 d-flex justify-content-between align-items-center ps-3">
       <h1>Модули</h1>

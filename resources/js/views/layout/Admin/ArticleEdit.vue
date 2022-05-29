@@ -1,6 +1,6 @@
 <template>
 
-  <div class="container custom-container-crud mt-3">
+  <div class="container custom-container-crud">
     <div class="row pt-3 pb-3">
 
       <div class="col-xl-12">
