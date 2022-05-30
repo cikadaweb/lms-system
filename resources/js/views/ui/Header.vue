@@ -7,6 +7,10 @@
         </div>      
 
         <div>
+            <h5 class="d-flex" id="time">Время: {{ getTime }}</h5>
+        </div>  
+
+        <div>
             <h5 class="d-flex">Добро пожаловать на платформу, {{ authUser.role }} !</h5>
         </div>  
 
@@ -44,21 +48,48 @@ export default {
     data() {
       return {
         token: null,
-        user: {}
+        user: {},
+        time: ""
       }
     },
     mounted() {
-
+        this.time = document.getElementById("time");
+        this.tiktak()
     },
     methods: {
         logout() {
             this.$store.dispatch('auth/logout', this.user)
             // localStorage.removeItem('userInfo')
         },
+        tiktak() {
+            let now = new Date();
+            let month = now.getMonth() - 1;
+            let day = now.getDay();
+            let myHours = now.getHours();
+            let myMinutes = now.getMinutes();
+            let mySec = now.getSeconds();
+            if (myMinutes < 10) myMinutes = "0" + myMinutes;
+            if (mySec < 10) mySec = "0" + mySec;
+
+            // let info = `MOSCOW, ${days[day]}, ${
+            // months[month]
+            // } ${now.getDate()}, ${now.getFullYear()}`;
+            // elm1.innerHTML = info;
+            this.time.innerHTML = "Текущее время: " + myHours + ":" + myMinutes + ":" + mySec;
+            setTimeout(this.tiktak, 1000);
+        }
     },
     computed: {
         authUser() {
             return this.$store.state.auth.authUser
+        },
+        getTime() {
+            return this.time
+        }
+    },
+    watch: {
+        time(value) {
+            console.log(value)
         }
     }
 }
