@@ -20448,30 +20448,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     submitHandler: function submitHandler() {
       if (this.formIsValid()) {
-        console.log(this.form); // this.$store.dispatch("lessons/addLesson", {
-        //   form: this.form,
-        //   course_id: this.$route.params.id
-        // })
-        //   addArticle({}, article) {
-        //     axios
-        //         .post("/api/articles", {
-        //             title: article.title,
-        //             img: article.img,
-        //             preview: article.preview,
-        //             body: article.body,
-        //         })
-        //         .then((response) => {
-        //             if (response.data) {
-        //                 // отладка
-        //                 console.log(response);
-        //                 router.push("/articles/dashboard");
-        //             }
-        //         })
-        //         .catch((error) => {
-        //             // отладка
-        //             console.log(error.response);
-        //         });
-        // },
+        this.$store.dispatch("questions/addQuestion", {
+          form: this.form,
+          course_id: this.$route.params.id
+        });
       }
     }
   }
@@ -20800,7 +20780,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      currentTab: "test"
+      currentTab: "about"
     };
   },
   mounted: function mounted() {},
@@ -21553,7 +21533,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this2.loading = true; // let response = await fetch("https://fsk-system-default-rtdb.firebaseio.com/results.json");
 
                 _context.next = 3;
-                return fetch("/api/test/" + "".concat(_this2.$route.params.id));
+                return fetch("/api/tests/" + "".concat(_this2.$route.params.id));
 
               case 3:
                 response = _context.sent;
@@ -24189,7 +24169,7 @@ var _hoisted_6 = {
 
 var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "bi bi-house-door"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Вернуться на главную")], -1
+}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Вернуться к курсу")], -1
 /* HOISTED */
 );
 
@@ -24260,10 +24240,10 @@ var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Добавление вопроса для теста: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.$route.params.id), 1
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Добавление вопроса для Курса: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.$route.params.id), 1
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: '/'
+    to: "/course-id".concat(this.$route.params.id, "/lessons")
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_7];
@@ -24271,7 +24251,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  })])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"dashboard-panel-buttons row pt-3\">\r\n          <div class=\"col-xl-12 d-flex justify-content-between\">\r\n\r\n            <div class=\"dashboard-panel__btn pe-5\">\r\n                <my-button class=\"btn-success me-3\">\r\n                  <span class=\"me-3\">Добавить вопрос </span>\r\n                </my-button>\r\n            </div>\r\n\r\n          </div>\r\n        </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+  }, 8
+  /* PROPS */
+  , ["to"])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"dashboard-panel-buttons row pt-3\">\r\n          <div class=\"col-xl-12 d-flex justify-content-between\">\r\n\r\n            <div class=\"dashboard-panel__btn pe-5\">\r\n                <my-button class=\"btn-success me-3\">\r\n                  <span class=\"me-3\">Добавить вопрос </span>\r\n                </my-button>\r\n            </div>\r\n\r\n          </div>\r\n        </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     onSubmit: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.submitHandler && $options.submitHandler.apply($options, arguments);
     }, ["prevent"]))
@@ -24313,7 +24295,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       invalid: $data.errors.incorrect_answers
     }]),
     id: "incorrectAnswers",
-    placeholder: "вариант ответа 1, вариант ответа 2, вариант ответа 3"
+    placeholder: "вариант ответа"
   }, null, 2
   /* CLASS */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.incorrect_answers, void 0, {
@@ -24856,7 +24838,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_AppLoader = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("AppLoader");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Идентификатор урока " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.$route.params.lesson), 1
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, "Урок " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.$route.params.lesson), 1
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: "/course-id".concat(this.$route.params.course, "/lessons")
@@ -24975,7 +24957,7 @@ var _hoisted_10 = /*#__PURE__*/_withScopeId(function () {
 var _hoisted_11 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
     "class": "me-3"
-  }, "Добавить тест к курсу", -1
+  }, "Добавить вопросы к тесту", -1
   /* HOISTED */
   );
 });
@@ -27424,9 +27406,7 @@ var _hoisted_5 = {
   "class": "correctAnswers text-center pt-3"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", null, "Тест курса: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.$route.params.id), 1
-  /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <h1>Тест курса: {{ this.$route.params.id }}</h1> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
     innerHTML: $data.loading ? 'Loading...' : $options.currentQuestion.question,
     "class": "text-center pt-5"
   }, null, 8
@@ -28489,13 +28469,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
 /* harmony import */ var _modules_auth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/auth */ "./resources/js/store/modules/auth.js");
 /* harmony import */ var _modules_users__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/users */ "./resources/js/store/modules/users.js");
 /* harmony import */ var _modules_articles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/articles */ "./resources/js/store/modules/articles.js");
 /* harmony import */ var _modules_courses__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/courses */ "./resources/js/store/modules/courses.js");
 /* harmony import */ var _modules_lessons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/lessons */ "./resources/js/store/modules/lessons.js");
 /* harmony import */ var _modules_tests__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/tests */ "./resources/js/store/modules/tests.js");
+/* harmony import */ var _modules_questions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/questions */ "./resources/js/store/modules/questions.js");
 
 
 
@@ -28503,14 +28484,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vuex__WEBPACK_IMPORTED_MODULE_6__["default"].Store({
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vuex__WEBPACK_IMPORTED_MODULE_7__["default"].Store({
   modules: {
     auth: _modules_auth__WEBPACK_IMPORTED_MODULE_0__["default"],
     users: _modules_users__WEBPACK_IMPORTED_MODULE_1__["default"],
     articles: _modules_articles__WEBPACK_IMPORTED_MODULE_2__["default"],
     courses: _modules_courses__WEBPACK_IMPORTED_MODULE_3__["default"],
     lessons: _modules_lessons__WEBPACK_IMPORTED_MODULE_4__["default"],
-    tests: _modules_tests__WEBPACK_IMPORTED_MODULE_5__["default"]
+    tests: _modules_tests__WEBPACK_IMPORTED_MODULE_5__["default"],
+    questions: _modules_questions__WEBPACK_IMPORTED_MODULE_6__["default"]
   }
 }));
 
@@ -29110,6 +29093,57 @@ var getters = {
     return state.lessonsList;
   }
 };
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  namespaced: true,
+  state: state,
+  actions: actions,
+  mutations: mutations,
+  getters: getters
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/questions.js":
+/*!*************************************************!*\
+  !*** ./resources/js/store/modules/questions.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _axios_axios_instance__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../axios/axios-instance */ "./resources/axios/axios-instance.js");
+/* harmony import */ var _router_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../router/router */ "./resources/js/router/router.js");
+function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure undefined"); }
+
+
+
+var state = {};
+var actions = {
+  addQuestion: function addQuestion(_ref, data) {
+    _objectDestructuringEmpty(_ref);
+
+    _axios_axios_instance__WEBPACK_IMPORTED_MODULE_0__["default"].post("/api/questions", {
+      question: data.form.question,
+      correct_answer: data.form.correct_answer,
+      incorrect_answers: data.form.incorrect_answers,
+      course_id: data.course_id
+    }).then(function (response) {
+      if (response.data) {
+        // отладка
+        console.log(response);
+        _router_router__WEBPACK_IMPORTED_MODULE_1__["default"].push("/course-id".concat(data.course_id, "/lessons"));
+      }
+    })["catch"](function (error) {
+      // отладка
+      console.log(error.response);
+    });
+  }
+};
+var mutations = {};
+var getters = {};
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   namespaced: true,
   state: state,

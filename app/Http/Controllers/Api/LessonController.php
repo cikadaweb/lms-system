@@ -61,7 +61,6 @@ class LessonController extends Controller
         $lesson->title = $request->title;
         $lesson->body = $request->body;
         $lesson->course_id = $request->course_id;
-
         $lesson->save();
         
         return response()->json([

@@ -62,9 +62,9 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::get('course-lessons', [LessonController::class, 'getCourseLessons']);
     Route::get('course-lesson', [LessonController::class, 'getCourseLesson']);
 
-    Route::apiResource('test', TestController::class);
+    Route::apiResource('tests', TestController::class);
 
-    Route::apiResource('question', QuestionController::class);
+    Route::apiResource('questions', QuestionController::class);
 
 });
 

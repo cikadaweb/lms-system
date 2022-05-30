@@ -7,7 +7,7 @@
         <div class="dashboard-panel__title row">
           <div class="nav col-xl-12">
             <div>
-              <h2>Идентификатор урока {{ this.$route.params.lesson }}</h2>
+              <h2>Урок {{ this.$route.params.lesson }}</h2>
             </div>
             <div>
               <router-link :to="`/course-id${this.$route.params.course}/lessons`"><h5><i class="bi bi-arrow-left-circle"></i> Вернуться к курсу</h5></router-link>

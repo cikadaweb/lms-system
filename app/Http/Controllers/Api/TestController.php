@@ -4,8 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 use App\Models\Test;
 use App\Http\Resources\TestResource;
+
+use Validator;
 
 class TestController extends Controller
 {
@@ -48,7 +52,9 @@ class TestController extends Controller
      */
     public function show($id)
     {
-        $test = Test::findById($id);
+        $test_id = DB::table("tests")->where("course_id", "=", $id)->get(); 
+        
+        $test = Test::findById($test_id[0]->id);
         if (!$test) {
             return response()->json([
                 "status" => false,

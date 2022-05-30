@@ -21,4 +21,9 @@ class Test extends Model
     {
         return $query->with('questions')->where('id', $id)->firstOrFail();
     }
+
+    // public function scopeAllQuestions($query)
+    // {
+    //     return $query->with('questions')->orderBy('created_at', 'desc')->get();
+    // }
 }

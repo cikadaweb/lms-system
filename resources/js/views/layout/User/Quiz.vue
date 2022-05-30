@@ -1,7 +1,7 @@
 <template>
   <div class="container">
 
-    <h1>Тест курса: {{ this.$route.params.id }}</h1>
+    <!-- <h1>Тест курса: {{ this.$route.params.id }}</h1> -->
 
     <h1 v-html="loading ? 'Loading...' : currentQuestion.question" class="text-center pt-5"></h1>
     <!-- Отображается только первый вопрос -->
@@ -114,8 +114,8 @@ export default {
 
       // let response = await fetch("https://fsk-system-default-rtdb.firebaseio.com/results.json");
 
-      let response = await fetch("/api/test/" + `${this.$route.params.id}`);
-
+      let response = await fetch("/api/tests/" + `${this.$route.params.id}`);
+      
       // индетификация вопроса
       let index = 0; 
       let data = await response.json();

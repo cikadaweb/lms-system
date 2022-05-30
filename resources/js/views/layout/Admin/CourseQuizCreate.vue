@@ -7,8 +7,8 @@
         <div class="dashboard-panel-title row">
           <div class="col-xl-12">
               <div class="nav">
-              <h2>Добавление вопроса для теста: {{ this.$route.params.id }}</h2>
-              <router-link :to="'/'"><h5><i class="bi bi-house-door"></i> Вернуться на главную</h5></router-link>
+              <h2>Добавление вопроса для Курса: {{ this.$route.params.id }}</h2>
+              <router-link :to="`/course-id${this.$route.params.id}/lessons`"><h5><i class="bi bi-house-door"></i> Вернуться к курсу</h5></router-link>
             </div>
           </div>
         </div>
@@ -27,6 +27,7 @@
 
         <div class="dashboard-panel-content row pt-3">
           <div class="col-xl-12">
+
             <form @submit.prevent="submitHandler">
               <div class="mb-3">
                 <label for="questionTitle" class="form-label"><strong>Введите вопрос *</strong></label>
@@ -42,7 +43,7 @@
 
               <div class="mb-3">
                 <label for="incorrectAnswers" class="form-label"><strong>Введите неправильные ответы через запятую *</strong></label>
-                <input v-model.trim="form.incorrect_answers" class="form-control" id="incorrectAnswers" placeholder="вариант ответа 1, вариант ответа 2, вариант ответа 3" :class="{invalid: errors.incorrect_answers}">
+                <input v-model.trim="form.incorrect_answers" class="form-control" id="incorrectAnswers" placeholder="вариант ответа" :class="{invalid: errors.incorrect_answers}">
                 <small v-if="errors.incorrect_answers" class="form-small">{{ errors.incorrect_answers }}</small>
               </div>
           
@@ -51,8 +52,8 @@
                 <router-link to="/articles/dashboard" class="btn btn-danger me-3">Отменить добавление</router-link>
                 <button type="submit" class="btn btn-success"> Добавить вопрос </button>
               </div>
-
             </form>
+
           </div>
         </div>
 
@@ -111,33 +112,10 @@ export default {
     submitHandler() {
       if (this.formIsValid()) {
 
-        console.log(this.form)
-
-        // this.$store.dispatch("lessons/addLesson", {
-        //   form: this.form,
-        //   course_id: this.$route.params.id
-        // })
-
-          //   addArticle({}, article) {
-          //     axios
-          //         .post("/api/articles", {
-          //             title: article.title,
-          //             img: article.img,
-          //             preview: article.preview,
-          //             body: article.body,
-          //         })
-          //         .then((response) => {
-          //             if (response.data) {
-          //                 // отладка
-          //                 console.log(response);
-          //                 router.push("/articles/dashboard");
-          //             }
-          //         })
-          //         .catch((error) => {
-          //             // отладка
-          //             console.log(error.response);
-          //         });
-          // },
+        this.$store.dispatch("questions/addQuestion", {
+          form: this.form,
+          course_id: this.$route.params.id
+        })
       }
     },
 

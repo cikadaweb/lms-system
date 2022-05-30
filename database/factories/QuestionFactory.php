@@ -22,13 +22,12 @@ class QuestionFactory extends Factory
         $incorrect_answer3 = $this->faker->sentence(1, true);
         $incorrect_answers = $incorrect_answer1 . "," . $incorrect_answer2 . "," . $incorrect_answer3;
         $question = $this->faker->sentence(5, true);
-        $type = $this->faker->sentence(1, true);
 
         return [
             'correct_answer' => $correct_answer,
             'incorrect_answers' => $incorrect_answers,
             'question' => $question,
-            'type' => $type,
+            'type' => "multiple",
             'test_id' => rand(1, 3),
         ];
     }
