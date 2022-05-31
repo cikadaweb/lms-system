@@ -7,7 +7,7 @@
 
         <div class="dashboard-panel__title row pt-3">
           <div class=" col-xl-12">
-            <h1>Статистика по курсам:</h1>
+            <h1>Главная</h1>
           </div>
         </div>
 

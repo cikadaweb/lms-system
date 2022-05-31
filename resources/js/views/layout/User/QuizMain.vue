@@ -3,7 +3,6 @@
     
     <div class="blog-panel-title col-xl-12 d-flex justify-content-between align-items-center ps-3">
       <h1>Тестирование</h1>
-      <router-link :to="'/'"><h5><i class="bi bi-house-door"></i> Вернуться на главную</h5></router-link>
     </div>
 
     <quiz @quiz-completed="handleQuizCompleted" :key="quizKey" />

@@ -25,7 +25,7 @@
             <my-input type="email" placeholder="email address" v-model="user.email"></my-input>
             <my-input type="password" placeholder="password" v-model="user.password"></my-input>
             <my-button type="submit" class="btn btn-primary" @click.prevent="login">Войти <i class="bi bi-box-arrow-in-right"></i></my-button>
-            <router-link to="/user/register"><p class="message">Еще не регистрироваилсь?</p><a href="#">Зарегистрироваться</a></router-link>
+            <!-- <router-link to="/user/register"><p class="message">Еще не регистрироваилсь?</p><a href="#">Зарегистрироваться</a></router-link> -->
           </form>
           
         </div>
