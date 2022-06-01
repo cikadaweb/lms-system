@@ -5,7 +5,7 @@
 
         <div class="dashboard-panel-title row pt-2">
           <div class=" col-xl-12">
-            <h1>Курс {{ this.$route.params.id }}:</h1>
+            <h1>{{ this.$route.params.title }}</h1>
           </div>
         </div>
 
@@ -13,7 +13,7 @@
           <div class="col-xl-12 d-flex justify-content-between">
 
             <div class="pe-5">
-              <router-link :to="{name: 'CourseEdit', params:{id: this.$route.params.id}}">
+              <router-link :to="{name: 'CourseEdit', params:{id: this.$route.params.id}}" v-if="authUser.role == 'Admin'">
                 <my-button class="btn-success me-3">
                   <span class="me-3">Редактировать курс </span>
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square side-nav__link-icon" viewBox="0 0 16 16">
@@ -23,7 +23,7 @@
                 </my-button>
               </router-link>
 
-              <router-link :to="{name: 'CourseQuizCreate', params:{id: this.$route.params.id}}">
+              <router-link :to="{name: 'CourseQuizCreate', params:{id: this.$route.params.id}}" v-if="authUser.role == 'Admin'">
                 <my-button class="btn-primary">
                   <span class="me-3">Добавить вопросы к тесту</span>
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-text-fill side-nav__link-icon" viewBox="0 0 16 16">
@@ -66,6 +66,9 @@ export default {
     this.$store.dispatch("courses/getCourseData", this.$route.params.id)
   },
   computed: {
+    authUser() {
+      return this.$store.state.auth.authUser
+    },
     getCurrentCourse: {
       get() {
         return this.$store.state.courses.currentCourse

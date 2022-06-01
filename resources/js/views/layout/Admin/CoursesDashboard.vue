@@ -42,7 +42,7 @@
 
       <div class="dashboard-panel-buttons col-xl-12 d-flex justify-content-between pt-3">
 
-        <router-link :to="'/course/create'">
+        <router-link :to="'/course/create'" v-if="authUser.role == 'Admin'">
           <my-button class="btn-success">
             <span class="me-3">Создать курс</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-folder-plus" viewBox="0 0 16 16">
@@ -79,11 +79,11 @@
               <p>Продолжительность: 8 часов</p>
 
               <div class="card__buttons d-flex justify-content-between">
-                <router-link :to="{name: 'LessonsMain', params:{id: course.id}}">
+                <router-link :to="{name: 'LessonsMain', params:{id: course.id, title: course.title}}">
                   <my-button class="btn btn-outline-primary">Открыть</my-button>
                 </router-link>
 
-                <router-link :to="'/'">
+                <router-link :to="'/'" v-if="authUser.role == 'Admin'">
                   <my-button class="btn btn-outline-danger">Архивироавать</my-button>
                 </router-link>
               </div>
@@ -136,6 +136,9 @@ export default {
   },
 
   computed: {
+    authUser() {
+      return this.$store.state.auth.authUser
+    },
     getCourses: {
       get() {
         return this.$store.state.courses.coursesList

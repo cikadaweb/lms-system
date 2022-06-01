@@ -53,8 +53,8 @@ export default {
       }
     },
     mounted() {
-        this.time = document.getElementById("time");
-        this.tiktak()
+        // this.time = document.getElementById("time");
+        // this.tiktak()
     },
     methods: {
         logout() {
