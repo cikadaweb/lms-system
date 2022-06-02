@@ -56,7 +56,7 @@ const actions = {
             .get("/api/users/" + id)
             .then((response) => {
                 ctx.commit("setUserData", response.data.data);
-                console.log(response);
+                console.log(response.data.data);
             })
             .catch((error) => {
                 // отладка
@@ -147,48 +147,47 @@ const actions = {
                 console.log(error);
             });
     },
-
-    // addRole({}, role) {
-    //     axios
-    //         .post("/api/roles", {
-    //             name: role.name,
-    //         })
-    //         .then((response) => {
-    //             if (response.data) {
-    //                 window.location.replace("/user/management");
-    //                 console.log(response);
-    //             }
-    //         })
-    //         .catch((error) => {
-    //             console.log(error.response);
-    //         });
-    // },
-    // getPermissions(ctx) {
-    //     axios
-    //         .get("/api/permissions")
-    //         .then((response) => {
-    //             ctx.commit("setPermissionsList", response.data.data);
-    //             console.log(response);
-    //         })
-    //         .catch((error) => {
-    //             console.log(error);
-    //         });
-    // },
-    // addPermission({}, permission) {
-    //     axios
-    //         .post("/api/permissions", {
-    //             name: permission.name,
-    //         })
-    //         .then((response) => {
-    //             if (response.data) {
-    //                 window.location.replace("/user/permissions");
-    //                 console.log(response);
-    //             }
-    //         })
-    //         .catch((error) => {
-    //             console.log(error.response);
-    //         });
-    // },
+    addRole({}, role) {
+        axios
+            .post("/api/roles", {
+                name: role.name,
+            })
+            .then((response) => {
+                if (response.data) {
+                    router.push("/user/management");
+                    console.log(response);
+                }
+            })
+            .catch((error) => {
+                console.log(error.response);
+            });
+    },
+    getPermissions(ctx) {
+        axios
+            .get("/api/permissions")
+            .then((response) => {
+                ctx.commit("setPermissionsList", response.data.data);
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
+    addPermission({}, permission) {
+        axios
+            .post("/api/permissions", {
+                name: permission.name,
+            })
+            .then((response) => {
+                if (response.data) {
+                    router.push("/user/permissions");
+                    console.log(response);
+                }
+            })
+            .catch((error) => {
+                console.log(error.response);
+            });
+    },
 };
 
 const mutations = {

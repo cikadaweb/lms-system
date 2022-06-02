@@ -55,7 +55,7 @@ const actions = {
                 console.log(error.response);
             });
     },
-    changeCourse({}, course, id) {
+    changeCourse({}, course) {
         axios
             .put("/api/courses/" + course.id, {
                 title: course.title,

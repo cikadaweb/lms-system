@@ -58,6 +58,28 @@ const actions = {
                 console.log(error.response);
             });
     },
+    changeLesson({}, data) {
+        console.log(data.course_id);
+        axios
+            .put("/api/lessons/" + data.lesson.id, {
+                title: data.lesson.title,
+                lesson_file: data.lesson.lesson_file,
+                body: data.lesson.body,
+            })
+            .then((response) => {
+                if (response.data) {
+                    // отладка
+                    console.log(response);
+                    router.push(
+                        `/course-id${data.course_id}/lesson-id${data.lesson.id}`
+                    );
+                }
+            })
+            .catch((error) => {
+                // отладка
+                console.log(error.response);
+            });
+    },
 };
 
 const mutations = {

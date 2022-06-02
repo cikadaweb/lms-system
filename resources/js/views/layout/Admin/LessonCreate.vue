@@ -5,8 +5,8 @@
 
       <div class="col-xl-12">
         <div class="nav">
-          <h2>Создать урок для курса: {{ this.$route.params.id }}</h2>
-          <router-link :to="'/'"><h5><i class="bi bi-house-door"></i> Вернуться на главную</h5></router-link>
+          <h2>Создание урока </h2>
+          <router-link :to="`/course-id${this.$route.params.id}/lessons`"><h5><i class="bi bi-arrow-left-circle"></i> Вернуться к курсу</h5></router-link>
         </div>
         
         <form @submit.prevent="submitHandler">

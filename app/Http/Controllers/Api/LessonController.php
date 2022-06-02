@@ -108,9 +108,33 @@ class LessonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Lesson $lesson)
     {
-        //
+        $validator = Validator::make(
+            $request->all(),
+            [
+                "title" => ["required"],
+                "lesson_file" => ["required"],
+                "body" => ["required"],
+            ]
+            );
+        if ($validator->fails()) {
+            return [
+                "status" => false,
+                "errors" => $validator->messages()
+            ];
+        }
+
+        $lesson->title = $request->title;
+        $lesson->lesson_file = $request->lesson_file;
+        $lesson->body = $request->body;
+        $lesson->save();
+        
+
+        return [
+            "status" => true,
+            "lesson" => $lesson
+        ];
     }
 
     /**

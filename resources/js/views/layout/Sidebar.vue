@@ -17,7 +17,7 @@
 
             <router-link
                 v-if="authUser.role == 'User'" 
-                :to="{name: 'UserProfile', params:{id: 1}}">
+                :to="{name: 'UserProfile', params:{id: authUser.id}}">
                     <li class="side-nav__item">
                         <a href="#" class="side-nav__link">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle side-nav__link-icon" viewBox="0 0 16 16">
@@ -30,7 +30,7 @@
             </router-link>
 
             <router-link
-                v-if="authUser.role == 'Admin' || authUser.role == 'Master'"
+                v-if="authUser.role == 'Master'"
                 :to="'/courses/dashboard'">
                     <li class="side-nav__item">
                         <a href="#" class="side-nav__link">
@@ -73,7 +73,7 @@
             </router-link> 
 
             <router-link 
-                v-if="authUser.role == 'Admin' || authUser.role == 'Master'"
+                v-if="authUser.role == 'Admin'"
                 :to="'/articles/dashboard'">
                     <li class="side-nav__item">
                         <a href="#" class="side-nav__link">
@@ -87,7 +87,7 @@
             </router-link>
 
             <router-link 
-                v-if="authUser.role == 'User'"
+                v-if="authUser.role == 'User' || authUser.role == 'Master'"
                 :to="'/articles'">
                     <li class="side-nav__item">
                         <a href="#" class="side-nav__link">

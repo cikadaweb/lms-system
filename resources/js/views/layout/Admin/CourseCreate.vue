@@ -6,7 +6,7 @@
       <div class="col-xl-12">
         <div class="nav">
           <h2>Создание курса: </h2>
-          <router-link :to="'/'"><h5><i class="bi bi-house-door"></i> Вернуться на главную</h5></router-link>
+          <router-link :to="'/courses/dashboard'"><h5><i class="bi bi-arrow-left-circle"></i> Вернуться к курсам</h5></router-link>
         </div>
         
         <form @submit.prevent="submitHandler">
@@ -77,7 +77,7 @@ export default {
       let isValid = true
 
       let imgPath = document.getElementById("feature_image")
-      this.form.img = imgPath.value;
+      this.form.img = "/" + imgPath.value;
       let textContent = tinymce.get('mytextarea').getContent();
       this.form.description =  textContent ;
 

@@ -7,23 +7,11 @@
         <div class="dashboard-panel-title row">
           <div class="col-xl-12">
               <div class="nav">
-              <h2>Добавление вопроса для Курса: {{ this.$route.params.id }}</h2>
+              <h2>Добавление вопроса для теста</h2>
               <router-link :to="`/course-id${this.$route.params.id}/lessons`"><h5><i class="bi bi-house-door"></i> Вернуться к курсу</h5></router-link>
             </div>
           </div>
         </div>
-
-        <!-- <div class="dashboard-panel-buttons row pt-3">
-          <div class="col-xl-12 d-flex justify-content-between">
-
-            <div class="dashboard-panel__btn pe-5">
-                <my-button class="btn-success me-3">
-                  <span class="me-3">Добавить вопрос </span>
-                </my-button>
-            </div>
-
-          </div>
-        </div> -->
 
         <div class="dashboard-panel-content row pt-3">
           <div class="col-xl-12">

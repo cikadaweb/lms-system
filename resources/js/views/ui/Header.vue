@@ -6,12 +6,12 @@
             <router-link :to="'/'"><img src="../../../img/logo.png" class="logo" alt="fsk logo"></router-link>
         </div>      
 
-        <div>
+        <!-- <div>
             <h5 class="d-flex" id="time">Время: {{ getTime }}</h5>
-        </div>  
+        </div>   -->
 
         <div>
-            <h5 class="d-flex">Добро пожаловать на платформу, {{ authUser.role }} !</h5>
+            <h5 class="d-flex">Добро пожаловать на платформу, {{ authUser.name }} !</h5>
         </div>  
 
         <nav class="navbar navbar-expand-lg user-menu">

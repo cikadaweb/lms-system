@@ -17,7 +17,7 @@ class MainController extends Controller
         $user = Auth::user();
         $userRole = DB::table("model_has_roles")->select("role_id")->where("model_id", $user->id)->get();
         $userName = DB::table("users")->select("name")->where("id", $user->id)->get();
-        if($userRole[0]->role_id === 9) {
+        if($userRole[0]->role_id === 12) {
             return [
                 "userId" => $user->id,
                 "userName" => $userName,
