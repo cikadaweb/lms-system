@@ -21,10 +21,11 @@
 
         <div class="login-page">
           <form class="form">
-            <h2>Авторизация</h2>
-            <my-input type="email" placeholder="email address" v-model="user.email"></my-input>
-            <my-input type="password" placeholder="password" v-model="user.password"></my-input>
-            <my-button type="submit" class="btn btn-primary" @click.prevent="login">Войти <i class="bi bi-box-arrow-in-right"></i></my-button>
+            <img src="../../../img/logo.png" class="logo pb-5" alt="fsk logo">
+            <h1 class="logo-title pb-3">Авторизация</h1>
+            <my-input type="email" placeholder="Логин" v-model="user.email"></my-input>
+            <my-input type="password" placeholder="Пароль" v-model="user.password"></my-input>
+            <my-button type="submit" class="btn btn-primary btn-lg" @click.prevent="login">Войти <i class="bi bi-box-arrow-in-right"></i></my-button>
             <!-- <router-link to="/user/register"><p class="message">Еще не регистрироваилсь?</p><a href="#">Зарегистрироваться</a></router-link> -->
           </form>
           
@@ -70,6 +71,10 @@ export default {
 
 <style scoped lang="scss">
 
+.logo {
+  width: 130px;
+}
+
 .alert-block {
   display: flex;
   align-items: center;
@@ -77,7 +82,7 @@ export default {
 }
 
 .login-page {
-    width: 450px;
+    width: 600px;
     padding: 8% 0 0;
     margin: auto;
     display:flex;
@@ -89,7 +94,7 @@ export default {
     background-size: cover;
     background-position: center;
     border-radius: 15px;
-    max-width: 450px;
+    max-width: 600px;
     margin: 0 auto 100px;
     padding: 45px;
     text-align: center;
@@ -103,13 +108,12 @@ export default {
     border: 0;
     margin: 0 0 15px;
     box-sizing: border-box;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .form .message {
     margin: 15px;
     font-size: 12px;
 }
-
 
 </style>
