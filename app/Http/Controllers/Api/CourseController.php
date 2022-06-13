@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use App\Models\Course;
 use App\Models\Test;
 use App\Http\Resources\CourseResource;
+use Illuminate\Support\Facades\DB;
+ use Illuminate\Support\Collection;
+
 use Validator;
 
 class CourseController extends Controller
@@ -162,4 +165,19 @@ class CourseController extends Controller
             return CourseResource::collection($courses);
         }
     }
+    public function getCoursesByUser(Request $request) {
+        $user_id =  $request->get('idUserCourses');
+        if (!empty($user_id)) {
+            $collection = collect([]);
+            $courses = DB::table("user_course")->where("user_id", "=", $user_id)->get(); 
+            
+            foreach ($courses as $course) {
+                $item = Course::findById($course->course_id);
+                $collection->push($item);
+            }
+            return $collection;
+            // return CourseResource::collection($courses);
+        }
+    }
+    
 }

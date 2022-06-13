@@ -13,13 +13,25 @@ const actions = {
         axios
             .get("/api/courses")
             .then((response) => {
-                // отладка
                 ctx.commit("setCoursesList", response.data);
                 console.log("Получим наши курсы: ", response.data);
                 ctx.commit("toggleLoading");
             })
             .catch((error) => {
-                // отладка
+                console.log(error);
+            });
+    },
+    getUserCourses(ctx, id) {
+        console.log("ID юзера:", id);
+        ctx.commit("toggleLoading");
+        axios
+            .get("/api/courses-user" + `?idUserCourses=${id}`)
+            .then((response) => {
+                ctx.commit("setCoursesList", response.data);
+                console.log("Получим курсы пользователя: ", response.data);
+                ctx.commit("toggleLoading");
+            })
+            .catch((error) => {
                 console.log(error);
             });
     },
@@ -27,7 +39,6 @@ const actions = {
         axios
             .get("/api/courses/" + id)
             .then((response) => {
-                // отладка
                 ctx.commit("setCourseData", response.data.data);
                 console.log(response.data.data);
             })
@@ -45,13 +56,11 @@ const actions = {
             })
             .then((response) => {
                 if (response.data) {
-                    // отладка
                     console.log(response);
                     router.push("/courses/dashboard");
                 }
             })
             .catch((error) => {
-                // отладка
                 console.log(error.response);
             });
     },
@@ -65,13 +74,11 @@ const actions = {
             })
             .then((response) => {
                 if (response.data) {
-                    // отладка
                     console.log(response);
                     router.push("/course-id" + course.id + "/lessons");
                 }
             })
             .catch((error) => {
-                // отладка
                 console.log(error.response);
             });
     },

@@ -3,11 +3,18 @@
   <div class="container">
     <div class="row pt-3">
       
-      <div class="dashboard-panel__title col-xl-12 pt-2">
-        <h1>Курсы</h1>
+      <div class="dashboard-panel__title col-xl-12 pt-3">
+        <h1 
+          v-if="authUser.role == 'Master'"
+        >Курсы</h1>
+        <h1 
+          v-if="authUser.role == 'User'"
+        >Мои курсы</h1>
       </div>
 
-      <div class="dashboard-panel-filter col-xl-12 d-flex justify-content-between pt-3">
+      <div 
+        v-if="authUser.role == 'Master'"
+        class="dashboard-panel-filter col-xl-12 d-flex justify-content-between pt-3">
           <div class="panel-filter-left">
             <form class="d-flex">
               <input class="form-control panel-input" v-model="search_input" @input="getCoursesBySearch" type="search" placeholder="Наименование курса" aria-label="Search">
@@ -16,28 +23,13 @@
           </div>
 
           <div class="panel-filter-right d-flex">
-
             <select class="form-select me-5">
               <option selected>Статус курса</option>
               <option value="1">Опубликован</option>
               <option value="2">Неопубликован</option>
             </select>
-
-            <!-- <select 
-              class="form-select" 
-              aria-label="Роль"
-              v-model="filter_role" 
-              @change="filterUsersByStatus"
-            >
-              <option value="" selected>Роль </option>
-              <option 
-              v-for="role in getRoles"
-              :key="role.id" 
-              :value="role.name"
-              >{{ role.name }}</option>
-            </select> -->
-
           </div>
+
       </div>
 
       <div class="dashboard-panel-buttons col-xl-12 d-flex justify-content-between pt-3">
@@ -113,7 +105,12 @@ export default {
   },
 
   mounted() {
-    this.$store.dispatch("courses/getCourses")
+    this.$store.dispatch("auth/getLoginUserData")
+    if (this.authUser.role == 'Master') {
+      this.$store.dispatch("courses/getCourses")
+    } else {
+      this.$store.dispatch("courses/getUserCourses", this.authUser.id)
+    }
   },
 
   methods: {
