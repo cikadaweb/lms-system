@@ -9,11 +9,15 @@ class Question extends Model
 {
     use HasFactory;
 
-    protected $fillable = ["correct_answer", "incorrect_answers", "question", "type", "test_id" ];
+    protected $fillable = ["question", "is_active", "type", "test_id"];
 
     public $timestamps = false;
 
     public function test() {
         return $this->belongsTo(Test::class);
+    }
+
+    public function answers() {
+        return $this->hasMany(Answer::class);
     }
 }

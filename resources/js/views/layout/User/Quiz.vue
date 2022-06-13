@@ -15,7 +15,7 @@
       ></button>
     </form>
 
-    <div class="correctAnswers text-center pt-3">
+    <div v-if="currentQuestion" class="correctAnswers text-center pt-3">
       Текущий вопрос {{ index + 1 }} из {{ questions.length }}
     </div>
 
@@ -119,19 +119,55 @@ export default {
       // индетификация вопроса
       let index = 0; 
       let data = await response.json();
+      // console.log(data);
 
       let myCategory = data.data.category
       let myQuestions = data.data.questions
       let goodData = []
-      myQuestions.forEach(element => {
+
+      for (const question of myQuestions) {
         let info = {}
         info.category = myCategory
-        info.correct_answer = element.correct_answer
-        info.incorrect_answers = element.incorrect_answers.split(',')
-        info.question = element.question
-        info.type = element.type
+
+        let responseAnswers = await fetch(`/api/questions/${question.id}`);
+        let dataAnswers = await responseAnswers.json(); // массив из объектов
+
+        // console.log("Все ответы: ", dataAnswers)
+
+        info.correct_answer = dataAnswers.filter((answer) => {  // узнаем текст правильного ответа
+          if (answer.is_correct_answer == 1) {
+            return answer
+          }
+        })[0].answer
+
+        let incorrectAnswers = []
+        info.incorrect_answers = dataAnswers.filter((answer) => {
+          if (answer.is_correct_answer == 0) {
+            return answer
+          }
+        }).forEach(elem => {
+          incorrectAnswers.push(elem.answer)
+        })
+        info.incorrect_answers = incorrectAnswers
+        // console.log(incorrectAnswers)
+
+        info.question = question.question
+        info.type = question.type
         goodData.push(info)
-      });
+        // console.log("Info", info)
+      }
+
+      console.log("Lol", goodData)
+
+      // myQuestions.forEach(element => {
+      //   let info = {}
+      //   info.category = myCategory
+      //   info.correct_answer = element.correct_answer
+      //   info.incorrect_answers = element.incorrect_answers.split(',')
+      //   info.question = element.question
+      //   info.type = element.type
+      //   goodData.push(info)
+      // });
 
       // console.log("Lol", goodData)
 

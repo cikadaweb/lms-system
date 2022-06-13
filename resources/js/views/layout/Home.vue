@@ -15,11 +15,19 @@
 
         <AppLoader v-if="loading"></AppLoader>
 
-        <Main
-          v-else 
-          :panelState = panelState
-        ></Main>
+        <div class="" v-else>
+          <Main 
+            v-if="authUser.role == 'Admin' || authUser.role == 'Master'"
+            :panelState = panelState
+          >
+          </Main>
+          <UserMain 
+            v-if="authUser.role == 'User'"
+          ></UserMain>
+
+        </div>
       </div>
+      
     </div>
   </div>
 
@@ -32,6 +40,7 @@ import axios from "../../../axios/axios-instance";
 import Header from "../ui/Header";
 import AppLoader from "../ui/AppLoader";
 import Main from "./Main";
+import UserMain from "./User/UserMain.vue";
 import Sidebar from "./Sidebar";
 
 export default {
@@ -39,7 +48,8 @@ export default {
         Header,
         Sidebar,
         Main,
-        AppLoader
+        AppLoader,
+        UserMain,
     },
     data() {
       return {
@@ -60,6 +70,11 @@ export default {
           // console.log(this.panelState)
         })
       },
+    },
+    computed: {
+      authUser() {
+        return this.$store.state.auth.authUser
+      }
     }
 
 }

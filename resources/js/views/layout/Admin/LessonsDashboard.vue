@@ -62,7 +62,7 @@ export default {
   components: {LessonsAbout, LessonsModules, QuizMain},
   data() {
     return {
-      currentTab: "modules"
+      currentTab: "about"
     }
   },
   mounted() {

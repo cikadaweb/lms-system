@@ -16,11 +16,20 @@ class QuestionResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'correct_answer' => $this->correct_answer,
-            'incorrect_answers' => $this->incorrect_answers,
             'question' => $this->question,
+            'is_active' => $this->is_active,
             'type' => $this->type,
+            'test_id' => $this->test_id,
+            'answers' => AnswerResource::collection($this->whenLoaded('answers')),
         ];
+
+        // return [
+        //     'id' => $this->id,
+        //     'question' => $this->question,
+        //     'is_active' => $this->is_active,
+        //     'type' => $this->type,
+        //     'test_id' => $this->test_id,
+        // ];
         
         // return parent::toArray($request);
     }

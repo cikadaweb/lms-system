@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 
-class QuestionFactory extends Factory
+class AnswerFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -15,11 +15,13 @@ class QuestionFactory extends Factory
      */
     public function definition()
     {
-        $question = $this->faker->sentence(5, true);
+        //$is_correct_answer = $this->faker->numberBetween(0, 1);
+        $answer = $this->faker->sentence(2, true);
+
         return [
-            'question' => $question,
-            'type' => "multiple",
-            'test_id' => rand(1, 3),
+            'is_correct_answer' => 1,
+            'answer' => $answer,
+            'question_id' => 18,
         ];
     }
 }
