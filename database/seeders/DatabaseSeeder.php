@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
         // $tests = \App\Models\Test::factory(1)->create();
         // $questions = \App\Models\Question::factory(18)->create();
         // $answers = \App\Models\Answer::factory(1)->create();
+        $scores = \App\Models\Score::factory(1)->create();
 
        
         // $lessons_id = $lessons->pluck('id');

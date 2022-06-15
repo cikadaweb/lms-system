@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\LessonController;
 use App\Http\Controllers\Api\TestController;
 use App\Http\Controllers\Api\QuestionController;
+use App\Http\Controllers\Api\ScoreController;
 
 use App\Http\Controllers\MainController;
 
@@ -64,6 +65,8 @@ Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::get('course-lesson', [LessonController::class, 'getCourseLesson']);
 
     Route::apiResource('tests', TestController::class);
+    
+    Route::apiResource('scores', ScoreController::class);
 
     Route::apiResource('questions', QuestionController::class);
 

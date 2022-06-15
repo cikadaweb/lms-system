@@ -25,17 +25,37 @@
 
               <div class="mb-3">
                 <label for="correctAnswer" class="form-label"><strong>Введите правильный ответ *</strong></label>
-                <input v-model.trim="form.correct_answer" class="form-control" id="correctAnswer" placeholder="Правильный ответ на вопрос" :class="{invalid: errors.correct_answer}">
+                <input v-model.trim="form.correct_answer" class="form-control" id="correctAnswer" placeholder="Правильный вариант ответа" :class="{invalid: errors.correct_answer}">
                 <small v-if="errors.correct_answer" class="form-small">{{ errors.correct_answer }}</small>
               </div>
 
               <div class="mb-3">
-                <label for="incorrectAnswers" class="form-label"><strong>Введите неправильные ответы через запятую *</strong></label>
-                <input v-model.trim="form.incorrect_answers" class="form-control" id="incorrectAnswers" placeholder="вариант ответа" :class="{invalid: errors.incorrect_answers}">
-                <small v-if="errors.incorrect_answers" class="form-small">{{ errors.incorrect_answers }}</small>
+                <label for="incorrectAnswer1" class="form-label"><strong>Введите неправильный ответ *</strong></label>
+                <input v-model.trim="incorrect_answer_1" class="form-control" id="incorrectAnswer1" placeholder="вариант ответа" :class="{invalid: errors.incorrect_answer_1}">
+                <small v-if="errors.incorrect_answer_1" class="form-small">{{ errors.incorrect_answer_1 }}</small>
               </div>
-          
 
+              <div class="mb-3">
+                <label for="incorrectAnswer2" class="form-label"><strong>Введите неправильный ответ *</strong></label>
+                <input v-model.trim="incorrect_answer_2" class="form-control" id="incorrectAnswer2" placeholder="вариант ответа" :class="{invalid: errors.incorrect_answer_2}">
+                <small v-if="errors.incorrect_answer_2" class="form-small">{{ errors.incorrect_answer_2 }}</small>
+              </div>
+
+              <div class="mb-3">
+                <label for="incorrectAnswer3" class="form-label"><strong>Введите неправильный ответ *</strong></label>
+                <input v-model.trim="incorrect_answer_3" class="form-control" id="incorrectAnswer3" placeholder="вариант ответа" :class="{invalid: errors.incorrect_answer_3}">
+                <small v-if="errors.incorrect_answer_3" class="form-small">{{ errors.incorrect_answer_3 }}</small>
+              </div>
+
+              <div class="div">
+                <button class="btn btn-outline-success">Добавить вариант ответа  
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                  </svg>
+                </button>
+              </div>
+            
               <div class="form-buttons">
                 <router-link to="/articles/dashboard" class="btn btn-danger me-3">Отменить добавление</router-link>
                 <button type="submit" class="btn btn-success"> Добавить вопрос </button>
@@ -62,10 +82,15 @@ export default {
         correct_answer: "",
         incorrect_answers: "",
       },
+      incorrect_answer_1: "",
+      incorrect_answer_2: "",
+      incorrect_answer_3: "",
       errors: {
         question: null,
         correct_answer: null,
-        incorrect_answers: null,
+        incorrect_answer_1: null,
+        incorrect_answer_2: null,
+        incorrect_answer_3: null,
       }
     }
   },
@@ -87,12 +112,25 @@ export default {
       } else {
         this.errors.correct_answer = null
       }
-      if (this.form.incorrect_answers.length === 0) {
-        this.errors.incorrect_answers = "Введите неправильные ответы через запятую ','"
+      if (this.incorrect_answer_1.length === 0) {
+        this.errors.incorrect_answer_1 = "Введите неправильный ответ"
         isValid = false
       } else {
-        this.errors.incorrect_answers = null
+        this.errors.incorrect_answer_1 = null
       }
+      if (this.incorrect_answer_2.length === 0) {
+        this.errors.incorrect_answer_2 = "Введите неправильный ответ"
+        isValid = false
+      } else {
+        this.errors.incorrect_answer_2 = null
+      }
+      if (this.incorrect_answer_3.length === 0) {
+        this.errors.incorrect_answer_3 = "Введите неправильный ответ"
+        isValid = false
+      } else {
+        this.errors.incorrect_answer_3 = null
+      }
+     
 
       return isValid
     },
@@ -100,6 +138,7 @@ export default {
     submitHandler() {
       if (this.formIsValid()) {
 
+        this.form.incorrect_answers = this.incorrect_answer_1 + "," + this.incorrect_answer_2 + "," + this.incorrect_answer_3
         this.$store.dispatch("questions/addQuestion", {
           form: this.form,
           course_id: this.$route.params.id

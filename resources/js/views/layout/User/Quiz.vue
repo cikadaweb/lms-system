@@ -157,20 +157,8 @@ export default {
         // console.log("Info", info)
       }
 
-      console.log("Lol", goodData)
-
-      // myQuestions.forEach(element => {
-      //   let info = {}
-      //   info.category = myCategory
-      //   info.correct_answer = element.correct_answer
-      //   info.incorrect_answers = element.incorrect_answers.split(',')
-      //   info.question = element.question
-      //   info.type = element.type
-      //   goodData.push(info)
-      // });
-
       // console.log("Lol", goodData)
-
+      
       let questions = goodData.map((question) => {
         question.answers = [
           question.correct_answer,

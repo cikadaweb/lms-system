@@ -40,11 +40,33 @@ export default {
     handleQuizCompleted(score) {
       this.score = score;
       this.showModal = true;
+
+      this.saveCurrentTestScores(this.score) // тут вызываем метод для сохранения результатов
+
     },
     updateQuiz() {
       this.showModal = false;
       this.quizKey++;
     },
+    async saveCurrentTestScores() {
+      console.log("Количество правильных ответов: ", this.score.correctlyAnsweredQuestions)
+      // fetch("/api/questions/", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type" : "application/json"
+      //   },
+      //   body: JSON.stringify({
+      //     score_percentage: 80,
+      //     score_count: 5,
+      //     user_id: 35,
+      //     test_id: 2
+      //   })
+      // })
+
+      let data = await response.json()
+      console.log(data)
+    }
+
   },
 };
 </script>

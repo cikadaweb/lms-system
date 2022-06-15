@@ -48,6 +48,10 @@ class User extends Authenticatable
         return $this->belongsToMany(Course::class);
     }
 
+    public function scores() {
+        return $this->hasMany(Score::class);
+    }
+
     public function scopeAllPaginate($query, $numbers)
     {
         return $query->orderBy('created_at', 'desc')->paginate($numbers);

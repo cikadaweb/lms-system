@@ -17,6 +17,10 @@ class Test extends Model
         return $this->hasMany(Question::class);
     }
 
+    public function score() {
+        return $this->hasOne(Score::class);
+    }
+
     public function scopeFindById($query, $id)
     {
         return $query->with('questions')->where('id', $id)->firstOrFail();

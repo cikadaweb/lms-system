@@ -20412,10 +20412,15 @@ __webpack_require__.r(__webpack_exports__);
         correct_answer: "",
         incorrect_answers: ""
       },
+      incorrect_answer_1: "",
+      incorrect_answer_2: "",
+      incorrect_answer_3: "",
       errors: {
         question: null,
         correct_answer: null,
-        incorrect_answers: null
+        incorrect_answer_1: null,
+        incorrect_answer_2: null,
+        incorrect_answer_3: null
       }
     };
   },
@@ -20437,17 +20442,32 @@ __webpack_require__.r(__webpack_exports__);
         this.errors.correct_answer = null;
       }
 
-      if (this.form.incorrect_answers.length === 0) {
-        this.errors.incorrect_answers = "Введите неправильные ответы через запятую ','";
+      if (this.incorrect_answer_1.length === 0) {
+        this.errors.incorrect_answer_1 = "Введите неправильный ответ";
         isValid = false;
       } else {
-        this.errors.incorrect_answers = null;
+        this.errors.incorrect_answer_1 = null;
+      }
+
+      if (this.incorrect_answer_2.length === 0) {
+        this.errors.incorrect_answer_2 = "Введите неправильный ответ";
+        isValid = false;
+      } else {
+        this.errors.incorrect_answer_2 = null;
+      }
+
+      if (this.incorrect_answer_3.length === 0) {
+        this.errors.incorrect_answer_3 = "Введите неправильный ответ";
+        isValid = false;
+      } else {
+        this.errors.incorrect_answer_3 = null;
       }
 
       return isValid;
     },
     submitHandler: function submitHandler() {
       if (this.formIsValid()) {
+        this.form.incorrect_answers = this.incorrect_answer_1 + "," + this.incorrect_answer_2 + "," + this.incorrect_answer_3;
         this.$store.dispatch("questions/addQuestion", {
           form: this.form,
           course_id: this.$route.params.id
@@ -21789,17 +21809,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context2.finish(24);
 
               case 27:
-                console.log("Lol", goodData); // myQuestions.forEach(element => {
-                //   let info = {}
-                //   info.category = myCategory
-                //   info.correct_answer = element.correct_answer
-                //   info.incorrect_answers = element.incorrect_answers.split(',')
-                //   info.question = element.question
-                //   info.type = element.type
-                //   goodData.push(info)
-                // });
                 // console.log("Lol", goodData)
-
                 questions = goodData.map(function (question) {
                   question.answers = [question.correct_answer].concat(_toConsumableArray(question.incorrect_answers)); // перетасовка массива с ответами
 
@@ -21819,7 +21829,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _this2.questions = questions;
                 _this2.loading = false;
 
-              case 31:
+              case 30:
               case "end":
                 return _context2.stop();
             }
@@ -21893,14 +21903,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _CustomModal_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CustomModal.vue */ "./resources/js/views/layout/User/CustomModal.vue");
-/* harmony import */ var _Quiz_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Quiz.vue */ "./resources/js/views/layout/User/Quiz.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _CustomModal_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CustomModal.vue */ "./resources/js/views/layout/User/CustomModal.vue");
+/* harmony import */ var _Quiz_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Quiz.vue */ "./resources/js/views/layout/User/Quiz.vue");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    Quiz: _Quiz_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    CustomModal: _CustomModal_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    Quiz: _Quiz_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    CustomModal: _CustomModal_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   name: "QuizMain",
   data: function data() {
@@ -21918,10 +21936,48 @@ __webpack_require__.r(__webpack_exports__);
     handleQuizCompleted: function handleQuizCompleted(score) {
       this.score = score;
       this.showModal = true;
+      this.saveCurrentTestScores(this.score); // тут вызываем метод для сохранения результатов
     },
     updateQuiz: function updateQuiz() {
       this.showModal = false;
       this.quizKey++;
+    },
+    saveCurrentTestScores: function saveCurrentTestScores() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var data;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                console.log("Количество правильных ответов: ", _this.score.correctlyAnsweredQuestions); // fetch("/api/questions/", {
+                //   method: "POST",
+                //   headers: {
+                //     "Content-Type" : "application/json"
+                //   },
+                //   body: JSON.stringify({
+                //     score_percentage: 80,
+                //     score_count: 5,
+                //     user_id: 35,
+                //     test_id: 2
+                //   })
+                // })
+
+                _context.next = 3;
+                return response.json();
+
+              case 3:
+                data = _context.sent;
+                console.log(data);
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
     }
   }
 });
@@ -24500,9 +24556,9 @@ var _hoisted_17 = {
 };
 
 var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-  "for": "incorrectAnswers",
+  "for": "incorrectAnswer1",
   "class": "form-label"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, "Введите неправильные ответы через запятую *")], -1
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, "Введите неправильный ответ *")], -1
 /* HOISTED */
 );
 
@@ -24511,12 +24567,45 @@ var _hoisted_19 = {
   "class": "form-small"
 };
 var _hoisted_20 = {
+  "class": "mb-3"
+};
+
+var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "incorrectAnswer2",
+  "class": "form-label"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, "Введите неправильный ответ *")], -1
+/* HOISTED */
+);
+
+var _hoisted_22 = {
+  key: 0,
+  "class": "form-small"
+};
+var _hoisted_23 = {
+  "class": "mb-3"
+};
+
+var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "incorrectAnswer3",
+  "class": "form-label"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("strong", null, "Введите неправильный ответ *")], -1
+/* HOISTED */
+);
+
+var _hoisted_25 = {
+  key: 0,
+  "class": "form-small"
+};
+
+var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"div\"><button class=\"btn btn-outline-success\">Добавить вариант ответа <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" fill=\"currentColor\" class=\"bi bi-plus-circle\" viewBox=\"0 0 16 16\"><path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z\"></path><path d=\"M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z\"></path></svg></button></div>", 1);
+
+var _hoisted_27 = {
   "class": "form-buttons"
 };
 
-var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Отменить добавление");
+var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Отменить добавление");
 
-var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   type: "submit",
   "class": "btn btn-success"
 }, " Добавить вопрос ", -1
@@ -24538,7 +24627,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, 8
   /* PROPS */
   , ["to"])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-    onSubmit: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+    onSubmit: _cache[5] || (_cache[5] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.submitHandler && $options.submitHandler.apply($options, arguments);
     }, ["prevent"]))
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [_hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
@@ -24564,7 +24653,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       invalid: $data.errors.correct_answer
     }]),
     id: "correctAnswer",
-    placeholder: "Правильный ответ на вопрос"
+    placeholder: "Правильный вариант ответа"
   }, null, 2
   /* CLASS */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.correct_answer, void 0, {
@@ -24573,30 +24662,60 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [_hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-      return $data.form.incorrect_answers = $event;
+      return $data.incorrect_answer_1 = $event;
     }),
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["form-control", {
-      invalid: $data.errors.incorrect_answers
+      invalid: $data.errors.incorrect_answer_1
     }]),
-    id: "incorrectAnswers",
+    id: "incorrectAnswer1",
     placeholder: "вариант ответа"
   }, null, 2
   /* CLASS */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.incorrect_answers, void 0, {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.incorrect_answer_1, void 0, {
     trim: true
-  }]]), $data.errors.incorrect_answers ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("small", _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.errors.incorrect_answers), 1
+  }]]), $data.errors.incorrect_answer_1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("small", _hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.errors.incorrect_answer_1), 1
   /* TEXT */
-  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [_hoisted_21, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+      return $data.incorrect_answer_2 = $event;
+    }),
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["form-control", {
+      invalid: $data.errors.incorrect_answer_2
+    }]),
+    id: "incorrectAnswer2",
+    placeholder: "вариант ответа"
+  }, null, 2
+  /* CLASS */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.incorrect_answer_2, void 0, {
+    trim: true
+  }]]), $data.errors.incorrect_answer_2 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("small", _hoisted_22, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.errors.incorrect_answer_2), 1
+  /* TEXT */
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [_hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+      return $data.incorrect_answer_3 = $event;
+    }),
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["form-control", {
+      invalid: $data.errors.incorrect_answer_3
+    }]),
+    id: "incorrectAnswer3",
+    placeholder: "вариант ответа"
+  }, null, 2
+  /* CLASS */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.incorrect_answer_3, void 0, {
+    trim: true
+  }]]), $data.errors.incorrect_answer_3 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("small", _hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.errors.incorrect_answer_3), 1
+  /* TEXT */
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), _hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: "/articles/dashboard",
     "class": "btn btn-danger me-3"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_21];
+      return [_hoisted_28];
     }),
     _: 1
     /* STABLE */
 
-  }), _hoisted_22])], 32
+  }), _hoisted_29])], 32
   /* HYDRATE_EVENTS */
   )])])])])]);
 }
