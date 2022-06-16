@@ -21905,8 +21905,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _CustomModal_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CustomModal.vue */ "./resources/js/views/layout/User/CustomModal.vue");
-/* harmony import */ var _Quiz_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Quiz.vue */ "./resources/js/views/layout/User/Quiz.vue");
+/* harmony import */ var _axios_axios_instance__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../axios/axios-instance */ "./resources/axios/axios-instance.js");
+/* harmony import */ var _CustomModal_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CustomModal.vue */ "./resources/js/views/layout/User/CustomModal.vue");
+/* harmony import */ var _Quiz_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Quiz.vue */ "./resources/js/views/layout/User/Quiz.vue");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -21915,10 +21916,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    Quiz: _Quiz_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    CustomModal: _CustomModal_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    Quiz: _Quiz_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    CustomModal: _CustomModal_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   name: "QuizMain",
   data: function data() {
@@ -21946,38 +21948,41 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var data;
+        var percentage;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                console.log("Количество правильных ответов: ", _this.score.correctlyAnsweredQuestions); // fetch("/api/questions/", {
-                //   method: "POST",
-                //   headers: {
-                //     "Content-Type" : "application/json"
-                //   },
-                //   body: JSON.stringify({
-                //     score_percentage: 80,
-                //     score_count: 5,
-                //     user_id: 35,
-                //     test_id: 2
-                //   })
-                // })
+                // console.log("Количество правильных ответов: ", this.score.correctlyAnsweredQuestions)
+                percentage = Math.floor(_this.score.correctlyAnsweredQuestions / _this.score.allQuestions * 100);
+                _axios_axios_instance__WEBPACK_IMPORTED_MODULE_1__["default"].post("/api/scores", {
+                  score_percentage: percentage,
+                  score_count: _this.score.correctlyAnsweredQuestions,
+                  user_id: _this.authUser.id,
+                  test_id: _this.$route.params.id
+                }).then(function (response) {
+                  if (response.data) {
+                    // отладка
+                    console.log("Успешно!");
+                    console.log(response);
+                  }
+                })["catch"](function (error) {
+                  // отладка
+                  console.log(error.response);
+                });
 
-                _context.next = 3;
-                return response.json();
-
-              case 3:
-                data = _context.sent;
-                console.log(data);
-
-              case 5:
+              case 2:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee);
       }))();
+    }
+  },
+  computed: {
+    authUser: function authUser() {
+      return this.$store.state.auth.authUser;
     }
   }
 });
@@ -21995,11 +22000,49 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _ui_BarChart_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../ui/BarChart.vue */ "./resources/js/views/ui/BarChart.vue");
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "UserMain",
-  components: {},
+  components: {
+    BarChart: _ui_BarChart_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
-    return {};
+    return {
+      chartData1: {
+        labels: ['2022-06-13', '2022-06-13', '2022-06-16'],
+        datasets: [{
+          label: 'Курс по резке стекла',
+          data: [3, 4, 5],
+          backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)'],
+          borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
+          borderWidth: 1
+        }]
+      },
+      chartData2: {
+        labels: ['2022-06-16', '2022-06-16', '2022-06-16'],
+        datasets: [{
+          label: 'Курс по резке стекла 2',
+          data: [3, 0, 5],
+          backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)'],
+          borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
+          borderWidth: 1
+        }]
+      }
+    };
+  },
+  created: function created() {
+    this.$store.dispatch("users/getUserScores", this.authUser.id);
+  },
+  computed: {
+    getUserScores: {
+      get: function get() {
+        return this.$store.state.users.currentUserScores;
+      }
+    },
+    authUser: function authUser() {
+      return this.$store.state.auth.authUser;
+    }
   }
 });
 
@@ -22053,6 +22096,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/views/ui/BarChart.vue?vue&type=script&lang=js":
+/*!************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/views/ui/BarChart.vue?vue&type=script&lang=js ***!
+  \************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var vue_chartjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-chartjs */ "./node_modules/vue-chartjs/es/index.js");
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  "extends": vue_chartjs__WEBPACK_IMPORTED_MODULE_0__.Bar,
+  props: ['chartData', 'options'],
+  mounted: function mounted() {
+    this.renderChart(this.chartData, this.options);
+  }
+});
 
 /***/ }),
 
@@ -28306,12 +28372,88 @@ var _withScopeId = function _withScopeId(n) {
 var _hoisted_1 = {
   "class": "container"
 };
+var _hoisted_2 = {
+  "class": "row pt-3"
+};
+var _hoisted_3 = {
+  "class": "col-xl-12"
+};
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"row pt-3\" data-v-0a95f07c><div class=\"col-xl-12\" data-v-0a95f07c><div class=\"dashboard-panel__title row pt-3\" data-v-0a95f07c><div class=\"col-xl-12\" data-v-0a95f07c><h1 data-v-0a95f07c>Главная</h1></div></div><div class=\"row pt-3\" data-v-0a95f07c><div class=\"col-xl-12\" data-v-0a95f07c><h2 data-v-0a95f07c>Результаты тестов:</h2></div></div></div></div>", 1);
+var _hoisted_4 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": "dashboard-panel__title row pt-3"
+  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    "class": "col-xl-12"
+  }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", null, "Результаты тестов:")])], -1
+  /* HOISTED */
+  );
+});
 
-var _hoisted_3 = [_hoisted_2];
+var _hoisted_5 = {
+  "class": "dashboard-panel-table row"
+};
+var _hoisted_6 = {
+  "class": "col-xl-12"
+};
+var _hoisted_7 = {
+  "class": "table table-light table-striped"
+};
+
+var _hoisted_8 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("thead", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+    "class": "tabel-label"
+  }, "Номер теста"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+    "class": "tabel-label"
+  }, "Количество баллов"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+    "class": "tabel-label"
+  }, "Процент выполнения"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+    "class": "tabel-label"
+  }, "Дата прохождения")])], -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_9 = {
+  "class": "dashboard-panel__charts row pt-3"
+};
+var _hoisted_10 = {
+  "class": "col-xl-6"
+};
+var _hoisted_11 = {
+  "class": "chart"
+};
+var _hoisted_12 = {
+  "class": "col-xl-6"
+};
+var _hoisted_13 = {
+  "class": "chart"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, _hoisted_3);
+  var _component_BarChart = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("BarChart");
+
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.getUserScores, function (score) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", {
+      key: score.id
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(score.test_id), 1
+    /* TEXT */
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(score.score_count) + " б", 1
+    /* TEXT */
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(score.score_percentage) + " %", 1
+    /* TEXT */
+    ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(score.created_at), 1
+    /* TEXT */
+    )]);
+  }), 128
+  /* KEYED_FRAGMENT */
+  ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"table-pagination col-xl-12 d-flex justify-content-center\">\r\n              <Pagination v-if=\"search_input == ''\"\r\n                :pagination_url=\"pagination_url\"\r\n                v-on:set-paginate-items=\"setPaginateArticles\"\r\n              ></Pagination>\r\n            </div> ")])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BarChart, {
+    chartData: $data.chartData1
+  }, null, 8
+  /* PROPS */
+  , ["chartData"])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_BarChart, {
+    chartData: $data.chartData2
+  }, null, 8
+  /* PROPS */
+  , ["chartData"])])])])])])]);
 }
 
 /***/ }),
@@ -28499,6 +28641,33 @@ var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 var _hoisted_3 = [_hoisted_2];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, _hoisted_3);
+}
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/views/ui/BarChart.vue?vue&type=template&id=5ccb7197":
+/*!****************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/views/ui/BarChart.vue?vue&type=template&id=5ccb7197 ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+var _hoisted_1 = {
+  "class": "chart"
+};
+var _hoisted_2 = {
+  ref: "canvas"
+};
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("canvas", _hoisted_2, null, 512
+  /* NEED_PATCH */
+  )]);
 }
 
 /***/ }),
@@ -30149,6 +30318,7 @@ function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("
 
 var state = {
   currentUser: {},
+  currentUserScores: {},
   userList: [],
   roleList: [],
   permissionsList: [],
@@ -30187,6 +30357,15 @@ var actions = {
   getUserData: function getUserData(ctx, id) {
     _axios_axios_instance__WEBPACK_IMPORTED_MODULE_1__["default"].get("/api/users/" + id).then(function (response) {
       ctx.commit("setUserData", response.data.data);
+      console.log(response.data.data);
+    })["catch"](function (error) {
+      // отладка
+      console.log(error);
+    });
+  },
+  getUserScores: function getUserScores(ctx, id) {
+    _axios_axios_instance__WEBPACK_IMPORTED_MODULE_1__["default"].get("/api/scores/" + id).then(function (response) {
+      ctx.commit("setUserScores", response.data.data);
       console.log(response.data.data);
     })["catch"](function (error) {
       // отладка
@@ -30298,6 +30477,9 @@ var mutations = {
   setUserData: function setUserData(state, payload) {
     state.currentUser = payload;
   },
+  setUserScores: function setUserScores(state, payload) {
+    state.currentUserScores = payload;
+  },
   setRoleList: function setRoleList(state, payload) {
     state.roleList = payload;
   },
@@ -30320,6 +30502,9 @@ var getters = {
   },
   currentUser: function currentUser(state) {
     return state.currentUser;
+  },
+  currentUserScores: function currentUserScores(state) {
+    return state.currentUserScores;
   },
   roleList: function roleList(state) {
     return state.userList;
@@ -72816,6 +73001,34 @@ if (false) {}
 
 /***/ }),
 
+/***/ "./resources/js/views/ui/BarChart.vue":
+/*!********************************************!*\
+  !*** ./resources/js/views/ui/BarChart.vue ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _BarChart_vue_vue_type_template_id_5ccb7197__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BarChart.vue?vue&type=template&id=5ccb7197 */ "./resources/js/views/ui/BarChart.vue?vue&type=template&id=5ccb7197");
+/* harmony import */ var _BarChart_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BarChart.vue?vue&type=script&lang=js */ "./resources/js/views/ui/BarChart.vue?vue&type=script&lang=js");
+/* harmony import */ var D_OpenServer_domains_information_system_fsk_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/vue-loader/dist/exportHelper.js */ "./node_modules/vue-loader/dist/exportHelper.js");
+
+
+
+
+;
+const __exports__ = /*#__PURE__*/(0,D_OpenServer_domains_information_system_fsk_node_modules_vue_loader_dist_exportHelper_js__WEBPACK_IMPORTED_MODULE_2__["default"])(_BarChart_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_1__["default"], [['render',_BarChart_vue_vue_type_template_id_5ccb7197__WEBPACK_IMPORTED_MODULE_0__.render],['__file',"resources/js/views/ui/BarChart.vue"]])
+/* hot reload */
+if (false) {}
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__exports__);
+
+/***/ }),
+
 /***/ "./resources/js/views/ui/Comments.vue":
 /*!********************************************!*\
   !*** ./resources/js/views/ui/Comments.vue ***!
@@ -73706,6 +73919,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/views/ui/BarChart.vue?vue&type=script&lang=js":
+/*!********************************************************************!*\
+  !*** ./resources/js/views/ui/BarChart.vue?vue&type=script&lang=js ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_BarChart_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__["default"])
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_BarChart_vue_vue_type_script_lang_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./BarChart.vue?vue&type=script&lang=js */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/views/ui/BarChart.vue?vue&type=script&lang=js");
+ 
+
+/***/ }),
+
 /***/ "./resources/js/views/ui/Comments.vue?vue&type=script&lang=js":
 /*!********************************************************************!*\
   !*** ./resources/js/views/ui/Comments.vue?vue&type=script&lang=js ***!
@@ -74454,6 +74683,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_AppLoader_vue_vue_type_template_id_41a0a3b8__WEBPACK_IMPORTED_MODULE_0__.render)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_AppLoader_vue_vue_type_template_id_41a0a3b8__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./AppLoader.vue?vue&type=template&id=41a0a3b8 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/views/ui/AppLoader.vue?vue&type=template&id=41a0a3b8");
+
+
+/***/ }),
+
+/***/ "./resources/js/views/ui/BarChart.vue?vue&type=template&id=5ccb7197":
+/*!**************************************************************************!*\
+  !*** ./resources/js/views/ui/BarChart.vue?vue&type=template&id=5ccb7197 ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_BarChart_vue_vue_type_template_id_5ccb7197__WEBPACK_IMPORTED_MODULE_0__.render)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_use_0_node_modules_vue_loader_dist_templateLoader_js_ruleSet_1_rules_2_node_modules_vue_loader_dist_index_js_ruleSet_0_use_0_BarChart_vue_vue_type_template_id_5ccb7197__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!../../../../node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!../../../../node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./BarChart.vue?vue&type=template&id=5ccb7197 */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5.use[0]!./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[2]!./node_modules/vue-loader/dist/index.js??ruleSet[0].use[0]!./resources/js/views/ui/BarChart.vue?vue&type=template&id=5ccb7197");
 
 
 /***/ }),

@@ -52,6 +52,7 @@ class TestController extends Controller
      */
     public function show($id)
     {
+        // id = id курса
         $test_id = DB::table("tests")->where("course_id", "=", $id)->get(); 
         
         $test = Test::findById($test_id[0]->id);

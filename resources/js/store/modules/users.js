@@ -4,6 +4,7 @@ import router from "../../router/router";
 
 const state = {
     currentUser: {},
+    currentUserScores: {},
     userList: [],
     roleList: [],
     permissionsList: [],
@@ -56,6 +57,19 @@ const actions = {
             .get("/api/users/" + id)
             .then((response) => {
                 ctx.commit("setUserData", response.data.data);
+                console.log(response.data.data);
+            })
+            .catch((error) => {
+                // отладка
+                console.log(error);
+            });
+    },
+
+    getUserScores(ctx, id) {
+        axios
+            .get("/api/scores/" + id)
+            .then((response) => {
+                ctx.commit("setUserScores", response.data.data);
                 console.log(response.data.data);
             })
             .catch((error) => {
@@ -197,6 +211,9 @@ const mutations = {
     setUserData(state, payload) {
         state.currentUser = payload;
     },
+    setUserScores(state, payload) {
+        state.currentUserScores = payload;
+    },
     setRoleList(state, payload) {
         state.roleList = payload;
     },
@@ -220,6 +237,9 @@ const getters = {
     },
     currentUser(state) {
         return state.currentUser;
+    },
+    currentUserScores(state) {
+        return state.currentUserScores;
     },
     roleList(state) {
         return state.userList;

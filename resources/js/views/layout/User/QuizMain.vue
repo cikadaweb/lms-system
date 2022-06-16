@@ -19,6 +19,8 @@
 </template>
 
 <script>
+import axios from "../../../../axios/axios-instance";
+
 import CustomModal from "./CustomModal.vue";
 import Quiz from "./Quiz.vue";
 
@@ -49,25 +51,34 @@ export default {
       this.quizKey++;
     },
     async saveCurrentTestScores() {
-      console.log("Количество правильных ответов: ", this.score.correctlyAnsweredQuestions)
-      // fetch("/api/questions/", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type" : "application/json"
-      //   },
-      //   body: JSON.stringify({
-      //     score_percentage: 80,
-      //     score_count: 5,
-      //     user_id: 35,
-      //     test_id: 2
-      //   })
-      // })
-
-      let data = await response.json()
-      console.log(data)
+      // console.log("Количество правильных ответов: ", this.score.correctlyAnsweredQuestions)
+      let percentage = Math.floor((this.score.correctlyAnsweredQuestions / this.score.allQuestions) *100)
+      axios
+          .post("/api/scores", {
+            score_percentage: percentage,
+            score_count: this.score.correctlyAnsweredQuestions,
+            user_id: this.authUser.id,
+            test_id: this.$route.params.id
+          })
+          .then((response) => {
+              if (response.data) {
+                  // отладка
+                  console.log("Успешно!")
+                  console.log(response)
+              }
+          })
+          .catch((error) => {
+              // отладка
+              console.log(error.response)
+          });
     }
 
   },
+  computed: {
+    authUser() {
+        return this.$store.state.auth.authUser
+    },
+  }
 };
 </script>
 
