@@ -11,7 +11,7 @@
         </div>
 
         <div class="dashboard-panel-table row">
-          <div class="col-xl-12">
+          <div class="col-xl-12 table-responsive">
             <table class="table table-light table-striped">
               <thead>
                 <tr>

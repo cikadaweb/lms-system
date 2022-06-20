@@ -6,29 +6,31 @@
 
         <div class="dashboard-panel__title row pt-2">
           <div class=" col-xl-12">
+
             <h1>Пользователи</h1>
+
           </div>
         </div>
 
         <div class="dashboard-panel-filter row pt-3">
-            <div class=" col-xl-12 d-flex justify-content-between">
+            <div class=" col-xl-12 d-flex justify-content-between flex-wrap">
+
               <div class="panel-filter-left">
-                <form class="d-flex">
+                <form class="d-flex mb-2">
                   <input class="form-control panel-input" v-model="search_input" @input="getUsersBySearch" type="search" placeholder="Имя пользователя" aria-label="Search">
                   <button class="btn btn-primary" @click.prevent type="submit"><i class="bi bi-search"></i></button>
                 </form>
               </div>
 
-              <div class="panel-filter-right d-flex">
-
-                <select class="form-select me-5">
+              <div class="panel-filter-right d-flex flex-wrap mt-2">
+                <select class="form-select me-5 mb-2">
                   <option selected>Статус пользователя</option>
                   <option value="1">Активный</option>
                   <option value="2">Неактивный</option>
                 </select>
 
                 <select 
-                  class="form-select" 
+                  class="form-select mb-2" 
                   aria-label="Роль"
                   v-model="filter_role" 
                   @change="filterUsersByStatus"
@@ -40,15 +42,15 @@
                   :value="role.name"
                   >{{ role.name }}</option>
                 </select>
-
               </div>
+
           </div>
         </div>
 
         <div class="dashboard-panel-buttons row pt-3">
-          <div class="col-xl-12 d-flex justify-content-between">
+          <div class="col-xl-12 d-flex justify-content-between flex-wrap">
 
-            <div class="dashboard-panel__btn table-btn ps-2">
+            <div class="dashboard-panel__btn table-btn ps-2 mb-2">
               <my-button class="btn-success" @click="popup">
                 <span class="me-3">Добавить пользователя</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">
@@ -58,7 +60,7 @@
               </my-button>
             </div>
 
-            <div class="dashboard-panel__btn table-btn ps-2">
+            <div class="dashboard-panel__btn table-btn ps-2 mb-2">
               <my-button class="btn-primary" @click="exportAllUsers">
                 Экспорт пользователей
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-filetype-xls" viewBox="0 0 16 16">
@@ -86,7 +88,7 @@
         <AppLoader v-if="loading"></AppLoader>
 
         <div v-else class="dashboard-panel__table row pt-2">
-          <div class=" col-xl-12">
+          <div class=" col-xl-12 table-responsive">
             <table v-if="getUsers.length != 0" class="table table-success table-striped">
               <thead>
                 <tr>

@@ -19,7 +19,6 @@
               <h5 class="my-3">{{ user.name }}</h5>
               <p class="text-muted mb-1">Мастер по резке стекла</p>
               <div class="d-flex justify-content-center mb-2">
-                <button type="button" class="btn btn-primary">Обновить фото</button>
                 <button type="button" class="btn btn-success ms-1">Редактировать данные <i class="bi bi-pencil-square"></i></button>
               </div>
             </div>

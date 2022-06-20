@@ -11,19 +11,19 @@
         </div>
 
         <div class="dashboard-panel-filter row pt-3">  
-          <div class=" col-xl-12 d-flex justify-content-between ">
+          <div class=" col-xl-12 d-flex justify-content-between flex-wrap">
 
               <div class="panel-filter-left">
-                <form class="d-flex">
+                <form class="d-flex mb-2">
                   <input class="form-control panel-input" v-model="search_input" @input="getArticlesBySearch" type="search" placeholder="Найти статью" aria-label="Search">
                   <button class="btn btn-primary" @click.prevent type="submit"><i class="bi bi-search"></i></button>
                 </form>
               </div>
 
-              <div class="panel-filter-right d-flex">
+              <div class="panel-filter-right d-flex flex-wrap">
 
                 <select 
-                  class="form-select me-5"
+                  class="form-select me-5 mb-2"
                   v-model="filter_status"
                   @change="filterArticlesByStatus"
                 >
@@ -33,7 +33,7 @@
                 </select>
 
                 <select 
-                  class="form-select" 
+                  class="form-select mb-2" 
                   v-model="filter_tag" 
                   @change="filterArticlesByTag"
                 >
@@ -50,11 +50,11 @@
         </div>
 
         <div class="dashboard-panel-buttons row pt-3">
-          <div class="col-xl-12 d-flex justify-content-between">
+          <div class="col-xl-12 d-flex justify-content-between flex-wrap">
 
             <div class="pe-5">
               <router-link :to="'/article/create'">
-                <my-button class="btn-success me-3">
+                <my-button class="btn-success me-3 mb-2">
                   <span class="me-3">Добавить статью </span>
                   <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-file-earmark-plus" viewBox="0 0 16 16">
                     <path d="M8 6.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V11a.5.5 0 0 1-1 0V9.5H6a.5.5 0 0 1 0-1h1.5V7a.5.5 0 0 1 .5-.5z"/>
@@ -64,7 +64,7 @@
               </router-link>
 
               <router-link :to="'/articles'">
-                <my-button class="btn-primary">
+                <my-button class="btn-primary mb-2">
                   <span class="me-3">Все статьи</span>
                   <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-newspaper" viewBox="0 0 16 16">
                     <path d="M0 2.5A1.5 1.5 0 0 1 1.5 1h11A1.5 1.5 0 0 1 14 2.5v10.528c0 .3-.05.654-.238.972h.738a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 1 1 0v9a1.5 1.5 0 0 1-1.5 1.5H1.497A1.497 1.497 0 0 1 0 13.5v-11zM12 14c.37 0 .654-.211.853-.441.092-.106.147-.279.147-.531V2.5a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0-.5.5v11c0 .278.223.5.497.5H12z"/>
@@ -102,7 +102,7 @@
         <AppLoader v-if="loading"></AppLoader>
 
         <div v-else class="dashboard-panel-table row">
-          <div class="col-xl-12">
+          <div class="col-xl-12 table-responsive">
             <table v-if="getArticles.length != 0" class="table table-light table-striped">
               <thead>
                 <tr>

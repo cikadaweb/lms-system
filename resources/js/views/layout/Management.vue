@@ -48,7 +48,7 @@
         </div>
 
         <div class="dashboard-panel__table row pt-2">
-          <div class=" col-xl-12">
+          <div class="col-xl-12 table-responsive">
             <table class="table table-success table-striped">
               <thead>
                 <tr>
