@@ -179,5 +179,23 @@ class CourseController extends Controller
             // return CourseResource::collection($courses);
         }
     }
+
+    public function changeCourseStatus(Request $request) {
+        $course_id =  $request->get('courseId');
+        if (!empty($course_id)) {
+            $course = Course::findById($course_id);
+            if ($course->is_active == 1) {
+                $course->is_active = 0;
+            } else {
+                $course->is_active = 1;
+            }
+            $course->save();
+
+            return [
+                "status" => true,
+                "course" => $course
+            ];
+        }
+    }
     
 }

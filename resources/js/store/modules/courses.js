@@ -82,6 +82,20 @@ const actions = {
                 console.log(error.response);
             });
     },
+    changeStatusCourse({}, course_id) {
+        console.log("Айди курса: ", course_id);
+        axios
+            .get("/api/course-change-status/" + `?courseId=${course_id}`)
+            .then((response) => {
+                if (response.data) {
+                    console.log(response);
+                    // router.push("/courses/dashboard");
+                }
+            })
+            .catch((error) => {
+                console.log(error.response);
+            });
+    },
     getCoursesBySearch(ctx, search_input) {
         axios
             .get("/api/courses-search/" + `?searchInput=${search_input}`)

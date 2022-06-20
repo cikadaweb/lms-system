@@ -80,9 +80,22 @@
                     <my-button class="btn btn-outline-primary">Открыть</my-button>
                   </router-link>
 
-                  <router-link :to="'/'" v-if="authUser.role == 'Master'">
-                    <my-button class="btn btn-outline-danger">Архивироавать</my-button>
-                  </router-link>
+                  <div v-if="authUser.role == 'Master'">
+
+                    <my-button
+                      v-if="course.is_active == 1"
+                      class="btn btn-outline-danger"
+                      @click="archiveCourse(course.id)"
+                    >Архивироавать</my-button>
+
+                    <my-button
+                      v-else
+                      class="btn btn-outline-success"
+                      @click="archiveCourse(course.id)"
+                    >Разархивироавать</my-button>
+
+                  </div>
+
                 </div>
               </div>
             </div>
@@ -109,7 +122,7 @@ export default {
     }
   },
 
-  mounted() {
+  created() {
     this.$store.dispatch("auth/getLoginUserData")
     if (this.authUser.role == 'Master') {
       this.$store.dispatch("courses/getCourses")
@@ -134,6 +147,11 @@ export default {
         this.isShowResultSatus = false
       }
     },
+
+    archiveCourse(course_id) {
+      this.$store.dispatch("courses/changeStatusCourse", course_id)
+      this.$store.dispatch("courses/getCourses")
+    }
   
   },
 

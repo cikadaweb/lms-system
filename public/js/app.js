@@ -20522,7 +20522,7 @@ __webpack_require__.r(__webpack_exports__);
       isShowResultSatus: false
     };
   },
-  mounted: function mounted() {
+  created: function created() {
     this.$store.dispatch("auth/getLoginUserData");
 
     if (this.authUser.role == 'Master') {
@@ -20544,6 +20544,10 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         this.isShowResultSatus = false;
       }
+    },
+    archiveCourse: function archiveCourse(course_id) {
+      this.$store.dispatch("courses/changeStatusCourse", course_id);
+      this.$store.dispatch("courses/getCourses");
     }
   },
   computed: {
@@ -24985,7 +24989,13 @@ var _hoisted_29 = {
 
 var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Открыть");
 
-var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Архивироавать");
+var _hoisted_31 = {
+  key: 0
+};
+
+var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Архивироавать");
+
+var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Разархивироавать");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_my_button = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("my-button");
@@ -25083,26 +25093,37 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     }, 1032
     /* PROPS, DYNAMIC_SLOTS */
-    , ["to"]), $options.authUser.role == 'Master' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_router_link, {
+    , ["to"]), $options.authUser.role == 'Master' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_31, [course.is_active == 1 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_my_button, {
       key: 0,
-      to: '/'
+      "class": "btn btn-outline-danger",
+      onClick: function onClick($event) {
+        return $options.archiveCourse(course.id);
+      }
     }, {
       "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-        return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_my_button, {
-          "class": "btn btn-outline-danger"
-        }, {
-          "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-            return [_hoisted_31];
-          }),
-          _: 1
-          /* STABLE */
-
-        })];
+        return [_hoisted_32];
       }),
-      _: 1
-      /* STABLE */
+      _: 2
+      /* DYNAMIC */
 
-    })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])]);
+    }, 1032
+    /* PROPS, DYNAMIC_SLOTS */
+    , ["onClick"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_my_button, {
+      key: 1,
+      "class": "btn btn-outline-success",
+      onClick: function onClick($event) {
+        return $options.archiveCourse(course.id);
+      }
+    }, {
+      "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+        return [_hoisted_33];
+      }),
+      _: 2
+      /* DYNAMIC */
+
+    }, 1032
+    /* PROPS, DYNAMIC_SLOTS */
+    , ["onClick"]))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])]);
   }), 128
   /* KEYED_FRAGMENT */
   ))]))])])]);
@@ -30110,6 +30131,18 @@ var actions = {
       if (response.data) {
         console.log(response);
         _router_router__WEBPACK_IMPORTED_MODULE_1__["default"].push("/course-id" + course.id + "/lessons");
+      }
+    })["catch"](function (error) {
+      console.log(error.response);
+    });
+  },
+  changeStatusCourse: function changeStatusCourse(_ref3, course_id) {
+    _objectDestructuringEmpty(_ref3);
+
+    console.log("Айди курса: ", course_id);
+    _axios_axios_instance__WEBPACK_IMPORTED_MODULE_0__["default"].get("/api/course-change-status/" + "?courseId=".concat(course_id)).then(function (response) {
+      if (response.data) {
+        console.log(response); // router.push("/courses/dashboard");
       }
     })["catch"](function (error) {
       console.log(error.response);
