@@ -11,6 +11,7 @@ use App\Http\Resources\ArticleResource;
 
 use App\Exports\ArticlesExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
 
 use Validator;
 
@@ -76,6 +77,7 @@ class ArticleController extends Controller
                 "img" => ["required"],
                 "preview" => ["required"],
                 "body" => ["required"],
+                "tag" => ["required"],
             ]
             );
             
@@ -99,6 +101,10 @@ class ArticleController extends Controller
         $state->views = 0;
         $state->article_id = $article->id;
         $state->save();
+
+        // добавления информации от теге статьи
+        $tag_id = DB::table("tags")->where("label", "=", $request->tag)->get(); 
+        $article_tag = DB::insert("INSERT INTO article_tag (article_id, tag_id) VALUES (?, ?)", [$article->id, $tag_id[0]->id]);
         
         return response()->json([
             "status" => true,

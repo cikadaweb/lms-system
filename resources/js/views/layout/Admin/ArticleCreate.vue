@@ -28,7 +28,23 @@
             <small v-if="errors.body" class="form-small">{{ errors.body }}</small>
           </div>
 
-          <div class="form-group">
+          <div>
+            <label for="articleDescription" class="form-label"><strong>Выбор тегов для статьи</strong></label>
+                <select 
+                  class="form-select mb-2" 
+                  v-model="form.filter_tag" 
+                >
+                  <option value="" selected disabled>Теги </option>
+                  <option 
+                  v-for="tag in getTags"
+                  :key="tag.id" 
+                  :value="tag.label"
+                  >{{ tag.label }}</option>
+                </select>
+            <small v-if="errors.filter_tag" class="form-small">{{ errors.filter_tag }}</small>
+          </div>
+
+          <div class="form-group mt-2">
               <label for="feature_image"><strong>Изображение статьи *</strong></label>
               <img src="" alt="" class="img-uploaded" style="display: block; width: 300px">
               <input type="text" class="form-control" id="feature_image" name="feature_image" value="" readonly :class="{invalid: errors.img}">
@@ -63,14 +79,16 @@ export default {
         title: "",
         preview: "",
         body: "",
-        img: ""
+        img: "",
+        filter_tag: "",
       },
       errors: {
         title: null,
         preview: null,
         body: null,
-        img: null
-      }
+        img: null,
+        filter_tag: null,
+      },
     }
   },
 
@@ -82,8 +100,6 @@ export default {
       this.form.img = "/" + imgPath.value;
       let textContent = tinymce.get('mytextarea').getContent();
       this.form.body =  textContent ;
-
-      console.log(this.form)
 
       if (this.form.title.length === 0) {
         this.errors.title = "Название статьи не может быть пустым"
@@ -106,22 +122,34 @@ export default {
         this.errors.body = null
       }
 
+      if (this.form.filter_tag == "") {
+        this.errors.filter_tag = "Необходимо выбрать тег"
+        isValid = false
+      } else {
+        this.errors.filter_tag = null
+      }
+
       if (this.form.img.length === 0) {
         this.errors.img = "Необходимо выбрать изображение статьи"
         isValid = false
       } else {
         this.errors.img = null
       }
+
       return isValid
     },
 
     submitHandler() {
       if (this.formIsValid()) {
 
+        // console.log(this.form)
         this.$store.dispatch("articles/addArticle", this.form)
       }
     },
 
+  },
+  created() {
+    this.$store.dispatch("articles/getTags")
   },
   mounted() {
     tinymce.remove();
@@ -175,9 +203,16 @@ export default {
 
           dialogApi.close();
         }
+        }
+      });
+    }
+  },
+  computed: {
+    getTags: {
+      get() {
+        return this.$store.state.articles.tagList
       }
-    });
-  }
+    },
   }
   
 }

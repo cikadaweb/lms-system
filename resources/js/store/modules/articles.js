@@ -146,6 +146,7 @@ const actions = {
                 img: article.img,
                 preview: article.preview,
                 body: article.body,
+                tag: article.filter_tag,
             })
             .then((response) => {
                 if (response.data) {
