@@ -7,7 +7,8 @@
           
           <form @submit.prevent="updateUserData" class="user-edit-form d-flex flex-column">
             
-            <h3>Редактирование пользователя {{ this.$route.params.id }}</h3>
+            <!-- <h3>Редактирование пользователя {{ this.$route.params.id }}</h3> -->
+            <h3>Редактирование пользователя</h3>
 
             <my-input type="text" placeholder="ФИО пользователя" v-model="user.name"></my-input>
             <span class="d-flex">Текущее значение: {{ getUserData.name }}</span>

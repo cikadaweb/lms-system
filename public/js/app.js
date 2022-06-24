@@ -22215,7 +22215,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     logout: function logout() {
-      this.$store.dispatch('auth/logout', this.user); // localStorage.removeItem('userInfo')
+      this.$store.dispatch("auth/logout", this.user); // localStorage.removeItem('userInfo')
     },
     tiktak: function tiktak() {
       var now = new Date();
@@ -26300,14 +26300,21 @@ var _hoisted_2 = {
 var _hoisted_3 = {
   "class": "dashboard-modal__user-edit"
 };
-var _hoisted_4 = {
-  "class": "d-flex"
-};
+
+var _hoisted_4 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", null, "Редактирование пользователя", -1
+  /* HOISTED */
+  );
+});
+
 var _hoisted_5 = {
   "class": "d-flex"
 };
+var _hoisted_6 = {
+  "class": "d-flex"
+};
 
-var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_7 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
     value: "",
     selected: ""
@@ -26316,14 +26323,14 @@ var _hoisted_6 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_7 = ["value"];
-var _hoisted_8 = {
+var _hoisted_8 = ["value"];
+var _hoisted_9 = {
   "class": "popup-buttons d-flex justify-content-between mt-3"
 };
 
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Обновить ");
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Обновить ");
 
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Отменить");
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Отменить");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_my_input = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("my-input");
@@ -26337,9 +26344,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.updateUserData && $options.updateUserData.apply($options, arguments);
     }, ["prevent"])),
     "class": "user-edit-form d-flex flex-column"
-  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", null, "Редактирование пользователя " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(this.$route.params.id), 1
-  /* TEXT */
-  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_my_input, {
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <h3>Редактирование пользователя {{ this.$route.params.id }}</h3> "), _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_my_input, {
     type: "text",
     placeholder: "ФИО пользователя",
     modelValue: $data.user.name,
@@ -26348,7 +26353,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 8
   /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_4, "Текущее значение: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getUserData.name), 1
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_5, "Текущее значение: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getUserData.name), 1
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_my_input, {
     type: "text",
@@ -26359,7 +26364,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 8
   /* PROPS */
-  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_5, "Текущее значение: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getUserData.email), 1
+  , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_6, "Текущее значение: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.getUserData.email), 1
   /* TEXT */
   ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
     "class": "form-select d-block mt-3",
@@ -26367,23 +26372,23 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
       return $data.user.role.name = $event;
     })
-  }, [_hoisted_6, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.getRoles, function (role) {
+  }, [_hoisted_7, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($options.getRoles, function (role) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
       key: role.id,
       value: role.name
     }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(role.name), 9
     /* TEXT, PROPS */
-    , _hoisted_7);
+    , _hoisted_8);
   }), 128
   /* KEYED_FRAGMENT */
   ))], 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.user.role.name]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_my_button, {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.user.role.name]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_my_button, {
     type: "submit",
     "class": "btn-success"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_9];
+      return [_hoisted_10];
     }),
     _: 1
     /* STABLE */
@@ -26396,7 +26401,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "btn-danger"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_10];
+          return [_hoisted_11];
         }),
         _: 1
         /* STABLE */
@@ -28940,12 +28945,15 @@ var _hoisted_4 = /*#__PURE__*/_withScopeId(function () {
 });
 
 var _hoisted_5 = {
+  "class": "d-flex"
+};
+var _hoisted_6 = {
   "class": "header-panel"
 };
 
-var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Выйти ");
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Выйти ");
 
-var _hoisted_7 = /*#__PURE__*/_withScopeId(function () {
+var _hoisted_8 = /*#__PURE__*/_withScopeId(function () {
   return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     width: "20",
@@ -28964,7 +28972,7 @@ var _hoisted_7 = /*#__PURE__*/_withScopeId(function () {
   );
 });
 
-var _hoisted_8 = [_hoisted_6, _hoisted_7];
+var _hoisted_9 = [_hoisted_7, _hoisted_8];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
 
@@ -28977,13 +28985,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", _hoisted_5, " Добро пожаловать на платформу, " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($options.authUser.name) + " ! ", 1
+  /* TEXT */
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "btn btn-danger me-3",
     type: "button",
     onClick: _cache[0] || (_cache[0] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
       return $options.logout && $options.logout.apply($options, arguments);
     }, ["prevent"]))
-  }, _hoisted_8)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div>\r\n            <h5 class=\"d-flex\" id=\"time\">Время: {{ getTime }}</h5>\r\n        </div>   "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div>\r\n            <h5 class=\"d-flex\">Добро пожаловать на платформу, {{ authUser.name }} !</h5>\r\n        </div>   "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" \r\n        <nav class=\"navbar navbar-expand-lg user-menu\">\r\n            <div class=\"container-fluid\">\r\n                <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\r\n                <ul class=\"navbar-nav me-auto mb-2 mb-lg-0\">\r\n                    <li class=\"nav-item dropdown\">\r\n                        <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdown\" role=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">\r\n                            <img src=\"../../../img/user3.png\" class=\"rounded-circle\" height=\"33\" alt=\"Avatar\" loading=\"lazy\" />\r\n                        </a>\r\n                \r\n                        <ul class=\"dropdown-menu\" aria-labelledby=\"navbarDropdown\">\r\n                            <li><a class=\"dropdown-item\" href=\"#\">Мой профиль</a></li>\r\n                            <li><a class=\"dropdown-item\" href=\"#\">Настройки</a></li>\r\n                            <li><hr class=\"dropdown-divider\"></li>\r\n                            <li><a class=\"dropdown-item\" href=\"\" @click.prevent=\"logout\">Выход</a></li>\r\n                        </ul>\r\n                    </li>\r\n                </ul>\r\n                </div>\r\n            </div>\r\n        </nav> ")]);
+  }, _hoisted_9)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div>\r\n            <h5 class=\"d-flex\" id=\"time\">Время: {{ getTime }}</h5>\r\n        </div>   "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" \r\n        <nav class=\"navbar navbar-expand-lg user-menu\">\r\n            <div class=\"container-fluid\">\r\n                <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">\r\n                <ul class=\"navbar-nav me-auto mb-2 mb-lg-0\">\r\n                    <li class=\"nav-item dropdown\">\r\n                        <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdown\" role=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\">\r\n                            <img src=\"../../../img/user3.png\" class=\"rounded-circle\" height=\"33\" alt=\"Avatar\" loading=\"lazy\" />\r\n                        </a>\r\n                \r\n                        <ul class=\"dropdown-menu\" aria-labelledby=\"navbarDropdown\">\r\n                            <li><a class=\"dropdown-item\" href=\"#\">Мой профиль</a></li>\r\n                            <li><a class=\"dropdown-item\" href=\"#\">Настройки</a></li>\r\n                            <li><hr class=\"dropdown-divider\"></li>\r\n                            <li><a class=\"dropdown-item\" href=\"\" @click.prevent=\"logout\">Выход</a></li>\r\n                        </ul>\r\n                    </li>\r\n                </ul>\r\n                </div>\r\n            </div>\r\n        </nav> ")]);
 }
 
 /***/ }),
