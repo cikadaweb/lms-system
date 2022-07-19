@@ -16,6 +16,7 @@
 
 ### Test users
 Login: user@mail.ru
+***
 Password: 12345678
 
 
