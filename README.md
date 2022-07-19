@@ -2,7 +2,6 @@
 
 [Project](https://fsk-system.tmweb.ru/)
 
-#### This project is an analogue of the OZON online store
 #### The interface consists of various components.
 * crud courses/lessons/tests/articles
 * user management, articles management
@@ -14,6 +13,11 @@
 * Vue3 + Vuex + VueRouter
 * Axios
 * Bootstrap 5
+
+### Test users
+Login: user@mail.ru
+Password: 12345678
+
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
