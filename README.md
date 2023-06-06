@@ -1,4 +1,4 @@
-# LMS system Formula Stekla
+# Система управления обучением (LMS - Learning Management System) для персонала
 
 ![screenshot](previews/lms-system-preview0.jpg)
 
